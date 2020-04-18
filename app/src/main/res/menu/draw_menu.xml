@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_text"
+            android:title="Yliopisto"
+            />
+        <item
+            android:id="@+id/nav_res1"
+            android:title="Restaurang 1"
+            />
+        <item
+            android:id="@+id/nav_res2"
+            android:title="Restaurang 1"
+            />
+        <item
+            android:id="@+id/nav_res3"
+            android:title="Restaurang 1"
+            />
+        <item
+            android:id="@+id/nav_rev"
+            android:title="Own reviews"
+            />
+        <item
+            android:id="@+id/nav_logout"
+            android:title="Logout"
+            />
+
+    </group>
+
+
+</menu>
