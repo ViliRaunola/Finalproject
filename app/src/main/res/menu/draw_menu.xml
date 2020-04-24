@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
     <group android:checkableBehavior="single">
+        <item android:title="University ">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_uni"
+                        android:title="University"
+                        />
+                    <item
+                        android:id="@+id/nav_res1"
+                        android:title="Restaurang 1"
+                        />
+                    <item
+                        android:id="@+id/nav_res2"
+                        android:title="Restaurang 2"
+                        />
+                    <item
+                        android:id="@+id/nav_res3"
+                        android:title="Restaurang 3"
+                        />
+                    <item
+                        android:id="@+id/nav_rev"
+                        android:title="Own reviews"
+                        />
+                </group>
+            </menu>
+        </item> 
         <item
-            android:id="@+id/nav_text"
-            android:title="Yliopisto"
-            />
-        <item
-            android:id="@+id/nav_res1"
-            android:title="Restaurang 1"
-            />
-        <item
-            android:id="@+id/nav_res2"
-            android:title="Restaurang 1"
-            />
-        <item
-            android:id="@+id/nav_res3"
-            android:title="Restaurang 1"
-            />
-        <item
-            android:id="@+id/nav_rev"
-            android:title="Own reviews"
+            android:id="@+id/nav_acc"
+            android:title="Account"
             />
         <item
             android:id="@+id/nav_logout"

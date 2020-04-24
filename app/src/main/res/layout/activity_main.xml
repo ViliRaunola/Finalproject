@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:openDrawer="start"
+    android:id="@+id/drawer_layout"
+    android:fitsSystemWindows="true">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,15 +25,21 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="@string/app_name"/>
 
-
-        <com.google.android.material.navigation.NavigationView
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:id="@+id/nav_view"
-            app:headerLayout="@layout/nav_header"
-            app:menu="@menu/draw_menu"/>
+            android:id="@+id/fragment_cotainer"/>
+
+
 
     </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:id="@+id/nav_view"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/draw_menu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
