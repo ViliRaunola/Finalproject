@@ -23,7 +23,7 @@ public class Lut_fragment extends Fragment {
 
     private ListView listView;
     public ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-
+    private String jesse;
     Restaurant laser = new Restaurant("LASER");
     Restaurant buffet = new Restaurant("BUFFETTI SAATANA");
 
