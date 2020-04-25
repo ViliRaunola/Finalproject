@@ -5,16 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Lut_fragment extends Fragment {
 
+    private ListView listView;
     public ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+
     Restaurant laser = new Restaurant("LASER");
     Restaurant buffet = new Restaurant("BUFFETTI SAATANA");
 
@@ -30,10 +34,15 @@ public class Lut_fragment extends Fragment {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         restaurant_spinner.setAdapter(arrayAdapter);
 
-
-
-
-
+        //Here is listView + array adapter for it. This listView is meant for food items.
+        //Food items come from some xml file; not sure yet from where??!
+        listView = (ListView) v.findViewById(R.id.listViewFood);
+        ArrayAdapter<String> arrayAdapterListView = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, HERECOMESJESSES_ARRAYLIST);
+        listView.setAdapter(arrayAdapterListView);
         return v;
     }
+
+
+
+
 }
