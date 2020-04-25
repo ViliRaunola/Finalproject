@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<restaurants>
+    <restaurant>
+        <restaurantName>Reaktori</restaurantName>
+        <restaurantMenu>reaktoriMenu.xml</restaurantMenu>
+    </restaurant>
+    <restaurant>
+        <restaurantName>Hertsi</restaurantName>
+        <restaurantMenu>hertsiMenu.xml</restaurantMenu>
+    </restaurant>
+    <restaurant>
+        <restaurantName>Newton</restaurantName>
+        <restaurantMenu>newtonMenu.xml</restaurantMenu>
+    </restaurant>
+</restaurants>
