@@ -60,13 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch(item.getItemId()){
             case R.id.nav_uni:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, lut).commit();
-                Toast.makeText(this, "LUT", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_uni2:
-                Toast.makeText(this, "Aalto", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_uni3:
-                Toast.makeText(this, "Tampere", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_rev:
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
@@ -75,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_logout:
-                Toast.makeText(this, "Your Have Logged Out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You Have Logged Out", Toast.LENGTH_SHORT).show();
                 break;
         }
         //After the item has been selected closes the side menu.

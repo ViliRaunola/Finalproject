@@ -3,40 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
      <group android:checkableBehavior="single">
-        <item
-            android:title="Univertities">
-                <menu>
-                    <item
-                        android:id="@+id/nav_uni"
-                        android:title="LUT" />
-                    <item
-                        android:id="@+id/nav_uni2"
-                        android:title="Aalto" />
-                    <item
-                        android:id="@+id/nav_uni3"
-                        android:title="Tampere" />
-                </menu>
-        </item>
+         <item android:title="Main">
+             <menu>
+                <item
+                    android:id="@+id/nav_uni"
+                    android:title="Univertities">
+                </item>
+             </menu>
+         </item>
      </group>
 
 
-    <group>
-        <item
-            android:id="@+id/nav_rev"
-            android:title="Own reviews"
-            />
-    </group>
-
-
-    <group>
-        <item
-            android:id="@+id/nav_acc"
-            android:title="Account"
-            />
-        <item
-            android:id="@+id/nav_logout"
-            android:title="Logout"
-            />
+    <group android:checkableBehavior="single">
+        <item android:title="User">
+            <menu>
+                <item
+                    android:id="@+id/nav_rev"
+                    android:title="Own reviews"
+                    />
+                <item
+                    android:id="@+id/nav_acc"
+                    android:title="Account"
+                    />
+                <item
+                    android:id="@+id/nav_logout"
+                    android:title="Logout"
+                    />
+            </menu>
+        </item>
     </group>
 
 

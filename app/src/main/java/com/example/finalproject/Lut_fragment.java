@@ -82,7 +82,7 @@ public class Lut_fragment extends Fragment {
                                 id = Integer.parseInt(parser.nextText());
                                 System.out.println(id);
                                 fd = new FoodItem(name, price, id);
-                                restaurantMenus.add(fd);
+                                laser.restaurantMenus.add(fd);
                             }
                         }
                         break;
