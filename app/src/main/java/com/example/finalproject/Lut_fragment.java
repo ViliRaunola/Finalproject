@@ -24,8 +24,8 @@ public class Lut_fragment extends Fragment {
     private ListView listView;
     public ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
     public ArrayList<FoodItem> restaurantMenus = new ArrayList<FoodItem>();
-    Restaurant laser = new Restaurant("LASER");
-    Restaurant buffet = new Restaurant("BUFFETTI SAATANA");
+    Restaurant laser = new Restaurant("Laseri");
+    Restaurant buffet = new Restaurant("Lut Buffet");
 
     private Spinner restaurantSpinner;
     @Nullable
@@ -47,6 +47,7 @@ public class Lut_fragment extends Fragment {
         listView.setAdapter(arrayAdapterListView);
         return v;
     }
+    //This handles what item has been selected by Mustonen.
     public void parseMenuFile(){
         String name = null;
         String price = null;
