@@ -23,7 +23,7 @@ public class Lut_fragment extends Fragment {
 
     private ListView listView;
     public ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-    public ArrayList<FoodItem> restaurantMenus = new ArrayList<FoodItem>();
+
     Restaurant laser = new Restaurant("LASER");
     Restaurant buffet = new Restaurant("BUFFETTI SAATANA");
 
@@ -43,7 +43,7 @@ public class Lut_fragment extends Fragment {
         //Food items come from some xml file; not sure yet from where??!
         parseMenuFile();
         listView = (ListView) v.findViewById(R.id.listViewFood);
-        ArrayAdapter<FoodItem> arrayAdapterListView = new ArrayAdapter<FoodItem>(getActivity(), android.R.layout.simple_list_item_1, restaurantMenus);
+        ArrayAdapter<FoodItem> arrayAdapterListView = new ArrayAdapter<FoodItem>(getActivity(), android.R.layout.simple_list_item_1, laser.restaurantMenus);
         listView.setAdapter(arrayAdapterListView);
         return v;
     }
