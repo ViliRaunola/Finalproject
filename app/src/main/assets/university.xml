@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<universities>
+    <university>
+        <univeristyName>LUT</univeristyName>
+        <restarantXml>LUT_Restaurants.xml</restarantXml>
+    </university>
+    <university>
+        <univeristyName>Aalto</univeristyName>
+        <restarantXml>Aalto_Restaurants.xml</restarantXml>
+    </university>
+    <university>
+        <univeristyName>TUT</univeristyName>
+        <restarantXml>TUT_Restaurants.xml</restarantXml>
+    </university>
+</universities>

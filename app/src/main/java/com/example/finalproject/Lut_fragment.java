@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,20 +20,38 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Lut_fragment extends Fragment {
 
     private ListView listView;
     public ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-    private String jesse;
-    Restaurant laser = new Restaurant("LASER");
-    Restaurant buffet = new Restaurant("BUFFETTI SAATANA");
+    public List<String> uni = new ArrayList<String>();
+    private TextView infoWin;
+
+    Restaurant laser = new Restaurant("Laseri");
+    Restaurant buffet = new Restaurant("Lut Buffet");
+    Restaurant yo = new Restaurant("Ylioppilastalo");
 
     private Spinner restaurantSpinner;
+    private Spinner universitySpinner;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.lut, container, false);
+        /*
+        *
+        *
+        * */
+        infoWin = (TextView)v.findViewById(R.id.infoWindow);
+        infoWin.setText("LUT university is located in Lappeenranta.\nThere are 3 different ");
+        universitySpinner = (Spinner)v.findViewById(R.id.university_spinner);
+        uni.add("LUT");
+        uni.add("Aalto");
+        uni.add("Tampere");
+        ArrayAdapter<String> ap = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, uni);
+        ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        universitySpinner.setAdapter(ap);
         restaurants.add(laser);
         restaurants.add(buffet);
         restaurantSpinner = (Spinner)v.findViewById(R.id.restaurant_spinner);
@@ -47,7 +67,7 @@ public class Lut_fragment extends Fragment {
         listView.setAdapter(arrayAdapterListView);
         return v;
     }
-    public void parseMenuFile(){
+        public void parseMenuFile(){
         String name = null;
         String price = null;
         int id=0;
