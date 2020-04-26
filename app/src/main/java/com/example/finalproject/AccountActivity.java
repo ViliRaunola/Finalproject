@@ -38,7 +38,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
         //Here can be defined what page opens first. If statement is for rotating the screen.
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, accountFragment).commit();
-            navigationView.setCheckedItem(R.id.nav_uni);
+            navigationView.setCheckedItem(R.id.nav_restaurants);
         }
 
 
@@ -57,17 +57,19 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
-            case R.id.nav_uni:
+            case R.id.nav_restaurants:
                 startActivity(new Intent(AccountActivity.this, MainActivity.class));
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.nav_rev:
+            case R.id.nav_reviews:
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.nav_acc:
+            case R.id.nav_account:
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_logout:
+                startActivity(new Intent(AccountActivity.this, LoginActivity.class));
+                finish();
                 Toast.makeText(this, "You Have Logged Out", Toast.LENGTH_SHORT).show();
                 break;
         }

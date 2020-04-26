@@ -6,8 +6,8 @@
          <item android:title="Main">
              <menu>
                 <item
-                    android:id="@+id/nav_uni"
-                    android:title="Univertities">
+                    android:id="@+id/nav_restaurants"
+                    android:title="Restaurant Menus">
                 </item>
              </menu>
          </item>
@@ -18,11 +18,11 @@
         <item android:title="User">
             <menu>
                 <item
-                    android:id="@+id/nav_rev"
+                    android:id="@+id/nav_reviews"
                     android:title="Own reviews"
                     />
                 <item
-                    android:id="@+id/nav_acc"
+                    android:id="@+id/nav_account"
                     android:title="Account"
                     />
                 <item
