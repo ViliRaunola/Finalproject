@@ -2,14 +2,17 @@
 <universities>
     <university>
         <univeristyName>LUT</univeristyName>
+        <id>0000</id>
         <restarantXml>LUT_Restaurants.xml</restarantXml>
     </university>
     <university>
         <univeristyName>Aalto</univeristyName>
+        <id>1111</id>
         <restarantXml>Aalto_Restaurants.xml</restarantXml>
     </university>
     <university>
         <univeristyName>TUT</univeristyName>
+        <id>2222</id>
         <restarantXml>TUT_Restaurants.xml</restarantXml>
     </university>
 </universities>
