@@ -37,7 +37,6 @@ public class Lut_fragment extends Fragment {
 
     private ListView listView;
     public ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-    public List<String> uni = new ArrayList<String>();
     private TextView infoWin;
     public ArrayList<University> universities = new ArrayList<University>();
 
@@ -58,10 +57,8 @@ public class Lut_fragment extends Fragment {
         infoWin = (TextView)v.findViewById(R.id.infoWindow);
         infoWin.setText("LUT university is located in Lappeenranta.\nThere are 3 different ");
         universitySpinner = (Spinner)v.findViewById(R.id.university_spinner);
-        uni.add("LUT");
-        uni.add("Aalto");
-        uni.add("Tampere");
-        ArrayAdapter<String> ap = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, uni);
+        parseUniversity();
+        ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, universities);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         universitySpinner.setAdapter(ap);
         restaurants.add(laser);
@@ -78,7 +75,7 @@ public class Lut_fragment extends Fragment {
         ArrayAdapter<FoodItem> arrayAdapterListView = new ArrayAdapter<FoodItem>(getActivity(), android.R.layout.simple_list_item_1, laser.restaurantMenus);
         listView.setAdapter(arrayAdapterListView);
 
-        parseUniversity();
+
 
         return v;
     }

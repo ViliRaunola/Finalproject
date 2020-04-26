@@ -16,5 +16,12 @@ public class University {
         restaurants.add(restaurant);
     }
 
+    @Override
+    public String toString() {
+        String temp;
+        temp = this.name;
+        return temp;
+    }
+
 
 }
