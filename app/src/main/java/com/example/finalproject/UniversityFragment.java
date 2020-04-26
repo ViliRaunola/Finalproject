@@ -50,7 +50,6 @@ public class UniversityFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.university, container, false);
         infoWin = (TextView)v.findViewById(R.id.infoWindow);
-        infoWin.setText("LUT university is located in Lappeenranta.\nThere are 3 different ");
         universitySpinner = (Spinner)v.findViewById(R.id.university_spinner);
         parseUniversity();
         ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, universities);
@@ -63,6 +62,7 @@ public class UniversityFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 restaurants.clear();
                 int uniPosition = position;
+
                 parseRestaurantsMenu(position);
                 restaurantSpinner = (Spinner)v.findViewById(R.id.restaurant_spinner);
                 ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, restaurants);
@@ -85,6 +85,7 @@ public class UniversityFragment extends Fragment {
         ArrayAdapter<FoodItem> arrayAdapterListView = new ArrayAdapter<FoodItem>(getActivity(), android.R.layout.simple_list_item_1, laser.restaurantMenus);
         listView.setAdapter(arrayAdapterListView);
         */
+        // TODO add listview
 
 
         return v;
@@ -108,12 +109,13 @@ public class UniversityFragment extends Fragment {
                     String uniName = element.getElementsByTagName("universityName").item(0).getTextContent();
                     String uniId = element.getElementsByTagName("id").item(0).getTextContent();
                     String resXMLFileName = element.getElementsByTagName("restaurantXml").item(0).getTextContent();
+                    String uniInfoText = element.getElementsByTagName("restaurantInfo").item(0).getTextContent();
                     /*
                     System.out.println("###########################################"+ name + "###########################################");
                     System.out.println("###########################################"+ id + "###########################################");
                     System.out.println("###########################################"+ xml + "###########################################");
                      */
-                    University university = new University(uniName, uniId);
+                    University university = new University(uniName, uniId, uniInfoText);
                     university.addToRestaurants(resXMLFileName);
                     universities.add(university);
 
@@ -132,6 +134,8 @@ public class UniversityFragment extends Fragment {
     //Parses a specific XML file depending on the selected university from the university spinner
     public void parseRestaurantsMenu(int pos) {
             University selectedUniversity = universities.get(pos);
+            //university info to textView
+            infoWin.setText(selectedUniversity.getInfo());
             for (String s : selectedUniversity.restaurantsXML) {
                 try (InputStream ins = getContext().getAssets().open(s)) {
                     DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
