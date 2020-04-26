@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <universities>
     <university>
-        <univeristyName>LUT</univeristyName>
+        <universityName>LUT</universityName>
         <id>0000</id>
-        <restarantXml>LUT_Restaurants.xml</restarantXml>
+        <restaurantXml>LUT_Restaurants.xml</restaurantXml>
     </university>
     <university>
-        <univeristyName>Aalto</univeristyName>
+        <universityName>Aalto</universityName>
         <id>1111</id>
-        <restarantXml>Aalto_Restaurants.xml</restarantXml>
+        <restaurantXml>Aalto_Restaurants.xml</restaurantXml>
     </university>
     <university>
-        <univeristyName>TUT</univeristyName>
+        <universityName>TUT</universityName>
         <id>2222</id>
-        <restarantXml>TUT_Restaurants.xml</restarantXml>
+        <restaurantXml>TUT_Restaurants.xml</restaurantXml>
     </university>
 </universities>

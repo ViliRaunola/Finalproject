@@ -5,10 +5,15 @@ import java.util.ArrayList;
 public class Restaurant {
 
     private String name;
-    public ArrayList<FoodItem> restaurantMenus = new ArrayList<FoodItem>();
+    public ArrayList<String> restaurantMenus = new ArrayList<String>();
+
 
     public Restaurant(String name){
         this.name = name;
+    }
+
+    public void addToRestaurantMenus(String menu) {
+        restaurantMenus.add(menu);
     }
 
     @Override
