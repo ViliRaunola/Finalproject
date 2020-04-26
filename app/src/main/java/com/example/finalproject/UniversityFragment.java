@@ -90,6 +90,7 @@ public class UniversityFragment extends Fragment {
         return v;
     }
 
+    
     //Parses "university.xml" and creates University objects based on .xml parameters. Adds these new University objects to "universities"-ArrayList.
     //This ArrayList is shown in university_spinner.
     public void parseUniversity(){
@@ -130,34 +131,34 @@ public class UniversityFragment extends Fragment {
 
     //Parses a specific XML file depending on the selected university from the university spinner
     public void parseRestaurantsMenu(int pos) {
-        University selectedUniversity = universities.get(pos);
-        for (String s : selectedUniversity.restaurants) {
-            try (InputStream ins = getContext().getAssets().open(s)) {
-                DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-                Document xmlDoc = documentBuilder.parse(ins);
-                NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("restaurant");
-                System.out.println(nodeList.getLength());
+            University selectedUniversity = universities.get(pos);
+            for (String s : selectedUniversity.restaurants) {
+                try (InputStream ins = getContext().getAssets().open(s)) {
+                    DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                    Document xmlDoc = documentBuilder.parse(ins);
+                    NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("restaurant");
+                    System.out.println(nodeList.getLength());
 
-                for (int i = 0; i < nodeList.getLength(); i++) {
-                    Node node = nodeList.item(i);
-                    if (node.getNodeType() == Node.ELEMENT_NODE) {
-                        Element element = (Element) node;
-                        String resName = element.getElementsByTagName("restaurantName").item(0).getTextContent();
-                        String resMenuName = element.getElementsByTagName("restaurantMenu").item(0).getTextContent();
-                        Restaurant restaurant = new Restaurant(resName);
-                        restaurant.addToRestaurantMenus(resMenuName);
-                        restaurants.add(restaurant);
+                    for (int i = 0; i < nodeList.getLength(); i++) {
+                        Node node = nodeList.item(i);
+                        if (node.getNodeType() == Node.ELEMENT_NODE) {
+                            Element element = (Element) node;
+                            String resName = element.getElementsByTagName("restaurantName").item(0).getTextContent();
+                            String resMenuName = element.getElementsByTagName("restaurantMenu").item(0).getTextContent();
+                            Restaurant restaurant = new Restaurant(resName);
+                            restaurant.addToRestaurantMenus(resMenuName);
+                            restaurants.add(restaurant);
+                        }
                     }
+                    System.out.println("###########" + universities.size() + "############");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                } catch (SAXException e) {
+                    e.printStackTrace();
                 }
-                System.out.println("###########" + universities.size() + "############");
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
             }
-        }
     }
 
     public void parseMenuFile(){
