@@ -90,7 +90,7 @@ public class UniversityFragment extends Fragment {
         return v;
     }
 
-    
+
     //Parses "university.xml" and creates University objects based on .xml parameters. Adds these new University objects to "universities"-ArrayList.
     //This ArrayList is shown in university_spinner.
     public void parseUniversity(){
@@ -132,7 +132,7 @@ public class UniversityFragment extends Fragment {
     //Parses a specific XML file depending on the selected university from the university spinner
     public void parseRestaurantsMenu(int pos) {
             University selectedUniversity = universities.get(pos);
-            for (String s : selectedUniversity.restaurants) {
+            for (String s : selectedUniversity.restaurantsXML) {
                 try (InputStream ins = getContext().getAssets().open(s)) {
                     DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                     Document xmlDoc = documentBuilder.parse(ins);

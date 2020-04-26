@@ -6,14 +6,14 @@ public class University {
 
     private String name;
     private String id;
-    ArrayList<String> restaurants = new ArrayList<>();
+    ArrayList<String> restaurantsXML = new ArrayList<>();
 
     University(String name, String id){
         this.name = name;
         this.id = id;
     }
     void addToRestaurants(String restaurant){
-        restaurants.add(restaurant);
+        restaurantsXML.add(restaurant);
     }
 
     @Override
