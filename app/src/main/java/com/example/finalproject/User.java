@@ -3,6 +3,7 @@ package com.example.finalproject;
 public class User {
 
     private String password;
+    private byte[] salt;
     private String userID;
     private String firstName;
     private String lastName;
@@ -15,6 +16,9 @@ public class User {
 
     public void setPassword(String pW) {
         password = pW;
+    }
+    public void setSalt( byte[] = s) {
+        salt = s;
     }
     public void setUserID(String uI) {
         userID = uI;
@@ -35,6 +39,9 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+    public byte[] getSalt() {
+        return salt;
     }
     public String getUserID() {
         return userID;
