@@ -17,7 +17,7 @@ public class User {
     public void setPassword(String pW) {
         password = pW;
     }
-    public void setSalt( byte[] = s) {
+    public void setSalt( byte[] s) {
         salt = s;
     }
     public void setUserID(String uI) {
