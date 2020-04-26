@@ -113,11 +113,6 @@ public class UniversityFragment extends Fragment {
                     String uniId = element.getElementsByTagName("id").item(0).getTextContent();
                     String resXMLFileName = element.getElementsByTagName("restaurantXml").item(0).getTextContent();
                     String uniInfoText = element.getElementsByTagName("restaurantInfo").item(0).getTextContent();
-                    /*
-                    System.out.println("###########################################"+ name + "###########################################");
-                    System.out.println("###########################################"+ id + "###########################################");
-                    System.out.println("###########################################"+ xml + "###########################################");
-                     */
                     University university = new University(uniName, uniId, uniInfoText);
                     university.addToRestaurants(resXMLFileName);
                     universities.add(university);

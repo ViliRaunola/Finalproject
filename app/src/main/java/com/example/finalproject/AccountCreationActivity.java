@@ -38,28 +38,36 @@ public class AccountCreationActivity extends AppCompatActivity {
     private String password_string;
     private String email_string;
     private String home_uni;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_creation);
+
         confirm = (Button)findViewById(R.id.confirm);
         firstName = (EditText)findViewById(R.id.firstNameTextField);
         password = (EditText)findViewById(R.id.passwordTextField_creation);
         email = (EditText)findViewById(R.id.emailTextField_creation);
         lastName = (EditText)findViewById(R.id.lastNameTextField);
         home_uni_spinner = (Spinner)findViewById(R.id.homeUniversitySpinner);
+
+        //create spinner from universityList
         parseUniversity();
         ArrayAdapter<String> ap = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, universityList);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         home_uni_spinner.setAdapter(ap);
     }
     public void confirmPressed(View view){
+
+        //get text from textfields and spinner
         home_uni = home_uni_spinner.getSelectedItem().toString();
         email_string = email.getText().toString();
         lastname_string = lastName.getText().toString();
         firstname_string = firstName.getText().toString();
         password_string = password.getText().toString();
+
         //TODO tarkista onko sama email muuten
+        //create a new user
         User user = new User();
         user.setEmail(email_string);
         user.setFirstName(firstname_string);
@@ -71,9 +79,11 @@ public class AccountCreationActivity extends AppCompatActivity {
         user.setSalt(salt);
         //TODO USER ID generointi ja tallennus
         //TODO ja näiden tietojen kirjoitus tiedostoon
+
         startActivity(new Intent(AccountCreationActivity.this, LoginActivity.class));
         finish();
     }
+    //parses "university.xml" to make a list from university names
     public void parseUniversity(){
 
         try (InputStream ins = this.getAssets().open("university.xml")){
