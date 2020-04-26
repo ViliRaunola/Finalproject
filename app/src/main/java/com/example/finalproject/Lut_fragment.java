@@ -70,7 +70,7 @@ public class Lut_fragment extends Fragment {
         public void parseMenuFile(){
         String name = null;
         String price = null;
-        int id=0;
+        int id = 0;
         try {
             XmlPullParserFactory parserFactory;
             parserFactory = XmlPullParserFactory.newInstance();
@@ -102,7 +102,7 @@ public class Lut_fragment extends Fragment {
                                 id = Integer.parseInt(parser.nextText());
                                 System.out.println(id);
                                 fd = new FoodItem(name, price, id);
-                                laser.restaurantMenus.add(fd);
+                                laser.restaurantMenus.add(fd);//tulee muuttaa
                             }
                         }
                         break;
