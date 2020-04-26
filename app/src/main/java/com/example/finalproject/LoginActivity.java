@@ -16,8 +16,16 @@ public class LoginActivity extends AppCompatActivity {
         login = (Button)findViewById(R.id.login);
 
     }
-    public void logIn(View view){
+    public void logInPressed(View view){
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
         finish();
+    }
+    public void createNewAccontPressed(View view){
+        startActivity(new Intent(LoginActivity.this, AccountCreationActivity.class));
+    }
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        this.moveTaskToBack(true);
     }
 }
