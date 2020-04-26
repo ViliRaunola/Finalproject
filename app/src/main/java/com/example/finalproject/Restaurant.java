@@ -5,15 +5,19 @@ import java.util.ArrayList;
 public class Restaurant {
 
     private String name;
-    public ArrayList<String> restaurantMenus = new ArrayList<String>();
-
+    public ArrayList<String> restaurantMenusXML = new ArrayList<String>();
+    public ArrayList<FoodItem> resDailyMenu = new ArrayList<FoodItem>();
 
     public Restaurant(String name){
         this.name = name;
     }
 
-    public void addToRestaurantMenus(String menu) {
-        restaurantMenus.add(menu);
+    public void addToRestaurantMenusXML(String menu) {
+        restaurantMenusXML.add(menu);
+    }
+
+    public void addFoodItemToDailyMenu(FoodItem o) {
+        resDailyMenu.add(o);
     }
 
     @Override

@@ -33,14 +33,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class UniversityFragment extends Fragment {
 
-    private ListView listView;
+    private ListView foodItemLisView;
     public ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
     private TextView infoWin;
     public ArrayList<University> universities = new ArrayList<University>();
-
-    Restaurant laser = new Restaurant("Laseri");
-    Restaurant buffet = new Restaurant("Lut Buffet");
-    Restaurant yo = new Restaurant("Ylioppilastalo");
 
     private Spinner restaurantSpinner;
     private Spinner universitySpinner;
@@ -56,18 +52,37 @@ public class UniversityFragment extends Fragment {
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         universitySpinner.setAdapter(ap);
 
+
         //On select adds specific restaurants to restaurantSpinner depending the selected university
         universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 restaurants.clear();
-                int uniPosition = position;
-
                 parseRestaurantsMenu(position);
                 restaurantSpinner = (Spinner)v.findViewById(R.id.restaurant_spinner);
                 ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, restaurants);
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 restaurantSpinner.setAdapter(arrayAdapter);
+
+                //Here is listView + array adapter for it. This listView is meant for food items.
+                //Food items come from some xml file; not sure yet from where??!
+                restaurantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        Restaurant selectedRestaurant = restaurants.get(position);
+                        parseFoodItems(selectedRestaurant);
+                        System.out.println("###########################################SELECTED ITEM:)))()(###########################################");
+                        foodItemLisView = (ListView) v.findViewById(R.id.listViewFood);
+                        ArrayAdapter<FoodItem> arrayAdapterListView = new ArrayAdapter<FoodItem>(getActivity(), android.R.layout.simple_list_item_1, selectedRestaurant.resDailyMenu);
+                        foodItemLisView.setAdapter(arrayAdapterListView);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
             }
 
             @Override
@@ -75,18 +90,6 @@ public class UniversityFragment extends Fragment {
 
             }
         });
-
-        //Here is listView + array adapter for it. This listView is meant for food items.
-        //Food items come from some xml file; not sure yet from where??!
-        parseMenuFile();
-
-        /*
-        listView = (ListView) v.findViewById(R.id.listViewFood);
-        ArrayAdapter<FoodItem> arrayAdapterListView = new ArrayAdapter<FoodItem>(getActivity(), android.R.layout.simple_list_item_1, laser.restaurantMenus);
-        listView.setAdapter(arrayAdapterListView);
-        */
-        // TODO add listview
-
 
         return v;
     }
@@ -150,7 +153,7 @@ public class UniversityFragment extends Fragment {
                             String resName = element.getElementsByTagName("restaurantName").item(0).getTextContent();
                             String resMenuName = element.getElementsByTagName("restaurantMenu").item(0).getTextContent();
                             Restaurant restaurant = new Restaurant(resName);
-                            restaurant.addToRestaurantMenus(resMenuName);
+                            restaurant.addToRestaurantMenusXML(resMenuName);
                             restaurants.add(restaurant);
                         }
                     }
@@ -164,60 +167,36 @@ public class UniversityFragment extends Fragment {
                 }
             }
     }
+    //parses food items from XML files of the chosen Restaurant. Adds them to Restaurant's dailyMenus.
+    public void parseFoodItems(Restaurant selectedRestaurant) {
+        for (String s : selectedRestaurant.restaurantMenusXML) {
+            try (InputStream ins = getContext().getAssets().open(s)) {
+                DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                Document xmlDoc = documentBuilder.parse(ins);
+                NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("food");
+                System.out.println(nodeList.getLength());
 
-    public void parseMenuFile(){
-    String name = null;
-    String price = null;
-    int id = 0;
-    try {
-        XmlPullParserFactory parserFactory;
-        parserFactory = XmlPullParserFactory.newInstance();
-        XmlPullParser parser = parserFactory.newPullParser();
-        InputStream is = getContext().getAssets().open("laseriMenu.xml");
-        parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-        parser.setInput(is, null);
-        int eventType = parser.getEventType();
-
-        while (eventType != XmlPullParser.END_DOCUMENT){
-            String tag = null;
-            FoodItem fd = null;
-
-            switch (eventType){
-                case XmlPullParser.START_TAG:
-                    tag = parser.getName();
-
-                    if ("food".equals(tag)){
-                            System.out.println(tag);
-
-                    }else{
-                        if ("name".equals(tag)){
-                            name = parser.nextText();
-                            System.out.println(name);
-                        } else if ("price".equals(tag)){
-                            price = parser.nextText();
-                            System.out.println(price);
-                        } else if ("id".equals(tag)){
-                            id = Integer.parseInt(parser.nextText());
-                            System.out.println(id);
-                            fd = new FoodItem(name, price, id);
-                            //laser.restaurantMenus.add(fd);//    TODO tulee muuttaa
-                        }
+                for (int i = 0; i < nodeList.getLength(); i++) {
+                    Node node = nodeList.item(i);
+                    if (node.getNodeType() == Node.ELEMENT_NODE) {
+                        Element element = (Element) node;
+                        String foodName = element.getElementsByTagName("name").item(0).getTextContent();
+                        String foodPrice = element.getElementsByTagName("price").item(0).getTextContent();
+                        String foodId = element.getElementsByTagName("id").item(0).getTextContent();
+                        FoodItem foodItem = new FoodItem(foodName, foodPrice, foodId);
+                        selectedRestaurant.addFoodItemToDailyMenu(foodItem);
+                        System.out.println("#################################################" + foodName + "################################################");
                     }
-                    break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch (SAXException e) {
+                e.printStackTrace();
             }
-            eventType  = parser.next();
-
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-    } catch (XmlPullParserException e) {
-        e.printStackTrace();
-    }finally{
-        System.out.println("*********DONE*******");
     }
-
-}
-
 
 
 
