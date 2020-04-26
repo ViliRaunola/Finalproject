@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
         finish();
     }
-    public void createNewAccontPressed(View view){
+    public void createNewAccountPressed(View view){
         startActivity(new Intent(LoginActivity.this, AccountCreationActivity.class));
     }
     @Override
