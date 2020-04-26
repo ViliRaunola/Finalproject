@@ -7,17 +7,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class AccountActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     Lut_fragment lut = new Lut_fragment();
     @Override
@@ -37,11 +35,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //Here can be defined what page opens first. If statement is for rotating the screen.
-        if(savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, lut).commit();
-            navigationView.setCheckedItem(R.id.nav_uni);
-        }
 
     }
 
@@ -59,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_uni:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, lut).commit();
+                startActivity(new Intent(AccountActivity.this, MainActivity.class));
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_rev:
@@ -67,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_acc:
-                startActivity(new Intent(MainActivity.this, AccountActivity.class));
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_logout:

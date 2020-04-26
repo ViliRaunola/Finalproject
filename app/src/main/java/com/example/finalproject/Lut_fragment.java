@@ -130,7 +130,7 @@ public class Lut_fragment extends Fragment {
             XmlPullParserFactory parserFactory;
             parserFactory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = parserFactory.newPullParser();
-            InputStream is = getContext().getAssets().open("laseri.xml");
+            InputStream is = getContext().getAssets().open("laseriMenu.xml");
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
             parser.setInput(is, null);
             int eventType = parser.getEventType();
@@ -157,7 +157,7 @@ public class Lut_fragment extends Fragment {
                                 id = Integer.parseInt(parser.nextText());
                                 System.out.println(id);
                                 fd = new FoodItem(name, price, id);
-                                laser.restaurantMenus.add(fd);//tulee muuttaa
+                                laser.restaurantMenus.add(fd);//    TODO tulee muuttaa
                             }
                         }
                         break;
