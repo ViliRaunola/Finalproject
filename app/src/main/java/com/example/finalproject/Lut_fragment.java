@@ -46,14 +46,11 @@ public class Lut_fragment extends Fragment {
 
     private Spinner restaurantSpinner;
     private Spinner universitySpinner;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.lut, container, false);
-        /*
-        *
-        *
-        * */
         infoWin = (TextView)v.findViewById(R.id.infoWindow);
         infoWin.setText("LUT university is located in Lappeenranta.\nThere are 3 different ");
         universitySpinner = (Spinner)v.findViewById(R.id.university_spinner);
@@ -80,6 +77,8 @@ public class Lut_fragment extends Fragment {
         return v;
     }
 
+    //Parses "university.xml" and creates University objects based on .xml parameters. Adds these new University objects to "universities"-ArrayList.
+    //This ArrayList is shown in university_spinner.
     public void parseUniversity(){
         String output ="";
 
