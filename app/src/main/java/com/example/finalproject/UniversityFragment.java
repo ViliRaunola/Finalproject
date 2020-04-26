@@ -22,18 +22,15 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class Lut_fragment extends Fragment {
+public class UniversityFragment extends Fragment {
 
     private ListView listView;
     public ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
@@ -50,7 +47,7 @@ public class Lut_fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.lut, container, false);
+        View v = inflater.inflate(R.layout.university, container, false);
         infoWin = (TextView)v.findViewById(R.id.infoWindow);
         infoWin.setText("LUT university is located in Lappeenranta.\nThere are 3 different ");
         universitySpinner = (Spinner)v.findViewById(R.id.university_spinner);
@@ -114,13 +111,6 @@ public class Lut_fragment extends Fragment {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
 
         public void parseMenuFile(){
         String name = null;

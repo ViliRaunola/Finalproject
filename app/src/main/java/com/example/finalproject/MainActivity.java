@@ -19,7 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
-    Lut_fragment lut = new Lut_fragment();
+    UniversityFragment universityFragment = new UniversityFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Here can be defined what page opens first. If statement is for rotating the screen.
         if(savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, lut).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, universityFragment).commit();
             navigationView.setCheckedItem(R.id.nav_uni);
         }
 
@@ -59,11 +59,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_uni:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, lut).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, universityFragment).commit();
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_rev:
-
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_acc:

@@ -17,7 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class AccountActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
-    Lut_fragment lut = new Lut_fragment();
+    AccountFragment accountFragment = new AccountFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +34,12 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,toolbar, R.string.navigatio_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        //Here can be defined what page opens first. If statement is for rotating the screen.
+        if(savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, accountFragment).commit();
+            navigationView.setCheckedItem(R.id.nav_uni);
+        }
 
 
     }
@@ -56,7 +62,6 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_rev:
-
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_acc:
