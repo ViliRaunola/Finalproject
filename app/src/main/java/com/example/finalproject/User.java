@@ -1,5 +1,7 @@
 package com.example.finalproject;
 
+import java.util.ArrayList;
+
 public class User {
 
     private String password;
@@ -10,6 +12,7 @@ public class User {
     private String eMail;
     private String homeUniversity;
     //TODO add picture here
+    ArrayList<FoodReview> Reviews;
 
     public User() {
     }
