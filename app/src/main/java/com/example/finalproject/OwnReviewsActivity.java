@@ -9,17 +9,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class OwnReviewsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
-    UniversityFragment universityFragment = new UniversityFragment();
+    OwnReviewsFragment ownReviewsFragment = new OwnReviewsFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +36,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Here can be defined what page opens first. If statement is for rotating the screen.
         if(savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).commit();
             navigationView.setCheckedItem(R.id.nav_restaurants);
         }
+
 
     }
 
@@ -50,28 +48,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         }else{
-            this.moveTaskToBack(true);
+            super.onBackPressed();
         }
     }
 
-    //This handles what item has been selected by Vili.
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_restaurants:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
+                startActivity(new Intent(OwnReviewsActivity.this, MainActivity.class));
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_reviews:
-                startActivity(new Intent(MainActivity.this, OwnReviewsActivity.class));
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_account:
-                startActivity(new Intent(MainActivity.this, AccountActivity.class));
+                startActivity(new Intent(OwnReviewsActivity.this, AccountActivity.class));
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_logout:
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(OwnReviewsActivity.this, LoginActivity.class));
                 finish();
                 Toast.makeText(this, "You Have Logged Out", Toast.LENGTH_SHORT).show();
                 break;
