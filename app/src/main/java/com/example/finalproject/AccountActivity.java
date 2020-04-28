@@ -37,7 +37,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
 
         //Here can be defined what page opens first. If statement is for rotating the screen.
         if(savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, accountFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).commit();
             navigationView.setCheckedItem(R.id.nav_restaurants);
         }
 

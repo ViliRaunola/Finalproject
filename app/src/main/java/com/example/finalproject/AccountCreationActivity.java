@@ -45,10 +45,10 @@ public class AccountCreationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account_creation);
 
         confirm = (Button)findViewById(R.id.confirm);
-        firstName = (EditText)findViewById(R.id.firstNameTextField);
-        password = (EditText)findViewById(R.id.passwordTextField_creation);
-        email = (EditText)findViewById(R.id.emailTextField_creation);
-        lastName = (EditText)findViewById(R.id.lastNameTextField);
+        firstName = (EditText)findViewById(R.id.firstNameTextField_account_creation);
+        password = (EditText)findViewById(R.id.passwordTextField_account_creation);
+        email = (EditText)findViewById(R.id.emailTextField_account_creation);
+        lastName = (EditText)findViewById(R.id.lastNameTextField_account_creation);
         home_uni_spinner = (Spinner)findViewById(R.id.homeUniversitySpinner);
 
         //create spinner from universityList

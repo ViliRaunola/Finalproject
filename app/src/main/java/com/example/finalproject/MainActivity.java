@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Here can be defined what page opens first. If statement is for rotating the screen.
         if(savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, universityFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
             navigationView.setCheckedItem(R.id.nav_restaurants);
         }
 
@@ -60,11 +60,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_restaurants:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, universityFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_reviews:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_cotainer, ownReviewsFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).commit();
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_account:
