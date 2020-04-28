@@ -36,6 +36,7 @@ public class OwnReviewsFragment extends Fragment {
     private ListView notPublishedReviews;
     private ListView publishedReviews;
     private String selectedSortingMethod;
+    EditOwnReviewsFragment editOwnReviewsFragment = new EditOwnReviewsFragment();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -97,8 +98,9 @@ public class OwnReviewsFragment extends Fragment {
         publishedReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(),MainActivity.class);
-                startActivity(intent);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editOwnReviewsFragment).commit();
+                //Intent intent = new Intent(getActivity(),MainActivity.class);
+                //startActivity(intent);
             }
         });
         notPublishedReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
