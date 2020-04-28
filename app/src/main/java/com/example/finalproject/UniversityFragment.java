@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,7 +26,12 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.ListIterator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -38,9 +44,10 @@ public class UniversityFragment extends Fragment {
     private TextView infoWin;
     public ArrayList<University> universities = new ArrayList<University>();
     private TextView dayTextView;
-
     private Spinner restaurantSpinner;
     private Spinner universitySpinner;
+    Button previousDayButton;
+    private ArrayList<String> weekDays = new ArrayList<String>();
 
     enum Days {
         MONDAY,
@@ -60,10 +67,20 @@ public class UniversityFragment extends Fragment {
         dayTextView = (TextView)v.findViewById(R.id.dayTextView);
         infoWin = (TextView)v.findViewById(R.id.infoWindow);
         universitySpinner = (Spinner)v.findViewById(R.id.university_spinner);
+        previousDayButton = (Button) v.findViewById(R.id.previousButton);
         parseUniversity();
         ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, universities);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         universitySpinner.setAdapter(ap);
+        weekDays.add("Monday");
+        weekDays.add("Tuesday");
+        weekDays.add("Wednesday");
+        weekDays.add("Thursday");
+        weekDays.add("Friday");
+        weekDays.add("Saturday");
+        weekDays.add("Sunday");
+        dayTextView.setText(getCurrentDate());
+
 
 
         //On select adds specific restaurants to restaurantSpinner depending the selected university
@@ -76,7 +93,6 @@ public class UniversityFragment extends Fragment {
                 ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, restaurants);
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 restaurantSpinner.setAdapter(arrayAdapter);
-
                 //Here is listView + array adapter for it. This listView is meant for food items.
                 //Food items come from some xml file; not sure yet from where??!
                 restaurantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -103,9 +119,6 @@ public class UniversityFragment extends Fragment {
 
             }
         });
-
-
-
 
 
 
@@ -214,6 +227,9 @@ public class UniversityFragment extends Fragment {
         }
     }
 
+
+
+
     public void nextDay(View v){
 
 
@@ -222,5 +238,10 @@ public class UniversityFragment extends Fragment {
 
     }
 
+    public String getCurrentDate() {
+        DateFormat dateFormat = new SimpleDateFormat("EEEE");
+        Date currentDate = new Date();
+        return dateFormat.format(currentDate);
+    }
 
 }

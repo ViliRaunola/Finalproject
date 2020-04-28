@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/previousButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -57,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/nextButton"
         android:layout_width="123dp"
         android:layout_height="49dp"
         android:layout_marginEnd="4dp"
@@ -72,7 +72,7 @@
         android:layout_marginBottom="20dp"
         android:text="Current Day"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
-        app:layout_constraintStart_toEndOf="@+id/button" />
+        app:layout_constraintEnd_toStartOf="@+id/nextButton"
+        app:layout_constraintStart_toEndOf="@+id/previousButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
