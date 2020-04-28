@@ -49,7 +49,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         password = (EditText)findViewById(R.id.passwordTextField_account_creation);
         email = (EditText)findViewById(R.id.emailTextField_account_creation);
         lastName = (EditText)findViewById(R.id.lastNameTextField_account_creation);
-        home_uni_spinner = (Spinner)findViewById(R.id.homeUniversitySpinner);
+        home_uni_spinner = (Spinner)findViewById(R.id.homeUniversity_spinner_creation);
 
         //create spinner from universityList
         parseUniversity();

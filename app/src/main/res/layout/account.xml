@@ -20,7 +20,7 @@
 
 
     <EditText
-        android:id="@+id/emailTextField_account_fragment"
+        android:id="@+id/emailTextField_account_creation"
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="48dp"
@@ -43,10 +43,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordTextField_account_fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextField_account_creation" />
 
     <EditText
-        android:id="@+id/passwordTextField_account_fragment"
+        android:id="@+id/passwordTextField_account_creation"
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
@@ -56,10 +56,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastNameTextField_account_fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/lastNameTextField_account_creation" />
 
     <EditText
-        android:id="@+id/lastNameTextField_account_fragment"
+        android:id="@+id/lastNameTextField_account_creation"
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
@@ -69,10 +69,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstNameTextField_account_fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/firstNameTextField_account_creation" />
 
     <EditText
-        android:id="@+id/firstNameTextField_account_fragment"
+        android:id="@+id/firstNameTextField_account_creation"
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
@@ -82,14 +82,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailTextField_account_fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/emailTextField_account_creation" />
 
     <TextView
         android:id="@+id/emailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
-        app:layout_constraintBottom_toTopOf="@+id/emailTextField_account_fragment"
+        app:layout_constraintBottom_toTopOf="@+id/emailTextField_account_creation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent" />
@@ -98,7 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="First Name"
-        app:layout_constraintBottom_toTopOf="@+id/firstNameTextField_account_fragment"
+        app:layout_constraintBottom_toTopOf="@+id/firstNameTextField_account_creation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent" />
@@ -108,7 +108,7 @@
         android:layout_width="64dp"
         android:layout_height="18dp"
         android:text="Last Name"
-        app:layout_constraintBottom_toTopOf="@+id/lastNameTextField_account_fragment"
+        app:layout_constraintBottom_toTopOf="@+id/lastNameTextField_account_creation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent" />
@@ -118,7 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password"
-        app:layout_constraintBottom_toTopOf="@+id/passwordTextField_account_fragment"
+        app:layout_constraintBottom_toTopOf="@+id/passwordTextField_account_creation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent" />
