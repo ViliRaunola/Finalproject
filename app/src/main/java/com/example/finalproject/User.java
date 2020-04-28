@@ -79,8 +79,8 @@ public class User {
         && r.getAverageScore() != -1
         && r.getReviewText() != null) {
             publishedReviews.add(r);
-            //TODO test if review already in food's reviews
-                //TODO add review to correct restaurant's food's reviews list (this information found in r)
+
+            //TODO test if review already in restaurant's food's reviews... if no add it to there
         }
     }
 }
