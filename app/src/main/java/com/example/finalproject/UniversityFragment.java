@@ -37,15 +37,27 @@ public class UniversityFragment extends Fragment {
     public ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
     private TextView infoWin;
     public ArrayList<University> universities = new ArrayList<University>();
+    private TextView dayTextView;
 
     private Spinner restaurantSpinner;
     private Spinner universitySpinner;
-    
+
+    enum Days {
+        MONDAY,
+        TUESDAY,
+        WEDNESDAY,
+        THURSDAY,
+        FRIDAY,
+        SATURDAY,
+        SUNDAY
+    }
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.university, container, false);
+        dayTextView = (TextView)v.findViewById(R.id.dayTextView);
         infoWin = (TextView)v.findViewById(R.id.infoWindow);
         universitySpinner = (Spinner)v.findViewById(R.id.university_spinner);
         parseUniversity();
@@ -185,7 +197,9 @@ public class UniversityFragment extends Fragment {
                         String foodName = element.getElementsByTagName("name").item(0).getTextContent();
                         String foodPrice = element.getElementsByTagName("price").item(0).getTextContent();
                         String foodId = element.getElementsByTagName("id").item(0).getTextContent();
-                        FoodItem foodItem = new FoodItem(foodName, foodPrice, foodId);
+                        String foodDay = element.getElementsByTagName("day").item(0).getTextContent();
+                        int foodDayInt = Integer.parseInt(foodDay);
+                        FoodItem foodItem = new FoodItem(foodName, foodPrice, foodId, foodDayInt);
                         selectedRestaurant.addFoodItemToDailyMenu(foodItem);
                         System.out.println("#################################################" + foodName + "################################################");
                     }
@@ -200,7 +214,13 @@ public class UniversityFragment extends Fragment {
         }
     }
 
+    public void nextDay(View v){
 
+
+
+
+
+    }
 
 
 }
