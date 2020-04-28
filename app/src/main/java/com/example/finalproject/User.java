@@ -12,7 +12,8 @@ public class User {
     private String eMail;
     private String homeUniversity;
     //TODO add picture here
-    ArrayList<FoodReview> Reviews;
+    ArrayList<FoodReview> publishedReviews;
+    ArrayList<FoodReview> nonPublishedReviews;
 
     public User() {
     }
@@ -39,7 +40,6 @@ public class User {
         homeUniversity = hU;
     }
 
-
     public String getPassword() {
         return password;
     }
@@ -60,6 +60,28 @@ public class User {
     }
     public String getHomeUniversity() {
         return homeUniversity;
+    }
+    public ArrayList<FoodReview> getPublishedReviews() {
+        return publishedReviews;
+    }
+    public ArrayList<FoodReview> getNonPublishedReviews() {
+        return nonPublishedReviews;
+    }
+
+    public void PublishReview(FoodReview r) {
+        if (r.getFood() != null
+        && r.getRestaurant() != null
+        && r.getUniversity() != null
+        && r.getDate() != null
+        && r.getTasteScore() != -1
+        && r.getLookScore() != -1
+        && r.getTextureScore() != -1
+        && r.getAverageScore() != -1
+        && r.getReviewText() != null) {
+            publishedReviews.add(r);
+            //TODO test if review already in food's reviews
+                //TODO add review to correct restaurant's food's reviews list (this information found in r)
+        }
     }
 }
 

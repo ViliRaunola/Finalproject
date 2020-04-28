@@ -6,7 +6,8 @@ public class FoodReview {
 
     private String food;
     private String restaurant;
-    DateFormat date; //TODO käytetäänkö me tätä?
+    private String university;
+    private DateFormat date; //TODO käytetäänkö me tätä?
     private float tasteScore;
     private float lookScore;
     private float textureScore;
@@ -14,9 +15,11 @@ public class FoodReview {
     private String reviewText;
     //TODO add picture of food
 
-    public FoodReview(String f, String r, float taScore, float loScore, float teScore, String text) {
+    public FoodReview(String f, String r, String u, DateFormat d, float taScore, float loScore, float teScore, String text) {
         food = f;
         restaurant = r;
+        university = u;
+        date = d;
         tasteScore = taScore;
         lookScore = loScore;
         textureScore = teScore;
@@ -27,20 +30,28 @@ public class FoodReview {
     public float getTasteScore() {
         return tasteScore;
     }
-
     public float getLookScore() {
         return lookScore;
     }
-
     public float getTextureScore() {
         return textureScore;
     }
-
     public float getAverageScore() {
         return averageScore;
     }
-
     public String getReviewText() {
         return reviewText;
+    }
+    public String getFood() {
+        return food;
+    }
+    public String getRestaurant() {
+        return restaurant;
+    }
+    public String getUniversity() {
+        return university;
+    }
+    public DateFormat getDate() {
+        return date;
     }
 }
