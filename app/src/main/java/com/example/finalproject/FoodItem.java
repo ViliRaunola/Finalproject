@@ -16,6 +16,9 @@ public class FoodItem {
 
     }
 
+    public int getDay(){
+        return this.day;
+    }
 
     @Override
     public String toString() {

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,8 @@ import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ListIterator;
@@ -50,15 +53,12 @@ public class UniversityFragment extends Fragment {
     private Button nextDayButton;
     private ArrayList<String> weekDays = new ArrayList<String>();
 
-    enum Days {
-        MONDAY,
-        TUESDAY,
-        WEDNESDAY,
-        THURSDAY,
-        FRIDAY,
-        SATURDAY,
-        SUNDAY
-    }
+    //These are for showing the right food item in the day
+    private int toDayInt;
+    private ArrayList<FoodItem> dailyFoods = new ArrayList<FoodItem>();
+    private int restaurantPostion;
+    private int toCheking = 0;
+    private int foodMenuMaxLenght = 1;
 
 
     @Nullable
@@ -70,6 +70,8 @@ public class UniversityFragment extends Fragment {
         universitySpinner = (Spinner)v.findViewById(R.id.university_spinner);
         previousDayButton = v.findViewById(R.id.previousDayButton);
         nextDayButton = v.findViewById(R.id.nextDayButton);
+
+        getToDayInt();
 
         parseUniversity();
         ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, universities);
@@ -90,6 +92,10 @@ public class UniversityFragment extends Fragment {
         universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                getToDayInt();
+
+
                 restaurants.clear();
                 parseRestaurantsMenu(position);
                 restaurantSpinner = (Spinner)v.findViewById(R.id.restaurant_spinner);
@@ -101,12 +107,17 @@ public class UniversityFragment extends Fragment {
                 restaurantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                        restaurantPostion = position;
+                        restaurants.get(restaurantPostion).resDailyMenu.clear();
                         Restaurant selectedRestaurant = restaurants.get(position);
                         parseFoodItems(selectedRestaurant);
-                        System.out.println("###########################################SELECTED ITEM:)))()(###########################################");
+
+                        checkCurrentDay(toDayInt, restaurantPostion);
                         foodItemLisView = (ListView) v.findViewById(R.id.listViewFood);
-                        ArrayAdapter<FoodItem> arrayAdapterListView = new ArrayAdapter<FoodItem>(getActivity(), android.R.layout.simple_list_item_1, selectedRestaurant.resDailyMenu);
+                        ArrayAdapter<FoodItem> arrayAdapterListView = new ArrayAdapter<FoodItem>(getActivity(), android.R.layout.simple_list_item_1, dailyFoods);
                         foodItemLisView.setAdapter(arrayAdapterListView);
+
                     }
 
                     @Override
@@ -114,9 +125,7 @@ public class UniversityFragment extends Fragment {
 
                     }
                 });
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -129,47 +138,88 @@ public class UniversityFragment extends Fragment {
         previousDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dayTextView.getText().equals("Monday")) {
-                    dayTextView.setText(weekDays.get(6));
-                } else if (dayTextView.getText().equals("Tuesday")) {
-                    dayTextView.setText(weekDays.get(0));
-                } else if (dayTextView.getText().equals("Wednesday")) {
-                    dayTextView.setText(weekDays.get(1));
-                } else if (dayTextView.getText().equals("Thursday")) {
-                    dayTextView.setText(weekDays.get(2));
-                } else if (dayTextView.getText().equals("Friday")) {
-                    dayTextView.setText(weekDays.get(3));
-                } else if (dayTextView.getText().equals("Saturday")) {
-                    dayTextView.setText(weekDays.get(4));
-                } else if (dayTextView.getText().equals("Sunday")) {
-                    dayTextView.setText(weekDays.get(5));
+
+                if(toDayInt <= 1){
+                    Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
+                }else {
+                    toDayInt -= 1;
+                    if (dayTextView.getText().equals("Monday")) {
+                        dayTextView.setText(weekDays.get(6));
+                    } else if (dayTextView.getText().equals("Tuesday")) {
+                        dayTextView.setText(weekDays.get(0));
+                    } else if (dayTextView.getText().equals("Wednesday")) {
+                        dayTextView.setText(weekDays.get(1));
+                    } else if (dayTextView.getText().equals("Thursday")) {
+                        dayTextView.setText(weekDays.get(2));
+                    } else if (dayTextView.getText().equals("Friday")) {
+                        dayTextView.setText(weekDays.get(3));
+                    } else if (dayTextView.getText().equals("Saturday")) {
+                        dayTextView.setText(weekDays.get(4));
+                    } else if (dayTextView.getText().equals("Sunday")) {
+                        dayTextView.setText(weekDays.get(5));
+                    }
+                    checkCurrentDay(toDayInt, restaurantPostion);
+                    foodItemLisView.invalidateViews();
                 }
             }
         });
         nextDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dayTextView.getText().equals("Monday")) {
-                    dayTextView.setText(weekDays.get(1));
-                } else if (dayTextView.getText().equals("Tuesday")) {
-                    dayTextView.setText(weekDays.get(2));
-                } else if (dayTextView.getText().equals("Wednesday")) {
-                    dayTextView.setText(weekDays.get(3));
-                } else if (dayTextView.getText().equals("Thursday")) {
-                    dayTextView.setText(weekDays.get(4));
-                } else if (dayTextView.getText().equals("Friday")) {
-                    dayTextView.setText(weekDays.get(5));
-                } else if (dayTextView.getText().equals("Saturday")) {
-                    dayTextView.setText(weekDays.get(6));
-                } else if (dayTextView.getText().equals("Sunday")) {
-                    dayTextView.setText(weekDays.get(0));
+                if(toDayInt >= restaurants.get(0).resDailyMenu.get(restaurants.get(0).resDailyMenu.size()-1).getDay()) {
+                    System.out.println("###########################   "+toDayInt +"  ###########################   ");
+                    System.out.println("###########################   "+restaurants.get(0).resDailyMenu.get(restaurants.get(0).resDailyMenu.size()-1).getDay() +"  ###########################   ");
+                    Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (dayTextView.getText().equals("Monday")) {
+                        dayTextView.setText(weekDays.get(1));
+                    } else if (dayTextView.getText().equals("Tuesday")) {
+                        dayTextView.setText(weekDays.get(2));
+                    } else if (dayTextView.getText().equals("Wednesday")) {
+                        dayTextView.setText(weekDays.get(3));
+                    } else if (dayTextView.getText().equals("Thursday")) {
+                        dayTextView.setText(weekDays.get(4));
+                    } else if (dayTextView.getText().equals("Friday")) {
+                        dayTextView.setText(weekDays.get(5));
+                    } else if (dayTextView.getText().equals("Saturday")) {
+                        dayTextView.setText(weekDays.get(6));
+                    } else if (dayTextView.getText().equals("Sunday")) {
+                        dayTextView.setText(weekDays.get(0));
+                    }
+                    toDayInt += 1;
+                    checkCurrentDay(toDayInt, restaurantPostion);
+                    foodItemLisView.invalidateViews();
                 }
             }
         });
-
-
-        
         return v;
+    }
+
+
+    //Goes through restaurants resDailyMenu list to find correct food responding to the wanted date.
+    public void checkCurrentDay(int day, int restaurantPlace){
+        foodMenuMaxLenght = 0;
+        dailyFoods.clear();
+        for(int i = 0; i < restaurants.get(restaurantPlace).resDailyMenu.size(); i++){
+            FoodItem foodItem = restaurants.get(restaurantPlace).resDailyMenu.get(i);
+            if(foodItem.getDay() == day){
+                dailyFoods.add(foodItem);
+            }else{
+                foodMenuMaxLenght += 1;
+                continue;
+            }
+        }
+    }
+
+
+
+    public void getToDayInt(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String temp = dtf.format(now);
+        String time[] = temp.split(" "); //time[0] == yyyy/MM/dd
+        final String day[] = time[0].split("/"); //day[2] == d
+        toDayInt = Integer.parseInt(day[2]);
     }
 
 
@@ -273,16 +323,6 @@ public class UniversityFragment extends Fragment {
         }
     }
 
-
-
-
-    public void nextDay(View v){
-
-
-
-
-
-    }
 
     public String getCurrentDate() {
         DateFormat dateFormat = new SimpleDateFormat("EEEE");

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu1>
     <food>
-        <name>Pissa</name>
+        <name>Food</name>
         <price>3.00€</price>
         <id>100</id>
         <day>1</day>
@@ -545,65 +545,5 @@
         <price>4.00€</price>
         <id>10</id>
         <day>30</day>
-    </food>
-    <food>
-        <name>Paistettua Porg</name>
-        <price>3.40€</price>
-        <id>9</id>
-        <day>31</day>
-    </food>
-    <food>
-        <name>Tappivanukas</name>
-        <price>6.00€</price>
-        <id>8</id>
-        <day>31</day>
-    </food>
-    <food>
-        <name>Lembas leipä</name>
-        <price>43.00€</price>
-        <id>7</id>
-        <day>31</day>
-    </food>
-    <food>
-        <name>Pitaleipä</name>
-        <price>3.43€</price>
-        <id>6</id>
-        <day>32</day>
-    </food>
-    <food>
-        <name>Kepappi</name>
-        <price>6.30€</price>
-        <id>5</id>
-        <day>32</day>
-    </food>
-    <food>
-        <name>Pyöränulkokumi</name>
-        <price>400.00€</price>
-        <id>4</id>
-        <day>32</day>
-    </food>
-    <food>
-        <name>Sammakon jalat</name>
-        <price>33.40€</price>
-        <id>3</id>
-        <day>33</day>
-    </food>
-    <food>
-        <name>Hitaasti kypsennetyt etanat</name>
-        <price>3.00€</price>
-        <id>2</id>
-        <day>33</day>
-    </food>
-    <food>
-        <name>Eduskuntavaalit kermakastikkeessa</name>
-        <price>4.00€</price>
-        <id>1</id>
-        <day>33</day>
-    </food>
-    <food>
-        <name>Lorem Ipsum</name>
-        <price>20.00€</price>
-        <id>0</id>
-        <day>34</day>
     </food>
 </menu1>
