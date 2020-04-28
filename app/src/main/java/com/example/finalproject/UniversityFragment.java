@@ -40,6 +40,7 @@ public class UniversityFragment extends Fragment {
 
     private Spinner restaurantSpinner;
     private Spinner universitySpinner;
+    
 
     @Nullable
     @Override
@@ -90,6 +91,12 @@ public class UniversityFragment extends Fragment {
 
             }
         });
+
+
+
+
+
+
 
         return v;
     }
