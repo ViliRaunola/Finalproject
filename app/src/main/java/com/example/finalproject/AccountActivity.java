@@ -62,6 +62,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_reviews:
+                startActivity(new Intent(AccountActivity.this, OwnReviewsActivity.class));
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_account:
