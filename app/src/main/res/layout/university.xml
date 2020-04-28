@@ -47,32 +47,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/dayTextView"
+        android:layout_width="81dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="8dp"
+        android:text="Current Day"
+        app:layout_constraintBottom_toTopOf="@+id/listViewFood"
+        app:layout_constraintEnd_toStartOf="@+id/nextDayButton"
+        app:layout_constraintStart_toEndOf="@+id/previousDayButton" />
+
     <Button
-        android:id="@+id/previousButton"
+        android:id="@+id/previousDayButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:text="Previous Day"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/nextButton"
-        android:layout_width="123dp"
-        android:layout_height="49dp"
-        android:layout_marginEnd="4dp"
+        android:id="@+id/nextDayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Next Day"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/dayTextView"
-        android:layout_width="81dp"
-        android:layout_height="28dp"
-        android:layout_marginBottom="20dp"
-        android:text="Current Day"
-        app:layout_constraintBottom_toTopOf="@+id/listViewFood"
-        app:layout_constraintEnd_toStartOf="@+id/nextButton"
-        app:layout_constraintStart_toEndOf="@+id/previousButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

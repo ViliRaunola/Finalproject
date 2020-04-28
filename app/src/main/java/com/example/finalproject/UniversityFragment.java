@@ -46,7 +46,8 @@ public class UniversityFragment extends Fragment {
     private TextView dayTextView;
     private Spinner restaurantSpinner;
     private Spinner universitySpinner;
-    Button previousDayButton;
+    private Button previousDayButton;
+    private Button nextDayButton;
     private ArrayList<String> weekDays = new ArrayList<String>();
 
     enum Days {
@@ -67,7 +68,9 @@ public class UniversityFragment extends Fragment {
         dayTextView = (TextView)v.findViewById(R.id.dayTextView);
         infoWin = (TextView)v.findViewById(R.id.infoWindow);
         universitySpinner = (Spinner)v.findViewById(R.id.university_spinner);
-        previousDayButton = (Button) v.findViewById(R.id.previousButton);
+        previousDayButton = v.findViewById(R.id.previousDayButton);
+        nextDayButton = v.findViewById(R.id.nextDayButton);
+
         parseUniversity();
         ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, universities);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -122,7 +125,50 @@ public class UniversityFragment extends Fragment {
 
 
 
+        //These on click listeners are for displaying right day on the text field.
+        previousDayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dayTextView.getText().equals("Monday")) {
+                    dayTextView.setText(weekDays.get(6));
+                } else if (dayTextView.getText().equals("Tuesday")) {
+                    dayTextView.setText(weekDays.get(0));
+                } else if (dayTextView.getText().equals("Wednesday")) {
+                    dayTextView.setText(weekDays.get(1));
+                } else if (dayTextView.getText().equals("Thursday")) {
+                    dayTextView.setText(weekDays.get(2));
+                } else if (dayTextView.getText().equals("Friday")) {
+                    dayTextView.setText(weekDays.get(3));
+                } else if (dayTextView.getText().equals("Saturday")) {
+                    dayTextView.setText(weekDays.get(4));
+                } else if (dayTextView.getText().equals("Sunday")) {
+                    dayTextView.setText(weekDays.get(5));
+                }
+            }
+        });
+        nextDayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dayTextView.getText().equals("Monday")) {
+                    dayTextView.setText(weekDays.get(1));
+                } else if (dayTextView.getText().equals("Tuesday")) {
+                    dayTextView.setText(weekDays.get(2));
+                } else if (dayTextView.getText().equals("Wednesday")) {
+                    dayTextView.setText(weekDays.get(3));
+                } else if (dayTextView.getText().equals("Thursday")) {
+                    dayTextView.setText(weekDays.get(4));
+                } else if (dayTextView.getText().equals("Friday")) {
+                    dayTextView.setText(weekDays.get(5));
+                } else if (dayTextView.getText().equals("Saturday")) {
+                    dayTextView.setText(weekDays.get(6));
+                } else if (dayTextView.getText().equals("Sunday")) {
+                    dayTextView.setText(weekDays.get(0));
+                }
+            }
+        });
 
+
+        
         return v;
     }
 
