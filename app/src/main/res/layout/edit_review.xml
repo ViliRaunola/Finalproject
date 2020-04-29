@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/writtenReview"
         android:layout_width="367dp"
         android:layout_height="177dp"
         android:layout_marginTop="40dp"
@@ -18,10 +18,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextureRatingBar" />
+        app:layout_constraintTop_toBottomOf="@+id/textureRatingBar" />
 
     <RatingBar
-        android:id="@+id/TasteRatingBar"
+        android:id="@+id/tasteRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -31,24 +31,24 @@
         app:layout_constraintTop_toBottomOf="@+id/foodInfoWindow" />
 
     <RatingBar
-        android:id="@+id/TextureRatingBar"
+        android:id="@+id/textureRatingBar"
         android:layout_width="239dp"
         android:layout_height="46dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AppearanceRatingBar" />
+        app:layout_constraintTop_toBottomOf="@+id/appearanceRatingBar" />
 
     <RatingBar
-        android:id="@+id/AppearanceRatingBar"
+        android:id="@+id/appearanceRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TasteRatingBar" />
+        app:layout_constraintTop_toBottomOf="@+id/tasteRatingBar" />
 
     <TextView
         android:id="@+id/foodInfoWindow"
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Taste"
-        app:layout_constraintBottom_toTopOf="@+id/TasteRatingBar"
+        app:layout_constraintBottom_toTopOf="@+id/tasteRatingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.226"
         app:layout_constraintStart_toStartOf="parent" />
@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Appearance"
-        app:layout_constraintBottom_toTopOf="@+id/AppearanceRatingBar"
+        app:layout_constraintBottom_toTopOf="@+id/appearanceRatingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.256"
         app:layout_constraintStart_toStartOf="parent" />
@@ -85,13 +85,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Texture"
-        app:layout_constraintBottom_toTopOf="@+id/TextureRatingBar"
+        app:layout_constraintBottom_toTopOf="@+id/textureRatingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.234"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/saveAndPublishEditReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
@@ -100,24 +100,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/writtenReview"
         app:layout_constraintVertical_bias="0.121" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/saveButtonEditReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/saveAndPublishEditReview"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/writtenReview"
         app:layout_constraintVertical_bias="0.57" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/removeButtonEditReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
@@ -125,7 +125,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintStart_toEndOf="@+id/saveAndPublishEditReview"
+        app:layout_constraintTop_toBottomOf="@+id/writtenReview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

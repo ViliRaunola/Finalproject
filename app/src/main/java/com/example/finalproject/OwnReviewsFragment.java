@@ -21,12 +21,15 @@ public class OwnReviewsFragment extends Fragment {
 
     private TextView tv;
     private Spinner sortingSpinner;
+    private Spinner universitySpinner;
+    private Spinner restaurantSpinner;
     private List<String> sortingList = new ArrayList<String>();
     private List<String> reviewsList = new ArrayList<String>();
     private ListView notPublishedReviews;
     private ListView publishedReviews;
     private String selectedSortingMethod;
-    EditOwnReviewsFragment editOwnReviewsFragment = new EditOwnReviewsFragment();
+    EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
+    UniversityFragment universityFragment = new UniversityFragment();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,6 +38,11 @@ public class OwnReviewsFragment extends Fragment {
         publishedReviews = (ListView) v.findViewById(R.id.listViewPublishedReviews);
         notPublishedReviews = (ListView) v.findViewById(R.id.listViewNotPublishedReviews);
         sortingSpinner = (Spinner) v.findViewById(R.id.ownReviews_sorting_spinner);
+        universitySpinner = (Spinner)v.findViewById(R.id.universitySpinner_ownReviews);
+        restaurantSpinner = (Spinner)v.findViewById(R.id.restaurantSpinner_ownReviews);
+
+
+        //clear spinner and list
         sortingSpinner.setAdapter(null);
         sortingList.clear();
         reviewsList.clear();
@@ -96,15 +104,14 @@ public class OwnReviewsFragment extends Fragment {
         publishedReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).commit();
 
-                //Intent intent = new Intent(getActivity(),MainActivity.class);
-                //startActivity(intent);
             }
         });
         notPublishedReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editOwnReviewsFragment).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).commit();
             }
         });
         return v;
