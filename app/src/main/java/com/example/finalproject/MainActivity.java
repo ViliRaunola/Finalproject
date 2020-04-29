@@ -20,6 +20,8 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
     UniversityFragment universityFragment = new UniversityFragment();
+    OwnReviewsFragment ownReviewsFragment = new OwnReviewsFragment();
+    AccountFragment accountFragment = new AccountFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,11 +65,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_reviews:
-                startActivity(new Intent(MainActivity.this, OwnReviewsActivity.class));
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).commit();
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_account:
-                startActivity(new Intent(MainActivity.this, AccountActivity.class));
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).commit();
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_logout:

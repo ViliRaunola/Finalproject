@@ -1,34 +1,24 @@
 package com.example.finalproject;
 
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ActionMenuView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class OwnReviewsFragment extends Fragment {
-    private PopupWindow popUp;
-    private LinearLayout layout;
+
     private TextView tv;
     private Spinner sortingSpinner;
     private List<String> sortingList = new ArrayList<String>();
@@ -106,8 +96,7 @@ public class OwnReviewsFragment extends Fragment {
         notPublishedReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(),AccountActivity.class);
-                startActivity(intent);
+
             }
         });
         return v;

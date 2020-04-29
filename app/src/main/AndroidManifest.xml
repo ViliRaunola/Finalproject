@@ -9,10 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".OwnReviewsActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
         <activity android:name=".AccountCreationActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -21,9 +17,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AccountActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
