@@ -8,6 +8,7 @@ public class University{
     private String name;
     private String id;
     ArrayList<String> restaurantsXML = new ArrayList<>();
+    ArrayList<Restaurant> restaurantArrayList = new ArrayList<Restaurant>();
     private String info;
 
     University(String name, String id, String info){
@@ -17,6 +18,9 @@ public class University{
     }
     void addToRestaurants(String restaurant){
         restaurantsXML.add(restaurant);
+    }
+    public void addToRestaurantArrayList(Restaurant r){
+        restaurantArrayList.add(r);
     }
 
     public String getInfo() {
@@ -28,6 +32,7 @@ public class University{
         temp = this.name;
         return temp;
     }
+
 
 
 }

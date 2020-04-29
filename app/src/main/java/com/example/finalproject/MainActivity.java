@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     UniversityFragment universityFragment = new UniversityFragment();
     OwnReviewsFragment ownReviewsFragment = new OwnReviewsFragment();
     AccountFragment accountFragment = new AccountFragment();
+    EditAccountInformationFragment editAccountInformationFragment = new EditAccountInformationFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,8 +92,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void sendUniversityFragmentRestaurants(){
         Bundle bundle = new Bundle();
-        bundle.putSerializable("key", universityFragment.restaurants);
+        bundle.putSerializable("key2",universityFragment.universities);
         ownReviewsFragment.setArguments(bundle);
+    }
+    public void sendUniversityFragmentUniversities(){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("key",universityFragment.universities);
+        editAccountInformationFragment.setArguments(bundle);
     }
 
 

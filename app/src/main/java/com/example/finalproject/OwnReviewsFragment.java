@@ -14,6 +14,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import java.io.NotSerializableException;
+import java.io.ObjectStreamException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +32,10 @@ public class OwnReviewsFragment extends Fragment {
     private ListView publishedReviews;
     private String selectedSortingMethod;
     private ArrayList<Restaurant> restaurants;
+    private ArrayList<University> universities;
     View v;
     EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
-    UniversityFragment universityFragment = new UniversityFragment();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,9 +47,9 @@ public class OwnReviewsFragment extends Fragment {
         universitySpinner = (Spinner)v.findViewById(R.id.universitySpinner_ownReviews);
         restaurantSpinner = (Spinner)v.findViewById(R.id.restaurantSpinner_ownReviews);
 
-        try{
-            restaurants = (ArrayList<Restaurant>) getArguments().getSerializable("key");
-        }catch (Exception e){ //TODO Add real Exception
+        try {
+            universities = (ArrayList<University>) getArguments().getSerializable("key2");
+        }catch (Exception e){
             e.printStackTrace();
         }
 
@@ -62,16 +66,31 @@ public class OwnReviewsFragment extends Fragment {
         sortingList.add("Food"); //ruoka;pvm;restaurant;score
         sortingList.add("Restaurant");
         sortingList.add("Average Score");
+
         //arrayadapter for spinner
         ArrayAdapter<String> ap = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, sortingList);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortingSpinner.setAdapter(ap);
 
-        ArrayAdapter<Restaurant> jotain = new ArrayAdapter<Restaurant>(getContext(), android.R.layout.simple_list_item_1, restaurants);
+        ArrayAdapter<Restaurant> ap3 = new ArrayAdapter<Restaurant>(getContext(), android.R.layout.simple_list_item_1, restaurants);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        universitySpinner.setAdapter(jotain);
+        restaurantSpinner.setAdapter(ap3);
 
+        ArrayAdapter<University> ap4 = new ArrayAdapter<University>(getContext(), android.R.layout.simple_list_item_1, universities);
+        ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        universitySpinner.setAdapter(ap4);
 
+        universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         //test list
         reviewsList.add("Food:  Lihapullat ja perunamuusi\nDate:  28.4.2020\nRestaurant:  Laseri\nAverage Score:  4.5 stars");
