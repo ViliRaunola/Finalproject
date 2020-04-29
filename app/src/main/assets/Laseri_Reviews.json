@@ -2,6 +2,7 @@
   {
     "review": {
       "FoodId": "1",
+      "UserId": "1000",
       "tasteScore": "3",
       "lookScore": "2.5",
       "textureScore": "1",
@@ -11,6 +12,7 @@
   {
     "review": {
       "FoodId": "25",
+      "UserId": "1000",
       "tasteScore": "3",
       "lookScore": "3",
       "textureScore": "5",
@@ -20,6 +22,7 @@
   {
     "review": {
       "FoodId": "2",
+      "UserId": "1000",
       "tasteScore": "0",
       "lookScore": "0",
       "textureScore": "1",
