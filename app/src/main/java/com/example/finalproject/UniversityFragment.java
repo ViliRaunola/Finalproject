@@ -59,7 +59,6 @@ public class UniversityFragment extends Fragment implements Serializable {
     private int toDayInt;
     private ArrayList<FoodItem> dailyFoods = new ArrayList<FoodItem>();
     private int restaurantPostion;
-    private int toCheking = 0;
     private int foodMenuMaxLenght = 1;
 
 
@@ -290,7 +289,6 @@ public class UniversityFragment extends Fragment implements Serializable {
                             Restaurant restaurant = new Restaurant(resName);
                             restaurant.addToRestaurantMenusXML(resMenuName);
                             restaurants.add(restaurant);
-                            selectedUniversity.addToRestaurantArrayList(restaurant);
                         }
                     }
                     System.out.println("###########" + universities.size() + "############");

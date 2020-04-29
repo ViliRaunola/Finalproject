@@ -15,10 +15,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.NotSerializableException;
 import java.io.ObjectStreamException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class OwnReviewsFragment extends Fragment {
 
@@ -31,8 +43,10 @@ public class OwnReviewsFragment extends Fragment {
     private ListView notPublishedReviews;
     private ListView publishedReviews;
     private String selectedSortingMethod;
-    private ArrayList<Restaurant> restaurants;
+    private ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
     private ArrayList<University> universities;
+    private University selectedUniversity;
+    private int restaurantPosition;
     View v;
     EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
 
@@ -72,18 +86,19 @@ public class OwnReviewsFragment extends Fragment {
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortingSpinner.setAdapter(ap);
 
-        ArrayAdapter<Restaurant> ap3 = new ArrayAdapter<Restaurant>(getContext(), android.R.layout.simple_list_item_1, restaurants);
-        ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        restaurantSpinner.setAdapter(ap3);
-
         ArrayAdapter<University> ap4 = new ArrayAdapter<University>(getContext(), android.R.layout.simple_list_item_1, universities);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         universitySpinner.setAdapter(ap4);
 
         universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                restaurants.clear();
+                selectedUniversity = universities.get(position);
+                parseRestaurantsMenu(position);
+                ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, restaurants);
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                restaurantSpinner.setAdapter(arrayAdapter);
             }
 
             @Override
@@ -149,7 +164,35 @@ public class OwnReviewsFragment extends Fragment {
         return v;
     }
 
+    public void parseRestaurantsMenu(int pos) {
+        University selectedUniversity = universities.get(pos);
+        for (String s : selectedUniversity.restaurantsXML) {
+            try (InputStream ins = getContext().getAssets().open(s)) {
+                DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                Document xmlDoc = documentBuilder.parse(ins);
+                NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("restaurant");
+                System.out.println(nodeList.getLength());
 
-
+                for (int i = 0; i < nodeList.getLength(); i++) {
+                    Node node = nodeList.item(i);
+                    if (node.getNodeType() == Node.ELEMENT_NODE) {
+                        Element element = (Element) node;
+                        String resName = element.getElementsByTagName("restaurantName").item(0).getTextContent();
+                        String resMenuName = element.getElementsByTagName("restaurantMenu").item(0).getTextContent();
+                        Restaurant restaurant = new Restaurant(resName);
+                        restaurant.addToRestaurantMenusXML(resMenuName);
+                        restaurants.add(restaurant);
+                    }
+                }
+                System.out.println("###########" + universities.size() + "############");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch (SAXException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }
