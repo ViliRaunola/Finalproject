@@ -1,17 +1,13 @@
 package com.example.finalproject;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.SecureRandom;
 
-/* Has a method to generate "securedPassword"
-from "originalPassword" and "salt" using "sha-512"
-and a method to generate "salt" byte[] */
-
+// Generates "securedPassword" using SHA-512 and salt from username
 public class Security {
-    public static String getSecuredPassword(String originalPassword, byte[] salt) {
+    public static String getSecuredPassword(String originalPassword, String username) {
         String securedPassword = null;
-
+        // Creates "salt" byte[] from username
+        byte[] salt = username.getBytes();
         try {
             // Creates MessageDigest instance for "SHA-512"
             MessageDigest md = MessageDigest.getInstance("SHA-512");
@@ -30,18 +26,5 @@ public class Security {
             e.printStackTrace();
         }
         return securedPassword;
-    }
-
-    // Uses SecureRandom to generate random bytes to byte[] "salt", returns salt
-    public static byte[] getSalt() {
-        byte[] salt = new byte[16];
-        try {
-
-            SecureRandom sr = SecureRandom.getInstance("SHA1PRNG", "SUN");
-            sr.nextBytes(salt);
-        } catch (NoSuchAlgorithmException | NoSuchProviderException e) {
-            e.printStackTrace();
-        }
-        return salt;
     }
 }
