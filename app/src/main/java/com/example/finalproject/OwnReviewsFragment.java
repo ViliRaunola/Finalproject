@@ -28,18 +28,26 @@ public class OwnReviewsFragment extends Fragment {
     private ListView notPublishedReviews;
     private ListView publishedReviews;
     private String selectedSortingMethod;
+    private ArrayList<Restaurant> restaurants;
+    View v;
     EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
     UniversityFragment universityFragment = new UniversityFragment();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_own_reviews, container, false);
+        v = inflater.inflate(R.layout.activity_own_reviews, container, false);
 
         publishedReviews = (ListView) v.findViewById(R.id.listViewPublishedReviews);
         notPublishedReviews = (ListView) v.findViewById(R.id.listViewNotPublishedReviews);
         sortingSpinner = (Spinner) v.findViewById(R.id.ownReviews_sorting_spinner);
         universitySpinner = (Spinner)v.findViewById(R.id.universitySpinner_ownReviews);
         restaurantSpinner = (Spinner)v.findViewById(R.id.restaurantSpinner_ownReviews);
+
+        try{
+            restaurants = (ArrayList<Restaurant>) getArguments().getSerializable("key");
+        }catch (Exception e){ //TODO Add real Exception
+            e.printStackTrace();
+        }
 
 
         //clear spinner and list
@@ -58,6 +66,11 @@ public class OwnReviewsFragment extends Fragment {
         ArrayAdapter<String> ap = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, sortingList);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortingSpinner.setAdapter(ap);
+
+        ArrayAdapter<Restaurant> jotain = new ArrayAdapter<Restaurant>(getContext(), android.R.layout.simple_list_item_1, restaurants);
+        ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        universitySpinner.setAdapter(jotain);
+
 
 
         //test list
@@ -116,6 +129,7 @@ public class OwnReviewsFragment extends Fragment {
         });
         return v;
     }
+
 
 
 

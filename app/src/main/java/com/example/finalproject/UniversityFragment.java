@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,7 +42,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class UniversityFragment extends Fragment {
+public class UniversityFragment extends Fragment implements Serializable {
 
     private ListView foodItemLisView;
     public ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
@@ -329,6 +331,12 @@ public class UniversityFragment extends Fragment {
         DateFormat dateFormat = new SimpleDateFormat("EEEE");
         Date currentDate = new Date();
         return dateFormat.format(currentDate);
+    }
+
+    public void sendToActivity(ArrayList arrayList){
+        Intent intent = new Intent(getActivity().getBaseContext(), MainActivity.class);
+        intent.putExtra("key", arrayList);
+        startActivity(intent);
     }
 
 }

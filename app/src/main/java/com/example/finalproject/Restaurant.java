@@ -1,8 +1,9 @@
 package com.example.finalproject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Restaurant {
+public class Restaurant implements Serializable {
 
     private String name;
     public ArrayList<String> restaurantMenusXML = new ArrayList<String>();

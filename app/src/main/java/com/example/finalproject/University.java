@@ -1,8 +1,9 @@
 package com.example.finalproject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class University {
+public class University{
 
     private String name;
     private String id;
