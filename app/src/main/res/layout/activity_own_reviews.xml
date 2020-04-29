@@ -21,10 +21,10 @@
         android:id="@+id/ownReviews_sorting_spinner"
         android:layout_width="350dp"
         android:layout_height="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/universitySpinner_ownReviews" />
+        app:layout_constraintTop_toBottomOf="@+id/restaurantSpinner_ownReviews" />
 
     <ListView
         android:id="@+id/listViewPublishedReviews"
@@ -59,18 +59,20 @@
         android:id="@+id/restaurantSpinner_ownReviews"
         android:layout_width="350dp"
         android:layout_height="32dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoWindow_own_reviews" />
+        app:layout_constraintTop_toBottomOf="@+id/universitySpinner_ownReviews" />
 
     <Spinner
         android:id="@+id/universitySpinner_ownReviews"
         android:layout_width="350dp"
         android:layout_height="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restaurantSpinner_ownReviews" />
+        app:layout_constraintTop_toBottomOf="@+id/infoWindow_own_reviews" />
 
     <TextView
         android:id="@+id/textView15"

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class User {
 
+    private boolean isAdminUser = false;
     private String password;
     private String userID;
     private String firstName;
@@ -35,6 +36,9 @@ public class User {
         homeUniversity = hU;
     }
 
+    public boolean getIsAdminUser() {
+        return isAdminUser;
+    }
     public String getPassword() {
         return password;
     }
@@ -75,8 +79,4 @@ public class User {
             //TODO test if review already in restaurant's food's reviews... if no add it to there
         }
     }
-}
-
-class AdminUser extends User {
-    //TODO add something here
 }
