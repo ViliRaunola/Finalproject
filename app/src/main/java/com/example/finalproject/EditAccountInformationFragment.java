@@ -47,6 +47,7 @@ public class EditAccountInformationFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View v = inflater.inflate(R.layout.edit_account_information_fragment, container, false);
         saveChanges = (Button)v.findViewById(R.id.saveChangesButton_editAccountInformationFragment);
         homeUniversity_spinner = (Spinner)v.findViewById(R.id.homeUniversitySpinner_editAccountInformationFragment);
@@ -78,9 +79,11 @@ public class EditAccountInformationFragment extends Fragment {
                 homeUniversity_string = homeUniversity_spinner.getSelectedItem().toString();
                 if (password.equals(passwordConfirmation)){
                     //TODO vaihdetaan käyttäjän tiedot
-
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
                 }else{
                     Toast.makeText(getContext(),"Password does not match password confirmation",Toast.LENGTH_SHORT).show();
+                    passwordEditText.setText("");
+                    passwordConfirmationEditText.setText("");
                 }
 
             }
