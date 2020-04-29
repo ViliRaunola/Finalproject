@@ -341,10 +341,6 @@ public class UniversityFragment extends Fragment implements Serializable {
         return dateFormat.format(currentDate);
     }
 
-    public void sendToActivity(ArrayList arrayList){
-        Intent intent = new Intent(getActivity().getBaseContext(), MainActivity.class);
-        intent.putExtra("key", arrayList);
-        startActivity(intent);
-    }
+
 
 }

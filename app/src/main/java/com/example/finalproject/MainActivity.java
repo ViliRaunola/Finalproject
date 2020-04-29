@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_account:
+                sendUniversityFragmentUniversitiesToEditAccountInformationFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).commit();
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
                 break;
@@ -95,9 +96,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bundle.putSerializable("key2",universityFragment.universities);
         ownReviewsFragment.setArguments(bundle);
     }
-    public void sendUniversityFragmentUniversities(){
+    public void sendUniversityFragmentUniversitiesToEditAccountInformationFragment(){
         Bundle bundle = new Bundle();
-        bundle.putSerializable("key",universityFragment.universities);
+        bundle.putSerializable("key2",universityFragment.universities);
         editAccountInformationFragment.setArguments(bundle);
     }
 
