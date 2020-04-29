@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,7 +42,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class UniversityFragment extends Fragment {
+public class UniversityFragment extends Fragment implements Serializable {
 
     private ListView foodItemLisView;
     public ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
@@ -52,7 +54,7 @@ public class UniversityFragment extends Fragment {
     private Button previousDayButton;
     private Button nextDayButton;
     private ArrayList<String> weekDays = new ArrayList<String>();
-
+    EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
     //These are for showing the right food item in the day
     private int toDayInt;
     private ArrayList<FoodItem> dailyFoods = new ArrayList<FoodItem>();
@@ -68,6 +70,8 @@ public class UniversityFragment extends Fragment {
         dayTextView = (TextView)v.findViewById(R.id.dayTextView);
         infoWin = (TextView)v.findViewById(R.id.infoWindow);
         universitySpinner = (Spinner)v.findViewById(R.id.university_spinner);
+        foodItemLisView = (ListView) v.findViewById(R.id.listViewFood);
+        restaurantSpinner = (Spinner)v.findViewById(R.id.restaurant_spinner);
         previousDayButton = v.findViewById(R.id.previousDayButton);
         nextDayButton = v.findViewById(R.id.nextDayButton);
 
@@ -99,7 +103,7 @@ public class UniversityFragment extends Fragment {
                 restaurants.clear();
 
                 parseRestaurantsMenu(position);
-                restaurantSpinner = (Spinner)v.findViewById(R.id.restaurant_spinner);
+
                 ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, restaurants);
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 restaurantSpinner.setAdapter(arrayAdapter);
@@ -115,7 +119,7 @@ public class UniversityFragment extends Fragment {
                         parseFoodItems(selectedRestaurant);
 
                         checkCurrentDay(toDayInt, restaurantPostion);
-                        foodItemLisView = (ListView) v.findViewById(R.id.listViewFood);
+
                         ArrayAdapter<FoodItem> arrayAdapterListView = new ArrayAdapter<FoodItem>(getActivity(), android.R.layout.simple_list_item_1, dailyFoods);
                         foodItemLisView.setAdapter(arrayAdapterListView);
 
@@ -191,6 +195,13 @@ public class UniversityFragment extends Fragment {
                     checkCurrentDay(toDayInt, restaurantPostion);
                     foodItemLisView.invalidateViews();
                 }
+            }
+        });
+
+        foodItemLisView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).commit();
             }
         });
         return v;
@@ -329,6 +340,12 @@ public class UniversityFragment extends Fragment {
         DateFormat dateFormat = new SimpleDateFormat("EEEE");
         Date currentDate = new Date();
         return dateFormat.format(currentDate);
+    }
+
+    public void sendToActivity(ArrayList arrayList){
+        Intent intent = new Intent(getActivity().getBaseContext(), MainActivity.class);
+        intent.putExtra("key", arrayList);
+        startActivity(intent);
     }
 
 }

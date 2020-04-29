@@ -19,6 +19,7 @@ public class AccountFragment extends Fragment {
     private EditText lastName;
     private EditText firstName;
     private EditText homeUniversity;
+    EditAccountInformationFragment editAccountInformationFragment = new EditAccountInformationFragment();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class AccountFragment extends Fragment {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,editAccountInformationFragment ).commit();
                 Toast.makeText(getContext(),"Account Edit fragment", Toast.LENGTH_SHORT).show();
             }
         });

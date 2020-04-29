@@ -55,37 +55,43 @@
 
     <ListView
         android:id="@+id/listViewFood"
-        android:layout_width="399dp"
-        android:layout_height="259dp"
+        android:layout_width="386dp"
+        android:layout_height="250dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/dayTextView"
         android:layout_width="100dp"
         android:layout_height="28dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="20dp"
         android:text="Current Day"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
         app:layout_constraintEnd_toStartOf="@+id/nextDayButton"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toEndOf="@+id/previousDayButton" />
-
-    <Button
-        android:id="@+id/previousDayButton"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:text="Previous Day"
-        app:layout_constraintBottom_toTopOf="@+id/listViewFood"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/nextDayButton"
         android:layout_width="125dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="12dp"
         android:text="Next Day"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/previousDayButton"
+        android:layout_width="125dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="12dp"
+        android:text="Previous Day"
+        app:layout_constraintBottom_toTopOf="@+id/listViewFood"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
