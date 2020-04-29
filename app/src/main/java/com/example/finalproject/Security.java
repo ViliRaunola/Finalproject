@@ -2,12 +2,12 @@ package com.example.finalproject;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-// Generates "securedPassword" using SHA-512 and salt from username
+// Generates "securedPassword" using SHA-512 and salt from user's eMail
 public class Security {
-    public static String getSecuredPassword(String originalPassword, String username) {
+    public static String getSecuredPassword(String originalPassword, String eMail) {
         String securedPassword = null;
         // Creates "salt" byte[] from username
-        byte[] salt = username.getBytes();
+        byte[] salt = eMail.getBytes();
         try {
             // Creates MessageDigest instance for "SHA-512"
             MessageDigest md = MessageDigest.getInstance("SHA-512");
