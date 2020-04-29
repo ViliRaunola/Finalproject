@@ -11,9 +11,7 @@
         android:layout_height="wrap_content"
         android:text="First Name"
         app:layout_constraintBottom_toTopOf="@+id/firstNameEditText_editAccountInformationFragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/firstNameEditText_editAccountInformationFragment" />
 
     <Button
         android:id="@+id/saveChangesButton_editAccountInformationFragment"
@@ -23,7 +21,6 @@
         android:text="save changes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -34,7 +31,6 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +42,6 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailEditText_editAccountInformationFragment" />
 
@@ -58,7 +53,6 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstNameEditText_editAccountInformationFragment" />
 
@@ -68,9 +62,8 @@
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeUniversitySpinner_editAccountInformationFragment" />
 
@@ -80,7 +73,6 @@
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lastNameEditText_editAccountInformationFragment" />
 
@@ -90,9 +82,8 @@
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText_editAccountInformationFragment" />
 
@@ -102,9 +93,7 @@
         android:layout_height="wrap_content"
         android:text="Email"
         app:layout_constraintBottom_toTopOf="@+id/emailEditText_editAccountInformationFragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/emailEditText_editAccountInformationFragment" />
 
     <TextView
         android:id="@+id/textView11"
@@ -112,9 +101,7 @@
         android:layout_height="wrap_content"
         android:text="Last Name"
         app:layout_constraintBottom_toTopOf="@+id/lastNameEditText_editAccountInformationFragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/lastNameEditText_editAccountInformationFragment" />
 
     <TextView
         android:id="@+id/textView12"
@@ -122,9 +109,7 @@
         android:layout_height="wrap_content"
         android:text="Home University"
         app:layout_constraintBottom_toTopOf="@+id/homeUniversitySpinner_editAccountInformationFragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/homeUniversitySpinner_editAccountInformationFragment" />
 
     <TextView
         android:id="@+id/textView13"
@@ -132,9 +117,7 @@
         android:layout_height="wrap_content"
         android:text="Password"
         app:layout_constraintBottom_toTopOf="@+id/passwordEditText_editAccountInformationFragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.086"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/passwordEditText_editAccountInformationFragment" />
 
     <TextView
         android:id="@+id/textView14"
@@ -142,7 +125,6 @@
         android:layout_height="wrap_content"
         android:text="Confrim Password"
         app:layout_constraintBottom_toTopOf="@+id/passwordConfirmationEditText_editAccountInformationFragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.102"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/passwordConfirmationEditText_editAccountInformationFragment" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
