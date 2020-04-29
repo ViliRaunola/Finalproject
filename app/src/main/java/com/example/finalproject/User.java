@@ -10,7 +10,6 @@ public class User {
     private String lastName;
     private String eMail;
     private String homeUniversity;
-    //TODO add picture here
     ArrayList<FoodReview> publishedReviews;
     ArrayList<FoodReview> nonPublishedReviews;
 

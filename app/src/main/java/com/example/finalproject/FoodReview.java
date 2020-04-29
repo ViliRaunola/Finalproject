@@ -13,7 +13,6 @@ public class FoodReview {
     private float textureScore;
     private float averageScore;
     private String reviewText;
-    //TODO add picture of food
 
     public FoodReview(String f, String r, String u, DateFormat d, float taScore, float loScore, float teScore, String text) {
         food = f;
