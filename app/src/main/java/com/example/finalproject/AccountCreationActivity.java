@@ -73,10 +73,10 @@ public class AccountCreationActivity extends AppCompatActivity {
         user.setFirstName(firstname_string);
         user.setLastName(lastname_string);
         user.setHomeUniversity(home_uni);
-        byte[] salt = Security.getSalt();
-        password_string = Security.getSecuredPassword(password_string,salt);
+
+        password_string = Security.getSecuredPassword(password_string,email_string);
         user.setPassword(password_string);
-        user.setSalt(salt);
+
         //TODO USER ID generointi ja tallennus
         //TODO ja näiden tietojen kirjoitus tiedostoon
 

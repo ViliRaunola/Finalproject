@@ -32,27 +32,35 @@ public class OwnReviewsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_own_reviews, container, false);
 
-        publishedReviews = (ListView)v.findViewById(R.id.listViewPublishedReviews);
-        notPublishedReviews = (ListView)v.findViewById(R.id.listViewNotPublishedReviews);
-        sortingSpinner = (Spinner)v.findViewById(R.id.ownReviews_sorting_spinner);
-
+        publishedReviews = (ListView) v.findViewById(R.id.listViewPublishedReviews);
+        notPublishedReviews = (ListView) v.findViewById(R.id.listViewNotPublishedReviews);
+        sortingSpinner = (Spinner) v.findViewById(R.id.ownReviews_sorting_spinner);
+        sortingSpinner.setAdapter(null);
+        sortingList.clear();
+        reviewsList.clear();
+        publishedReviews.setAdapter(null);
+        notPublishedReviews.setAdapter(null);
         //sorting options
+
         sortingList.add("Date");
         sortingList.add("Food"); //ruoka;pvm;restaurant;score
         sortingList.add("Restaurant");
         sortingList.add("Average Score");
-
-        //test list
-        reviewsList.add("Food:  Lihapullat ja perunamuusi\nDate:  28.4.2020\nRestaurant:  Laseri\nAverage Score:  4.5 stars");
-        reviewsList.add("Food:  Lohipullat ja perunamuusi\nDate:  29.4.2020\nRestaurant:  Lut Buffet\nAverage Score:  4.0 stars");
-        reviewsList.add("Food:  Lohipullat ja perunamuusi\nDate:  29.4.2020\nRestaurant:  Lut Buffet\nAverage Score:  4.0 stars");
         //arrayadapter for spinner
         ArrayAdapter<String> ap = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, sortingList);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortingSpinner.setAdapter(ap);
 
+
+        //test list
+        reviewsList.add("Food:  Lihapullat ja perunamuusi\nDate:  28.4.2020\nRestaurant:  Laseri\nAverage Score:  4.5 stars");
+        reviewsList.add("Food:  Lohipullat ja perunamuusi\nDate:  29.4.2020\nRestaurant:  Lut Buffet\nAverage Score:  4.0 stars");
+        reviewsList.add("Food:  Lohipullat ja perunamuusi\nDate:  29.4.2020\nRestaurant:  Lut Buffet\nAverage Score:  4.0 stars");
+
+
+
         //arrayadapter for publishedreviews listview
-        ArrayAdapter<String> ap2 = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,reviewsList);
+        ArrayAdapter<String> ap2 = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, reviewsList);
         publishedReviews.setAdapter(ap2);
         notPublishedReviews.setAdapter(ap2);
 
@@ -88,7 +96,7 @@ public class OwnReviewsFragment extends Fragment {
         publishedReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editOwnReviewsFragment).commit();
+
                 //Intent intent = new Intent(getActivity(),MainActivity.class);
                 //startActivity(intent);
             }
@@ -96,7 +104,7 @@ public class OwnReviewsFragment extends Fragment {
         notPublishedReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editOwnReviewsFragment).commit();
             }
         });
         return v;
