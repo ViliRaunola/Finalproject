@@ -72,7 +72,7 @@ public class UniversityFragment extends Fragment {
         nextDayButton = v.findViewById(R.id.nextDayButton);
 
         getToDayInt();
-
+        universities.clear();
         parseUniversity();
         ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, universities);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -97,6 +97,7 @@ public class UniversityFragment extends Fragment {
 
 
                 restaurants.clear();
+
                 parseRestaurantsMenu(position);
                 restaurantSpinner = (Spinner)v.findViewById(R.id.restaurant_spinner);
                 ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, restaurants);
