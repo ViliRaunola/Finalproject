@@ -10,7 +10,7 @@
         android:id="@+id/writtenReview"
         android:layout_width="350dp"
         android:layout_height="200dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Give a written review"
@@ -24,7 +24,7 @@
         android:id="@+id/tasteRatingBar"
         android:layout_width="240dp"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         android:id="@+id/textureRatingBar"
         android:layout_width="240dp"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
         android:id="@+id/appearanceRatingBar"
         android:layout_width="240dp"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,29 +93,29 @@
 
     <Button
         android:id="@+id/removeButtonEditReview"
-        android:layout_width="80dp"
+        android:layout_width="350dp"
         android:layout_height="48dp"
-        android:text="Remove"
-        app:layout_constraintEnd_toEndOf="@+id/writtenReview"
-        app:layout_constraintTop_toTopOf="@+id/saveAndPublishEditReview" />
-
-    <Button
-        android:id="@+id/saveAndPublishEditReview"
-        android:layout_width="160dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:text="Save and Publish"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:text="Delete review"
+        app:layout_constraintStart_toStartOf="@+id/saveButtonEditReview"
         app:layout_constraintTop_toBottomOf="@+id/writtenReview" />
 
     <Button
-        android:id="@+id/saveButtonEditReview"
-        android:layout_width="80dp"
+        android:id="@+id/saveAndPublishEditReview"
+        android:layout_width="350dp"
         android:layout_height="48dp"
-        android:text="Save"
+        android:layout_marginTop="8dp"
+        android:text="Save and Publish"
         app:layout_constraintStart_toStartOf="@+id/writtenReview"
-        app:layout_constraintTop_toTopOf="@+id/saveAndPublishEditReview" />
+        app:layout_constraintTop_toBottomOf="@+id/saveButtonEditReview" />
+
+    <Button
+        android:id="@+id/saveButtonEditReview"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:text="Save as a draft"
+        app:layout_constraintStart_toStartOf="@+id/writtenReview"
+        app:layout_constraintTop_toBottomOf="@+id/removeButtonEditReview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
