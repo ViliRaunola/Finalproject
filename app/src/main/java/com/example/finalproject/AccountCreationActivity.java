@@ -57,7 +57,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         home_uni_spinner.setAdapter(ap);
     }
-    public void confirmPressed(View view){
+    public void confirmPressed(View view) {
 
         //get text from textfields and spinner
         home_uni = home_uni_spinner.getSelectedItem().toString();
@@ -84,7 +84,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         finish();
     }
     //parses "university.xml" to make a list from university names
-    public void parseUniversity(){
+    public void parseUniversity() {
 
         try (InputStream ins = this.getAssets().open("university.xml")){
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -100,7 +100,7 @@ public class AccountCreationActivity extends AppCompatActivity {
                 }
             }
 
-        }catch (IOException e){
+        }catch (IOException e) {
             e.printStackTrace();
         }catch(ParserConfigurationException e){
             e.printStackTrace();

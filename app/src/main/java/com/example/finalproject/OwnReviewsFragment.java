@@ -93,6 +93,7 @@ public class OwnReviewsFragment extends Fragment {
         universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                //Reads restaurant XML file again based on the selected university
                 restaurants.clear();
                 selectedUniversity = universities.get(position);
                 parseRestaurantsMenu(position);
