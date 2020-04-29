@@ -18,26 +18,40 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/restaurant_spinner"
-        android:layout_width="232dp"
-        android:layout_height="33dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoWindow"
-        app:layout_constraintVertical_bias="0.231" />
-
-    <Spinner
         android:id="@+id/university_spinner"
         android:layout_width="232dp"
         android:layout_height="33dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoWindow"
-        app:layout_constraintVertical_bias="0.078" />
+        app:layout_constraintTop_toBottomOf="@+id/infoWindow" />
+
+    <Spinner
+        android:id="@+id/restaurant_spinner"
+        android:layout_width="232dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/university_spinner" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant"
+        app:layout_constraintBottom_toTopOf="@+id/restaurant_spinner"
+        app:layout_constraintStart_toStartOf="@+id/restaurant_spinner" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="University"
+        app:layout_constraintBottom_toTopOf="@+id/university_spinner"
+        app:layout_constraintStart_toStartOf="@+id/university_spinner" />
 
     <ListView
         android:id="@+id/listViewFood"
@@ -49,17 +63,18 @@
 
     <TextView
         android:id="@+id/dayTextView"
-        android:layout_width="81dp"
+        android:layout_width="100dp"
         android:layout_height="28dp"
         android:layout_marginBottom="8dp"
         android:text="Current Day"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
         app:layout_constraintEnd_toStartOf="@+id/nextDayButton"
         app:layout_constraintStart_toEndOf="@+id/previousDayButton" />
 
     <Button
         android:id="@+id/previousDayButton"
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:text="Previous Day"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
@@ -67,7 +82,7 @@
 
     <Button
         android:id="@+id/nextDayButton"
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:text="Next Day"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"

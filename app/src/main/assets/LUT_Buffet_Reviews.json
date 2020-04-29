@@ -1,0 +1,26 @@
+[
+  {
+    "review": {
+      "tasteScore": "3",
+      "lookScore": "2.5",
+      "textureScore": "1",
+      "reviewText": "It was kinda good food yes."
+    }
+  },
+  {
+    "review": {
+      "tasteScore": "3",
+      "lookScore": "3",
+      "textureScore": "5",
+      "reviewText": "It was very good food yes."
+    }
+  },
+  {
+    "review": {
+      "tasteScore": "0",
+      "lookScore": "0",
+      "textureScore": "1",
+      "reviewText": "5/5 would never eat again."
+    }
+  }
+]
