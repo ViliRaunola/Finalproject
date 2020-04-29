@@ -9,7 +9,7 @@
     <EditText
         android:id="@+id/writtenReview"
         android:layout_width="350dp"
-        android:layout_height="225dp"
+        android:layout_height="200dp"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:gravity="start|top"
@@ -44,7 +44,6 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:text="Texture"
         app:layout_constraintBottom_toTopOf="@+id/textureRatingBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,18 +93,17 @@
 
     <Button
         android:id="@+id/removeButtonEditReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
         android:text="Remove"
-        app:layout_constraintStart_toEndOf="@+id/saveAndPublishEditReview"
+        app:layout_constraintEnd_toEndOf="@+id/writtenReview"
         app:layout_constraintTop_toTopOf="@+id/saveAndPublishEditReview" />
 
     <Button
         android:id="@+id/saveAndPublishEditReview"
         android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
         android:text="Save and Publish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -114,11 +112,10 @@
 
     <Button
         android:id="@+id/saveButtonEditReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
         android:text="Save"
-        app:layout_constraintEnd_toStartOf="@+id/saveAndPublishEditReview"
+        app:layout_constraintStart_toStartOf="@+id/writtenReview"
         app:layout_constraintTop_toTopOf="@+id/saveAndPublishEditReview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
