@@ -25,7 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/homeUniversity_spinner_creation"
         app:layout_constraintTop_toBottomOf="@+id/homeUniversity_spinner_creation"
-        app:layout_constraintVertical_bias="0.889" />
+        app:layout_constraintVertical_bias="0.504" />
 
     <EditText
         android:id="@+id/emailTextField_account_creation"
@@ -152,6 +152,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/homeUniversity_spinner_creation"
         app:layout_constraintTop_toBottomOf="@+id/homeUniversity_spinner_creation"
-        app:layout_constraintVertical_bias="0.889" />
+        app:layout_constraintVertical_bias="0.504" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
