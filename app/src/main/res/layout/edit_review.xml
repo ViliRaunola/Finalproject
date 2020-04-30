@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/account_creation_cancel_button2"
+        android:id="@+id/review_edit_cancel_button2"
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
