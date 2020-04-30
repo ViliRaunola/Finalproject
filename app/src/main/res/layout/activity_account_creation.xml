@@ -8,16 +8,15 @@
 
     <Button
         android:id="@+id/confirm"
-        android:layout_width="350dp"
+        android:layout_width="167dp"
         android:layout_height="48dp"
         android:onClick="confirmPressed"
-        android:text="Confirm  "
+        android:text="Confirm"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.951" />
+        app:layout_constraintEnd_toEndOf="@+id/homeUniversity_spinner_creation"
+        app:layout_constraintTop_toBottomOf="@+id/homeUniversity_spinner_creation"
+        app:layout_constraintVertical_bias="0.889" />
+
     <EditText
         android:id="@+id/emailTextField_account_creation"
         android:layout_width="350dp"
@@ -125,5 +124,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/homeUniversity_spinner_creation" />
+
+    <Button
+        android:id="@+id/account_creation_cancel_button"
+        android:layout_width="167dp"
+        android:layout_height="48dp"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/homeUniversity_spinner_creation"
+        app:layout_constraintTop_toBottomOf="@+id/homeUniversity_spinner_creation"
+        app:layout_constraintVertical_bias="0.889" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
