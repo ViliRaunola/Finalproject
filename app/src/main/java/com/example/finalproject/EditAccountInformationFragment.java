@@ -179,7 +179,9 @@ public class EditAccountInformationFragment extends Fragment {
         jsonObject.put("eMail", user.getEmail());
         jsonObject.put("homeUniversity", user.getHomeUniversity());
         try{
+
             String x = String.format("userData/User%d", user.getUserID());
+            System.out.println(x);
             FileWriter fileWriter = new FileWriter(x);
             fileWriter.write(jsonObject.toString());
             fileWriter.close();
