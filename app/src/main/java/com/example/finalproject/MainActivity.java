@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     OwnReviewsFragment ownReviewsFragment = new OwnReviewsFragment();
     AccountFragment accountFragment = new AccountFragment();
     EditAccountInformationFragment editAccountInformationFragment = new EditAccountInformationFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +56,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onBackPressed(){
-        if (drawer.isDrawerOpen(GravityCompat.START)){
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        }else if(getSupportFragmentManager().getBackStackEntryCount()>0){
+            getSupportFragmentManager().popBackStack();
         }else{
             this.moveTaskToBack(true);
+
         }
     }
 
@@ -67,20 +72,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_restaurants:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).addToBackStack("restaurant_fragment").commit();
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_reviews:
                 sendUniversityFragmentRestaurants();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).commit();
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).addToBackStack("reviews_fragment").commit();
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_account:
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).addToBackStack("account_fragment").commit();
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_logout:
+
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 finish();
                 Toast.makeText(this, "You Have Logged Out", Toast.LENGTH_SHORT).show();

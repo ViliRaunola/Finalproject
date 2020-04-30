@@ -38,7 +38,7 @@ public class AccountFragment extends Fragment {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,editAccountInformationFragment ).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,editAccountInformationFragment).addToBackStack("account_fragment").commit();
                 Toast.makeText(getContext(),"Account Edit fragment", Toast.LENGTH_SHORT).show();
             }
         });
