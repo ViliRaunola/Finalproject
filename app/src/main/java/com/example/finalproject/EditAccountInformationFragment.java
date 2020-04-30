@@ -14,12 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -45,6 +48,7 @@ public class EditAccountInformationFragment extends Fragment {
     private String homeUniversity_string;
     private boolean checkPassword;
     User user = User.getInstance();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,20 +62,31 @@ public class EditAccountInformationFragment extends Fragment {
         passwordEditText = (EditText)v.findViewById(R.id.passwordEditText_editAccountInformationFragment);
         passwordConfirmationEditText = (EditText)v.findViewById(R.id.passwordConfirmationEditText_editAccountInformationFragment);
 
-
+        //set textfields to user data
         firstNameEditText.setText(user.getFirstName());
         lastNameEditText.setText(user.getLastName());
         emailEditText.setText(user.getEmail());
 
-
+        //parsing university xml and setting home university spinner adapter
         parseUniversity();
         ArrayAdapter<String> universityArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, universities);
         universityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         homeUniversity_spinner.setAdapter(universityArrayAdapter);
 
+        //set spinner to current home university
+        if (user.getHomeUniversity().equals("LUT")){
+            homeUniversity_spinner.setSelection(0);
+        }else if (user.getHomeUniversity().equals("Aalto")){
+            homeUniversity_spinner.setSelection(1);
+        }else if (user.getHomeUniversity().equals("TUT")){
+            homeUniversity_spinner.setSelection(2);
+        }
+
         saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //edittext and spinner item to string
                 email = emailEditText.getText().toString();
                 firstName = firstNameEditText.getText().toString();
                 lastName = lastNameEditText.getText().toString();
@@ -79,6 +94,7 @@ public class EditAccountInformationFragment extends Fragment {
                 passwordConfirmation = passwordConfirmationEditText.getText().toString();
                 homeUniversity_string = homeUniversity_spinner.getSelectedItem().toString();
 
+                //checking if the password and confirmation are the same
                 if (!password.equals(passwordConfirmation)){
                     Toast.makeText(getContext(),"Password does not match password confirmation",Toast.LENGTH_SHORT).show();
                     passwordEditText.setText("");
@@ -86,19 +102,36 @@ public class EditAccountInformationFragment extends Fragment {
 
                 }else{
 
+                    //setting new user data
                     user.setLastName(lastName);
                     user.setFirstName(firstName);
                     user.setHomeUniversity(homeUniversity_string);
                     user.setEmail(email);
 
+                    //check if user wants to change their password
                     if ((!password.isEmpty()) && (!passwordConfirmation.isEmpty())) {
+
+                        //check if the password  contains all the required characters
                         checkPassword = Security.passwordChecker(password);
 
                         if (checkPassword) {
+
+                            //getting secured password
                             password = Security.getSecuredPassword(password,email);
                             user.setPassword(password);
+
+                            //Rewrites the changed user file
+                            try {
+                                writeUserJson();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            //switching fragments
                             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
+
                         }else {
+
                             passwordEditText.setText("");
                             passwordConfirmationEditText.setText("");
                             Toast.makeText(getContext(),"Your password does not contains all the required characters",Toast.LENGTH_SHORT).show();
@@ -107,7 +140,6 @@ public class EditAccountInformationFragment extends Fragment {
                 }
             }
         });
-        System.out.println(user.getFirstName());
         return v;
     }
     //parses "university.xml" to make a list from university names
@@ -127,7 +159,6 @@ public class EditAccountInformationFragment extends Fragment {
                     universities.add(uniName);
                 }
             }
-
         }catch (IOException e){
             e.printStackTrace();
         }catch(ParserConfigurationException e){
@@ -137,4 +168,23 @@ public class EditAccountInformationFragment extends Fragment {
         }
     }
 
+
+    //https://www.tutorialspoint.com/how-to-write-create-a-json-file-using-java
+    public void writeUserJson() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("password", user.getPassword());
+        jsonObject.put("userId", user.getUserID());
+        jsonObject.put("firstName", user.getFirstName());
+        jsonObject.put("lastName", user.getLastName());
+        jsonObject.put("eMail", user.getEmail());
+        jsonObject.put("homeUniversity", user.getHomeUniversity());
+        try{
+            String x = String.format("userData/User%d", user.getUserID());
+            FileWriter fileWriter = new FileWriter(x);
+            fileWriter.write(jsonObject.toString());
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
