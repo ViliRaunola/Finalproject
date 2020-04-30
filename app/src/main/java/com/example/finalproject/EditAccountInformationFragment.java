@@ -42,8 +42,9 @@ public class EditAccountInformationFragment extends Fragment {
     private String lastName;
     private String password;
     private String passwordConfirmation;
-    private  String homeUniversity_string;
-
+    private String homeUniversity_string;
+    private boolean checkPassword;
+    User user = User.getInstance();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,10 +59,10 @@ public class EditAccountInformationFragment extends Fragment {
         passwordConfirmationEditText = (EditText)v.findViewById(R.id.passwordConfirmationEditText_editAccountInformationFragment);
 
 
-        //TODO lisätään käyttäjän tiedot autofilliin
-        emailEditText.setText("Keijo.keijo@keijo.com");
-        firstNameEditText.setText("Vili");
-        lastNameEditText.setText("Raunola");
+        firstNameEditText.setText(user.getFirstName());
+        lastNameEditText.setText(user.getLastName());
+        emailEditText.setText(user.getEmail());
+
 
         parseUniversity();
         ArrayAdapter<String> universityArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, universities);
@@ -77,17 +78,36 @@ public class EditAccountInformationFragment extends Fragment {
                 password = passwordEditText.getText().toString();
                 passwordConfirmation = passwordConfirmationEditText.getText().toString();
                 homeUniversity_string = homeUniversity_spinner.getSelectedItem().toString();
-                if (password.equals(passwordConfirmation)){
-                    //TODO vaihdetaan käyttäjän tiedot
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
-                }else{
+
+                if (!password.equals(passwordConfirmation)){
                     Toast.makeText(getContext(),"Password does not match password confirmation",Toast.LENGTH_SHORT).show();
                     passwordEditText.setText("");
                     passwordConfirmationEditText.setText("");
-                }
 
+                }else{
+
+                    user.setLastName(lastName);
+                    user.setFirstName(firstName);
+                    user.setHomeUniversity(homeUniversity_string);
+                    user.setEmail(email);
+
+                    if ((!password.isEmpty()) && (!passwordConfirmation.isEmpty())) {
+                        checkPassword = Security.passwordChecker(password);
+
+                        if (checkPassword) {
+                            password = Security.getSecuredPassword(password,email);
+                            user.setPassword(password);
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
+                        }else {
+                            passwordEditText.setText("");
+                            passwordConfirmationEditText.setText("");
+                            Toast.makeText(getContext(),"Your password does not contains all the required characters",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
             }
         });
+        System.out.println(user.getFirstName());
         return v;
     }
     //parses "university.xml" to make a list from university names

@@ -68,7 +68,7 @@ public class AccountCreationActivity extends AppCompatActivity {
 
         //TODO tarkista onko sama email muuten
         //create a new user
-        User user = new User();
+        User user = User.getInstance();
         user.setEmail(email_string);
         user.setFirstName(firstname_string);
         user.setLastName(lastname_string);

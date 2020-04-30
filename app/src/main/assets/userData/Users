@@ -1,10 +1,18 @@
 [
   {
-   "password": "4c48b2f7aae0197f022a4b360771a8d10d67476d3587c40ddbba40b303c285ca920e6a685f136844a000054cd0be3e52e972221aa1de0cf2215d58811a6e2d31",
-    "userId": "4",
-    "firstName": "Kayttaja",
-    "lastName": "Keittäjä",
-    "eMail": "a@a.com",
-    "homeUniversity": "LUT"
-  }
+      "password": "7e7246cbaa79f710fe57ba338f684064a416198270db19b4a0c509c83755a9a307c87b21736c99a7dbff5da96a6191ec89ce9fbace919a6d8455f51d78e0313f",
+       "userId": "4",
+       "firstName": "Kayttaja",
+       "lastName": "Keittäjä",
+       "eMail": "w",
+       "homeUniversity": "LUT"
+     },
+     {
+         "password": "e6d9d480cbc4e7739f2a5d961c3b0b2d7db2af7396bcb4f461558f8513b8f7bbc01cae25fbf106989efc226a843fba100a2852314f1abc7907873aeba370de44",
+          "userId": "4",
+          "firstName": "Kayttaja",
+          "lastName": "Keittäjä",
+          "eMail": "we",
+          "homeUniversity": "Aalto"
+        }
 ]

@@ -20,21 +20,24 @@ public class AccountFragment extends Fragment {
     private EditText firstName;
     private EditText homeUniversity;
     EditAccountInformationFragment editAccountInformationFragment = new EditAccountInformationFragment();
+    User user = User.getInstance();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.account, container, false);
+
         editButton = (Button)v.findViewById(R.id.editButton);
         email = (EditText)v.findViewById(R.id.emailTextField_account_creation);
         firstName = (EditText)v.findViewById(R.id.firstNameTextField_account_creation);
         lastName = (EditText)v.findViewById(R.id.lastNameTextField_account_creation);
         password = (EditText)v.findViewById(R.id.passwordTextField_account_creation);
         homeUniversity = (EditText)v.findViewById(R.id.homeUnniversityTextField_account_fragment);
-        firstName.setText("Vili");
-        lastName.setText("Raunola");
-        email.setText("Keijo.keijo@keijo.com");
-        password.setText("********");
-        homeUniversity.setText("LUT");
+
+        firstName.setText(user.getFirstName());
+        lastName.setText(user.getLastName());
+        email.setText(user.getEmail());
+        password.setText("************");
+        homeUniversity.setText(user.getHomeUniversity());
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

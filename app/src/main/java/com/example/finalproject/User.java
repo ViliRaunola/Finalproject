@@ -1,6 +1,7 @@
 package com.example.finalproject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class User {
 
@@ -13,10 +14,12 @@ public class User {
     private String homeUniversity;
     ArrayList<FoodReview> publishedReviews;
     ArrayList<FoodReview> nonPublishedReviews;
-
-    public User() {
+    private static User user = new User();
+    private User() {
     }
-
+    public static User getInstance(){
+        return user;
+    }
     public void setPassword(String pW) {
         password = pW;
     }
