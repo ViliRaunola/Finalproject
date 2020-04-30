@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
-import android.util.JsonReader;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +15,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -91,7 +88,8 @@ public class LoginActivity extends AppCompatActivity {
     private int jsonParse(String id, String userPassword) {
 
         String json;
-        try (InputStream ins = getBaseContext().getAssets().open("userData/User" + id)) {
+        try (InputStream ins = getResources().openRawResource(getResources().getIdentifier("raw/userData/User" + id + ".json", "raw", getPackageName()))){
+
             int size = ins.available();
             byte[] buffer = new byte[size];
             ins.read(buffer);
@@ -126,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
     private String jsonParseEmailsAndIds(String userEMail) {
         String id = "";
         String json;
-        try (InputStream ins = getBaseContext().getAssets().open("userData/EmailsAndIds")) {
+        try (InputStream ins = getBaseContext().getAssets().open("raw/userData/EmailsAndIds.json")) {
             int size = ins.available();
             byte[] buffer = new byte[size];
             ins.read(buffer);

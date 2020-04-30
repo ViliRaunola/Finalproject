@@ -168,6 +168,19 @@ public class EditAccountInformationFragment extends Fragment {
         }
     }
 
+/*
+JSONArray arr = new JSONArray(str);
+for(int i = 0; i < arr.length(); i++){
+
+    JSONObject jsonObj = (JSONObject)arr.get(i); // get the josn object
+    if(jsonObj.getString("name").equals("Rose")){ // compare for the key-value
+        ((JSONObject)arr.get(i)).put("id", 22); // put the new value for the key
+    }
+    textview.setText(arr.toString());// display and verify your Json with updated value
+}
+ */
+
+
 
     //https://www.tutorialspoint.com/how-to-write-create-a-json-file-using-java
     public void writeUserJson() throws JSONException {
@@ -180,7 +193,7 @@ public class EditAccountInformationFragment extends Fragment {
         jsonObject.put("homeUniversity", user.getHomeUniversity());
         try{
 
-            String x = String.format("userData/User%d", user.getUserID());
+            String x = String.format("raw/userData/User%d", user.getUserID());
             System.out.println(x);
             FileWriter fileWriter = new FileWriter(x);
             fileWriter.write(jsonObject.toString());
