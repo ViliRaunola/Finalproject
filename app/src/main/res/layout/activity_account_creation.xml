@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".AccountCreationActivity">
 
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="12dp"
+        android:text="Password needs to contain the following: \n - Minimum 12 characters \n - At least one number, one special character, one capital and one small letter "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lastNameTextField_account_creation" />
+
     <Button
         android:id="@+id/confirm"
         android:layout_width="167dp"
@@ -33,19 +43,31 @@
         android:id="@+id/passwordTextField_account_creation"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastNameTextField_account_creation" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextField_account_creation2" />
+
+    <EditText
+        android:id="@+id/passwordTextField_account_creation2"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <EditText
         android:id="@+id/lastNameTextField_account_creation"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +79,7 @@
         android:id="@+id/firstNameTextField_account_creation"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,8 +93,6 @@
         android:layout_height="wrap_content"
         android:text="Email"
         app:layout_constraintBottom_toTopOf="@+id/emailTextField_account_creation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/emailTextField_account_creation" />
 
     <TextView
@@ -80,36 +100,37 @@
         android:layout_height="wrap_content"
         android:text="First Name"
         app:layout_constraintBottom_toTopOf="@+id/firstNameTextField_account_creation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/firstNameTextField_account_creation" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="78dp"
         android:layout_height="21dp"
-        android:layout_marginEnd="232dp"
         android:text="Last Name"
         app:layout_constraintBottom_toTopOf="@+id/lastNameTextField_account_creation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/lastNameTextField_account_creation" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
+        android:text="Confirm Password"
         app:layout_constraintBottom_toTopOf="@+id/passwordTextField_account_creation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/passwordTextField_account_creation" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        app:layout_constraintBottom_toTopOf="@+id/passwordTextField_account_creation2"
+        app:layout_constraintStart_toStartOf="@+id/passwordTextField_account_creation2" />
 
     <Spinner
         android:id="@+id/homeUniversity_spinner_creation"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,8 +142,6 @@
         android:layout_height="wrap_content"
         android:text="Home University"
         app:layout_constraintBottom_toTopOf="@+id/homeUniversity_spinner_creation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/homeUniversity_spinner_creation" />
 
     <Button
