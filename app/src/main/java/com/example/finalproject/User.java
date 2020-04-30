@@ -6,7 +6,7 @@ public class User {
 
     private boolean isAdminUser = false;
     private String password;
-    private String userID;
+    private int userId;
     private String firstName;
     private String lastName;
     private String eMail;
@@ -20,8 +20,8 @@ public class User {
     public void setPassword(String pW) {
         password = pW;
     }
-    public void setUserID(String uI) {
-        userID = uI;
+    public void setUserID(int uI) {
+        userId = uI;
     }
     public void setFirstName(String fN) {
         firstName = fN;
@@ -42,8 +42,8 @@ public class User {
     public String getPassword() {
         return password;
     }
-    public String getUserID() {
-        return userID;
+    public int getUserID() {
+        return userId;
     }
     public String getFirstName() {
         return firstName;

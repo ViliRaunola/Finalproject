@@ -97,8 +97,6 @@ public class UniversityFragment extends Fragment implements Serializable {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 getToDayInt();
-
-
                 restaurants.clear();
 
                 parseRestaurantsMenu(position);
@@ -121,12 +119,9 @@ public class UniversityFragment extends Fragment implements Serializable {
 
                         ArrayAdapter<FoodItem> arrayAdapterListView = new ArrayAdapter<FoodItem>(getActivity(), android.R.layout.simple_list_item_1, dailyFoods);
                         foodItemLisView.setAdapter(arrayAdapterListView);
-
                     }
-
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
-
                     }
                 });
             }
@@ -278,7 +273,6 @@ public class UniversityFragment extends Fragment implements Serializable {
                     DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                     Document xmlDoc = documentBuilder.parse(ins);
                     NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("restaurant");
-                    System.out.println(nodeList.getLength());
 
                     for (int i = 0; i < nodeList.getLength(); i++) {
                         Node node = nodeList.item(i);
@@ -291,7 +285,6 @@ public class UniversityFragment extends Fragment implements Serializable {
                             restaurants.add(restaurant);
                         }
                     }
-                    System.out.println("###########" + universities.size() + "############");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (ParserConfigurationException e) {
@@ -308,7 +301,6 @@ public class UniversityFragment extends Fragment implements Serializable {
                 DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 Document xmlDoc = documentBuilder.parse(ins);
                 NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("food");
-                System.out.println(nodeList.getLength());
 
                 for (int i = 0; i < nodeList.getLength(); i++) {
                     Node node = nodeList.item(i);
@@ -321,7 +313,7 @@ public class UniversityFragment extends Fragment implements Serializable {
                         int foodDayInt = Integer.parseInt(foodDay);
                         FoodItem foodItem = new FoodItem(foodName, foodPrice, foodId, foodDayInt);
                         selectedRestaurant.addFoodItemToDailyMenu(foodItem);
-                        System.out.println("#################################################" + foodName + "################################################");
+
                     }
                 }
             } catch (IOException e) {

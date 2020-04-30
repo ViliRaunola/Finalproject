@@ -1,0 +1,32 @@
+[
+  {
+    "user": {
+      "password": "53a8ff9d1cece45ff44347e5cbb14b8352ea5797841d2d3080c00d411220793ad8d2eb11bbbbbebdda698152c23d5750aaffedfa093508a90fec92d99c72d301",
+      "userId": "1",
+      "firstName": "Admin",
+      "lastName": "Keijola",
+      "eMail": "admin1@admin.com",
+      "homeUniversity": "LUT"
+    }
+  },
+  {
+    "user": {
+      "password": "89637f45ccfdb30ecda5649e0b7d3d8d8f47c6041156a5560ce033d23ee2a9ea8744374391ef7ae4776019d7a17f75a0ce5783dd16656bc3869a61dc039da63c",
+      "userId": "2",
+      "firstName": "Admin",
+      "lastName": "Mustonen",
+      "eMail": "admin2@admin.com",
+      "homeUniversity": "LUT"
+    }
+  },
+  {
+    "user": {
+      "password": "f9bf0b4e4cc5803e7060d7db421e8115eeef33e28caca04780ff61f5bd1c6e6a095403c08b8853b3ea52208f4575e812dd1b9d15944747cb52a905d3fec4e245",
+      "userId": "3",
+      "firstName": "Admin",
+      "lastName": "Erkkilä",
+      "eMail": "admin3@admin.com",
+      "homeUniversity": "Aalto"
+    }
+  }
+]
