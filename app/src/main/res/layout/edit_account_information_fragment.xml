@@ -5,6 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/account_creation_cancel_button"
+        android:layout_width="167dp"
+        android:layout_height="48dp"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/passwordConfirmationEditText_editAccountInformationFragment"
+        app:layout_constraintTop_toBottomOf="@+id/passwordConfirmationEditText_editAccountInformationFragment"
+        app:layout_constraintVertical_bias="0.788" />
+
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
@@ -15,13 +25,13 @@
 
     <Button
         android:id="@+id/saveChangesButton_editAccountInformationFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_width="167dp"
+        android:layout_height="48dp"
         android:text="save changes"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/passwordConfirmationEditText_editAccountInformationFragment"
+        app:layout_constraintTop_toBottomOf="@+id/passwordConfirmationEditText_editAccountInformationFragment"
+        app:layout_constraintVertical_bias="0.788" />
 
     <EditText
         android:id="@+id/emailEditText_editAccountInformationFragment"
