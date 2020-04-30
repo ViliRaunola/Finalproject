@@ -1,7 +1,5 @@
 package com.example.finalproject;
-import android.service.autofill.RegexValidator;
 
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -33,20 +31,28 @@ public class Security {
         }
         return securedPassword;
     }
+
     //https://stackoverflow.com/questions/1795402/check-if-a-string-contains-a-special-character 3rd answer Pir Fahim Shah
     public static boolean passwordChecker(String password) {
+
+        //check if password is more than 11 characters
         if ((password.length() > 11)) {
+
+            //required patters for a good password
             Pattern capitalLetter = Pattern.compile("[A-Z]");
             Pattern smallLetter = Pattern.compile("[a-z]");
             Pattern digit = Pattern.compile("[0-9]");
             Pattern special = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
 
+            //making matchers for each pattern
             Matcher hasSmallLetter = smallLetter.matcher(password);
             Matcher hasCapitalLetter = capitalLetter.matcher(password);
             Matcher hasDigit = digit.matcher(password);
             Matcher hasSpecial = special.matcher(password);
 
+            //returns true if all are true
             return hasSmallLetter.find() && hasDigit.find() && hasSpecial.find() && hasCapitalLetter.find();
+
         } else{
           return false;
         }
