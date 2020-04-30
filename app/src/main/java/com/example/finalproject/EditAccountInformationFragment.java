@@ -14,12 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -117,6 +120,13 @@ public class EditAccountInformationFragment extends Fragment {
                             password = Security.getSecuredPassword(password,email);
                             user.setPassword(password);
 
+                            //Rewrites the changed user file
+                            try {
+                                writeUserJson();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
                             //switching fragments
                             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
 
@@ -130,7 +140,6 @@ public class EditAccountInformationFragment extends Fragment {
                 }
             }
         });
-
         return v;
     }
     //parses "university.xml" to make a list from university names
@@ -150,7 +159,6 @@ public class EditAccountInformationFragment extends Fragment {
                     universities.add(uniName);
                 }
             }
-
         }catch (IOException e){
             e.printStackTrace();
         }catch(ParserConfigurationException e){
@@ -160,4 +168,23 @@ public class EditAccountInformationFragment extends Fragment {
         }
     }
 
+
+    //https://www.tutorialspoint.com/how-to-write-create-a-json-file-using-java
+    public void writeUserJson() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("password", user.getPassword());
+        jsonObject.put("userId", user.getUserID());
+        jsonObject.put("firstName", user.getFirstName());
+        jsonObject.put("lastName", user.getLastName());
+        jsonObject.put("eMail", user.getEmail());
+        jsonObject.put("homeUniversity", user.getHomeUniversity());
+        try{
+            String x = String.format("userData/User%d", user.getUserID());
+            FileWriter fileWriter = new FileWriter(x);
+            fileWriter.write(jsonObject.toString());
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
