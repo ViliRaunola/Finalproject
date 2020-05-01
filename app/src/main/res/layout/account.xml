@@ -22,7 +22,7 @@
         android:id="@+id/emailTextField_account_creation"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:enabled="false"
         android:inputType="textEmailAddress"
@@ -34,7 +34,7 @@
         android:id="@+id/passwordTextField_account_creation"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:enabled="false"
         android:inputType="textEmailAddress"
@@ -46,7 +46,7 @@
         android:id="@+id/lastNameTextField_account_creation"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:enabled="false"
         android:inputType="textEmailAddress"
@@ -59,7 +59,7 @@
         android:id="@+id/firstNameTextField_account_creation"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:enabled="false"
         android:inputType="textEmailAddress"
@@ -74,14 +74,16 @@
         android:layout_height="wrap_content"
         android:text="Email"
         app:layout_constraintBottom_toTopOf="@+id/emailTextField_account_creation"
-        app:layout_constraintStart_toStartOf="@+id/emailTextField_account_creation" />
+        app:layout_constraintStart_toStartOf="@+id/emailTextField_account_creation"
+        app:layout_constraintTop_toTopOf="@+id/emailTextField_account_creation" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="First Name"
         app:layout_constraintBottom_toTopOf="@+id/firstNameTextField_account_creation"
-        app:layout_constraintStart_toStartOf="@+id/firstNameTextField_account_creation" />
+        app:layout_constraintStart_toStartOf="@+id/firstNameTextField_account_creation"
+        app:layout_constraintTop_toTopOf="@+id/firstNameTextField_account_creation" />
 
     <TextView
         android:id="@+id/textView2"
@@ -89,7 +91,8 @@
         android:layout_height="wrap_content"
         android:text="Last Name"
         app:layout_constraintBottom_toTopOf="@+id/lastNameTextField_account_creation"
-        app:layout_constraintStart_toStartOf="@+id/lastNameTextField_account_creation" />
+        app:layout_constraintStart_toStartOf="@+id/lastNameTextField_account_creation"
+        app:layout_constraintTop_toTopOf="@+id/lastNameTextField_account_creation" />
 
     <TextView
         android:id="@+id/textView3"
@@ -97,31 +100,29 @@
         android:layout_height="wrap_content"
         android:text="Password"
         app:layout_constraintBottom_toTopOf="@+id/passwordTextField_account_creation"
-        app:layout_constraintStart_toStartOf="@+id/passwordTextField_account_creation" />
+        app:layout_constraintStart_toStartOf="@+id/passwordTextField_account_creation"
+        app:layout_constraintTop_toTopOf="@+id/passwordTextField_account_creation" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="408dp"
-        android:layout_marginEnd="272dp"
         android:text="Home University"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@+id/homeUniTextField_Account"
         app:layout_constraintStart_toStartOf="@+id/homeUniTextField_Account"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/homeUniTextField_Account" />
 
     <EditText
         android:id="@+id/homeUniTextField_Account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="248dp"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:enabled="false"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextField_account_creation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
