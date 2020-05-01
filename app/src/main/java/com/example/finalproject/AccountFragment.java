@@ -37,7 +37,7 @@ public class AccountFragment extends Fragment {
         lastName.setText(user.getLastName());
         email.setText(user.getEmail());
         password.setText("************");
-        homeUniversity.setText(user.getHomeUniversity());
+        //homeUniversity.setText(user.getHomeUniversity());
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

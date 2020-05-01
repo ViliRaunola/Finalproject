@@ -11,7 +11,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String eMail;
-    private String homeUniversity;
+    private int homeUniversity;
     ArrayList<FoodReview> publishedReviews;
     ArrayList<FoodReview> nonPublishedReviews;
     private static User user = new User();
@@ -35,7 +35,7 @@ public class User {
     public void setEmail(String eM) {
         eMail = eM;
     }
-    public void setHomeUniversity(String hU) {
+    public void setHomeUniversity(int hU) {
         homeUniversity = hU;
     }
 
@@ -57,7 +57,7 @@ public class User {
     public String getEmail() {
         return eMail;
     }
-    public String getHomeUniversity() {
+    public int getHomeUniversity() {
         return homeUniversity;
     }
     public ArrayList<FoodReview> getPublishedReviews() {
