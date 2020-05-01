@@ -72,10 +72,10 @@ public class EditAccountInformationFragment extends Fragment {
         ArrayAdapter<String> universityArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, universities);
         universityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         homeUniversity_spinner.setAdapter(universityArrayAdapter);
-        homeUniversity_spinner.setSelection(user.getHomeUniversity());
+        homeUniversity_spinner.setSelection(user.getHomeUniversityPos());
 
 
-        homeUniversity_spinner.setSelection(user.getHomeUniversity());
+        homeUniversity_spinner.setSelection(user.getHomeUniversityPos());
         saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +99,7 @@ public class EditAccountInformationFragment extends Fragment {
                     //setting new user data
                     user.setLastName(lastName);
                     user.setFirstName(firstName);
-                    user.setHomeUniversity(homeUniversityPos);
+                    user.setHomeUniversityPos(homeUniversityPos);
                     user.setEmail(email);
 
                     //check if user wants to change their password

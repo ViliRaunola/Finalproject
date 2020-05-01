@@ -71,7 +71,7 @@ public class UniversityFragment extends Fragment implements Serializable {
         ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, universities);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         universitySpinner.setAdapter(ap);
-        universitySpinner.setSelection(User.getInstance().getHomeUniversity());
+        universitySpinner.setSelection(User.getInstance().getHomeUniversityPos());
 
         weekDays.clear();
         weekDays.add("Monday");
@@ -231,7 +231,6 @@ public class UniversityFragment extends Fragment implements Serializable {
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document xmlDoc = documentBuilder.parse(ins);
             NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("university");
-            System.out.println(nodeList.getLength());
 
             for(int i = 0; i < nodeList.getLength(); i++){
                 Node node = nodeList.item(i);
@@ -247,7 +246,6 @@ public class UniversityFragment extends Fragment implements Serializable {
 
                 }
             }
-            System.out.println("###########" + universities.size()+ "############");
         }catch (IOException e){
             e.printStackTrace();
         }catch(ParserConfigurationException e){

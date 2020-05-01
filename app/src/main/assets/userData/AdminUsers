@@ -6,7 +6,7 @@
       "firstName": "Admin",
       "lastName": "Keijola",
       "eMail": "admin1@admin.com",
-      "homeUniversity": "0"
+      "homeUniversity": "LUT"
     }
   },
   {
@@ -16,7 +16,7 @@
       "firstName": "Admin",
       "lastName": "Mustonen",
       "eMail": "admin2@admin.com",
-      "homeUniversity": "0"
+      "homeUniversity": "LUT"
     }
   },
   {
@@ -26,7 +26,7 @@
       "firstName": "Admin",
       "lastName": "Erkkilä",
       "eMail": "admin3@admin.com",
-      "homeUniversity": "1"
+      "homeUniversity": "Aalto"
     }
   }
 ]

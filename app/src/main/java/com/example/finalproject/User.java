@@ -11,7 +11,8 @@ public class User {
     private String firstName;
     private String lastName;
     private String eMail;
-    private int homeUniversity;
+    private int homeUniversityPos;
+    private String homeUniversity;
     ArrayList<FoodReview> publishedReviews;
     ArrayList<FoodReview> nonPublishedReviews;
     private static User user = new User();
@@ -35,8 +36,11 @@ public class User {
     public void setEmail(String eM) {
         eMail = eM;
     }
-    public void setHomeUniversity(int hU) {
+    public void setHomeUniversity(String hU) {
         homeUniversity = hU;
+    }
+    public void setHomeUniversityPos(int hU) {
+        homeUniversityPos = hU;
     }
     //Moi vili
     public boolean getIsAdminUser() {
@@ -57,7 +61,10 @@ public class User {
     public String getEmail() {
         return eMail;
     }
-    public int getHomeUniversity() {
+    public int getHomeUniversityPos() {
+        return homeUniversityPos;
+    }
+    public String getHomeUniversity() {
         return homeUniversity;
     }
     public ArrayList<FoodReview> getPublishedReviews() {

@@ -13,11 +13,21 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,9 +39,10 @@ public class LoginActivity extends AppCompatActivity {
     private String em;
     private String id;
     private Context context;
-
+    private int universitiesPositionCompare;
+    private String homeUniversity;
     private int check = 0;
-
+    // LoginPasswordTestiHommma Vili!Raunola12345
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,7 +130,10 @@ public class LoginActivity extends AppCompatActivity {
                     user.setUserID(Integer.parseInt(id));
                     user.setEmail(object.getString("eMail"));
                     user.setPassword(userPassword);
-                    user.setHomeUniversity(Integer.parseInt(object.getString("homeUniversity")));
+                    homeUniversity = object.getString("homeUniversity");
+                    parseUniversity(homeUniversity);
+                    user.setHomeUniversity(homeUniversity);
+                    user.setHomeUniversityPos(universitiesPositionCompare);
                     user.setLastName(object.getString("lastName"));
                     user.setFirstName(object.getString("firstName"));
                     return 1;
@@ -162,5 +176,34 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return id;
+    }
+
+    public void parseUniversity(String hU){
+        try (InputStream ins = context.getAssets().open("university.xml")){
+            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document xmlDoc = documentBuilder.parse(ins);
+            NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("university");
+
+            for(int i = 0; i < nodeList.getLength(); i++){
+                Node node = nodeList.item(i);
+                if(node.getNodeType() == Node.ELEMENT_NODE){
+                    Element element = (Element) node;
+                    String uniName = element.getElementsByTagName("universityName").item(0).getTextContent();
+                    System.out.println("uniname" + uniName + "      ##################################################");
+                    System.out.println("homeuni" + hU + "      ##################################################");
+                    if (uniName.equals(hU)) {
+                        universitiesPositionCompare = i;
+                        System.out.println(universitiesPositionCompare + "      ##################################################");
+                    }
+
+                }
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch(ParserConfigurationException e){
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
     }
 }

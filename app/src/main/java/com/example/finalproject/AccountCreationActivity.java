@@ -73,7 +73,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         user.setEmail(email_string);
         user.setFirstName(firstname_string);
         user.setLastName(lastname_string);
-        user.setHomeUniversity(home_uni);
+        user.setHomeUniversityPos(home_uni);
 
         password_string = Security.getSecuredPassword(password_string,email_string);
         user.setPassword(password_string);
