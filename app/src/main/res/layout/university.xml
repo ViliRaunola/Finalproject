@@ -9,31 +9,28 @@
 
     <TextView
         android:id="@+id/infoWindow"
-        android:layout_width="382dp"
-        android:layout_height="124dp"
+        android:layout_width="386dp"
+        android:layout_height="128dp"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/university_spinner"
-        android:layout_width="232dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infoWindow" />
 
     <Spinner
         android:id="@+id/restaurant_spinner"
-        android:layout_width="232dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/university_spinner" />
 
@@ -56,8 +53,8 @@
     <ListView
         android:id="@+id/listViewFood"
         android:layout_width="386dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="175dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="128dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_spinner" />
@@ -66,20 +63,19 @@
         android:id="@+id/dayTextView"
         android:layout_width="100dp"
         android:layout_height="28dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="18dp"
         android:text="Current Day"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
         app:layout_constraintEnd_toStartOf="@+id/nextDayButton"
-        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toEndOf="@+id/previousDayButton" />
 
     <Button
         android:id="@+id/nextDayButton"
         android:layout_width="125dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="8dp"
         android:text="Next Day"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -88,8 +84,8 @@
         android:id="@+id/previousDayButton"
         android:layout_width="125dp"
         android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="8dp"
         android:text="Previous Day"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
         app:layout_constraintStart_toStartOf="parent" />
