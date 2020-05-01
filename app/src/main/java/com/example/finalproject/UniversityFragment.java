@@ -71,6 +71,9 @@ public class UniversityFragment extends Fragment implements Serializable {
         ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, universities);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         universitySpinner.setAdapter(ap);
+        universitySpinner.setSelection(User.getInstance().getHomeUniversity());
+
+        weekDays.clear();
         weekDays.add("Monday");
         weekDays.add("Tuesday");
         weekDays.add("Wednesday");

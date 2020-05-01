@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                     user.setUserID(Integer.parseInt(id));
                     user.setEmail(object.getString("eMail"));
                     user.setPassword(userPassword);
-                    user.setHomeUniversity(object.getString("homeUniversity"));
+                    user.setHomeUniversity(Integer.parseInt(object.getString("homeUniversity")));
                     user.setLastName(object.getString("lastName"));
                     user.setFirstName(object.getString("firstName"));
                     return 1;
