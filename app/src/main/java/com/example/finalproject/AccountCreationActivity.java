@@ -37,7 +37,7 @@ public class AccountCreationActivity extends AppCompatActivity {
     private String lastname_string;
     private String password_string;
     private String email_string;
-    private int home_uni;
+    private String home_uni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class AccountCreationActivity extends AppCompatActivity {
     public void confirmPressed(View view) {
 
         //get text from textfields and spinner
-        home_uni = home_uni_spinner.getSelectedItemPosition();
+        home_uni = home_uni_spinner.getSelectedItem().toString();
         email_string = email.getText().toString();
         lastname_string = lastName.getText().toString();
         firstname_string = firstName.getText().toString();
@@ -73,7 +73,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         user.setEmail(email_string);
         user.setFirstName(firstname_string);
         user.setLastName(lastname_string);
-        user.setHomeUniversityPos(home_uni);
+        user.setHomeUniversity(home_uni);
 
         password_string = Security.getSecuredPassword(password_string,email_string);
         user.setPassword(password_string);

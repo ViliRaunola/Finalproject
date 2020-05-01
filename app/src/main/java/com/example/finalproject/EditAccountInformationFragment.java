@@ -86,7 +86,6 @@ public class EditAccountInformationFragment extends Fragment {
         homeUniversity_spinner.setSelection(user.getHomeUniversityPos());
 
 
-        homeUniversity_spinner.setSelection(user.getHomeUniversityPos());
         saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +110,8 @@ public class EditAccountInformationFragment extends Fragment {
                     user.setLastName(lastName);
                     user.setFirstName(firstName);
                     user.setHomeUniversityPos(homeUniversityPos);
+                    System.out.println(homeUniversityPos + "             kotihomon paikka ========================================================================================¤");
+                    user.setHomeUniversity(homeUniversity_spinner.getSelectedItem().toString());
                     user.setEmail(email);
 
                     //check if user wants to change their password

@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +21,8 @@ public class AccountFragment extends Fragment {
     private EditText lastName;
     private EditText firstName;
     private EditText homeUniText;
-
-    EditAccountInformationFragment editAccountInformationFragment = new EditAccountInformationFragment();
     User user = User.getInstance();
+    EditAccountInformationFragment editAccountInformationFragment = new EditAccountInformationFragment();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,7 +34,6 @@ public class AccountFragment extends Fragment {
         lastName = (EditText)v.findViewById(R.id.lastNameTextField_account_creation);
         password = (EditText)v.findViewById(R.id.passwordTextField_account_creation);
         homeUniText = (EditText) v.findViewById(R.id.homeUniTextField_Account);
-
 
         firstName.setText(user.getFirstName());
         lastName.setText(user.getLastName());
@@ -51,5 +50,15 @@ public class AccountFragment extends Fragment {
             }
         });
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        firstName.setText(user.getFirstName());
+        lastName.setText(user.getLastName());
+        email.setText(user.getEmail());
+        password.setText("************");
+        homeUniText.setText(user.getHomeUniversity());
     }
 }

@@ -51,7 +51,7 @@ public class UniversityFragment extends Fragment implements Serializable {
     private ArrayList<FoodItem> dailyFoods = new ArrayList<FoodItem>();
     private int restaurantPostion;
     private int foodMenuMaxLenght = 1;
-
+    User user = User.getInstance();
 
     @Nullable
     @Override
@@ -71,7 +71,9 @@ public class UniversityFragment extends Fragment implements Serializable {
         ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, universities);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         universitySpinner.setAdapter(ap);
-        universitySpinner.setSelection(User.getInstance().getHomeUniversityPos());
+        System.out.println(savedInstanceState);
+        universitySpinner.setSelection(user.getHomeUniversityPos());
+        ap.notifyDataSetChanged();
 
         weekDays.clear();
         weekDays.add("Monday");
@@ -326,5 +328,9 @@ public class UniversityFragment extends Fragment implements Serializable {
     }
 
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        universitySpinner.setSelection(user.getHomeUniversityPos());
+    }
 }
