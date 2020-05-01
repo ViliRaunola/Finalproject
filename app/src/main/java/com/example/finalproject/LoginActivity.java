@@ -2,6 +2,7 @@ package com.example.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -25,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private String pw;
     private String em;
     private String id;
+    private Context context;
 
     private int check = 0;
 
@@ -32,6 +36,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+        context = this;
+
+
         login = (Button) findViewById(R.id.login);
         createAccount = (Button) findViewById(R.id.createAccount);
         email = (EditText) findViewById(R.id.emailTextField_login);
@@ -87,8 +96,10 @@ public class LoginActivity extends AppCompatActivity {
     //If they both match a user class is created. 
     private int jsonParse(String id, String userPassword) {
 
+
+
         String json;
-        try (InputStream ins = getResources().openRawResource(getResources().getIdentifier("raw/userData/User" + id + ".json", "raw", getPackageName()))){
+        try (FileInputStream ins = new FileInputStream(context.getFilesDir() + "/userData/User" + id + ".json")){
 
             int size = ins.available();
             byte[] buffer = new byte[size];
@@ -124,7 +135,10 @@ public class LoginActivity extends AppCompatActivity {
     private String jsonParseEmailsAndIds(String userEMail) {
         String id = "";
         String json;
-        try (InputStream ins = getBaseContext().getAssets().open("raw/userData/EmailsAndIds.json")) {
+
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + context.getFilesDir()+ "##########################################");
+          // 2nd line
+        try (FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"))) {
             int size = ins.available();
             byte[] buffer = new byte[size];
             ins.read(buffer);
