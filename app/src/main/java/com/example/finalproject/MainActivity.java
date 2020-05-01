@@ -67,13 +67,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_reviews:
-                sendUniversityFragmentRestaurants();
+                sendUniversityFragmentRestaurantsOwnReviews();
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).addToBackStack("reviews_fragment").commit();
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_account:
-
+                sendUniversityFragmentRestaurantsAccount();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).addToBackStack("account_fragment").commit();
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
                 break;
@@ -89,10 +89,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    public void sendUniversityFragmentRestaurants(){
+    public void sendUniversityFragmentRestaurantsOwnReviews(){
         Bundle bundle = new Bundle();
         bundle.putSerializable("key2",universityFragment.universities);
         ownReviewsFragment.setArguments(bundle);
+
+    }
+    public void sendUniversityFragmentRestaurantsAccount(){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("key2",universityFragment.universities);
+        accountFragment.setArguments(bundle);
     }
 
 
