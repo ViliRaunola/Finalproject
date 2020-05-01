@@ -9,7 +9,7 @@
         <restaurantMenu>silinteriMenu.xml</restaurantMenu>
     </restaurant>
     <restaurant>
-        <restaurantName>Tipoli</restaurantName>
-        <restaurantMenu>tipoliMenu.xml</restaurantMenu>
+        <restaurantName>Dipoli</restaurantName>
+        <restaurantMenu>dipoliMenu.xml</restaurantMenu>
     </restaurant>
 </restaurants>
