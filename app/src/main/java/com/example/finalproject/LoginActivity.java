@@ -152,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
 
         System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + context.getFilesDir()+ "##########################################");
           // 2nd line
+
         try (FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"))) {
             int size = ins.available();
             byte[] buffer = new byte[size];
@@ -163,8 +164,11 @@ public class LoginActivity extends AppCompatActivity {
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
-                JSONObject object = jsonArray.getJSONObject(i);
-                System.out.println(object.getString("eMail"));
+                JSONObject object = jsonArray.getJSONObject(i).getJSONObject("user");
+                System.out.println("############################################");
+                System.out.println(object);
+                System.out.println(object.getString("userId"));
+
                 if (object.getString("eMail").equals(userEMail)){
                     id = object.getString("userId");
                     return id;

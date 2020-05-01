@@ -1,10 +1,14 @@
 [
   {
-    "userId": "4",
-    "eMail": "w"
+    "user": {
+      "userId": "4",
+      "eMail": "w"
+    }
   },
   {
-    "userId": "5",
-    "eMail": "we"
+    "user": {
+      "userId": "5",
+      "eMail": "we"
+    }
   }
 ]

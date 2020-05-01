@@ -129,7 +129,7 @@ public class EditAccountInformationFragment extends Fragment {
                             try {
                                 modifyEmailsAndIds();
                                 writeUserJson();
-                            } catch (JSONException e) {
+                            } catch (JSONException | IOException e) {
                                 e.printStackTrace();
                             }
 
@@ -177,64 +177,62 @@ public class EditAccountInformationFragment extends Fragment {
             e.printStackTrace();
         }
     }
+    //https://howtodoinjava.com/library/json-simple-read-write-json-examples/
+    public void modifyEmailsAndIds() throws JSONException, IOException {
 
- public void modifyEmailsAndIds(){
-     final String json;
-     try (FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"))) {
-         int size = ins.available();
-         final byte[] buffer = new byte[size];
-         ins.read(buffer);
-         ins.close();
-         try (ObjectOutputStream outputStream = new ObjectOutputStream (new FileOutputStream(new File(context.getFilesDir() +"/userData/EmailsAndIds.json")))) {
+        //reading original file
+        FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"));
+        int size = ins.available();
+        final byte[] buffer = new byte[size];
+        ins.read(buffer);
+        ins.close();
 
-             json = new String(buffer, "UTF-8");
-             JSONArray jsonArray = new JSONArray(json);
-             for (int i = 0; i < jsonArray.length(); i++) {
-                 JSONObject object = jsonArray.getJSONObject(i);
-                 if (Integer.parseInt(object.getString("userId")) == user.getUserID()) {
-                     System.out.println(user.getEmail());
-                     System.out.println(object.getString("eMail"));
-                     System.out.println("Eka");
-                     System.out.println(object);
-                     object.remove("eMail");
-                     System.out.println("Toka");
-                     System.out.println(object);
-                     object.put("eMail", user.getEmail());
-                     System.out.println("kolmas");
-                     System.out.println(object);
-                     outputStream.writeObject();
-                     outputStream.close();
-                     break;
-                 }
-             }
-         }
-     } catch (IOException e) {
-         e.printStackTrace();
-     } catch (JSONException e) {
-         e.printStackTrace();
-     }
+        String json = new String(buffer, "UTF-8");
+        JSONArray originalUserData = new JSONArray(json);
+        JSONArray newUserData = new JSONArray();
+        FileWriter fileWriter = new FileWriter((context.getFilesDir() + "/userData/EmailsAndIds.json"));
 
+        //goinng through original EmailsAnsIds file
+        for (int i = 0; i < originalUserData.length(); i++) {
+            JSONObject userObject = originalUserData.getJSONObject(i).getJSONObject("user");
 
+            //changing new user email for the same user id
+            if (Integer.parseInt(userObject.getString("userId")) == user.getUserID()) {
+                userObject.put("eMail", user.getEmail());
+            }
 
- }
+            //create a newUserObject and adding it to newUserData
+            JSONObject newUserObject = new JSONObject();
+            newUserObject.put("user", userObject);
+            newUserData.put(newUserObject);
+        }
+
+        fileWriter.write(newUserData.toString());
+        fileWriter.close();
+    }
 
     //https://www.tutorialspoint.com/how-to-write-create-a-json-file-using-java
     public void writeUserJson() throws JSONException {
+        JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
         String password;
-        password = Security.getSecuredPassword(user.getPassword(),user.getEmail());
-        jsonObject.put("password", password);
+        //password = Security.getSecuredPassword(user.getPassword(),user.getEmail());
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        System.out.println(user.getPassword());
+        //System.out.println(password);
+        jsonObject.put("password", user.getPassword());
         jsonObject.put("userId", user.getUserID());
         jsonObject.put("firstName", user.getFirstName());
         jsonObject.put("lastName", user.getLastName());
         jsonObject.put("eMail", user.getEmail());
         jsonObject.put("homeUniversity", user.getHomeUniversity());
+        jsonArray.put(jsonObject);
         try{
 
             String x = String.format(context.getFilesDir() + "/userData/User" + user.getUserID() + ".json");
             System.out.println(x);
             FileWriter fileWriter = new FileWriter(x);
-            fileWriter.write(jsonObject.toString());
+            fileWriter.write(jsonArray.toString());
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
