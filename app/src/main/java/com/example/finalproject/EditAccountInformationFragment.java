@@ -45,7 +45,7 @@ public class EditAccountInformationFragment extends Fragment {
     private String lastName;
     private String password;
     private String passwordConfirmation;
-    private String homeUniversity_string;
+    private int homeUniversityPos;
     private boolean checkPassword;
     User user = User.getInstance();
 
@@ -72,16 +72,10 @@ public class EditAccountInformationFragment extends Fragment {
         ArrayAdapter<String> universityArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, universities);
         universityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         homeUniversity_spinner.setAdapter(universityArrayAdapter);
+        homeUniversity_spinner.setSelection(user.getHomeUniversity());
 
-        //set spinner to current home university
-        if (user.getHomeUniversity().equals("LUT")){
-            homeUniversity_spinner.setSelection(0);
-        }else if (user.getHomeUniversity().equals("Aalto")){
-            homeUniversity_spinner.setSelection(1);
-        }else if (user.getHomeUniversity().equals("TUT")){
-            homeUniversity_spinner.setSelection(2);
-        }
 
+        homeUniversity_spinner.setSelection(user.getHomeUniversity());
         saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +86,7 @@ public class EditAccountInformationFragment extends Fragment {
                 lastName = lastNameEditText.getText().toString();
                 password = passwordEditText.getText().toString();
                 passwordConfirmation = passwordConfirmationEditText.getText().toString();
-                homeUniversity_string = homeUniversity_spinner.getSelectedItem().toString();
+                homeUniversityPos = homeUniversity_spinner.getSelectedItemPosition();
 
                 //checking if the password and confirmation are the same
                 if (!password.equals(passwordConfirmation)){
@@ -105,7 +99,7 @@ public class EditAccountInformationFragment extends Fragment {
                     //setting new user data
                     user.setLastName(lastName);
                     user.setFirstName(firstName);
-                    user.setHomeUniversity(homeUniversity_string);
+                    user.setHomeUniversity(homeUniversityPos);
                     user.setEmail(email);
 
                     //check if user wants to change their password
@@ -193,7 +187,7 @@ for(int i = 0; i < arr.length(); i++){
         jsonObject.put("homeUniversity", user.getHomeUniversity());
         try{
 
-            String x = String.format("raw/userData/User%d", user.getUserID());
+            String x = String.format("userData/User%d", user.getUserID());
             System.out.println(x);
             FileWriter fileWriter = new FileWriter(x);
             fileWriter.write(jsonObject.toString());

@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
     private int jsonParse(String id, String userPassword) {
 
         String json;
-        try (InputStream ins = getResources().openRawResource(getResources().getIdentifier("raw/userData/User" + id + ".json", "raw", getPackageName()))){
+        try (InputStream ins = getBaseContext().getAssets().open("userData/User"+id+".json")){
 
             int size = ins.available();
             byte[] buffer = new byte[size];
@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                     user.setUserID(Integer.parseInt(id));
                     user.setEmail(object.getString("eMail"));
                     user.setPassword(userPassword);
-                    user.setHomeUniversity(object.getString("homeUniversity"));
+                    user.setHomeUniversity(Integer.parseInt(object.getString("homeUniversity")));
                     user.setLastName(object.getString("lastName"));
                     user.setFirstName(object.getString("firstName"));
                     return 1;
@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
     private String jsonParseEmailsAndIds(String userEMail) {
         String id = "";
         String json;
-        try (InputStream ins = getBaseContext().getAssets().open("raw/userData/EmailsAndIds.json")) {
+        try (InputStream ins = getBaseContext().getAssets().open("userData/EmailsAndIds.json")) {
             int size = ins.available();
             byte[] buffer = new byte[size];
             ins.read(buffer);

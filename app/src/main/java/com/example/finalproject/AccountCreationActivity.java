@@ -37,7 +37,7 @@ public class AccountCreationActivity extends AppCompatActivity {
     private String lastname_string;
     private String password_string;
     private String email_string;
-    private String home_uni;
+    private int home_uni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +56,12 @@ public class AccountCreationActivity extends AppCompatActivity {
         ArrayAdapter<String> ap = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, universityList);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         home_uni_spinner.setAdapter(ap);
+
     }
     public void confirmPressed(View view) {
 
         //get text from textfields and spinner
-        home_uni = home_uni_spinner.getSelectedItem().toString();
+        home_uni = home_uni_spinner.getSelectedItemPosition();
         email_string = email.getText().toString();
         lastname_string = lastName.getText().toString();
         firstname_string = firstName.getText().toString();
