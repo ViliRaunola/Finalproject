@@ -39,7 +39,7 @@ public class User {
     public void setHomeUniversity(int hU) {
         homeUniversity = hU;
     }
-
+    //Moi vili
     public boolean getIsAdminUser() {
         return isAdminUser;
     }
