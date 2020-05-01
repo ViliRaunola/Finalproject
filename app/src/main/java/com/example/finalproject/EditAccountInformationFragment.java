@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
@@ -22,10 +24,16 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -47,6 +55,7 @@ public class EditAccountInformationFragment extends Fragment {
     private String passwordConfirmation;
     private int homeUniversityPos;
     private boolean checkPassword;
+    private Context context;
     User user = User.getInstance();
 
     @Nullable
@@ -54,6 +63,8 @@ public class EditAccountInformationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.edit_account_information_fragment, container, false);
+        context = this.getContext();
+
         saveChanges = (Button)v.findViewById(R.id.saveChangesButton_editAccountInformationFragment);
         homeUniversity_spinner = (Spinner)v.findViewById(R.id.homeUniversitySpinner_editAccountInformationFragment);
         emailEditText = (EditText)v.findViewById(R.id.emailEditText_editAccountInformationFragment);
@@ -116,6 +127,7 @@ public class EditAccountInformationFragment extends Fragment {
 
                             //Rewrites the changed user file
                             try {
+                                modifyEmailsAndIds();
                                 writeUserJson();
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -136,6 +148,10 @@ public class EditAccountInformationFragment extends Fragment {
         });
         return v;
     }
+
+    //Vili!Raunola12345
+
+
     //parses "university.xml" to make a list from university names
     public void parseUniversity() {
 
@@ -162,24 +178,52 @@ public class EditAccountInformationFragment extends Fragment {
         }
     }
 
-/*
-JSONArray arr = new JSONArray(str);
-for(int i = 0; i < arr.length(); i++){
+ public void modifyEmailsAndIds(){
+     final String json;
+     try (FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"))) {
+         int size = ins.available();
+         final byte[] buffer = new byte[size];
+         ins.read(buffer);
+         ins.close();
+         try (ObjectOutputStream outputStream = new ObjectOutputStream (new FileOutputStream(new File(context.getFilesDir() +"/userData/EmailsAndIds.json")))) {
 
-    JSONObject jsonObj = (JSONObject)arr.get(i); // get the josn object
-    if(jsonObj.getString("name").equals("Rose")){ // compare for the key-value
-        ((JSONObject)arr.get(i)).put("id", 22); // put the new value for the key
-    }
-    textview.setText(arr.toString());// display and verify your Json with updated value
-}
- */
+             json = new String(buffer, "UTF-8");
+             JSONArray jsonArray = new JSONArray(json);
+             for (int i = 0; i < jsonArray.length(); i++) {
+                 JSONObject object = jsonArray.getJSONObject(i);
+                 if (Integer.parseInt(object.getString("userId")) == user.getUserID()) {
+                     System.out.println(user.getEmail());
+                     System.out.println(object.getString("eMail"));
+                     System.out.println("Eka");
+                     System.out.println(object);
+                     object.remove("eMail");
+                     System.out.println("Toka");
+                     System.out.println(object);
+                     object.put("eMail", user.getEmail());
+                     System.out.println("kolmas");
+                     System.out.println(object);
+                     outputStream.writeObject();
+                     outputStream.close();
+                     break;
+                 }
+             }
+         }
+     } catch (IOException e) {
+         e.printStackTrace();
+     } catch (JSONException e) {
+         e.printStackTrace();
+     }
 
 
+
+ }
 
     //https://www.tutorialspoint.com/how-to-write-create-a-json-file-using-java
     public void writeUserJson() throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("password", user.getPassword());
+        String password;
+        password = Security.getSecuredPassword(user.getPassword(),user.getEmail());
+        jsonObject.put("password", password);
         jsonObject.put("userId", user.getUserID());
         jsonObject.put("firstName", user.getFirstName());
         jsonObject.put("lastName", user.getLastName());
@@ -187,7 +231,7 @@ for(int i = 0; i < arr.length(); i++){
         jsonObject.put("homeUniversity", user.getHomeUniversity());
         try{
 
-            String x = String.format("userData/User%d", user.getUserID());
+            String x = String.format(context.getFilesDir() + "/userData/User" + user.getUserID() + ".json");
             System.out.println(x);
             FileWriter fileWriter = new FileWriter(x);
             fileWriter.write(jsonObject.toString());
