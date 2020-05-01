@@ -40,7 +40,8 @@
         android:layout_height="wrap_content"
         android:text="Restaurant"
         app:layout_constraintBottom_toTopOf="@+id/restaurant_spinner"
-        app:layout_constraintStart_toStartOf="@+id/restaurant_spinner" />
+        app:layout_constraintStart_toStartOf="@+id/restaurant_spinner"
+        app:layout_constraintTop_toTopOf="@+id/restaurant_spinner" />
 
     <TextView
         android:id="@+id/textView5"
@@ -48,7 +49,8 @@
         android:layout_height="wrap_content"
         android:text="University"
         app:layout_constraintBottom_toTopOf="@+id/university_spinner"
-        app:layout_constraintStart_toStartOf="@+id/university_spinner" />
+        app:layout_constraintStart_toStartOf="@+id/university_spinner"
+        app:layout_constraintTop_toTopOf="@+id/university_spinner" />
 
     <ListView
         android:id="@+id/listViewFood"
