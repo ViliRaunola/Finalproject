@@ -11,8 +11,8 @@
         android:layout_height="48dp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/passwordConfirmationEditText_editAccountInformationFragment"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintStart_toStartOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
+        app:layout_constraintTop_toBottomOf="@+id/currentPasswordConfirmation_editAccountInformationFragment" />
 
     <TextView
         android:id="@+id/textView10"
@@ -29,8 +29,8 @@
         android:layout_height="48dp"
         android:text="save changes"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/passwordConfirmationEditText_editAccountInformationFragment"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintEnd_toEndOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
+        app:layout_constraintTop_toBottomOf="@+id/currentPasswordConfirmation_editAccountInformationFragment" />
 
     <EditText
         android:id="@+id/emailEditText_editAccountInformationFragment"
@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/firstNameEditText_editAccountInformationFragment" />
 
     <EditText
-        android:id="@+id/passwordEditText_editAccountInformationFragment"
+        android:id="@+id/newPasswordEditText_editAccountInformationFragment"
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lastNameEditText_editAccountInformationFragment" />
 
     <EditText
-        android:id="@+id/passwordConfirmationEditText_editAccountInformationFragment"
+        android:id="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
@@ -94,7 +94,7 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_editAccountInformationFragment" />
+        app:layout_constraintTop_toBottomOf="@+id/newPasswordEditText_editAccountInformationFragment" />
 
     <TextView
         android:id="@+id/textView5"
@@ -129,18 +129,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Password"
-        app:layout_constraintBottom_toTopOf="@+id/passwordEditText_editAccountInformationFragment"
-        app:layout_constraintStart_toStartOf="@+id/passwordEditText_editAccountInformationFragment"
-        app:layout_constraintTop_toTopOf="@+id/passwordEditText_editAccountInformationFragment" />
+        app:layout_constraintBottom_toTopOf="@+id/newPasswordEditText_editAccountInformationFragment"
+        app:layout_constraintStart_toStartOf="@+id/newPasswordEditText_editAccountInformationFragment"
+        app:layout_constraintTop_toTopOf="@+id/newPasswordEditText_editAccountInformationFragment" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Confrim New Password"
-        app:layout_constraintBottom_toTopOf="@+id/passwordConfirmationEditText_editAccountInformationFragment"
-        app:layout_constraintStart_toStartOf="@+id/passwordConfirmationEditText_editAccountInformationFragment"
-        app:layout_constraintTop_toTopOf="@+id/passwordConfirmationEditText_editAccountInformationFragment" />
+        app:layout_constraintBottom_toTopOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
+        app:layout_constraintStart_toStartOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
+        app:layout_constraintTop_toTopOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment" />
 
     <TextView
         android:id="@+id/textView16"
@@ -148,11 +148,11 @@
         android:layout_height="70dp"
         android:layout_marginTop="8dp"
         android:text="Password needs to contain the following: \n - Minimum 12 characters \n - At least one number, one special character, one capital and one small letter "
-        app:layout_constraintStart_toStartOf="@+id/passwordEditText_editAccountInformationFragment"
+        app:layout_constraintStart_toStartOf="@+id/newPasswordEditText_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/homeUniversitySpinner_editAccountInformationFragment" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/currentPasswordConfirmation_editAccountInformationFragment"
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="48dp"
@@ -160,15 +160,15 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordConfirmationEditText_editAccountInformationFragment" />
+        app:layout_constraintTop_toBottomOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Confirm Changes With Current Password"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toTopOf="@+id/editText" />
+        app:layout_constraintBottom_toTopOf="@+id/currentPasswordConfirmation_editAccountInformationFragment"
+        app:layout_constraintStart_toStartOf="@+id/currentPasswordConfirmation_editAccountInformationFragment"
+        app:layout_constraintTop_toTopOf="@+id/currentPasswordConfirmation_editAccountInformationFragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

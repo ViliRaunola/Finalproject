@@ -26,14 +26,11 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -46,16 +43,20 @@ public class EditAccountInformationFragment extends Fragment {
     private EditText emailEditText;
     private EditText firstNameEditText;
     private EditText lastNameEditText;
-    private EditText passwordEditText;
-    private EditText passwordConfirmationEditText;
-    private String email;
-    private String firstName;
-    private String lastName;
-    private String password;
-    private String passwordConfirmation;
+    private EditText newPasswordEditText;
+    private EditText newPasswordConfirmationEditText;
+    private EditText currentPasswordConfirmationEditText;
+    private String emailInput;
+    private String firstNameInput;
+    private String lastNameInput;
+    private String passwordInput;
+    private String passwordConfirmationInput;
+    private String currentpasswordInput;
     private int homeUniversityPos;
     private boolean checkPassword;
+    private boolean emailCheck;
     private Context context;
+    private String currentPasswordUser;
     User user = User.getInstance();
 
     @Nullable
@@ -70,13 +71,18 @@ public class EditAccountInformationFragment extends Fragment {
         emailEditText = (EditText)v.findViewById(R.id.emailEditText_editAccountInformationFragment);
         firstNameEditText = (EditText)v.findViewById(R.id.firstNameEditText_editAccountInformationFragment);
         lastNameEditText = (EditText)v.findViewById(R.id.lastNameEditText_editAccountInformationFragment);
-        passwordEditText = (EditText)v.findViewById(R.id.passwordEditText_editAccountInformationFragment);
-        passwordConfirmationEditText = (EditText)v.findViewById(R.id.passwordConfirmationEditText_editAccountInformationFragment);
+        newPasswordEditText = (EditText)v.findViewById(R.id.newPasswordEditText_editAccountInformationFragment);
+        newPasswordConfirmationEditText = (EditText)v.findViewById(R.id.newPasswordConfirmationEditText_editAccountInformationFragment);
+        currentPasswordConfirmationEditText = (EditText)v.findViewById(R.id.currentPasswordConfirmation_editAccountInformationFragment);
+
 
         //set textfields to user data
         firstNameEditText.setText(user.getFirstName());
         lastNameEditText.setText(user.getLastName());
         emailEditText.setText(user.getEmail());
+
+        //get current password to compare it with given current password to editText
+        currentPasswordUser = user.getPassword();
 
         //parsing university xml and setting home university spinner adapter
         parseUniversity();
@@ -91,40 +97,53 @@ public class EditAccountInformationFragment extends Fragment {
             public void onClick(View view) {
 
                 //edittext and spinner item to string
-                email = emailEditText.getText().toString();
-                firstName = firstNameEditText.getText().toString();
-                lastName = lastNameEditText.getText().toString();
-                password = passwordEditText.getText().toString();
-                passwordConfirmation = passwordConfirmationEditText.getText().toString();
+                emailInput = emailEditText.getText().toString();
+                firstNameInput = firstNameEditText.getText().toString();
+                lastNameInput = lastNameEditText.getText().toString();
+                passwordInput = newPasswordEditText.getText().toString();
+                passwordConfirmationInput = newPasswordConfirmationEditText.getText().toString();
                 homeUniversityPos = homeUniversity_spinner.getSelectedItemPosition();
+                currentpasswordInput = currentPasswordConfirmationEditText.getText().toString();
+
+                try {
+                    emailCheck = checkIfEmailInUse(emailInput);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 //checking if the password and confirmation are the same
-                if (!password.equals(passwordConfirmation)){
-                    Toast.makeText(getContext(),"Password does not match password confirmation",Toast.LENGTH_SHORT).show();
-                    passwordEditText.setText("");
-                    passwordConfirmationEditText.setText("");
-
+                if (!passwordInput.equals(passwordConfirmationInput)) {
+                    Toast.makeText(getContext(), "Password does not match password confirmation", Toast.LENGTH_SHORT).show();
+                    newPasswordEditText.setText("");
+                    newPasswordConfirmationEditText.setText("");
+                }else if (!Security.getSecuredPassword(currentpasswordInput, user.getEmail()).equals(currentPasswordUser)) {
+                    Toast.makeText(getContext(), "Given password does not match your current password", Toast.LENGTH_SHORT).show();
+                    currentPasswordConfirmationEditText.setText("");
+                }else if (emailCheck && !user.getEmail().equals(emailInput)) {
+                    Toast.makeText(getContext(), "User with that email already exists", Toast.LENGTH_SHORT).show();
                 }else{
 
                     //setting new user data
-                    user.setLastName(lastName);
-                    user.setFirstName(firstName);
+                    user.setLastName(lastNameInput);
+                    user.setFirstName(firstNameInput);
                     user.setHomeUniversityPos(homeUniversityPos);
                     System.out.println(homeUniversityPos + "             kotihomon paikka ========================================================================================¤");
                     user.setHomeUniversity(homeUniversity_spinner.getSelectedItem().toString());
-                    user.setEmail(email);
+                    user.setEmail(emailInput);
 
                     //check if user wants to change their password
-                    if ((!password.isEmpty()) && (!passwordConfirmation.isEmpty())) {
+                    if ((!passwordInput.isEmpty()) && (!passwordConfirmationInput.isEmpty())) {
 
                         //check if the password  contains all the required characters
-                        checkPassword = Security.passwordChecker(password);
+                        checkPassword = Security.passwordChecker(passwordInput);
 
                         if (checkPassword) {
 
                             //getting secured password
-                            password = Security.getSecuredPassword(password,email);
-                            user.setPassword(password);
+                            passwordInput = Security.getSecuredPassword(passwordInput,emailInput);
+                            user.setPassword(passwordInput);
 
                             //Rewrites the changed user file
                             try {
@@ -139,10 +158,15 @@ public class EditAccountInformationFragment extends Fragment {
 
                         }else {
 
-                            passwordEditText.setText("");
-                            passwordConfirmationEditText.setText("");
+                            newPasswordEditText.setText("");
+                            newPasswordConfirmationEditText.setText("");
                             Toast.makeText(getContext(),"Your password does not contains all the required characters",Toast.LENGTH_SHORT).show();
                         }
+                    //if user does not want to change their password
+                    }else {
+
+                        //switching fragments
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
                     }
                 }
             }
@@ -178,6 +202,7 @@ public class EditAccountInformationFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
     //https://howtodoinjava.com/library/json-simple-read-write-json-examples/
     public void modifyEmailsAndIds() throws JSONException, IOException {
 
@@ -238,5 +263,24 @@ public class EditAccountInformationFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public boolean checkIfEmailInUse(String email) throws IOException, JSONException {
+        FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"));
+        int size = ins.available();
+        final byte[] buffer = new byte[size];
+        ins.read(buffer);
+        ins.close();
+
+        String json = new String(buffer, "UTF-8");
+        JSONArray originalUserData = new JSONArray(json);
+
+        for (int i = 0; i < originalUserData.length(); i++) {
+            JSONObject userObject = originalUserData.getJSONObject(i).getJSONObject("user");
+            if (email.equals(userObject.getString("eMail"))){
+                return true;
+            }
+
+        }
+        return  false;
     }
 }
