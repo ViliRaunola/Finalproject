@@ -10,7 +10,7 @@
         <universityName>Aalto</universityName>
         <id>1111</id>
         <restaurantXml>Aalto_Restaurants.xml</restaurantXml>
-        <restaurantInfo>Aalto is located in Helsinki.</restaurantInfo>
+        <restaurantInfo>Aalto is located in Espoo.</restaurantInfo>
     </university>
     <university>
         <universityName>TUT</universityName>

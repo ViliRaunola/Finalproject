@@ -46,13 +46,12 @@ public class UniversityFragment extends Fragment implements Serializable {
     private Spinner universitySpinner;
     private Button previousDayButton;
     private Button nextDayButton;
-    private ArrayList<String> weekDays = new ArrayList<String>();
+    private Button currentDayButton;
     EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
     //These are for showing the right food item in the day
     private int toDayInt;
     private ArrayList<FoodItem> dailyFoods = new ArrayList<FoodItem>();
-    private int restaurantPostion;
-    private int foodMenuMaxLenght = 1;
+    private int restaurantPosition;
     User user = User.getInstance();
 
     @Nullable
@@ -66,6 +65,8 @@ public class UniversityFragment extends Fragment implements Serializable {
         restaurantSpinner = (Spinner)v.findViewById(R.id.restaurant_spinner);
         previousDayButton = v.findViewById(R.id.previousDayButton);
         nextDayButton = v.findViewById(R.id.nextDayButton);
+        currentDayButton = v.findViewById(R.id.currentDayButton);
+
 
         getToDayInt();
         universities.clear();
@@ -77,15 +78,7 @@ public class UniversityFragment extends Fragment implements Serializable {
         universitySpinner.setSelection(user.getHomeUniversityPos());
         ap.notifyDataSetChanged();
 
-        weekDays.clear();
-        weekDays.add("Monday");
-        weekDays.add("Tuesday");
-        weekDays.add("Wednesday");
-        weekDays.add("Thursday");
-        weekDays.add("Friday");
-        weekDays.add("Saturday");
-        weekDays.add("Sunday");
-        dayTextView.setText(getCurrentDate());
+
 
 
 
@@ -93,9 +86,10 @@ public class UniversityFragment extends Fragment implements Serializable {
         universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                dayTextView.setText(getCurrentDate());
                 getToDayInt();
                 restaurants.clear();
+
 
                 parseRestaurantsMenu(position);
 
@@ -108,12 +102,12 @@ public class UniversityFragment extends Fragment implements Serializable {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                        restaurantPostion = position;
-                        restaurants.get(restaurantPostion).resDailyMenu.clear();
+                        restaurantPosition = position;
+                        restaurants.get(restaurantPosition).resDailyMenu.clear();
                         Restaurant selectedRestaurant = restaurants.get(position);
                         parseFoodItems(selectedRestaurant);
 
-                        checkCurrentDay(toDayInt, restaurantPostion);
+                        checkCurrentDay(toDayInt, restaurantPosition);
 
                         ArrayAdapter<FoodItem> arrayAdapterListView = new ArrayAdapter<FoodItem>(getActivity(), android.R.layout.simple_list_item_1, dailyFoods);
                         foodItemLisView.setAdapter(arrayAdapterListView);
@@ -131,43 +125,39 @@ public class UniversityFragment extends Fragment implements Serializable {
 
 
 
+        //Gets today's restaurant menu and resets date
+        currentDayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dayTextView.setText(getCurrentDate());
+                getToDayInt();
+                checkCurrentDay(toDayInt, restaurantPosition);
+                foodItemLisView.invalidateViews();
+            }
+        });
+
+
+
         //These on click listeners are for displaying right day on the text field.
         previousDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy EEEE");
                 try {
-                    Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
-                    String previousDate = simpleDateFormat.format(changeDate(selectedDate, -1));
-                    dayTextView.setText(previousDate);
-                } catch (ParseException e) {
+                    if(toDayInt <= 1){
+                        Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
+                        String previousDate = simpleDateFormat.format(changeDate(selectedDate, -1));
+                        dayTextView.setText(previousDate);
+                        toDayInt -= 1;
+                        checkCurrentDay(toDayInt, restaurantPosition);
+                        foodItemLisView.invalidateViews();
+                    }
+                } catch (ParseException e){
                     e.printStackTrace();
                 }
-                /*
-                if(toDayInt <= 1){
-                    Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
-                }else {
-                    toDayInt -= 1;
-                    if (dayTextView.getText().equals("Monday")) {
-                        dayTextView.setText(weekDays.get(6));
-                    } else if (dayTextView.getText().equals("Tuesday")) {
-                        dayTextView.setText(weekDays.get(0));
-                    } else if (dayTextView.getText().equals("Wednesday")) {
-                        dayTextView.setText(weekDays.get(1));
-                    } else if (dayTextView.getText().equals("Thursday")) {
-                        dayTextView.setText(weekDays.get(2));
-                    } else if (dayTextView.getText().equals("Friday")) {
-                        dayTextView.setText(weekDays.get(3));
-                    } else if (dayTextView.getText().equals("Saturday")) {
-                        dayTextView.setText(weekDays.get(4));
-                    } else if (dayTextView.getText().equals("Sunday")) {
-                        dayTextView.setText(weekDays.get(5));
-                    }
-                    checkCurrentDay(toDayInt, restaurantPostion);
-                    foodItemLisView.invalidateViews();
-                }
 
-                 */
             }
 
 
@@ -177,40 +167,21 @@ public class UniversityFragment extends Fragment implements Serializable {
             public void onClick(View v) {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy EEEE");
                 try {
-                    Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
-                    String nextDate = simpleDateFormat.format(changeDate(selectedDate, 1));
-                    dayTextView.setText(nextDate);
+
+                    if(toDayInt >= restaurants.get(0).resDailyMenu.get(restaurants.get(0).resDailyMenu.size()-1).getDay()) {
+                        Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
+                        String nextDate = simpleDateFormat.format(changeDate(selectedDate, 1));
+                        dayTextView.setText(nextDate);
+                        toDayInt += 1;
+                        checkCurrentDay(toDayInt, restaurantPosition);
+                        foodItemLisView.invalidateViews();
+                    }
+
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-
-                /*
-                if(toDayInt >= restaurants.get(0).resDailyMenu.get(restaurants.get(0).resDailyMenu.size()-1).getDay()) {
-                    System.out.println("###########################   "+toDayInt +"  ###########################   ");
-                    System.out.println("###########################   "+restaurants.get(0).resDailyMenu.get(restaurants.get(0).resDailyMenu.size()-1).getDay() +"  ###########################   ");
-                    Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
-                }else{
-                    if (dayTextView.getText().equals("Monday")) {
-                        dayTextView.setText(weekDays.get(1));
-                    } else if (dayTextView.getText().equals("Tuesday")) {
-                        dayTextView.setText(weekDays.get(2));
-                    } else if (dayTextView.getText().equals("Wednesday")) {
-                        dayTextView.setText(weekDays.get(3));
-                    } else if (dayTextView.getText().equals("Thursday")) {
-                        dayTextView.setText(weekDays.get(4));
-                    } else if (dayTextView.getText().equals("Friday")) {
-                        dayTextView.setText(weekDays.get(5));
-                    } else if (dayTextView.getText().equals("Saturday")) {
-                        dayTextView.setText(weekDays.get(6));
-                    } else if (dayTextView.getText().equals("Sunday")) {
-                        dayTextView.setText(weekDays.get(0));
-                    }
-                    toDayInt += 1;
-                    checkCurrentDay(toDayInt, restaurantPostion);
-                    foodItemLisView.invalidateViews();
-                }
-
-                 */
             }
         });
 
@@ -226,14 +197,12 @@ public class UniversityFragment extends Fragment implements Serializable {
 
     //Goes through restaurants resDailyMenu list to find correct food responding to the wanted date.
     public void checkCurrentDay(int day, int restaurantPlace){
-        foodMenuMaxLenght = 0;
         dailyFoods.clear();
         for(int i = 0; i < restaurants.get(restaurantPlace).resDailyMenu.size(); i++){
             FoodItem foodItem = restaurants.get(restaurantPlace).resDailyMenu.get(i);
             if(foodItem.getDay() == day){
                 dailyFoods.add(foodItem);
             }else{
-                foodMenuMaxLenght += 1;
                 continue;
             }
         }
@@ -333,7 +302,6 @@ public class UniversityFragment extends Fragment implements Serializable {
                         int foodDayInt = Integer.parseInt(foodDay);
                         FoodItem foodItem = new FoodItem(foodName, foodPrice, foodId, foodDayInt);
                         selectedRestaurant.addFoodItemToDailyMenu(foodItem);
-
                     }
                 }
             } catch (IOException e) {
@@ -360,9 +328,6 @@ public class UniversityFragment extends Fragment implements Serializable {
         cal.add(Calendar.DATE, numberOfDays);
         return cal.getTime();
     }
-
-
-
 
     
     @Override
