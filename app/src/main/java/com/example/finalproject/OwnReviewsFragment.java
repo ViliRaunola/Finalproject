@@ -116,6 +116,9 @@ public class OwnReviewsFragment extends Fragment {
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         selectedRestaurantName = restaurantSpinner.getSelectedItem().toString();
                         parseRestaurantReviews(selectedRestaurantName);
+
+                        ArrayAdapter<FoodReview> arrayAdapterListView = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, reviews);
+                        publishedReviews.setAdapter(arrayAdapterListView);
                     }
 
                     @Override
@@ -243,6 +246,8 @@ public class OwnReviewsFragment extends Fragment {
                     Element element = (Element) node;
                     String foodId = element.getElementsByTagName("foodId").item(0).getTextContent();
 
+                    String foodName = element.getElementsByTagName("foodName").item(0).getTextContent();
+
                     String userId = element.getElementsByTagName("userId").item(0).getTextContent();
 
                     String tasteScore = element.getElementsByTagName("tasteScore").item(0).getTextContent();
@@ -259,7 +264,7 @@ public class OwnReviewsFragment extends Fragment {
                     String reviewDate = element.getElementsByTagName("date").item(0).getTextContent();
                     Date reviewDateDate = simpleDateFormat.parse(reviewDate);
 
-                    FoodReview review = new FoodReview(foodId, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId);
+                    FoodReview review = new FoodReview(foodId, foodName, selectedRestaurantName, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId);
                     reviews.add(review);
                 }
             }
