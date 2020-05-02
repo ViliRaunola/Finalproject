@@ -27,13 +27,13 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.account, container, false);
-
-        editButton = (Button)v.findViewById(R.id.editButton);
-        email = (EditText)v.findViewById(R.id.emailTextField_account_creation);
-        firstName = (EditText)v.findViewById(R.id.firstNameTextField_account_creation);
-        lastName = (EditText)v.findViewById(R.id.lastNameTextField_account_creation);
-        password = (EditText)v.findViewById(R.id.passwordTextField_account_creation);
-        homeUniText = (EditText) v.findViewById(R.id.homeUniTextField_Account);
+        //TODO idt väärin
+        editButton = (Button)v.findViewById(R.id.editButton_account_fragment);
+        email = (EditText)v.findViewById(R.id.emailEditText_account_fragment);
+        firstName = (EditText)v.findViewById(R.id.firstNameEditText_account_fragment);
+        lastName = (EditText)v.findViewById(R.id.lastNameEditText_account_fragment);
+        password = (EditText)v.findViewById(R.id.passwordEditText_account_fragment);
+        homeUniText = (EditText) v.findViewById(R.id.homeUniversityEditText_account_fragment);
 
         firstName.setText(user.getFirstName());
         lastName.setText(user.getLastName());
