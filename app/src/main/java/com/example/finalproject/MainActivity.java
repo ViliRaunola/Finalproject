@@ -9,6 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
@@ -44,6 +47,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_restaurants);
         }
 
+        //https://stackoverflow.com/questions/34973456/how-to-change-text-of-a-textview-in-navigation-drawer-header first answer
+        LinearLayout navView = (LinearLayout) findViewById(R.id.nav_header);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.userHeader);
+        navUsername.setText(User.getInstance().getFirstName() + " " + User.getInstance().getLastName());
     }
 
     @Override

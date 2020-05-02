@@ -235,6 +235,7 @@ public class AccountCreationActivity extends AppCompatActivity {
     //TODO lisää osa parse luokkaan
     public void modifyEmailsAndIds() throws JSONException, IOException {
 
+        //TODO lisää osa parse luokkaan
         //reading original file
         FileInputStream ins = new FileInputStream (new File(this.getFilesDir() +"/userData/EmailsAndIds.json"));
         int size = ins.available();
