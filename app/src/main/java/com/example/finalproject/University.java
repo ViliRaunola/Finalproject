@@ -21,6 +21,7 @@ public class University{
     public String getInfo() {
         return info;
     }
+
     @Override
     public String toString() {
         String temp;

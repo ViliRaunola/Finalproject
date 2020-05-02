@@ -16,8 +16,9 @@ public class FoodReview {
     private String reviewText;
     private String userId;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private Boolean published;
 
-    public FoodReview(String f, String n, String r, Date d, float taScore, float loScore, float teScore, String text, String userId) {
+    public FoodReview(Boolean published, String f, String n, String r, Date d, float taScore, float loScore, float teScore, String text, String userId) {
         foodId = f;
         foodName = n;
         restaurant = r;
@@ -28,6 +29,7 @@ public class FoodReview {
         averageScore = (taScore + loScore + teScore) / 3;
         reviewText = text;
         this.userId = userId;
+        this.published = published;
     }
 
     public float getTasteScore() {

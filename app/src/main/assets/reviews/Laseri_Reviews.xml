@@ -3,32 +3,35 @@
     <review>
         <foodId>97</foodId>
         <foodName>Pitsa</foodName>
-        <userId>4</userId>
+        <userId>5</userId>
         <tasteScore>3</tasteScore>
         <lookScore>2.5</lookScore>
         <textureScore>1</textureScore>
         <reviewText>It was kinda good food maybe.</reviewText>
         <date>2.5.2020</date>
+        <published>true</published>
     </review>
     <review>
         <foodId>96</foodId>
         <foodName>Makaroonilaatikko</foodName>
-        <userId>4</userId>
+        <userId>5</userId>
         <tasteScore>2</tasteScore>
         <lookScore>2</lookScore>
         <textureScore>5</textureScore>
         <reviewText>It was ok</reviewText>
         <date>4.5.2020</date>
+        <published>false</published>
     </review>
     <review>
         <foodId>95</foodId>
         <foodName>Kana salaatti</foodName>
-        <userId>5</userId>
+        <userId>4</userId>
         <tasteScore>5</tasteScore>
         <lookScore>5</lookScore>
         <textureScore>5</textureScore>
         <reviewText>Kill me now, pls</reviewText>
         <date>3.5.2020</date>
+        <published>true</published>
     </review>
 
 

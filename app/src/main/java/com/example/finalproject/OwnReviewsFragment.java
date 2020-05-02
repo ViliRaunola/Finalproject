@@ -47,7 +47,8 @@ public class OwnReviewsFragment extends Fragment {
     private String selectedSortingMethod;
     private ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
     private ArrayList<University> universities;
-    private ArrayList<FoodReview> reviews = new ArrayList<FoodReview>();
+    private ArrayList<FoodReview> reviewsPublished = new ArrayList<FoodReview>();
+    private ArrayList<FoodReview> reviewsNotPublished = new ArrayList<FoodReview>();
     private University selectedUniversity;
     private int restaurantPosition;
     private String selectedRestaurantName;
@@ -117,8 +118,11 @@ public class OwnReviewsFragment extends Fragment {
                         selectedRestaurantName = restaurantSpinner.getSelectedItem().toString();
                         parseRestaurantReviews(selectedRestaurantName);
 
-                        ArrayAdapter<FoodReview> arrayAdapterListView = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, reviews);
+                        ArrayAdapter<FoodReview> arrayAdapterListView = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, reviewsPublished);
                         publishedReviews.setAdapter(arrayAdapterListView);
+
+                        ArrayAdapter<FoodReview> arrayAdapterListView2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, reviewsNotPublished);
+                        notPublishedReviews.setAdapter(arrayAdapterListView2);
                     }
 
                     @Override
@@ -250,6 +254,9 @@ public class OwnReviewsFragment extends Fragment {
 
                     String userId = element.getElementsByTagName("userId").item(0).getTextContent();
 
+                    String published = element.getElementsByTagName("published").item(0).getTextContent();
+                    Boolean publishedBoolean = Boolean.parseBoolean(published);
+
                     String tasteScore = element.getElementsByTagName("tasteScore").item(0).getTextContent();
                     float tasteScoreFloat = Float.parseFloat(tasteScore);
 
@@ -264,8 +271,14 @@ public class OwnReviewsFragment extends Fragment {
                     String reviewDate = element.getElementsByTagName("date").item(0).getTextContent();
                     Date reviewDateDate = simpleDateFormat.parse(reviewDate);
 
-                    FoodReview review = new FoodReview(foodId, foodName, selectedRestaurantName, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId);
-                    reviews.add(review);
+                    FoodReview review = new FoodReview(publishedBoolean,foodId, foodName, selectedRestaurantName, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId);
+                    if(Integer.parseInt(userId) == user.getUserID()){
+                        if(publishedBoolean){
+                            reviewsPublished.add(review);
+                        }else{
+                            reviewsNotPublished.add(review);
+                        }
+                    }
                 }
             }
         }catch (IOException e){
