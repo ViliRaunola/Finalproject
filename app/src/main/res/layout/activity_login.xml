@@ -10,41 +10,39 @@
         android:id="@+id/login"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:onClick="logInPressed"
+        android:layout_marginBottom="20dp"
         android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/createAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.691" />
+        app:layout_constraintTop_toBottomOf="@+id/randomNumberInputEditText"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/createAccount"
         android:layout_width="350dp"
         android:layout_height="48dp"
+        android:layout_marginBottom="40dp"
         android:onClick="createNewAccountPressed"
         android:text="Create a new account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.796" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/passwordTextField_login"
         android:layout_width="350dp"
         android:layout_height="48dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
-        android:inputType="textPassword"
         android:hint="Write your password here..."
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.534" />
+        app:layout_constraintTop_toBottomOf="@+id/emailTextField_login" />
 
     <TextView
         android:id="@+id/password"
@@ -52,9 +50,8 @@
         android:layout_height="wrap_content"
         android:text="Password"
         app:layout_constraintBottom_toTopOf="@+id/passwordTextField_login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/passwordTextField_login"
+        app:layout_constraintTop_toTopOf="@+id/passwordTextField_login" />
 
     <TextView
         android:id="@+id/emailText"
@@ -62,22 +59,21 @@
         android:layout_height="wrap_content"
         android:text="Email"
         app:layout_constraintBottom_toTopOf="@+id/emailTextField_login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/emailTextField_login"
+        app:layout_constraintTop_toTopOf="@+id/emailTextField_login" />
 
     <EditText
         android:id="@+id/emailTextField_login"
         android:layout_width="350dp"
         android:layout_height="48dp"
+        android:layout_marginTop="168dp"
         android:ems="10"
         android:hint="Write your email here..."
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.382" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,6 @@
 package com.example.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +17,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,7 +26,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -149,6 +145,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         }
 
     }
+    //TODO lisää parse luokkaan
     //parses "university.xml" to make a list from university names
     public void parseUniversity() {
 
@@ -174,6 +171,7 @@ public class AccountCreationActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    //TODO lisää parse luokkaan
     public byte[] readEmailsAndIds() throws IOException {
         FileInputStream ins = new FileInputStream (new File(this.getFilesDir() +"/userData/EmailsAndIds.json"));
         int size = ins.available();
@@ -182,7 +180,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         ins.close();
         return buffer;
     }
-
+    //TODO lisää parse luokkaan
     public boolean checkIfEmailInUse(String email, byte[] buffer) throws IOException, JSONException {
         String json = new String(buffer, "UTF-8");
         JSONArray originalUserData = new JSONArray(json);
@@ -210,6 +208,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         userId += 1;
         return  userId;
     }
+    //TODO lisää parse luokkaan
     public void writeUserJson() throws JSONException {
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
@@ -233,6 +232,7 @@ public class AccountCreationActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    //TODO lisää osa parse luokkaan
     public void modifyEmailsAndIds() throws JSONException, IOException {
 
         //reading original file

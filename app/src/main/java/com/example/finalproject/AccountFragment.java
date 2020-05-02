@@ -27,7 +27,7 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.account, container, false);
-        //TODO idt väärin
+
         editButton = (Button)v.findViewById(R.id.editButton_account_fragment);
         email = (EditText)v.findViewById(R.id.emailEditText_account_fragment);
         firstName = (EditText)v.findViewById(R.id.firstNameEditText_account_fragment);

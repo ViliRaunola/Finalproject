@@ -10,11 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,15 +21,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -185,7 +180,7 @@ public class EditAccountInformationFragment extends Fragment {
 
     //Vili!Raunola12345
 
-
+    //TODO lisää parse luokkaan
     //parses "university.xml" to make a list from university names
     public void parseUniversity() {
 
@@ -211,7 +206,7 @@ public class EditAccountInformationFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
+    //TODO lisää parse luokkaan
     //https://howtodoinjava.com/library/json-simple-read-write-json-examples/
     public void modifyEmailsAndIds() throws JSONException, IOException {
 
@@ -245,7 +240,7 @@ public class EditAccountInformationFragment extends Fragment {
         fileWriter.write(newUserData.toString());
         fileWriter.close();
     }
-
+    //TODO lisää parse luokkaan
     //https://www.tutorialspoint.com/how-to-write-create-a-json-file-using-java
     public void writeUserJson() throws JSONException {
         JSONArray jsonArray = new JSONArray();
@@ -273,6 +268,7 @@ public class EditAccountInformationFragment extends Fragment {
             e.printStackTrace();
         }
     }
+    //TODO lisää parse luokkaan
     public boolean checkIfEmailInUse(String email) throws IOException, JSONException {
         FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"));
         int size = ins.available();

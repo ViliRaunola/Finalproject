@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,40 +39,42 @@ public class LoginActivity extends AppCompatActivity {
     private int universitiesPositionCompare;
     private String homeUniversity;
     private int check = 0;
+
     // LoginPasswordTestiHommma Vili!Raunola12345
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         context = this;
-
-
         login = (Button) findViewById(R.id.login);
         createAccount = (Button) findViewById(R.id.createAccount);
         email = (EditText) findViewById(R.id.emailTextField_login);
         password = (EditText) findViewById(R.id.passwordTextField_login);
+
+
         login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                em = email.getText().toString();
-                pw = password.getText().toString();
-                pw = Security.getSecuredPassword(pw, em);
-                id = jsonParseEmailsAndIds(em);
-                if (!id.isEmpty()) {
-                    credentialsCheck(id, pw);
 
-                    if (check == 0){
+                    em = email.getText().toString();
+                    pw = password.getText().toString();
+                    pw = Security.getSecuredPassword(pw, em);
+                    id = jsonParseEmailsAndIds(em);
+                    if (!id.isEmpty()) {
+                        credentialsCheck(id, pw);
+
+                        if (check == 0) {
+                            password.setText("");
+                        }
+                    } else {
                         password.setText("");
+                        Toast.makeText(getBaseContext(), "We didn't find your account. Please create a new one.", Toast.LENGTH_SHORT).show();
                     }
-                }else {
-                    password.setText("");
-                    Toast.makeText(getBaseContext(),"We didn't find your account. Please create a new one.",Toast.LENGTH_SHORT).show();
+
                 }
 
-            }
         });
     }
 
@@ -86,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         this.moveTaskToBack(true);
     }
 
+    //TODO lisää parse luokkaan
     //https://www.youtube.com/watch?v=y2xtLqP8dSQ,https://www.youtube.com/watch?v=h71Ia9iFWfI
     public void credentialsCheck(String id, String password) {
         //TODO tiedoston avaus, luku ja salasanan ja sähköpostin tarkistus,jos väärin alla oleva viesti
@@ -94,11 +98,11 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
 
         } else {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
+            startActivity(new Intent(LoginActivity.this, Authentication.class));
+
         }
     }
-
+    //TODO lisää parse luokkaan
     //Reads Users-json file and checks user's input (email and password) and compares them to the file parameters
     //If they both match a user class is created. 
     private int jsonParse(String id, String userPassword) {
@@ -142,6 +146,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         return 0;
     }
+    //TODO lisää parse luokkaan
     private String jsonParseEmailsAndIds(String userEMail) {
         String id = "";
         String json;
@@ -177,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         return id;
     }
-
+    //TODO lisää parse luokkaan
     public void parseUniversity(String hU){
         try (InputStream ins = context.getAssets().open("university.xml")){
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
