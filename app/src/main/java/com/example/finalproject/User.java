@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class User {
 
-    private boolean isAdminUser = false;
+    private boolean isAdminUser;
     private String password;
     private int userId;
     private String firstName;
@@ -43,7 +43,10 @@ public class User {
     public void setHomeUniversityPos(int hU) {
         homeUniversityPos = hU;
     }
-    //Moi vili
+    public void setAdminUser(boolean isAdminUser){
+        this.isAdminUser = isAdminUser;
+    }
+
     public boolean getIsAdminUser() {
         return isAdminUser;
     }

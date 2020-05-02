@@ -256,6 +256,7 @@ public class EditAccountInformationFragment extends Fragment {
         jsonObject.put("lastName", user.getLastName());
         jsonObject.put("eMail", user.getEmail());
         jsonObject.put("homeUniversity", user.getHomeUniversity());
+        jsonObject.put("adminStatus", user.getIsAdminUser());
         jsonArray.put(jsonObject);
         try{
 

@@ -228,8 +228,6 @@ public class OwnReviewsFragment extends Fragment {
                 DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 Document xmlDoc = documentBuilder.parse(ins);
                 NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("restaurant");
-                System.out.println(nodeList.getLength());
-
                 for (int i = 0; i < nodeList.getLength(); i++) {
                     Node node = nodeList.item(i);
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -241,7 +239,6 @@ public class OwnReviewsFragment extends Fragment {
                         restaurants.add(restaurant);
                     }
                 }
-                System.out.println("###########" + universities.size() + "############");
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ParserConfigurationException e) {

@@ -96,19 +96,18 @@ public class LoginActivity extends AppCompatActivity {
         check = jsonParse(id, password);
         if (check == 0) {
             Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
-
         } else {
-            startActivity(new Intent(LoginActivity.this, Authentication.class));
-
+            if(User.getInstance().getIsAdminUser()){
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }else{
+                startActivity(new Intent(LoginActivity.this, Authentication.class));
+            }
         }
     }
     //TODO lisää parse luokkaan
     //Reads Users-json file and checks user's input (email and password) and compares them to the file parameters
     //If they both match a user class is created. 
     private int jsonParse(String id, String userPassword) {
-
-
-
         String json;
         try (FileInputStream ins = new FileInputStream(context.getFilesDir() + "/userData/User" + id + ".json")){
 
@@ -123,10 +122,10 @@ public class LoginActivity extends AppCompatActivity {
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject object = jsonArray.getJSONObject(i);
-                System.out.println(object.getString("eMail"));
                 if (object.getString("userId").equals(id) && object.getString("password").equals(userPassword)) {
 
                     User user = User.getInstance();
+                    user.setAdminUser(object.getBoolean("adminStatus"));
                     user.setUserID(Integer.parseInt(id));
                     user.setEmail(object.getString("eMail"));
                     user.setPassword(userPassword);
@@ -151,25 +150,15 @@ public class LoginActivity extends AppCompatActivity {
         String id = "";
         String json;
 
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + context.getFilesDir()+ "##########################################");
-          // 2nd line
-
         try (FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"))) {
             int size = ins.available();
             byte[] buffer = new byte[size];
             ins.read(buffer);
             ins.close();
-
             json = new String(buffer, "UTF-8");
             JSONArray jsonArray = new JSONArray(json);
-
             for (int i = 0; i < jsonArray.length(); i++) {
-
                 JSONObject object = jsonArray.getJSONObject(i).getJSONObject("user");
-                System.out.println("############################################");
-                System.out.println(object);
-                System.out.println(object.getString("userId"));
-
                 if (object.getString("eMail").equals(userEMail)){
                     id = object.getString("userId");
                     return id;
@@ -194,11 +183,8 @@ public class LoginActivity extends AppCompatActivity {
                 if(node.getNodeType() == Node.ELEMENT_NODE){
                     Element element = (Element) node;
                     String uniName = element.getElementsByTagName("universityName").item(0).getTextContent();
-                    System.out.println("uniname" + uniName + "      ##################################################");
-                    System.out.println("homeuni" + hU + "      ##################################################");
                     if (uniName.equals(hU)) {
                         universitiesPositionCompare = i;
-                        System.out.println(universitiesPositionCompare + "      ##################################################");
                     }
 
                 }

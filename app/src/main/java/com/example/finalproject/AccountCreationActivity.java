@@ -219,6 +219,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         jsonObject.put("lastName", user.getLastName());
         jsonObject.put("eMail", user.getEmail());
         jsonObject.put("homeUniversity", user.getHomeUniversity());
+        jsonObject.put("adminStatus", false);
         jsonArray.put(jsonObject);
 
         try{

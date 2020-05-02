@@ -5,6 +5,7 @@
     "firstName": "Kayttaja",
     "lastName": "Keittäjä",
     "eMail": "we",
-    "homeUniversity": "Aalto"
+    "homeUniversity": "Aalto",
+    "adminStatus": false
   }
 ]
