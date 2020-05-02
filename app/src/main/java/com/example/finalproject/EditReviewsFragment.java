@@ -37,12 +37,18 @@ public class EditReviewsFragment extends Fragment {
         saveReviewButton = (Button)v.findViewById(R.id.saveButtonEditReview);
         saveAndPublishButton = (Button)v.findViewById(R.id.saveAndPublishEditReview);
         removeButton = (Button)v.findViewById(R.id.removeButtonEditReview);
+        writtenReview = (EditText) v.findViewById(R.id.writtenReview);
+
 
         informationBundle = getArguments();
         FoodReview selectedOwnReview = (FoodReview) informationBundle.getSerializable("reviewKey");
 
 
         tasteRatingBar.setRating(selectedOwnReview.getTasteScore());
+        textureRatingBar.setRating(selectedOwnReview.getTextureScore());
+        appearanceRatingBar.setRating(selectedOwnReview.getLookScore());
+        writtenReview.setText(selectedOwnReview.getReviewText());
+        foodInfoWindow.setText(selectedOwnReview.getFoodName());
 
 
 
