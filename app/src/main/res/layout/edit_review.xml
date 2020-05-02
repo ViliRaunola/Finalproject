@@ -18,11 +18,11 @@
 
     <EditText
         android:id="@+id/writtenReview"
-        android:layout_width="350dp"
-        android:layout_height="180dp"
+        android:layout_width="337dp"
+        android:layout_height="223dp"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:gravity="start|top"
+        android:gravity="start|bottom"
         android:hint="Give a written review"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"

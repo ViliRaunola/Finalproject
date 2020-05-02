@@ -7,7 +7,7 @@
         <tasteScore>3</tasteScore>
         <lookScore>2.5</lookScore>
         <textureScore>1</textureScore>
-        <reviewText>It was kinda good food maybe.</reviewText>
+        <reviewText>It was kinda good food maybe.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</reviewText>
         <date>2.5.2020</date>
         <published>true</published>
     </review>
