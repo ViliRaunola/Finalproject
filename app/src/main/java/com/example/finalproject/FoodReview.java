@@ -1,9 +1,10 @@
 package com.example.finalproject;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class FoodReview {
+public class FoodReview implements Serializable {
 
     private String foodId;
     private String foodName;

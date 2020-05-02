@@ -24,6 +24,8 @@ public class EditReviewsFragment extends Fragment {
     private Button saveAndPublishButton;
     private Button removeButton;
     private Bundle informationBundle;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,6 +37,14 @@ public class EditReviewsFragment extends Fragment {
         saveReviewButton = (Button)v.findViewById(R.id.saveButtonEditReview);
         saveAndPublishButton = (Button)v.findViewById(R.id.saveAndPublishEditReview);
         removeButton = (Button)v.findViewById(R.id.removeButtonEditReview);
+
+        informationBundle = getArguments();
+        FoodReview selectedOwnReview = (FoodReview) informationBundle.getSerializable("reviewKey");
+
+
+        tasteRatingBar.setRating(selectedOwnReview.getTasteScore());
+
+
 
         saveReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override

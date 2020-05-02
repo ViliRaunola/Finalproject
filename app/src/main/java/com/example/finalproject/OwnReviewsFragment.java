@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -42,8 +44,8 @@ public class OwnReviewsFragment extends Fragment {
     private Spinner restaurantSpinner;
     private List<String> sortingList = new ArrayList<String>();
     private List<String> reviewsList = new ArrayList<String>();
-    private ListView notPublishedReviews;
-    private ListView publishedReviews;
+    private ListView notPublishedReviewsListView ;
+    private ListView publishedReviewsListView ;
     private String selectedSortingMethod;
     private ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
     private ArrayList<University> universities;
@@ -65,8 +67,8 @@ public class OwnReviewsFragment extends Fragment {
 
         context = this.getContext();
 
-        publishedReviews = (ListView) v.findViewById(R.id.listViewPublishedReviews);
-        notPublishedReviews = (ListView) v.findViewById(R.id.listViewNotPublishedReviews);
+        publishedReviewsListView = (ListView) v.findViewById(R.id.listViewPublishedReviews);
+        notPublishedReviewsListView = (ListView) v.findViewById(R.id.listViewNotPublishedReviews);
         sortingSpinner = (Spinner) v.findViewById(R.id.ownReviews_sorting_spinner);
         universitySpinner = (Spinner)v.findViewById(R.id.universitySpinner_ownReviews);
         restaurantSpinner = (Spinner)v.findViewById(R.id.restaurantSpinner_ownReviews);
@@ -82,8 +84,8 @@ public class OwnReviewsFragment extends Fragment {
         sortingSpinner.setAdapter(null);
         sortingList.clear();
         reviewsList.clear();
-        publishedReviews.setAdapter(null);
-        notPublishedReviews.setAdapter(null);
+        publishedReviewsListView.setAdapter(null);
+        notPublishedReviewsListView.setAdapter(null);
         //sorting options
 
         sortingList.add("Date");
@@ -119,10 +121,10 @@ public class OwnReviewsFragment extends Fragment {
                         parseRestaurantReviews(selectedRestaurantName);
 
                         ArrayAdapter<FoodReview> arrayAdapterListView = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, reviewsPublished);
-                        publishedReviews.setAdapter(arrayAdapterListView);
+                        publishedReviewsListView.setAdapter(arrayAdapterListView);
 
                         ArrayAdapter<FoodReview> arrayAdapterListView2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, reviewsNotPublished);
-                        notPublishedReviews.setAdapter(arrayAdapterListView2);
+                        notPublishedReviewsListView.setAdapter(arrayAdapterListView2);
                     }
 
                     @Override
@@ -149,8 +151,8 @@ public class OwnReviewsFragment extends Fragment {
 
         //arrayadapter for publishedreviews listview
         ArrayAdapter<String> ap2 = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, reviewsList);
-        publishedReviews.setAdapter(ap2);
-        notPublishedReviews.setAdapter(ap2);
+        publishedReviewsListView.setAdapter(ap2);
+        notPublishedReviewsListView.setAdapter(ap2);
 
 
 
@@ -180,15 +182,29 @@ public class OwnReviewsFragment extends Fragment {
             }
         });
 
-
-        publishedReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    //https://stackoverflow.com/questions/42266436/passing-objects-between-fragments
+        publishedReviewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).addToBackStack("edit_own_reviews_fragment").commit();
+
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
+
+                Bundle bundle = new Bundle();
+                FoodReview selectedReview = reviewsPublished.get(i);
+                bundle.putSerializable("reviewKey", selectedReview);
+                editReviewsFragment.setArguments(bundle);
+                ft.replace(R.id.fragment_container, editReviewsFragment);
+                ft.addToBackStack("edit_own_reviews_fragment");
+                ft.commit();
+
+                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).addToBackStack("edit_own_reviews_fragment").commit();
 
             }
         });
-        notPublishedReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        notPublishedReviewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).addToBackStack("edit_own_reviews_fragment").commit();
