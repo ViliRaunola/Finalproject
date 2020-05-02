@@ -63,13 +63,14 @@
 
     <TextView
         android:id="@+id/dayTextView"
-        android:layout_width="100dp"
-        android:layout_height="28dp"
-        android:layout_marginBottom="18dp"
+        android:layout_width="104dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="8dp"
         android:text="Current Day"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
         app:layout_constraintEnd_toStartOf="@+id/nextDayButton"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/previousDayButton" />
 
     <Button

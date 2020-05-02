@@ -24,10 +24,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -133,7 +135,15 @@ public class UniversityFragment extends Fragment implements Serializable {
         previousDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy EEEE");
+                try {
+                    Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
+                    String previousDate = simpleDateFormat.format(changeDate(selectedDate, -1));
+                    dayTextView.setText(previousDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                /*
                 if(toDayInt <= 1){
                     Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
                 }else {
@@ -156,11 +166,25 @@ public class UniversityFragment extends Fragment implements Serializable {
                     checkCurrentDay(toDayInt, restaurantPostion);
                     foodItemLisView.invalidateViews();
                 }
+
+                 */
             }
+
+
         });
         nextDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy EEEE");
+                try {
+                    Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
+                    String nextDate = simpleDateFormat.format(changeDate(selectedDate, 1));
+                    dayTextView.setText(nextDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                /*
                 if(toDayInt >= restaurants.get(0).resDailyMenu.get(restaurants.get(0).resDailyMenu.size()-1).getDay()) {
                     System.out.println("###########################   "+toDayInt +"  ###########################   ");
                     System.out.println("###########################   "+restaurants.get(0).resDailyMenu.get(restaurants.get(0).resDailyMenu.size()-1).getDay() +"  ###########################   ");
@@ -185,6 +209,8 @@ public class UniversityFragment extends Fragment implements Serializable {
                     checkCurrentDay(toDayInt, restaurantPostion);
                     foodItemLisView.invalidateViews();
                 }
+
+                 */
             }
         });
 
@@ -320,12 +346,22 @@ public class UniversityFragment extends Fragment implements Serializable {
         }
     }
 
-
+    // returns current date
     public String getCurrentDate() {
-        DateFormat dateFormat = new SimpleDateFormat("EEEE");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy EEEE");
         Date currentDate = new Date();
-        return dateFormat.format(currentDate);
+        return simpleDateFormat.format(currentDate);
     }
+
+    //returns next or previous date (+1 or -1)
+    public static Date changeDate(Date date, int numberOfDays) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, numberOfDays);
+        return cal.getTime();
+    }
+
+
 
 
     @Override
