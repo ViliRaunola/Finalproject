@@ -38,6 +38,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class EditAccountInformationFragment extends Fragment {
     private Button saveChanges;
+    private Button cancelButton;
     private ArrayList<String> universities = new ArrayList<String>();
     private Spinner homeUniversity_spinner;
     private EditText emailEditText;
@@ -67,6 +68,7 @@ public class EditAccountInformationFragment extends Fragment {
         context = this.getContext();
 
         saveChanges = (Button)v.findViewById(R.id.saveChangesButton_editAccountInformationFragment);
+        cancelButton = (Button)v.findViewById(R.id.account_information_edit_cancel_button);
         homeUniversity_spinner = (Spinner)v.findViewById(R.id.homeUniversitySpinner_editAccountInformationFragment);
         emailEditText = (EditText)v.findViewById(R.id.emailEditText_editAccountInformationFragment);
         firstNameEditText = (EditText)v.findViewById(R.id.firstNameEditText_editAccountInformationFragment);
@@ -169,6 +171,13 @@ public class EditAccountInformationFragment extends Fragment {
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
                     }
                 }
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
             }
         });
         return v;
