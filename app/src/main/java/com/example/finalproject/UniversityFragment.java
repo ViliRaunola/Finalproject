@@ -185,9 +185,11 @@ public class UniversityFragment extends Fragment implements Serializable {
             }
         });
 
+        //TODO Add here a new fragment that displays all reviews for selected food item.
         foodItemLisView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).commit();
             }
         });
