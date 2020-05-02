@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<reviews>
+    <review>
+        <foodId>1</foodId>
+        <userId>4</userId>
+        <tasteScore>3</tasteScore>
+        <lookScore>2.5</lookScore>
+        <textureScore>1</textureScore>
+        <reviewText>It was kinda good food maybe.</reviewText>
+        <date>2.5.2020</date>
+    </review>
+    <review>
+        <foodId>2</foodId>
+        <userId>4</userId>
+        <tasteScore>2</tasteScore>
+        <lookScore>2</lookScore>
+        <textureScore>5</textureScore>
+        <reviewText>It was ok</reviewText>
+        <date>4.5.2020</date>
+    </review>
+    <review>
+        <foodId>3</foodId>
+        <userId>5</userId>
+        <tasteScore>5</tasteScore>
+        <lookScore>5</lookScore>
+        <textureScore>5</textureScore>
+        <reviewText>Kill me now, pls</reviewText>
+        <date>3.5.2020</date>
+    </review>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</reviews>

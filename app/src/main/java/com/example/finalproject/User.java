@@ -77,8 +77,6 @@ public class User {
 
     public void PublishReview(FoodReview r) {
         if (r.getFood() != null
-        && r.getRestaurant() != null
-        && r.getUniversity() != null
         && r.getDate() != null
         && r.getTasteScore() != -1
         && r.getLookScore() != -1

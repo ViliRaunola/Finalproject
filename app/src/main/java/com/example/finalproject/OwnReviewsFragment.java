@@ -1,6 +1,7 @@
 package com.example.finalproject;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +20,15 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -40,15 +47,22 @@ public class OwnReviewsFragment extends Fragment {
     private String selectedSortingMethod;
     private ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
     private ArrayList<University> universities;
+    private ArrayList<FoodReview> reviews = new ArrayList<FoodReview>();
     private University selectedUniversity;
     private int restaurantPosition;
+    private String selectedRestaurantName;
     View v;
     EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
+    User user = User.getInstance();
+    private Context context;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.activity_own_reviews, container, false);
+
+        context = this.getContext();
 
         publishedReviews = (ListView) v.findViewById(R.id.listViewPublishedReviews);
         notPublishedReviews = (ListView) v.findViewById(R.id.listViewNotPublishedReviews);
@@ -84,6 +98,7 @@ public class OwnReviewsFragment extends Fragment {
         ArrayAdapter<University> ap4 = new ArrayAdapter<University>(getContext(), android.R.layout.simple_list_item_1, universities);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         universitySpinner.setAdapter(ap4);
+        universitySpinner.setSelection(user.getHomeUniversityPos());
 
         universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -95,6 +110,21 @@ public class OwnReviewsFragment extends Fragment {
                 ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, restaurants);
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 restaurantSpinner.setAdapter(arrayAdapter);
+
+                restaurantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        selectedRestaurantName = restaurantSpinner.getSelectedItem().toString();
+                        parseRestaurantReviews(selectedRestaurantName);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+
             }
 
             @Override
@@ -160,6 +190,14 @@ public class OwnReviewsFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        universitySpinner.setSelection(user.getHomeUniversityPos());
+    }
+
+
+
     public void parseRestaurantsMenu(int pos) {
         University selectedUniversity = universities.get(pos);
         for (String s : selectedUniversity.restaurantsXML) {
@@ -190,5 +228,52 @@ public class OwnReviewsFragment extends Fragment {
             }
         }
     }
+
+    public void parseRestaurantReviews(String selectedRestaurantName){
+
+        try (FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/reviews/" + selectedRestaurantName + "_Reviews.xml"))){
+            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document xmlDoc = documentBuilder.parse(ins);
+            NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("review");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+            for(int i = 0; i < nodeList.getLength(); i++){
+                Node node = nodeList.item(i);
+                if(node.getNodeType() == Node.ELEMENT_NODE){
+                    Element element = (Element) node;
+                    String foodId = element.getElementsByTagName("foodId").item(0).getTextContent();
+
+                    String userId = element.getElementsByTagName("userId").item(0).getTextContent();
+
+                    String tasteScore = element.getElementsByTagName("tasteScore").item(0).getTextContent();
+                    float tasteScoreFloat = Float.parseFloat(tasteScore);
+
+                    String lookScore = element.getElementsByTagName("lookScore").item(0).getTextContent();
+                    float lookScoreFloat = Float.parseFloat(lookScore);
+
+                    String textureScore = element.getElementsByTagName("textureScore").item(0).getTextContent();
+                    float textureScoreFloat = Float.parseFloat(textureScore);
+
+                    String reviewText = element.getElementsByTagName("reviewText").item(0).getTextContent();
+
+                    String reviewDate = element.getElementsByTagName("date").item(0).getTextContent();
+                    Date reviewDateDate = simpleDateFormat.parse(reviewDate);
+
+                    FoodReview review = new FoodReview(foodId, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId);
+                    reviews.add(review);
+                }
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch(ParserConfigurationException e){
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

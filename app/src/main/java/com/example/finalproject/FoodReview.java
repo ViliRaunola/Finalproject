@@ -1,29 +1,28 @@
 package com.example.finalproject;
 
 import java.text.DateFormat;
+import java.util.Date;
 
 public class FoodReview {
 
-    private String food;
-    private String restaurant;
-    private String university;
-    private DateFormat date; //TODO käytetäänkö me tätä?
+    private String foodId;
+    private Date date; //TODO käytetäänkö me tätä?
     private float tasteScore;
     private float lookScore;
     private float textureScore;
     private float averageScore;
     private String reviewText;
+    private String userId;
 
-    public FoodReview(String f, String r, String u, DateFormat d, float taScore, float loScore, float teScore, String text) {
-        food = f;
-        restaurant = r;
-        university = u;
+    public FoodReview(String f, Date d, float taScore, float loScore, float teScore, String text, String userId) {
+        foodId = f;
         date = d;
         tasteScore = taScore;
         lookScore = loScore;
         textureScore = teScore;
         averageScore = (taScore + loScore + teScore) / 3;
         reviewText = text;
+        this.userId = userId;
     }
 
     public float getTasteScore() {
@@ -42,15 +41,9 @@ public class FoodReview {
         return reviewText;
     }
     public String getFood() {
-        return food;
+        return foodId;
     }
-    public String getRestaurant() {
-        return restaurant;
-    }
-    public String getUniversity() {
-        return university;
-    }
-    public DateFormat getDate() {
+    public Date getDate() {
         return date;
     }
 }
