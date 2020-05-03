@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     UniversityFragment universityFragment = new UniversityFragment();
     OwnReviewsFragment ownReviewsFragment = new OwnReviewsFragment();
     AccountFragment accountFragment = new AccountFragment();
-
+    SettingsFragment settingsFragment = new SettingsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +85,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).addToBackStack("account_fragment").commit();
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.nav_settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, settingsFragment).addToBackStack("settings_fragment").commit();
+                break;
             case R.id.nav_logout:
-
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 finish();
                 Toast.makeText(this, "You Have Logged Out", Toast.LENGTH_SHORT).show();
