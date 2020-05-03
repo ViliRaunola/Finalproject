@@ -48,6 +48,7 @@ public class UniversityFragment extends Fragment implements Serializable {
     private Button nextDayButton;
     private Button currentDayButton;
     EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
+    FoodReviewsFragment foodReviewsFragment = new FoodReviewsFragment();
     //These are for showing the right food item in the day
     private int toDayInt;
     private ArrayList<FoodItem> dailyFoods = new ArrayList<FoodItem>();
@@ -74,7 +75,6 @@ public class UniversityFragment extends Fragment implements Serializable {
         ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, universities);
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         universitySpinner.setAdapter(ap);
-        System.out.println(savedInstanceState);
         universitySpinner.setSelection(user.getHomeUniversityPos());
         ap.notifyDataSetChanged();
 
@@ -190,7 +190,7 @@ public class UniversityFragment extends Fragment implements Serializable {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,foodReviewsFragment).commit();
             }
         });
         return v;

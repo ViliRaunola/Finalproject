@@ -50,7 +50,7 @@ public class EditReviewsFragment extends Fragment {
         saveAndPublishButton = (Button)v.findViewById(R.id.saveAndPublishEditReview);
         removeButton = (Button)v.findViewById(R.id.removeButtonEditReview);
         writtenReview = (EditText) v.findViewById(R.id.writtenReview);
-        context = this.context;
+
 
         try{
             informationBundle = getArguments();

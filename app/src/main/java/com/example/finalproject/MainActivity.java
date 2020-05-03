@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         }else if(getSupportFragmentManager().getBackStackEntryCount()>0){
             getSupportFragmentManager().popBackStack();
+        /*}else if (getBaseContext()) {*/
+
         }else{
             this.moveTaskToBack(true);
         }
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).addToBackStack("restaurant_fragment").commit();
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 toolbar.setTitle("Restaurant Menus");
+
                 break;
             case R.id.nav_reviews:
                 sendUniversityFragmentRestaurantsOwnReviews();
@@ -96,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).addToBackStack("reviews_fragment").commit();
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 toolbar.setTitle("Own Reviews");
+                System.out.println(getBaseContext());
                 break;
             case R.id.nav_account:
                 sendUniversityFragmentRestaurantsAccount();
