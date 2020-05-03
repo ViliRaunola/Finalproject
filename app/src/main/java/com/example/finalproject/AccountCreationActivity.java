@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -55,6 +58,8 @@ public class AccountCreationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_creation);
+        Language.getInstance().loadLocale(this);
+        System.out.println(Locale.getDefault().getLanguage());
 
         confirmButton = (Button)findViewById(R.id.confirmButton_account_creation);
         cancelButton = (Button)findViewById(R.id.cancelButton_account_creation);
@@ -65,6 +70,8 @@ public class AccountCreationActivity extends AppCompatActivity {
         lastName = (EditText)findViewById(R.id.lastNameTextField_account_creation);
         home_uni_spinner = (Spinner)findViewById(R.id.homeUniversity_spinner_account_creation);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Account creation");
         //create spinner from universityList
         parseUniversity();
         ArrayAdapter<String> ap = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, universityList);
@@ -74,7 +81,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AccountCreationActivity.this, LoginActivity.class));
+                onBackPressed();
                 finish();
             }
         });

@@ -63,44 +63,41 @@
 
     <TextView
         android:id="@+id/dayTextView"
-        android:layout_width="104dp"
-        android:layout_height="39dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Current Day"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/listViewFood"
+        app:layout_constraintBottom_toBottomOf="@+id/previousDayButton"
         app:layout_constraintEnd_toStartOf="@+id/nextDayButton"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/previousDayButton" />
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toEndOf="@+id/previousDayButton"
+        app:layout_constraintTop_toTopOf="@+id/previousDayButton" />
 
     <Button
         android:id="@+id/nextDayButton"
         android:layout_width="125dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="28dp"
         android:layout_marginBottom="8dp"
         android:text="Next Day"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/listViewFood" />
 
     <Button
         android:id="@+id/previousDayButton"
         android:layout_width="125dp"
         android:layout_height="48dp"
-        android:layout_marginStart="28dp"
         android:layout_marginBottom="8dp"
         android:text="Previous Day"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/listViewFood" />
 
     <Button
         android:id="@+id/currentDayButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Current Day"
-        app:layout_constraintBottom_toTopOf="@+id/dayTextView"
+        app:layout_constraintBottom_toTopOf="@+id/nextDayButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_spinner" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

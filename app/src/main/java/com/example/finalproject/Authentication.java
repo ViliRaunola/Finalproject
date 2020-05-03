@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
@@ -11,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 public class Authentication extends AppCompatActivity {
     private EditText randomNumberEditText;
@@ -25,6 +28,12 @@ public class Authentication extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
         context = this;
+        Language.getInstance().loadLocale(this);
+        System.out.println(Locale.getDefault().getLanguage());
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Authentication");
+
         randomNumberEditText = (EditText) findViewById(R.id.randomNumberInputEditText);
         randomNumberTextView = (TextView) findViewById(R.id.randomNumberTextView);
         cancelButton = (Button) findViewById(R.id.cancelButton_authentication);

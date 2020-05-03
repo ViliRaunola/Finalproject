@@ -1,13 +1,17 @@
 package com.example.finalproject;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONArray;
@@ -22,6 +26,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -32,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button createAccount;
     private EditText password;
     private EditText email;
+    private Spinner languageSpinner;
     private String pw;
     private String em;
     private String id;
@@ -39,19 +48,58 @@ public class LoginActivity extends AppCompatActivity {
     private int universitiesPositionCompare;
     private String homeUniversity;
     private int check = 0;
+    private List<String> languageList = new ArrayList<String>();
 
     // LoginPasswordTestiHommma Vili!Raunola12345
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        Language.getInstance().loadLocale(this);
+        System.out.println(Locale.getDefault().getLanguage());
         context = this;
+        Language.getInstance().loadLocale(context);
         login = (Button) findViewById(R.id.login);
         createAccount = (Button) findViewById(R.id.createAccount);
         email = (EditText) findViewById(R.id.emailTextField_login);
         password = (EditText) findViewById(R.id.passwordTextField_login);
 
+        languageSpinner = (Spinner)findViewById(R.id.languageSpinner_login);
+        languageList.add("Change Language");
+        parseLanguage();
+        final ArrayAdapter<String> languageSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, languageList);
+        languageSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        languageSpinner.setAdapter(languageSpinnerAdapter);
+        languageSpinner.setSelection(0);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Login");
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                switch (position){
+                    case 0:
+                        break;
+                    case 1:
+                        Language.getInstance().setLocale("en", context);
+                        Language.getInstance().setLanguage("en");
+                        languageSpinner.setSelection(0);
+                        recreate();
+                        break;
+                    case 2:
+                        Language.getInstance().setLocale("fi", context);
+                        Language.getInstance().setLanguage("fi");
+                        languageSpinner.setSelection(0);
+                        recreate();
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
@@ -190,6 +238,30 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         }catch (IOException e){
+            e.printStackTrace();
+        }catch(ParserConfigurationException e){
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+    }
+    public void parseLanguage() {
+
+        try (InputStream ins = this.getAssets().open("language.xml")){
+            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document xmlDoc = documentBuilder.parse(ins);
+            NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("language");
+
+            for(int i = 0; i < nodeList.getLength(); i++){
+                Node node = nodeList.item(i);
+                if(node.getNodeType() == Node.ELEMENT_NODE){
+                    Element element = (Element) node;
+                    String uniName = element.getElementsByTagName("name").item(0).getTextContent();
+                    languageList.add(uniName);
+                }
+            }
+
+        }catch (IOException e) {
             e.printStackTrace();
         }catch(ParserConfigurationException e){
             e.printStackTrace();

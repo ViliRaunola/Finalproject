@@ -6,7 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -22,22 +31,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     UniversityFragment universityFragment = new UniversityFragment();
     OwnReviewsFragment ownReviewsFragment = new OwnReviewsFragment();
     AccountFragment accountFragment = new AccountFragment();
-
+    SettingsFragment settingsFragment = new SettingsFragment();
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Language.getInstance().loadLocale(this);
+        System.out.println(Locale.getDefault().getLanguage());
+
+
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("Restaurant Menus");
 
         //Part of onNavigationItemSelected.
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,toolbar, R.string.navigatio_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -73,20 +88,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).addToBackStack("restaurant_fragment").commit();
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
+                toolbar.setTitle("Restaurant Menus");
                 break;
             case R.id.nav_reviews:
                 sendUniversityFragmentRestaurantsOwnReviews();
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).addToBackStack("reviews_fragment").commit();
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
+                toolbar.setTitle("Own Reviews");
                 break;
             case R.id.nav_account:
                 sendUniversityFragmentRestaurantsAccount();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).addToBackStack("account_fragment").commit();
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
+                toolbar.setTitle("Account");
+                break;
+            case R.id.nav_settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, settingsFragment).addToBackStack("settings_fragment").commit();
+                toolbar.setTitle("Settings");
                 break;
             case R.id.nav_logout:
-
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 finish();
                 Toast.makeText(this, "You Have Logged Out", Toast.LENGTH_SHORT).show();
@@ -109,5 +130,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         accountFragment.setArguments(bundle);
     }
 
+   /*@SuppressWarnings("deprecation")
+    public void setLocale(String language){
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration config = getBaseContext().getResources().getConfiguration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("My_language", language);
+        editor.apply();
+    }
+    public void loadLocale(){
+        SharedPreferences sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = sharedPreferences.getString("My_language","");
+        setLocale(language);
+    }*/
 
 }
