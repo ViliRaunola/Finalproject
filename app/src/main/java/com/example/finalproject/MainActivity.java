@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 break;
             case R.id.nav_reviews:
-                sendUniversityFragmentRestaurantsOwnReviews();
+                //sendUniversityFragmentRestaurantsOwnReviews();
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).addToBackStack("reviews_fragment").commit();
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 System.out.println(getBaseContext());
                 break;
             case R.id.nav_account:
-                sendUniversityFragmentRestaurantsAccount();
+                //sendUniversityFragmentRestaurantsAccount();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).addToBackStack("account_fragment").commit();
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
                 toolbar.setTitle("Account");
@@ -121,20 +121,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+/*
     public void sendUniversityFragmentRestaurantsOwnReviews(){
         Bundle bundle = new Bundle();
         bundle.putSerializable("key2",universityFragment.universities);
         ownReviewsFragment.setArguments(bundle);
 
     }
+
+ */
+/*
     public void sendUniversityFragmentRestaurantsAccount(){
         Bundle bundle = new Bundle();
         bundle.putSerializable("key2",universityFragment.universities);
         accountFragment.setArguments(bundle);
     }
 
-   /*@SuppressWarnings("deprecation")
+ */
+
+   @SuppressWarnings("deprecation")
     public void setLocale(String language){
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
@@ -150,6 +155,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
         String language = sharedPreferences.getString("My_language","");
         setLocale(language);
-    }*/
+    }
 
 }

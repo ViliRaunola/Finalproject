@@ -14,14 +14,17 @@ public class User {
     private String eMail;
     private int homeUniversityPos;
     private String homeUniversity;
-    ArrayList<FoodReview> publishedReviews;
-    ArrayList<FoodReview> nonPublishedReviews;
+
+    //Makes this singleton
     private static User user = new User();
     private User() {
     }
     public static User getInstance(){
         return user;
     }
+
+
+    //Set methods
     public void setPassword(String pW) {
         password = pW;
     }
@@ -47,6 +50,7 @@ public class User {
         this.isAdminUser = isAdminUser;
     }
 
+    //Get methods
     public boolean getIsAdminUser() {
         return isAdminUser;
     }
@@ -71,24 +75,5 @@ public class User {
     public String getHomeUniversity() {
         return homeUniversity;
     }
-    public ArrayList<FoodReview> getPublishedReviews() {
-        return publishedReviews;
-    }
-    public ArrayList<FoodReview> getNonPublishedReviews() {
-        return nonPublishedReviews;
-    }
 
-    public void PublishReview(FoodReview r) {
-        if (r.getFoodId() != null
-        && r.getDate() != null
-        && r.getTasteScore() != -1
-        && r.getLookScore() != -1
-        && r.getTextureScore() != -1
-        && r.getAverageScore() != -1
-        && r.getReviewText() != null) {
-            publishedReviews.add(r);
-
-            //TODO test if review already in restaurant's food's reviews... if no add it to there
-        }
-    }
 }

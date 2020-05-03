@@ -1,6 +1,7 @@
 package com.example.finalproject;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,9 +39,7 @@ import javax.xml.parsers.ParserConfigurationException;
 public class UniversityFragment extends Fragment implements Serializable {
 
     private ListView foodItemLisView;
-    public ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
     private TextView infoWin;
-    public ArrayList<University> universities = new ArrayList<University>();
     private TextView dayTextView;
     private Spinner restaurantSpinner;
     private Spinner universitySpinner;
@@ -54,6 +53,9 @@ public class UniversityFragment extends Fragment implements Serializable {
     private ArrayList<FoodItem> dailyFoods = new ArrayList<FoodItem>();
     private int restaurantPosition;
     User user = User.getInstance();
+    Context context;
+    ParseClass parseClass = ParseClass.getInstance();
+    University selectedUniversity;
 
     @Nullable
     @Override
@@ -67,19 +69,17 @@ public class UniversityFragment extends Fragment implements Serializable {
         previousDayButton = v.findViewById(R.id.previousDayButton);
         nextDayButton = v.findViewById(R.id.nextDayButton);
         currentDayButton = v.findViewById(R.id.currentDayButton);
+        context = getContext();
 
 
         getToDayInt();
-        universities.clear();
-        parseUniversity();
-        ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, universities);
+        parseClass.getUniversities().clear();
+        parseClass.parseUniversity(context);
+        ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getUniversities());
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         universitySpinner.setAdapter(ap);
         universitySpinner.setSelection(user.getHomeUniversityPos());
         ap.notifyDataSetChanged();
-
-
-
 
 
         //On select adds specific restaurants to restaurantSpinner depending the selected university
@@ -88,12 +88,13 @@ public class UniversityFragment extends Fragment implements Serializable {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 dayTextView.setText(getCurrentDate());
                 getToDayInt();
-                restaurants.clear();
+                parseClass.getRestaurants().clear();
 
 
-                parseRestaurantsMenu(position);
+                selectedUniversity = parseClass.parseRestaurantsMenu(position, context);
+                infoWin.setText(selectedUniversity.getInfo());
 
-                ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, restaurants);
+                ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item,  parseClass.getRestaurants());
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 restaurantSpinner.setAdapter(arrayAdapter);
                 //Here is listView + array adapter for it. This listView is meant for food items.
@@ -103,9 +104,9 @@ public class UniversityFragment extends Fragment implements Serializable {
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                         restaurantPosition = position;
-                        restaurants.get(restaurantPosition).resDailyMenu.clear();
-                        Restaurant selectedRestaurant = restaurants.get(position);
-                        parseFoodItems(selectedRestaurant);
+                        parseClass.getRestaurants().get(restaurantPosition).resDailyMenu.clear();
+
+                        parseClass.parseFoodItems(restaurantPosition, context);
 
                         checkCurrentDay(toDayInt, restaurantPosition);
 
@@ -123,8 +124,6 @@ public class UniversityFragment extends Fragment implements Serializable {
             }
         });
 
-
-
         //Gets today's restaurant menu and resets date
         currentDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,13 +135,11 @@ public class UniversityFragment extends Fragment implements Serializable {
             }
         });
 
-
-
         //These on click listeners are for displaying right day on the text field.
         previousDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy EEEE");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy");
                 try {
                     if(toDayInt <= 1){
                         Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
@@ -165,10 +162,10 @@ public class UniversityFragment extends Fragment implements Serializable {
         nextDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy EEEE");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy");
                 try {
 
-                    if(toDayInt >= restaurants.get(0).resDailyMenu.get(restaurants.get(0).resDailyMenu.size()-1).getDay()) {
+                    if(toDayInt >=  parseClass.getRestaurants().get(0).resDailyMenu.get( parseClass.getRestaurants().get(0).resDailyMenu.size()-1).getDay()) {
                         Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
                     }else{
                         Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
@@ -196,12 +193,11 @@ public class UniversityFragment extends Fragment implements Serializable {
         return v;
     }
 
-
     //Goes through restaurants resDailyMenu list to find correct food responding to the wanted date.
     public void checkCurrentDay(int day, int restaurantPlace){
         dailyFoods.clear();
-        for(int i = 0; i < restaurants.get(restaurantPlace).resDailyMenu.size(); i++){
-            FoodItem foodItem = restaurants.get(restaurantPlace).resDailyMenu.get(i);
+        for(int i = 0; i <  parseClass.getRestaurants().get(restaurantPlace).resDailyMenu.size(); i++){
+            FoodItem foodItem =  parseClass.getRestaurants().get(restaurantPlace).resDailyMenu.get(i);
             if(foodItem.getDay() == day){
                 dailyFoods.add(foodItem);
             }else{
@@ -209,8 +205,6 @@ public class UniversityFragment extends Fragment implements Serializable {
             }
         }
     }
-
-
 
     public void getToDayInt(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -221,103 +215,9 @@ public class UniversityFragment extends Fragment implements Serializable {
         toDayInt = Integer.parseInt(day[2]);
     }
 
-
-    //Parses "university.xml" and creates University objects based on .xml parameters. Adds these new University objects to "universities"-ArrayList.
-    //This ArrayList is shown in university_spinner.
-    public void parseUniversity(){
-
-        try (InputStream ins = getContext().getAssets().open("university.xml")){
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document xmlDoc = documentBuilder.parse(ins);
-            NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("university");
-
-            for(int i = 0; i < nodeList.getLength(); i++){
-                Node node = nodeList.item(i);
-                if(node.getNodeType() == Node.ELEMENT_NODE){
-                    Element element = (Element) node;
-                    String uniName = element.getElementsByTagName("universityName").item(0).getTextContent();
-                    String uniId = element.getElementsByTagName("id").item(0).getTextContent();
-                    String resXMLFileName = element.getElementsByTagName("restaurantXml").item(0).getTextContent();
-                    String uniInfoText = element.getElementsByTagName("restaurantInfo").item(0).getTextContent();
-                    University university = new University(uniName, uniId, uniInfoText);
-                    university.addToRestaurants(resXMLFileName);
-                    universities.add(university);
-                }
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch(ParserConfigurationException e){
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //Parses a specific XML file depending on the selected university from the university spinner
-    public void parseRestaurantsMenu(int pos) {
-            University selectedUniversity = universities.get(pos);
-            //university info to textView
-            infoWin.setText(selectedUniversity.getInfo());
-            for (String s : selectedUniversity.restaurantsXML) {
-                try (InputStream ins = getContext().getAssets().open(s)) {
-                    DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-                    Document xmlDoc = documentBuilder.parse(ins);
-                    NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("restaurant");
-
-                    for (int i = 0; i < nodeList.getLength(); i++) {
-                        Node node = nodeList.item(i);
-                        if (node.getNodeType() == Node.ELEMENT_NODE) {
-                            Element element = (Element) node;
-                            String resName = element.getElementsByTagName("restaurantName").item(0).getTextContent();
-                            String resMenuName = element.getElementsByTagName("restaurantMenu").item(0).getTextContent();
-                            Restaurant restaurant = new Restaurant(resName);
-                            restaurant.addToRestaurantMenusXML(resMenuName);
-                            restaurants.add(restaurant);
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParserConfigurationException e) {
-                    e.printStackTrace();
-                } catch (SAXException e) {
-                    e.printStackTrace();
-                }
-            }
-    }
-    //parses food items from XML files of the chosen Restaurant. Adds them to Restaurant's dailyMenus.
-    public void parseFoodItems(Restaurant selectedRestaurant) {
-        for (String s : selectedRestaurant.restaurantMenusXML) {
-            try (InputStream ins = getContext().getAssets().open(s)) {
-                DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-                Document xmlDoc = documentBuilder.parse(ins);
-                NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("food");
-
-                for (int i = 0; i < nodeList.getLength(); i++) {
-                    Node node = nodeList.item(i);
-                    if (node.getNodeType() == Node.ELEMENT_NODE) {
-                        Element element = (Element) node;
-                        String foodName = element.getElementsByTagName("name").item(0).getTextContent();
-                        String foodPrice = element.getElementsByTagName("price").item(0).getTextContent();
-                        String foodId = element.getElementsByTagName("id").item(0).getTextContent();
-                        String foodDay = element.getElementsByTagName("day").item(0).getTextContent();
-                        int foodDayInt = Integer.parseInt(foodDay);
-                        FoodItem foodItem = new FoodItem(foodName, foodPrice, foodId, foodDayInt);
-                        selectedRestaurant.addFoodItemToDailyMenu(foodItem);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     // returns current date
     public String getCurrentDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE \ndd.MM.yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy");
         Date currentDate = new Date();
         return simpleDateFormat.format(currentDate);
     }
@@ -330,7 +230,6 @@ public class UniversityFragment extends Fragment implements Serializable {
         return cal.getTime();
     }
 
-    
     @Override
     public void onResume() {
         super.onResume();

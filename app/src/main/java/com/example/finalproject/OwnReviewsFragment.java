@@ -49,7 +49,6 @@ public class OwnReviewsFragment extends Fragment {
     private ListView publishedReviewsListView ;
     private String selectedSortingMethod;
     private ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-    private ArrayList<University> universities;
     private ArrayList<FoodReview> reviewsPublished = new ArrayList<FoodReview>();
     private ArrayList<FoodReview> reviewsNotPublished = new ArrayList<FoodReview>();
     private ArrayList<FoodReview> reviewsAll = new ArrayList<FoodReview>();
@@ -59,6 +58,7 @@ public class OwnReviewsFragment extends Fragment {
     View v;
     EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
     User user = User.getInstance();
+    ParseClass parseClass = ParseClass.getInstance();
     private Context context;
 
 
@@ -76,12 +76,13 @@ public class OwnReviewsFragment extends Fragment {
         restaurantSpinner = (Spinner)v.findViewById(R.id.restaurantSpinner_ownReviews);
 
 
-
+/*
         try {
             universities = (ArrayList<University>) getArguments().getSerializable("key2");
         }catch (Exception e){ //TODO ADD REAL EXCEPTION
             e.printStackTrace();
         }
+ */
 
 
         //clear spinner and list
@@ -103,8 +104,8 @@ public class OwnReviewsFragment extends Fragment {
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortingSpinner.setAdapter(ap);
 
-        ArrayAdapter<University> ap4 = new ArrayAdapter<University>(getContext(), android.R.layout.simple_list_item_1, universities);
-        ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<University> ap4 = new ArrayAdapter<University>(getContext(), android.R.layout.simple_list_item_1, parseClass.getUniversities());
+        ap4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         universitySpinner.setAdapter(ap4);
         universitySpinner.setSelection(user.getHomeUniversityPos());
 
@@ -114,7 +115,7 @@ public class OwnReviewsFragment extends Fragment {
                 //Reads restaurant XML file again based on the selected university
                 restaurants.clear();
                 clearChoices();
-                selectedUniversity = universities.get(position);
+                selectedUniversity = parseClass.getUniversities().get(position);
                 parseRestaurantsMenu(position);
                 ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, restaurants);
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -249,7 +250,7 @@ public class OwnReviewsFragment extends Fragment {
 
 
     public void parseRestaurantsMenu(int pos) {
-        University selectedUniversity = universities.get(pos);
+        University selectedUniversity = parseClass.getUniversities().get(pos);
         for (String s : selectedUniversity.restaurantsXML) {
             try (InputStream ins = getContext().getAssets().open(s)) {
                 DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();

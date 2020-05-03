@@ -37,6 +37,8 @@ public class EditReviewsFragment extends Fragment {
     private ArrayList<FoodReview> allReviews;
 
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class EditReviewsFragment extends Fragment {
                 selectedOwnReview.setPublished(false);
                 modifyRestaurantReviewXmlFile();
                 Toast.makeText(getContext(),"Your review was saved",Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
             }
         });
         saveAndPublishButton.setOnClickListener(new View.OnClickListener() {
