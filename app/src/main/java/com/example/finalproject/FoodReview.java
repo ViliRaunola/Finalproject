@@ -70,6 +70,10 @@ public class FoodReview implements Serializable {
         return  this.userId;
     }
 
+    public void setPublished(Boolean b) {
+        this.published = b;
+    }
+
     public void setReviewText(String text){
         this.reviewText = text;
     }

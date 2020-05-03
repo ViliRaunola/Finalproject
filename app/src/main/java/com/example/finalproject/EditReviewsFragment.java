@@ -35,7 +35,6 @@ public class EditReviewsFragment extends Fragment {
     private Bundle informationBundle;
     private FoodReview selectedOwnReview;
     private ArrayList<FoodReview> allReviews;
-    private Context context;
 
 
     @Nullable
@@ -51,7 +50,6 @@ public class EditReviewsFragment extends Fragment {
         removeButton = (Button)v.findViewById(R.id.removeButtonEditReview);
         writtenReview = (EditText) v.findViewById(R.id.writtenReview);
 
-
         try{
             informationBundle = getArguments();
             selectedOwnReview = (FoodReview) informationBundle.getSerializable("reviewKey");
@@ -66,6 +64,7 @@ public class EditReviewsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 setReviewInformation();
+                selectedOwnReview.setPublished(false);
                 modifyRestaurantReviewXmlFile();
                 Toast.makeText(getContext(),"Your review was saved",Toast.LENGTH_SHORT).show();
             }
@@ -73,12 +72,15 @@ public class EditReviewsFragment extends Fragment {
         saveAndPublishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                selectedOwnReview.setPublished(true);
+                modifyRestaurantReviewXmlFile();
                 Toast.makeText(getContext(),"Your review was saved and published",Toast.LENGTH_SHORT).show();
             }
         });
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                removeReviewFromXml();
                 Toast.makeText(getContext(),"Your review was removed",Toast.LENGTH_SHORT).show();
             }
         });
@@ -156,133 +158,52 @@ public class EditReviewsFragment extends Fragment {
             s = "\n</reviews>";
             fos.write(s.getBytes());
             fos.close();
+            allReviews.clear();
         }catch (IOException e) {//TODO ADD REAL EXCEPTION
-            e.printStackTrace();
-        }
-
-        /*
-
-        try {
-            System.out.println("TÄSTÄ ALKAAAAAA modifyRestaurantReviewXmlFile &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-            //TODO lisää osa parse luokkaan
-            FileOutputStream fos = new FileOutputStream( getContext().getFilesDir() +"/reviews/" + selectedOwnReview.getRestaurant() + "_Reviews.xml");
-            FileOutputStream fileos = getContext().openFileOutput(selectedOwnReview.getRestaurant() + "_Reviews", Context.MODE_PRIVATE);
-
-            XmlSerializer xmlSerializer = Xml.newSerializer();
-            StringWriter writer = new StringWriter();
-            xmlSerializer.setOutput(writer);
-            xmlSerializer.startDocument("UTF-8", true);
-            xmlSerializer.startTag(null, "reviews");
-            for (FoodReview review : allReviews) {
-
-                if (!review.getReviewId().equals(selectedOwnReview.getReviewId())) {
-                    xmlSerializer.startTag(null, "review");
-
-                    xmlSerializer.startTag(null, "reviewId");
-                    xmlSerializer.text(review.getReviewId());
-                    xmlSerializer.endTag(null, "reviewId");
-
-                    xmlSerializer.startTag(null, "foodId");
-                    xmlSerializer.text(review.getFoodId());
-                    xmlSerializer.endTag(null, "foodId");
-
-                    xmlSerializer.startTag(null, "foodName");
-                    xmlSerializer.text(review.getFoodName());
-                    xmlSerializer.endTag(null, "foodName");
-
-                    xmlSerializer.startTag(null, "userId");
-                    xmlSerializer.text(review.getUserId());
-                    xmlSerializer.endTag(null, "userId");
-
-                    xmlSerializer.startTag(null, "tasteScore");
-                    xmlSerializer.text(String.valueOf(review.getTasteScore()));
-                    xmlSerializer.endTag(null, "tasteScore");
-
-                    xmlSerializer.startTag(null, "lookScore");
-                    xmlSerializer.text(String.valueOf(review.getLookScore()));
-                    xmlSerializer.endTag(null, "lookScore");
-
-                    xmlSerializer.startTag(null, "textureScore");
-                    xmlSerializer.text(String.valueOf(review.getTextureScore()));
-                    xmlSerializer.endTag(null, "textureScore");
-
-                    xmlSerializer.startTag(null, "reviewText");
-                    xmlSerializer.text(review.getReviewText());
-                    xmlSerializer.endTag(null, "reviewText");
-
-                    xmlSerializer.startTag(null, "date");
-                    xmlSerializer.text(review.getDateString());
-                    xmlSerializer.endTag(null, "date");
-
-                    xmlSerializer.startTag(null, "published");
-                    xmlSerializer.text(review.getPublished());
-                    xmlSerializer.endTag(null, "published");
-
-                    xmlSerializer.endTag(null, "review");
-                } else {
-                    xmlSerializer.startTag(null, "review");
-
-                    xmlSerializer.startTag(null, "reviewId");
-                    xmlSerializer.text(selectedOwnReview.getReviewId());
-                    xmlSerializer.endTag(null, "reviewId");
-
-                    xmlSerializer.startTag(null, "foodId");
-                    xmlSerializer.text(selectedOwnReview.getFoodId());
-                    xmlSerializer.endTag(null, "foodId");
-
-                    xmlSerializer.startTag(null, "foodName");
-                    xmlSerializer.text(selectedOwnReview.getFoodName());
-                    xmlSerializer.endTag(null, "foodName");
-
-                    xmlSerializer.startTag(null, "userId");
-                    xmlSerializer.text(selectedOwnReview.getUserId());
-                    xmlSerializer.endTag(null, "userId");
-
-                    xmlSerializer.startTag(null, "tasteScore");
-                    xmlSerializer.text(String.valueOf(selectedOwnReview.getTasteScore()));
-                    xmlSerializer.endTag(null, "tasteScore");
-
-                    xmlSerializer.startTag(null, "lookScore");
-                    xmlSerializer.text(String.valueOf(selectedOwnReview.getLookScore()));
-                    xmlSerializer.endTag(null, "lookScore");
-
-                    xmlSerializer.startTag(null, "textureScore");
-                    xmlSerializer.text(String.valueOf(selectedOwnReview.getTextureScore()));
-                    xmlSerializer.endTag(null, "textureScore");
-
-                    xmlSerializer.startTag(null, "reviewText");
-                    xmlSerializer.text(selectedOwnReview.getReviewText());
-                    xmlSerializer.endTag(null, "reviewText");
-
-                    xmlSerializer.startTag(null, "date");
-                    xmlSerializer.text(selectedOwnReview.getDateString());
-                    xmlSerializer.endTag(null, "date");
-
-                    xmlSerializer.startTag(null, "published");
-                    xmlSerializer.text(selectedOwnReview.getPublished());
-                    xmlSerializer.endTag(null, "published");
-
-                    xmlSerializer.endTag(null, "review");
-                }
-            }
-            xmlSerializer.endTag(null, "reviews");
-            xmlSerializer.endDocument();
-            xmlSerializer.flush();
-            String dataWrite = writer.toString();
-            fileos.write(dataWrite.getBytes());
-            fileos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-         */
+    public void removeReviewFromXml() {
+
+        OutputStreamWriter osw = null;
+        String s;
+        try {
+            File file = new File(getContext().getFilesDir() +"/reviews/" + selectedOwnReview.getRestaurant() + "_Reviews.xml");
+            FileOutputStream fos = new FileOutputStream(file);
+
+            s = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                    "<reviews>";
+            fos.write(s.getBytes());
+
+            for (FoodReview review : allReviews) {
+                System.out.println(allReviews.size());
+                if (review.getReviewId().equals(selectedOwnReview.getReviewId())){
+                    s = "";
+                }else {
+                    System.out.println("ELSEN SISÄLLÄ ##############");
+                    s = "<review>\n" +
+                            "        <reviewId>" + review.getReviewId() + "</reviewId>\n" +
+                            "        <foodId>" + review.getFoodId() + "</foodId>\n" +
+                            "        <foodName>" + review.getFoodName() + "</foodName>\n" +
+                            "        <userId>" + review.getUserId() + "</userId>\n" +
+                            "        <tasteScore>" + review.getTasteScore() + "</tasteScore>\n" +
+                            "        <lookScore>" + review.getLookScore() + "</lookScore>\n" +
+                            "        <textureScore>" + review.getTextureScore() + "</textureScore>\n" +
+                            "        <reviewText>" + review.getReviewText() + "</reviewText>\n" +
+                            "        <date>" + review.getDateString() + "</date>\n" +
+                            "        <published>" + review.getPublished() + "</published>\n" +
+                            "    </review>";
+                }
+                fos.write(s.getBytes());
+            }
+            s = "\n</reviews>";
+            fos.write(s.getBytes());
+            fos.close();
+            allReviews.remove(selectedOwnReview);
+        }catch (IOException e) {//TODO ADD REAL EXCEPTION
+            e.printStackTrace();
+        }
     }
 }
 

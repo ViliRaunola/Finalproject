@@ -215,7 +215,19 @@ public class OwnReviewsFragment extends Fragment {
         notPublishedReviewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).addToBackStack("edit_own_reviews_fragment").commit();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
+
+                Bundle bundle = new Bundle();
+                FoodReview selectedReview = reviewsNotPublished.get(i);
+                bundle.putSerializable("reviewKey", selectedReview);
+                bundle.putSerializable("allReviews", reviewsAll);
+                editReviewsFragment.setArguments(bundle);
+                ft.replace(R.id.fragment_container, editReviewsFragment);
+                ft.addToBackStack("edit_own_reviews_fragment");
+                ft.commit();
+                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).addToBackStack("edit_own_reviews_fragment").commit();
             }
         });
         return v;

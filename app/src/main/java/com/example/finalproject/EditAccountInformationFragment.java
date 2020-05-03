@@ -161,7 +161,13 @@ public class EditAccountInformationFragment extends Fragment {
                         }
                     //if user does not want to change their password
                     }else {
-
+                        //Rewrites the changed user file
+                        try {
+                            modifyEmailsAndIds();
+                            writeUserJson();
+                        } catch (JSONException | IOException e) {
+                            e.printStackTrace();
+                        }
                         //switching fragments
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
                     }
