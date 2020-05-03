@@ -317,7 +317,7 @@ public class UniversityFragment extends Fragment implements Serializable {
 
     // returns current date
     public String getCurrentDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy EEEE");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE \ndd.MM.yyyy");
         Date currentDate = new Date();
         return simpleDateFormat.format(currentDate);
     }
