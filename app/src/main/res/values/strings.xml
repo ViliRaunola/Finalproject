@@ -5,10 +5,10 @@
     <string name="common_loginButton">Login</string>
     <string name="Common_eMail">Email</string>
     <string name="common_password">Password</string>
-    <string name="common_confirmPassword">Confirm Password</string>
-    <string name="common_firstName">First Name</string>
-    <string name="common_lastName">Last Name</string>
-    <string name="common_homeUniversity">Home University</string>
+    <string name="common_confirmPassword">Confirm password</string>
+    <string name="common_firstName">First name</string>
+    <string name="common_lastName">Last name</string>
+    <string name="common_homeUniversity">Home university</string>
     <string name="common_passwordRequirements">Password needs to contain the following: \n - Minimum 12 characters \n - At least one number, one special character, one capital and one small letter</string>
     <string name="common_cancelButton">Cancel</string>
     <string name="common_university">University</string>
@@ -20,15 +20,15 @@
     <string name="loginScreen_CreateAccountButton">Create a new account</string>
 
     <!-- accountCreation specific -->
-    <string name="accountCreation_ConfirmButton">Confirm</string>
+    <string name="accountCreation_makeAccountButton">Make an account</string>
 
     <!-- authenticationView -->
     <string name="authenticationView_hintText">Write the number to the text field below,\n for 2-step authentication</string>
 
     <!-- mainView specific -->
-    <string name="mainView_nextDay">Next Day</string>
-    <string name="mainView_currentDay">Current Day</string>
-    <string name="mainView_previousDay">Previous Day</string>
+    <string name="mainView_nextDay">Next day</string>
+    <string name="mainView_currentDay">Current day</string>
+    <string name="mainView_previousDay">Previous day</string>
     <string name="mainView_monday">Monday</string>
     <string name="mainView_tuesday">Tuesday</string>
     <string name="mainView_wednesday">Wednesday</string>
@@ -40,11 +40,11 @@
     <!-- sideMenu specific -->
     <string name="sideMenu_mainTitle">Main</string>
     <string name="sideMenu_userTitle">User</string>
-    <string name="sideMenu_restaurantMenus">Restaurant Menus</string>
-    <string name="sideMenu_ownReviews">Own Reviews</string>
+    <string name="sideMenu_restaurantMenus">Restaurant menus</string>
+    <string name="sideMenu_ownReviews">Own reviews</string>
     <string name="sideMenu_account">Account</string>
     <string name="sideMenu_settings">Settings</string>
-    <string name="sideMenu_logOut">Log Out</string>
+    <string name="sideMenu_logOut">Log out</string>
 
     <!-- ownReviewsView specific -->
     <string name="ownReviewsView_viewTitle">Your own reviews</string>
@@ -71,9 +71,9 @@
     <string name="accountView_editButton">Edit</string>
 
     <!-- editAccountInformationView specific -->
-    <string name="editAccountInformationView_newPassword">New Password</string>
-    <string name="editAccountInformationView_confirmNewPassword">Confirm New Password</string>
-    <string name="editAccountInformationView_confirmCurrentPassword">Confirm Changes With Current Password</string>
+    <string name="editAccountInformationView_newPassword">New password</string>
+    <string name="editAccountInformationView_confirmNewPassword">Confirm new password</string>
+    <string name="editAccountInformationView_confirmCurrentPassword">Confirm changes with current password</string>
     <string name="editAccountInformationView_saveButton">Save changes</string>
 
     <!-- settingsView specific -->
