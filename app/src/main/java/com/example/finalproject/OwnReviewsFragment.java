@@ -3,6 +3,7 @@ package com.example.finalproject;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class OwnReviewsFragment extends Fragment {
     private ArrayList<University> universities;
     private ArrayList<FoodReview> reviewsPublished = new ArrayList<FoodReview>();
     private ArrayList<FoodReview> reviewsNotPublished = new ArrayList<FoodReview>();
+    private ArrayList<FoodReview> reviewsAll = new ArrayList<FoodReview>();
     private University selectedUniversity;
     private int restaurantPosition;
     private String selectedRestaurantName;
@@ -73,9 +75,11 @@ public class OwnReviewsFragment extends Fragment {
         universitySpinner = (Spinner)v.findViewById(R.id.universitySpinner_ownReviews);
         restaurantSpinner = (Spinner)v.findViewById(R.id.restaurantSpinner_ownReviews);
 
+
+
         try {
             universities = (ArrayList<University>) getArguments().getSerializable("key2");
-        }catch (Exception e){
+        }catch (Exception e){ //TODO ADD REAL EXCEPTION
             e.printStackTrace();
         }
 
@@ -86,6 +90,7 @@ public class OwnReviewsFragment extends Fragment {
         reviewsList.clear();
         publishedReviewsListView.setAdapter(null);
         notPublishedReviewsListView.setAdapter(null);
+        clearChoices();
         //sorting options
 
         sortingList.add("Date");
@@ -108,6 +113,7 @@ public class OwnReviewsFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 //Reads restaurant XML file again based on the selected university
                 restaurants.clear();
+                clearChoices();
                 selectedUniversity = universities.get(position);
                 parseRestaurantsMenu(position);
                 ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, restaurants);
@@ -117,6 +123,7 @@ public class OwnReviewsFragment extends Fragment {
                 restaurantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        clearChoices();
                         selectedRestaurantName = restaurantSpinner.getSelectedItem().toString();
                         parseRestaurantReviews(selectedRestaurantName);
 
@@ -195,6 +202,7 @@ public class OwnReviewsFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 FoodReview selectedReview = reviewsPublished.get(i);
                 bundle.putSerializable("reviewKey", selectedReview);
+                bundle.putSerializable("allReviews", reviewsAll);
                 editReviewsFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, editReviewsFragment);
                 ft.addToBackStack("edit_own_reviews_fragment");
@@ -216,9 +224,16 @@ public class OwnReviewsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        clearChoices();
         universitySpinner.setSelection(user.getHomeUniversityPos());
     }
 
+    private void clearChoices(){
+        reviewsNotPublished.clear();
+        reviewsPublished.clear();
+        publishedReviewsListView.clearChoices();
+        notPublishedReviewsListView.clearChoices();
+    }
 
 
     public void parseRestaurantsMenu(int pos) {
@@ -249,6 +264,7 @@ public class OwnReviewsFragment extends Fragment {
         }
     }
 
+    //Gets selected restaurant reviews from the user.
     public void parseRestaurantReviews(String selectedRestaurantName){
 
         try (FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/reviews/" + selectedRestaurantName + "_Reviews.xml"))){
@@ -261,6 +277,8 @@ public class OwnReviewsFragment extends Fragment {
                 Node node = nodeList.item(i);
                 if(node.getNodeType() == Node.ELEMENT_NODE){
                     Element element = (Element) node;
+                    String reviewId = element.getElementsByTagName("reviewId").item(0).getTextContent();
+
                     String foodId = element.getElementsByTagName("foodId").item(0).getTextContent();
 
                     String foodName = element.getElementsByTagName("foodName").item(0).getTextContent();
@@ -284,7 +302,8 @@ public class OwnReviewsFragment extends Fragment {
                     String reviewDate = element.getElementsByTagName("date").item(0).getTextContent();
                     Date reviewDateDate = simpleDateFormat.parse(reviewDate);
 
-                    FoodReview review = new FoodReview(publishedBoolean,foodId, foodName, selectedRestaurantName, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId);
+                    FoodReview review = new FoodReview(reviewId, publishedBoolean,foodId, foodName, selectedRestaurantName, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId);
+                    reviewsAll.add(review);
                     if(Integer.parseInt(userId) == user.getUserID()){
                         if(publishedBoolean){
                             reviewsPublished.add(review);

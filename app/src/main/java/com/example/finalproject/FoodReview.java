@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class FoodReview implements Serializable {
 
+    private String reviewId;
     private String foodId;
     private String foodName;
     private String restaurant;
@@ -19,7 +20,8 @@ public class FoodReview implements Serializable {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
     private Boolean published;
 
-    public FoodReview(Boolean published, String f, String n, String r, Date d, float taScore, float loScore, float teScore, String text, String userId) {
+
+    public FoodReview(String reviewId,Boolean published, String f, String n, String r, Date d, float taScore, float loScore, float teScore, String text, String userId) {
         foodId = f;
         foodName = n;
         restaurant = r;
@@ -31,6 +33,7 @@ public class FoodReview implements Serializable {
         reviewText = text;
         this.userId = userId;
         this.published = published;
+        this.reviewId = reviewId;
     }
 
     public float getTasteScore() {
@@ -54,10 +57,49 @@ public class FoodReview implements Serializable {
     public String getFoodName() {
         return foodName;
     }
-
     public Date getDate() {
         return date;
     }
+    public String getRestaurant(){
+     return this.restaurant;
+    }
+    public String getReviewId(){
+        return this.reviewId;
+    }
+    public String getUserId(){
+        return  this.userId;
+    }
+
+    public void setReviewText(String text){
+        this.reviewText = text;
+    }
+
+    public void setTasteScore(float taste){
+        this.tasteScore = taste;
+    }
+
+    public void setLookScore(float look){
+        this.lookScore = look;
+    }
+
+    public void setTextureScore(float texture){
+        this.textureScore = texture;
+    }
+
+    public void setAverageScore(){
+        this.averageScore = (this.lookScore + this.textureScore + this.tasteScore) / 3;
+    }
+
+    public String getDateString(){
+        return simpleDateFormat.format(this.date);
+    }
+
+    public String getPublished(){
+        return this.published.toString();
+    }
+
+
+
 
 
     @Override

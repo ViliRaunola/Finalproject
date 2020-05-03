@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <reviews>
     <review>
+        <reviewId>1</reviewId>
         <foodId>97</foodId>
         <foodName>Pitsa</foodName>
         <userId>5</userId>
@@ -12,6 +13,7 @@
         <published>true</published>
     </review>
     <review>
+        <reviewId>2</reviewId>
         <foodId>96</foodId>
         <foodName>Makaroonilaatikko</foodName>
         <userId>5</userId>
@@ -23,6 +25,7 @@
         <published>false</published>
     </review>
     <review>
+        <reviewId>3</reviewId>
         <foodId>95</foodId>
         <foodName>Kana salaatti</foodName>
         <userId>4</userId>
@@ -33,20 +36,4 @@
         <date>3.5.2020</date>
         <published>true</published>
     </review>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </reviews>

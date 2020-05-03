@@ -242,7 +242,6 @@ public class UniversityFragment extends Fragment implements Serializable {
                     University university = new University(uniName, uniId, uniInfoText);
                     university.addToRestaurants(resXMLFileName);
                     universities.add(university);
-
                 }
             }
         }catch (IOException e){
