@@ -8,12 +8,13 @@
 
     <TextView
         android:id="@+id/infoWindow_own_reviews"
-        android:layout_width="350dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Your own reviews"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,9 +22,10 @@
         android:id="@+id/ownReviews_sorting_spinner"
         android:layout_width="350dp"
         android:layout_height="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/restaurantSpinner_ownReviews" />
 
@@ -31,7 +33,7 @@
         android:id="@+id/listViewPublishedReviews"
         android:layout_width="366dp"
         android:layout_height="180dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ownReviews_sorting_spinner" />
@@ -40,7 +42,7 @@
         android:id="@+id/listViewNotPublishedReviews"
         android:layout_width="366dp"
         android:layout_height="180dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listViewPublishedReviews" />
@@ -58,9 +60,10 @@
         android:id="@+id/restaurantSpinner_ownReviews"
         android:layout_width="350dp"
         android:layout_height="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/universitySpinner_ownReviews" />
 
@@ -68,9 +71,10 @@
         android:id="@+id/universitySpinner_ownReviews"
         android:layout_width="350dp"
         android:layout_height="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infoWindow_own_reviews" />
 
@@ -82,5 +86,29 @@
         app:layout_constraintBottom_toTopOf="@+id/listViewPublishedReviews"
         app:layout_constraintEnd_toEndOf="@+id/listViewPublishedReviews"
         app:layout_constraintStart_toStartOf="@+id/listViewPublishedReviews" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter reviews by university"
+        app:layout_constraintBottom_toTopOf="@+id/universitySpinner_ownReviews"
+        app:layout_constraintStart_toStartOf="@+id/universitySpinner_ownReviews" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter reviews by restaurant"
+        app:layout_constraintBottom_toTopOf="@+id/restaurantSpinner_ownReviews"
+        app:layout_constraintStart_toStartOf="@+id/restaurantSpinner_ownReviews" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sort reviews by"
+        app:layout_constraintBottom_toTopOf="@+id/ownReviews_sorting_spinner"
+        app:layout_constraintStart_toStartOf="@+id/ownReviews_sorting_spinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

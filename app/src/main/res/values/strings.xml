@@ -1,5 +1,45 @@
 <resources>
     <string name="app_name">Finalproject</string>
-    <string name="navigatio_drawer_open">Open navigation drawer</string>
+
+    <!-- Commonly used -->
+    <string name="common_loginButton">Login</string>
+    <string name="Common_eMail">Email</string>
+    <string name="common_password">Password</string>
+    <string name="common_confirmPassword">Confirm Password</string>
+    <string name="common_firstName">First Name</string>
+    <string name="common_lastName">Last Name</string>
+    <string name="common_homeUniversity">Home University</string>
+    <string name="common_passwordRequirements">Password needs to contain the following: \n - Minimum 12 characters \n - At least one number, one special character, one capital and one small letter</string>
+    <string name="common_cancelButton">Cancel</string>
+    <string name="common_university">University</string>
+    <string name="common_restaurant">restaurant</string>
+
+    <!-- loginScreen -->
+    <string name="loginScreen_EmailHint">Write your email here...</string>
+    <string name="loginScreen_passwordHint">Write your password here...</string>
+    <string name="loginScreen_CreateAccountButton">Create a new account</string>
+
+    <!-- accountCreation -->
+    <string name="accountCreation_ConfirmButton">Confirm</string>
+
+    <!-- mainView -->
+    <string name="mainview_nextDay">Next Day</string>
+    <string name="mainview_currentDay">Current Day</string>
+    <string name="mainview_previousDay">Previous Day</string>
+    <string name="mainview_monday">Monday</string>
+    <string name="mainview_tuesday">Tuesday</string>
+    <string name="mainview_wednesday">Wednesday</string>
+    <string name="mainview_thursday">Thursday</string>
+    <string name="mainview_friday">Friday</string>
+    <string name="mainview_saturday">Saturday</string>
+    <string name="mainview_sunday">Sunday</string>
+
+    <!-- ownReviewsView -->
+    <string name="ownReviewsView_viewTitle">Your own reviews</string>
+    <string name="ownReviewsView_publishedTitle">Reviews published by you</string>
+    <string name="ownReviewsView_draftsTitle">Your review drafts</string>
+
+     <!-- navigationDrawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
