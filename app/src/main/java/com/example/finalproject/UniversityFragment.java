@@ -91,7 +91,8 @@ public class UniversityFragment extends Fragment implements Serializable {
                 parseClass.getRestaurants().clear();
 
 
-                selectedUniversity = parseClass.parseRestaurantsMenu(position, context);
+                parseClass.parseRestaurantsMenu(position, context);
+                University selectedUniversity = parseClass.getUniversities().get(position);
                 infoWin.setText(selectedUniversity.getInfo());
 
                 ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item,  parseClass.getRestaurants());

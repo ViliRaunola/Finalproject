@@ -54,6 +54,7 @@ public class AccountCreationActivity extends AppCompatActivity {
     private byte[] buffer;
     private int newUserId;
     User user = User.getInstance();
+    ParseClass parseClass = ParseClass.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,11 +71,13 @@ public class AccountCreationActivity extends AppCompatActivity {
         lastName = (EditText)findViewById(R.id.lastNameTextField_account_creation);
         home_uni_spinner = (Spinner)findViewById(R.id.homeUniversity_spinner_account_creation);
 
+
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Account creation");
         //create spinner from universityList
-        parseUniversity();
-        ArrayAdapter<String> ap = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, universityList);
+
+        ArrayAdapter<University> ap = new ArrayAdapter<University>(this, android.R.layout.simple_list_item_1, parseClass.getUniversities());
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         home_uni_spinner.setAdapter(ap);
 
@@ -152,6 +155,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         }
 
     }
+    /*
     //TODO lisää parse luokkaan
     //parses "university.xml" to make a list from university names
     public void parseUniversity() {
@@ -178,6 +182,8 @@ public class AccountCreationActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    */
     //TODO lisää parse luokkaan
     public byte[] readEmailsAndIds() throws IOException {
         FileInputStream ins = new FileInputStream (new File(this.getFilesDir() +"/userData/EmailsAndIds.json"));
@@ -276,4 +282,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         fileWriter.append(newUserData.toString());
         fileWriter.close();
     }
+
+
+
 }

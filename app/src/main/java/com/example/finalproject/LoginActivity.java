@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     private String homeUniversity;
     private int check = 0;
     private List<String> languageList = new ArrayList<String>();
+    ParseClass parseClass = ParseClass.getInstance();
 
     // LoginPasswordTestiHommma Vili!Raunola12345
     @Override
@@ -59,6 +60,9 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println(Locale.getDefault().getLanguage());
 
         context = this;
+
+        parseClass.parseUniversity(context);
+
         Language.getInstance().loadLocale(context);
         login = (Button) findViewById(R.id.login);
         createAccount = (Button) findViewById(R.id.createAccount);
@@ -93,12 +97,9 @@ public class LoginActivity extends AppCompatActivity {
                         recreate();
                         break;
                 }
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
@@ -106,7 +107,6 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                     em = email.getText().toString();
                     pw = password.getText().toString();
                     pw = Security.getSecuredPassword(pw, em);
@@ -121,9 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                         password.setText("");
                         Toast.makeText(getBaseContext(), "We didn't find your account. Please create a new one.", Toast.LENGTH_SHORT).show();
                     }
-
                 }
-
         });
     }
 
@@ -179,7 +177,13 @@ public class LoginActivity extends AppCompatActivity {
                     user.setEmail(object.getString("eMail"));
                     user.setPassword(userPassword);
                     homeUniversity = object.getString("homeUniversity");
-                    parseUniversity(homeUniversity);
+                    //parseUniversity(homeUniversity);
+                    String uniName = homeUniversity;
+                    for(University u : parseClass.getUniversities()){
+                        if (uniName.equals(u.toString())) {
+                            universitiesPositionCompare = i;
+                        }
+                    }
                     user.setHomeUniversity(homeUniversity);
                     user.setHomeUniversityPos(universitiesPositionCompare);
                     user.setLastName(object.getString("lastName"));
@@ -194,6 +198,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         return 0;
     }
+
     //TODO lisää parse luokkaan
     private String jsonParseEmailsAndIds(String userEMail) {
         String id = "";
@@ -220,6 +225,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         return id;
     }
+
+    /*
     //TODO lisää parse luokkaan
     public void parseUniversity(String hU){
         try (InputStream ins = context.getAssets().open("university.xml")){
@@ -246,6 +253,8 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+     */
     public void parseLanguage() {
 
         try (InputStream ins = this.getAssets().open("language.xml")){

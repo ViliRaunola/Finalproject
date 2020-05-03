@@ -48,12 +48,6 @@ public class OwnReviewsFragment extends Fragment {
     private ListView notPublishedReviewsListView ;
     private ListView publishedReviewsListView ;
     private String selectedSortingMethod;
-    private ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-    private ArrayList<FoodReview> reviewsPublished = new ArrayList<FoodReview>();
-    private ArrayList<FoodReview> reviewsNotPublished = new ArrayList<FoodReview>();
-    private ArrayList<FoodReview> reviewsAll = new ArrayList<FoodReview>();
-    private University selectedUniversity;
-    private int restaurantPosition;
     private String selectedRestaurantName;
     View v;
     EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
@@ -74,15 +68,6 @@ public class OwnReviewsFragment extends Fragment {
         sortingSpinner = (Spinner) v.findViewById(R.id.ownReviews_sorting_spinner);
         universitySpinner = (Spinner)v.findViewById(R.id.universitySpinner_ownReviews);
         restaurantSpinner = (Spinner)v.findViewById(R.id.restaurantSpinner_ownReviews);
-
-
-/*
-        try {
-            universities = (ArrayList<University>) getArguments().getSerializable("key2");
-        }catch (Exception e){ //TODO ADD REAL EXCEPTION
-            e.printStackTrace();
-        }
- */
 
 
         //clear spinner and list
@@ -113,11 +98,10 @@ public class OwnReviewsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 //Reads restaurant XML file again based on the selected university
-                restaurants.clear();
+                parseClass.getRestaurants().clear();
                 clearChoices();
-                selectedUniversity = parseClass.getUniversities().get(position);
-                parseRestaurantsMenu(position);
-                ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, restaurants);
+                parseClass.parseRestaurantsMenu(position, context);
+                ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, parseClass.getRestaurants());
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 restaurantSpinner.setAdapter(arrayAdapter);
 
@@ -126,12 +110,12 @@ public class OwnReviewsFragment extends Fragment {
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         clearChoices();
                         selectedRestaurantName = restaurantSpinner.getSelectedItem().toString();
-                        parseRestaurantReviews(selectedRestaurantName);
+                        parseClass.parseRestaurantReviews(selectedRestaurantName, context);
 
-                        ArrayAdapter<FoodReview> arrayAdapterListView = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, reviewsPublished);
+                        ArrayAdapter<FoodReview> arrayAdapterListView = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsPublished());
                         publishedReviewsListView.setAdapter(arrayAdapterListView);
 
-                        ArrayAdapter<FoodReview> arrayAdapterListView2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, reviewsNotPublished);
+                        ArrayAdapter<FoodReview> arrayAdapterListView2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
                         notPublishedReviewsListView.setAdapter(arrayAdapterListView2);
                     }
 
@@ -149,12 +133,6 @@ public class OwnReviewsFragment extends Fragment {
 
             }
         });
-
-        //test list
-        reviewsList.add("Food:  Lihapullat ja perunamuusi\nDate:  28.4.2020\nRestaurant:  Laseri\nAverage Score:  4.5 stars");
-        reviewsList.add("Food:  Lohipullat ja perunamuusi\nDate:  29.4.2020\nRestaurant:  Lut Buffet\nAverage Score:  4.0 stars");
-        reviewsList.add("Food:  Lohipullat ja perunamuusi\nDate:  29.4.2020\nRestaurant:  Lut Buffet\nAverage Score:  4.0 stars");
-
 
 
         //arrayadapter for publishedreviews listview
@@ -201,9 +179,9 @@ public class OwnReviewsFragment extends Fragment {
                 EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
 
                 Bundle bundle = new Bundle();
-                FoodReview selectedReview = reviewsPublished.get(i);
+                FoodReview selectedReview = parseClass.getReviewsPublished().get(i);
                 bundle.putSerializable("reviewKey", selectedReview);
-                bundle.putSerializable("allReviews", reviewsAll);
+                bundle.putSerializable("allReviews", parseClass.getAllReviews());
                 editReviewsFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, editReviewsFragment);
                 ft.addToBackStack("edit_own_reviews_fragment");
@@ -221,9 +199,9 @@ public class OwnReviewsFragment extends Fragment {
                 EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
 
                 Bundle bundle = new Bundle();
-                FoodReview selectedReview = reviewsNotPublished.get(i);
+                FoodReview selectedReview = parseClass.getReviewsNotPublished().get(i);
                 bundle.putSerializable("reviewKey", selectedReview);
-                bundle.putSerializable("allReviews", reviewsAll);
+                bundle.putSerializable("allReviews", parseClass.getAllReviews());
                 editReviewsFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, editReviewsFragment);
                 ft.addToBackStack("edit_own_reviews_fragment");
@@ -242,101 +220,11 @@ public class OwnReviewsFragment extends Fragment {
     }
 
     private void clearChoices(){
-        reviewsNotPublished.clear();
-        reviewsPublished.clear();
+        parseClass.getReviewsNotPublished().clear();
+        parseClass.getReviewsPublished().clear();
         publishedReviewsListView.clearChoices();
         notPublishedReviewsListView.clearChoices();
     }
-
-
-    public void parseRestaurantsMenu(int pos) {
-        University selectedUniversity = parseClass.getUniversities().get(pos);
-        for (String s : selectedUniversity.restaurantsXML) {
-            try (InputStream ins = getContext().getAssets().open(s)) {
-                DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-                Document xmlDoc = documentBuilder.parse(ins);
-                NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("restaurant");
-                for (int i = 0; i < nodeList.getLength(); i++) {
-                    Node node = nodeList.item(i);
-                    if (node.getNodeType() == Node.ELEMENT_NODE) {
-                        Element element = (Element) node;
-                        String resName = element.getElementsByTagName("restaurantName").item(0).getTextContent();
-                        String resMenuName = element.getElementsByTagName("restaurantMenu").item(0).getTextContent();
-                        Restaurant restaurant = new Restaurant(resName);
-                        restaurant.addToRestaurantMenusXML(resMenuName);
-                        restaurants.add(restaurant);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    //Gets selected restaurant reviews from the user.
-    public void parseRestaurantReviews(String selectedRestaurantName){
-
-        try (FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/reviews/" + selectedRestaurantName + "_Reviews.xml"))){
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document xmlDoc = documentBuilder.parse(ins);
-            NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("review");
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-
-            for(int i = 0; i < nodeList.getLength(); i++){
-                Node node = nodeList.item(i);
-                if(node.getNodeType() == Node.ELEMENT_NODE){
-                    Element element = (Element) node;
-                    String reviewId = element.getElementsByTagName("reviewId").item(0).getTextContent();
-
-                    String foodId = element.getElementsByTagName("foodId").item(0).getTextContent();
-
-                    String foodName = element.getElementsByTagName("foodName").item(0).getTextContent();
-
-                    String userId = element.getElementsByTagName("userId").item(0).getTextContent();
-
-                    String published = element.getElementsByTagName("published").item(0).getTextContent();
-                    Boolean publishedBoolean = Boolean.parseBoolean(published);
-
-                    String tasteScore = element.getElementsByTagName("tasteScore").item(0).getTextContent();
-                    float tasteScoreFloat = Float.parseFloat(tasteScore);
-
-                    String lookScore = element.getElementsByTagName("lookScore").item(0).getTextContent();
-                    float lookScoreFloat = Float.parseFloat(lookScore);
-
-                    String textureScore = element.getElementsByTagName("textureScore").item(0).getTextContent();
-                    float textureScoreFloat = Float.parseFloat(textureScore);
-
-                    String reviewText = element.getElementsByTagName("reviewText").item(0).getTextContent();
-
-                    String reviewDate = element.getElementsByTagName("date").item(0).getTextContent();
-                    Date reviewDateDate = simpleDateFormat.parse(reviewDate);
-
-                    FoodReview review = new FoodReview(reviewId, publishedBoolean,foodId, foodName, selectedRestaurantName, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId);
-                    reviewsAll.add(review);
-                    if(Integer.parseInt(userId) == user.getUserID()){
-                        if(publishedBoolean){
-                            reviewsPublished.add(review);
-                        }else{
-                            reviewsNotPublished.add(review);
-                        }
-                    }
-                }
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch(ParserConfigurationException e){
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 
 }

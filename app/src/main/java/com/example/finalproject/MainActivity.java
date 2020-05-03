@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     AccountFragment accountFragment = new AccountFragment();
     SettingsFragment settingsFragment = new SettingsFragment();
     private Toolbar toolbar;
+    ParseClass parseClass = ParseClass.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +120,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_logout:
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                parseClass.getUniversities().clear();
+                parseClass.getRestaurants().clear();
+                parseClass.getAllReviews().clear();
+                parseClass.getReviewsNotPublished().clear();
+                parseClass.getReviewsPublished().clear();
+                
                 finish();
                 Toast.makeText(this, "You Have Logged Out", Toast.LENGTH_SHORT).show();
                 break;

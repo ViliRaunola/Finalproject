@@ -54,6 +54,7 @@ public class EditAccountInformationFragment extends Fragment {
     private Context context;
     private String currentPasswordUser;
     User user = User.getInstance();
+    ParseClass parseClass = ParseClass.getInstance();
 
     @Nullable
     @Override
@@ -82,8 +83,8 @@ public class EditAccountInformationFragment extends Fragment {
         currentPasswordUser = user.getPassword();
 
         //parsing university xml and setting home university spinner adapter
-        parseUniversity();
-        ArrayAdapter<String> universityArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, universities);
+
+        ArrayAdapter<University> universityArrayAdapter = new ArrayAdapter<University>(getContext(), android.R.layout.simple_list_item_1, parseClass.getUniversities());
         universityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         homeUniversity_spinner.setAdapter(universityArrayAdapter);
         homeUniversity_spinner.setSelection(user.getHomeUniversityPos());
@@ -187,32 +188,9 @@ public class EditAccountInformationFragment extends Fragment {
 
     //Vili!Raunola12345
 
-    //TODO lisää parse luokkaan
-    //parses "university.xml" to make a list from university names
-    public void parseUniversity() {
 
-        try (InputStream ins = getActivity().getAssets().open("university.xml")){
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document xmlDoc = documentBuilder.parse(ins);
-            NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("university");
 
-            for(int i = 0; i < nodeList.getLength(); i++){
-                Node node = nodeList.item(i);
-                if(node.getNodeType() == Node.ELEMENT_NODE){
-                    Element element = (Element) node;
-                    String uniName = element.getElementsByTagName("universityName").item(0).getTextContent();
-                    System.out.println(uniName);
-                    universities.add(uniName);
-                }
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch(ParserConfigurationException e){
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
-    }
+
     //TODO lisää parse luokkaan
     //https://howtodoinjava.com/library/json-simple-read-write-json-examples/
     public void modifyEmailsAndIds() throws JSONException, IOException {
