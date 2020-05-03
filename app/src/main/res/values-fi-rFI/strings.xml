@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FinalProject</string>
+
+    <!-- Commonly used strings -->
+    <string name="common_loginButton">Kirjaudu sisään</string>
+    <string name="Common_eMail">Sähköposti</string>
+    <string name="common_password">Salasana</string>
+    <string name="common_confirmPassword">Vahvista Salasana</string>
+    <string name="common_firstName">Etunimi</string>
+    <string name="common_lastName">Sukunimi</string>
+    <string name="common_homeUniversity">Koti Yliopisto</string>
+    <string name="common_passwordRequirements">Salasanan tulee sisältää: \\n - Vähintään 12 merkkiä \\n - Vähintään yksi numero, yksi erikoismerkki, yksi iso ja yksi pieni kirjain</string>
+    <string name="common_cancelButton">Peruuta</string>
+    <string name="common_university">Yliopisto</string>
+    <string name="common_restaurant">Ravintola</string>
+
+    <!-- loginScreen specific -->
+    <string name="loginScreen_EmailHint">Kirjoita sähköpostisi tähän...</string>
+    <string name="loginScreen_passwordHint">Kirjoita salasanasi tähän...</string>
+    <string name="loginScreen_CreateAccountButton">Luo uusi tili</string>
+
+    <!-- accountCreation specific -->
+    <string name="accountCreation_ConfirmButton">Vahvista</string>
+
+    <!-- mainView specific -->
+    <string name="mainView_nextDay">Seuraava Päivä</string>
+    <string name="mainView_currentDay">Tämä Päivä</string>
+    <string name="mainView_previousDay">Edellinen Päivä</string>
+    <string name="mainView_monday">Maanantai</string>
+    <string name="mainView_tuesday">Tiistai</string>
+    <string name="mainView_wednesday">Keskiviikko</string>
+    <string name="mainView_thursday">Torstai</string>
+    <string name="mainView_friday">Perjantai</string>
+    <string name="mainView_saturday">Lauantai</string>
+    <string name="mainView_sunday">Sunnuntai</string>
+
+    <!-- ownReviewsView specific -->
+    <string name="ownReviewsView_viewTitle">Omat arvostelusi</string>
+    <string name="ownReviewsView_publishedTitle">Julkaistut arvostelusi</string>
+    <string name="ownReviewsView_draftsTitle">Arvostelu luonnoksesi</string>
+    <string name="ownReviewsView_food">"Ruoka: "</string>
+    <string name="ownReviewsView_date">"Päivämäärä: "</string>
+    <string name="ownReviewsView_restaurant">"Ravintola: "</string>
+    <string name="ownReviewsView_overallScore">"Yleinen arvosana: "</string>
+
+    <!-- editReviewView specific -->
+    <string name="editReviewView_taste">Maku</string>
+    <string name="editReviewView_appearance">Ulkonäkö</string>
+    <string name="editReviewView_texture">Rakenne</string>
+    <string name="editReviewView_deleteReviewButton">Poista arvostelu</string>
+    <string name="editReviewView_saveReviewButton">Tallenna luonnoksena</string>
+    <string name="editReviewView_publishReviewButton">Tallenna ja julkaise</string>
+
+    <!-- accountView specific -->
+
+    <!-- editAccountInformationView specific -->
+    <string name="editAccountInformationView_newPassword">Uusi Salasana</string>
+    <string name="editAccountInformationView_confirmNewPassword">Vahvista Uusi Salasana</string>
+    <string name="editAccountInformationView_confirmCurrentPassword">Vahvista Muutokset Nykyisellä Salasanallasi</string>
+    <string name="editAccountInformationView_saveButton">Vahvista muutokset</string>
+
+    <!-- settingsView specific -->
+    <string name="SettingsView_titleText">Täällä voit vaihtaa sovelluksen kielen</string>
+    <string name="SettingsView_language">Kieli</string>
+    <string name="SettingsView_changeLanguageButton">Vaihda kieli</string>
+
+    <!-- navigationDrawer specific -->
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+</resources>

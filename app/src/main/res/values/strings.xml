@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Finalproject</string>
+    <string name="app_name">FinalProject</string>
 
-    <!-- Commonly used -->
+    <!-- Commonly used strings -->
     <string name="common_loginButton">Login</string>
     <string name="Common_eMail">Email</string>
     <string name="common_password">Password</string>
@@ -12,34 +12,59 @@
     <string name="common_passwordRequirements">Password needs to contain the following: \n - Minimum 12 characters \n - At least one number, one special character, one capital and one small letter</string>
     <string name="common_cancelButton">Cancel</string>
     <string name="common_university">University</string>
-    <string name="common_restaurant">restaurant</string>
+    <string name="common_restaurant">Restaurant</string>
 
-    <!-- loginScreen -->
+    <!-- loginScreen specific -->
     <string name="loginScreen_EmailHint">Write your email here...</string>
     <string name="loginScreen_passwordHint">Write your password here...</string>
     <string name="loginScreen_CreateAccountButton">Create a new account</string>
 
-    <!-- accountCreation -->
+    <!-- accountCreation specific -->
     <string name="accountCreation_ConfirmButton">Confirm</string>
 
-    <!-- mainView -->
-    <string name="mainview_nextDay">Next Day</string>
-    <string name="mainview_currentDay">Current Day</string>
-    <string name="mainview_previousDay">Previous Day</string>
-    <string name="mainview_monday">Monday</string>
-    <string name="mainview_tuesday">Tuesday</string>
-    <string name="mainview_wednesday">Wednesday</string>
-    <string name="mainview_thursday">Thursday</string>
-    <string name="mainview_friday">Friday</string>
-    <string name="mainview_saturday">Saturday</string>
-    <string name="mainview_sunday">Sunday</string>
+    <!-- mainView specific -->
+    <string name="mainView_nextDay">Next Day</string>
+    <string name="mainView_currentDay">Current Day</string>
+    <string name="mainView_previousDay">Previous Day</string>
+    <string name="mainView_monday">Monday</string>
+    <string name="mainView_tuesday">Tuesday</string>
+    <string name="mainView_wednesday">Wednesday</string>
+    <string name="mainView_thursday">Thursday</string>
+    <string name="mainView_friday">Friday</string>
+    <string name="mainView_saturday">Saturday</string>
+    <string name="mainView_sunday">Sunday</string>
 
-    <!-- ownReviewsView -->
+    <!-- ownReviewsView specific -->
     <string name="ownReviewsView_viewTitle">Your own reviews</string>
     <string name="ownReviewsView_publishedTitle">Reviews published by you</string>
     <string name="ownReviewsView_draftsTitle">Your review drafts</string>
+    <string name="ownReviewsView_food">Food: </string>
+    <string name="ownReviewsView_date">Date: </string>
+    <string name="ownReviewsView_restaurant">Restaurant: </string>
+    <string name="ownReviewsView_overallScore">Overall score: </string>
 
-     <!-- navigationDrawer -->
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!-- editReviewView specific -->
+    <string name="editReviewView_taste">Taste</string>
+    <string name="editReviewView_appearance">Appearance</string>
+    <string name="editReviewView_texture">Texture</string>
+    <string name="editReviewView_deleteReviewButton">Delete review</string>
+    <string name="editReviewView_saveReviewButton">Save as a draft</string>
+    <string name="editReviewView_publishReviewButton">Save and publish</string>
+
+    <!-- accountView specific -->
+
+    <!-- editAccountInformationView specific -->
+    <string name="editAccountInformationView_newPassword">New Password</string>
+    <string name="editAccountInformationView_confirmNewPassword">Confirm New Password</string>
+    <string name="editAccountInformationView_confirmCurrentPassword">Confirm Changes With Current Password</string>
+    <string name="editAccountInformationView_saveButton">Save changes</string>
+
+    <!-- settingsView specific -->
+    <string name="SettingsView_titleText">Here you can change the language</string>
+    <string name="SettingsView_language">Language</string>
+    <string name="SettingsView_changeLanguageButton">Change language</string>
+
+    <!-- navigationDrawer specific -->
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 </resources>
