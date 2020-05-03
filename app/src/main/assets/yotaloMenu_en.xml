@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu1>
     <food>
-        <name>Lihapullia ja perunamuusia</name>
+        <name>Meatballs and mashed potatoes</name>
         <price>3.00€</price>
         <id>100</id>
         <day>1</day>
     </food>
     <food>
-        <name>Kalakeitto</name>
+        <name>Fish soup</name>
         <price>3.00€</price>
         <id>99</id>
         <day>1</day>
     </food>
     <food>
-        <name>Lihapiirakka</name>
+        <name>meat pie</name>
         <price>3.00€</price>
         <id>98</id>
         <day>1</day>
     </food>
     <food>
-        <name>Pitsa</name>
+        <name>Pizza</name>
         <price>3.00€</price>
         <id>97</id>
         <day>2</day>
     </food>
     <food>
-        <name>Makaroonilaatikko</name>
+        <name>Macaroni casserole</name>
         <price>3.00€</price>
         <id>96</id>
         <day>2</day>
     </food>
     <food>
-        <name>Kana salaatti</name>
+        <name>Chicken salad</name>
         <price>3.00€</price>
         <id>95</id>
         <day>2</day>
     </food>
     <food>
-        <name>Lohi salaatti</name>
+        <name>Salmon salad</name>
         <price>3.00€</price>
         <id>94</id>
         <day>3</day>
     </food>
     <food>
-        <name>Liha salaatti</name>
+        <name>Meat salad</name>
         <price>3.00€</price>
         <id>93</id>
         <day>3</day>
@@ -55,151 +55,151 @@
         <day>3</day>
     </food>
     <food>
-        <name>Tomaatti keitto</name>
+        <name>Tomato soup</name>
         <price>3.00€</price>
         <id>91</id>
         <day>4</day>
     </food>
     <food>
-        <name>Pasta carbonara</name>
+        <name>Carbonara pasta</name>
         <price>3.00€</price>
         <id>90</id>
         <day>4</day>
     </food>
     <food>
-        <name>Lohi pizza</name>
+        <name>Salmon pizza</name>
         <price>3.00€</price>
         <id>89</id>
         <day>4</day>
     </food>
     <food>
-        <name>Kana nugetit</name>
+        <name>Chicken nuggets</name>
         <price>3.00€</price>
         <id>88</id>
         <day>5</day>
     </food>
     <food>
-        <name>Suola silakka</name>
+        <name>Salt herring</name>
         <price>3.00€</price>
         <id>87</id>
         <day>5</day>
     </food>
     <food>
-        <name>Hauki ja peruna</name>
+        <name>Pike and potato</name>
         <price>3.00€</price>
         <id>86</id>
         <day>5</day>
     </food>
     <food>
-        <name>Sian maksa ja makarooni</name>
+        <name>Pork liver and macaroni</name>
         <price>3.00€</price>
         <id>85</id>
         <day>6</day>
     </food>
     <food>
-        <name>Klimppisoppa</name>
+        <name>Lump soup</name>
         <price>3.00€</price>
         <id>84</id>
         <day>6</day>
     </food>
     <food>
-        <name>Poron käristys</name>
+        <name>Sautéed reindeer</name>
         <price>3.00€</price>
         <id>83</id>
         <day>6</day>
     </food>
     <food>
-        <name>Anjovis pasta</name>
+        <name>Anchovy pasta</name>
         <price>3.00€</price>
         <id>82</id>
         <day>7</day>
     </food>
     <food>
-        <name>Suolakurkku perunasalaatti</name>
+        <name>Pickled potato salad</name>
         <price>3.00€</price>
         <id>81</id>
         <day>7</day>
     </food>
     <food>
-        <name>Karhu 24 pack</name>
+        <name>Karhu 24-pack</name>
         <price>3.00€</price>
         <id>80</id>
         <day>7</day>
     </food>
     <food>
-        <name>Salaatti hamburilainen</name>
+        <name>Salad hamburger</name>
         <price>3.00€</price>
         <id>79</id>
         <day>8</day>
     </food>
     <food>
-        <name>Munakoiso salaatti</name>
+        <name>Eggplant salad</name>
         <price>3.00€</price>
         <id>78</id>
         <day>8</day>
     </food>
     <food>
-        <name>Jäätelö</name>
+        <name>Ice cream</name>
         <price>3.00€</price>
         <id>77</id>
         <day>8</day>
     </food>
     <food>
-        <name>Lihahyytelö</name>
+        <name>Meat jelly</name>
         <price>3.00€</price>
         <id>76</id>
         <day>9</day>
     </food>
     <food>
-        <name>Syväpakastettu jalkapallo</name>
+        <name>deep frozen football</name>
         <price>3.00€</price>
         <id>75</id>
         <day>9</day>
     </food>
     <food>
-        <name>Alijäähtynyt vesi</name>
+        <name>Supercooled water</name>
         <price>30.00€</price>
         <id>74</id>
         <day>9</day>
     </food>
     <food>
-        <name>Lohikäärmelasikakku</name>
+        <name>Dragon class cake</name>
         <price>3.00€</price>
         <id>73</id>
         <day>10</day>
     </food>
     <food>
-        <name>Kaviaari</name>
+        <name>Caviar</name>
         <price>13.00€</price>
         <id>72</id>
         <day>10</day>
     </food>
     <food>
-        <name>Mäkkärin euron juusto</name>
+        <name>One euro cheese from McDonalds</name>
         <price>1.10€</price>
         <id>71</id>
         <day>10</day>
     </food>
     <food>
-        <name>Korvapuusti</name>
+        <name>Cinnamon bun</name>
         <price>12.00€</price>
         <id>70</id>
         <day>11</day>
     </food>
     <food>
-        <name>Euron Greyjoy</name>
+        <name>One euro Greyjoy</name>
         <price>1.00€</price>
         <id>69</id>
         <day>11</day>
     </food>
     <food>
-        <name>Karjalanpaisti</name>
+        <name>Karelian stew</name>
         <price>123.00€</price>
         <id>68</id>
         <day>11</day>
     </food>
     <food>
-        <name>Kesäkeitto</name>
+        <name>Summer soup</name>
         <price>9.00€</price>
         <id>67</id>
         <day>12</day>
@@ -217,19 +217,19 @@
         <day>12</day>
     </food>
     <food>
-        <name>Juustokimbab</name>
+        <name>Cheese kimbab</name>
         <price>3.00€</price>
         <id>64</id>
         <day>13</day>
     </food>
     <food>
-        <name>Pinaattikeitto</name>
+        <name>Spinach soup</name>
         <price>3.50€</price>
         <id>63</id>
         <day>13</day>
     </food>
     <food>
-        <name>Pinaattiletut ja peruna</name>
+        <name>Spinachpancakes and potatoes</name>
         <price>3.09€</price>
         <id>62</id>
         <day>13</day>
@@ -241,7 +241,7 @@
         <day>14</day>
     </food>
     <food>
-        <name>Vety</name>
+        <name>Hydrogen</name>
         <price>2.00€</price>
         <id>60</id>
         <day>14</day>
@@ -253,49 +253,49 @@
         <day>14</day>
     </food>
     <food>
-        <name>Atomi</name>
+        <name>Atom</name>
         <price>4.00€</price>
         <id>58</id>
         <day>15</day>
     </food>
     <food>
-        <name>Wingardium leviousa</name>
+        <name>Wingardium leviosa</name>
         <price>31324.00€</price>
         <id>57</id>
         <day>15</day>
     </food>
     <food>
-        <name>Pannukakku</name>
+        <name>Pancakes</name>
         <price>1.00€</price>
         <id>56</id>
         <day>15</day>
     </food>
     <food>
-        <name>Pannukakkukeitto</name>
+        <name>Pancake soup</name>
         <price>30.00€</price>
         <id>55</id>
         <day>16</day>
     </food>
     <food>
-        <name>Pannukakkupiiras</name>
+        <name>Pancake pie</name>
         <price>3.00€</price>
         <id>54</id>
         <day>16</day>
     </food>
     <food>
-        <name>Pannukakkupaistos</name>
+        <name>Pancake casserole</name>
         <price>12.00€</price>
         <id>53</id>
         <day>16</day>
     </food>
     <food>
-        <name>Pannukakkumureke</name>
+        <name>Pancake meat loaf</name>
         <price>32.00€</price>
         <id>52</id>
         <day>17</day>
     </food>
     <food>
-        <name>Pannukakkukakku</name>
+        <name>Pancake cake</name>
         <price>3.30€</price>
         <id>51</id>
         <day>17</day>
@@ -307,79 +307,79 @@
         <day>17</day>
     </food>
     <food>
-        <name>Pannukakku Pitsa</name>
+        <name>Pancake pizza</name>
         <price>3.20€</price>
         <id>49</id>
         <day>18</day>
     </food>
     <food>
-        <name>Miso keitto</name>
+        <name>Miso soup</name>
         <price>12.00€</price>
         <id>48</id>
         <day>18</day>
     </food>
     <food>
-        <name>Puolukkahillo ja kanamunat</name>
+        <name>Lingonberry jam and eggs</name>
         <price>12.40€</price>
         <id>47</id>
         <day>18</day>
     </food>
     <food>
-        <name>Ruisleipä</name>
+        <name>Rye bread</name>
         <price>3.30€</price>
         <id>46</id>
         <day>19</day>
     </food>
     <food>
-        <name>Kobe härkä</name>
+        <name>Kobe bull</name>
         <price>1000.00€</price>
         <id>45</id>
         <day>19</day>
     </food>
     <food>
-        <name>Korona</name>
+        <name>Corona</name>
         <price>0.00€</price>
         <id>44</id>
         <day>19</day>
     </food>
     <food>
-        <name>Lepakkokeitto</name>
+        <name>Bat soup</name>
         <price>32.00€</price>
         <id>43</id>
         <day>19</day>
     </food>
     <food>
-        <name>Lepakkomureke</name>
+        <name>Bat meat loaf</name>
         <price>34.00€</price>
         <id>42</id>
         <day>20</day>
     </food>
     <food>
-        <name>Lepakko Pitsa</name>
+        <name>Bat pizza</name>
         <price>6.00€</price>
         <id>41</id>
         <day>20</day>
     </food>
     <food>
-        <name>Hiekkakansan kakku</name>
+        <name>Cake of the sand people</name>
         <price>3.20€</price>
         <id>40</id>
         <day>20</day>
     </food>
     <food>
-        <name>Lanttulaatikko ja porkkanalaatikko</name>
+        <name>rutabaga casserole and carrot casserole</name>
         <price>6.00€</price>
         <id>39</id>
         <day>21</day>
     </food>
     <food>
-        <name>Wookie pihvi</name>
+        <name>Wookie steak</name>
         <price>35.00€</price>
         <id>38</id>
         <day>21</day>
     </food>
     <food>
-        <name>Ketsuppi ja sinappi</name>
+        <name>Ketchup and mustard</name>
         <price>100.00€</price>
         <id>37</id>
         <day>21</day>
@@ -391,13 +391,13 @@
         <day>22</day>
     </food>
     <food>
-        <name>Lauantaimakkara</name>
+        <name>Saturday sausage</name>
         <price>32.00€</price>
         <id>35</id>
         <day>22</day>
     </food>
     <food>
-        <name>Uncle Ben's tomaattikastikkeessa</name>
+        <name>Uncle Ben's in tomato soup</name>
         <price>5.00€</price>
         <id>34</id>
         <day>22</day>
@@ -409,7 +409,7 @@
         <day>23</day>
     </food>
     <food>
-        <name>Valekakku</name>
+        <name>Lie cake</name>
         <price>32.00€</price>
         <id>32</id>
         <day>23</day>
@@ -421,19 +421,19 @@
         <day>23</day>
     </food>
     <food>
-        <name>Whey proteiinipirtelö</name>
+        <name>Whey protein shake</name>
         <price>4.00€</price>
         <id>30</id>
         <day>24</day>
     </food>
     <food>
-        <name>Mustikkeitto</name>
+        <name>Blueberry soup</name>
         <price>3.03€</price>
         <id>29</id>
         <day>24</day>
     </food>
     <food>
-        <name>Omena</name>
+        <name>Apple</name>
         <price>1.00€</price>
         <id>28</id>
         <day>24</day>
@@ -445,7 +445,7 @@
         <day>25</day>
     </food>
     <food>
-        <name>Raakaliha</name>
+        <name>Raw meat</name>
         <price>0.20€</price>
         <id>26</id>
         <day>25</day>
@@ -457,19 +457,19 @@
         <day>25</day>
     </food>
     <food>
-        <name>Joulukinkku ja sinappi</name>
+        <name>Christmas ham and mustard</name>
         <price>3.30€</price>
         <id>24</id>
         <day>26</day>
     </food>
     <food>
-        <name>Sinappi ja ketsuppi</name>
+        <name>Mustard and Ketchup</name>
         <price>3.00€</price>
         <id>23</id>
         <day>26</day>
     </food>
     <food>
-        <name>Tacoja</name>
+        <name>Tacos</name>
         <price>3.40€</price>
         <id>22</id>
         <day>26</day>
@@ -481,67 +481,67 @@
         <day>27</day>
     </food>
     <food>
-        <name>Mustekalarenkaat</name>
+        <name>Octopus rings</name>
         <price>3.40€</price>
         <id>20</id>
         <day>27</day>
     </food>
     <food>
-        <name>Hirmususi leipä</name>
+        <name>Hirmususi bread</name>
         <price>4.00€</price>
         <id>19</id>
         <day>27</day>
     </food>
     <food>
-        <name>Oisterit, simpukat, ja sydänsimpukat</name>
+        <name>Oysters, clams and cockles</name>
         <price>3.40€</price>
         <id>18</id>
         <day>28</day>
     </food>
     <food>
-        <name>Sitruunakakku</name>
+        <name>Lemon cake</name>
         <price>6.00€</price>
         <id>17</id>
         <day>28</day>
     </food>
     <food>
-        <name>Frey piiras</name>
+        <name>Frey pie</name>
         <price>4.40€</price>
         <id>16</id>
         <day>28</day>
     </food>
     <food>
-        <name>Hevosenliha</name>
+        <name>Horse meat</name>
         <price>14.40€</price>
         <id>15</id>
         <day>29</day>
     </food>
     <food>
-        <name>Valkovenäläinen</name>
+        <name>White russian</name>
         <price>6.00€</price>
         <id>14</id>
         <day>29</day>
     </food>
     <food>
-        <name>Raaka hevosen sydän</name>
+        <name>Raw horse heart</name>
         <price>6.00€</price>
         <id>13</id>
         <day>29</day>
     </food>
     <food>
-        <name>Kuninkaan kruunu(ranskalaiset uppopaistettuna kullassa)</name>
+        <name>Kings crown (french fries fried in gold)</name>
         <price>3.40€</price>
         <id>12</id>
         <day>30</day>
     </food>
     <food>
-        <name>Härän penis</name>
+        <name>bull penis</name>
         <price>6.00€</price>
         <id>11</id>
         <day>30</day>
     </food>
     <food>
-        <name>Haltioiden leipä</name>
+        <name>bread of the elves</name>
         <price>4.00€</price>
         <id>10</id>
         <day>30</day>

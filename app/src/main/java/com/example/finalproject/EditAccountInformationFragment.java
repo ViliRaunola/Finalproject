@@ -151,7 +151,7 @@ public class EditAccountInformationFragment extends Fragment {
                             }
 
                             //switching fragments
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).addToBackStack("account_edit_fragment").commit();
 
                         }else {
 
@@ -169,7 +169,8 @@ public class EditAccountInformationFragment extends Fragment {
                             e.printStackTrace();
                         }
                         //switching fragments
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().remove(new AccountFragment()).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).addToBackStack("account_edit_fragment").commit();
                     }
                 }
             }
@@ -178,7 +179,7 @@ public class EditAccountInformationFragment extends Fragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).addToBackStack("account_edit_fragment").commit();
             }
         });
         return v;

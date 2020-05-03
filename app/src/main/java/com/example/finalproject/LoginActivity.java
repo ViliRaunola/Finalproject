@@ -54,9 +54,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
         Language.getInstance().loadLocale(this);
+        setContentView(R.layout.activity_login);
         System.out.println(Locale.getDefault().getLanguage());
+
         context = this;
         Language.getInstance().loadLocale(context);
         login = (Button) findViewById(R.id.login);
