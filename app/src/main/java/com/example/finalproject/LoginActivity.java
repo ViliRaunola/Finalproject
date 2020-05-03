@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -22,6 +23,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Locale;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,13 +48,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        System.out.println(Locale.getDefault().getLanguage());
         context = this;
         login = (Button) findViewById(R.id.login);
         createAccount = (Button) findViewById(R.id.createAccount);
         email = (EditText) findViewById(R.id.emailTextField_login);
         password = (EditText) findViewById(R.id.passwordTextField_login);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Login");
 
         login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {

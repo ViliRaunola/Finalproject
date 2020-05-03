@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
@@ -25,6 +26,10 @@ public class Authentication extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
         context = this;
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Authentication");
+
         randomNumberEditText = (EditText) findViewById(R.id.randomNumberInputEditText);
         randomNumberTextView = (TextView) findViewById(R.id.randomNumberTextView);
         cancelButton = (Button) findViewById(R.id.cancelButton_authentication);

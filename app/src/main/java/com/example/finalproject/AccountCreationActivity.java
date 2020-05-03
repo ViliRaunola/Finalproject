@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -65,6 +66,8 @@ public class AccountCreationActivity extends AppCompatActivity {
         lastName = (EditText)findViewById(R.id.lastNameTextField_account_creation);
         home_uni_spinner = (Spinner)findViewById(R.id.homeUniversity_spinner_account_creation);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Account creation");
         //create spinner from universityList
         parseUniversity();
         ArrayAdapter<String> ap = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, universityList);
