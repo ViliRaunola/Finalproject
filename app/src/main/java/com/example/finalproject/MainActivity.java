@@ -39,7 +39,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadLocale();
+        Language.getInstance().loadLocale(this);
+        System.out.println(Locale.getDefault().getLanguage());
+
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Restaurant Menus");
@@ -127,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         accountFragment.setArguments(bundle);
     }
 
-    @SuppressWarnings("deprecation")
+   /*@SuppressWarnings("deprecation")
     public void setLocale(String language){
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
@@ -143,6 +146,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
         String language = sharedPreferences.getString("My_language","");
         setLocale(language);
-    }
+    }*/
 
 }

@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 public class Authentication extends AppCompatActivity {
     private EditText randomNumberEditText;
     private TextView randomNumberTextView;
@@ -26,6 +28,8 @@ public class Authentication extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
         context = this;
+        Language.getInstance().loadLocale(this);
+        System.out.println(Locale.getDefault().getLanguage());
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Authentication");

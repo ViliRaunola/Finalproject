@@ -34,9 +34,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
-        android:text="Change Language"
+        android:text="@string/SettingsView_changeLanguageButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Language"
+        app:layout_constraintBottom_toTopOf="@+id/languageSpinner_settings"
+        app:layout_constraintStart_toStartOf="@+id/languageSpinner_settings"
+        app:layout_constraintTop_toTopOf="@+id/languageSpinner_settings" />
 </androidx.constraintlayout.widget.ConstraintLayout>

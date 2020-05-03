@@ -61,14 +61,14 @@ public class SettingsFragment extends Fragment {
                 position = languageSpinner.getSelectedItemPosition();
                 switch (position) {
                     case 0:
-                        mainActivity = ((MainActivity) getActivity());
-                        mainActivity.setLocale("en");
-                        mainActivity.recreate();
+                        Language.getInstance().setLocale("en", getContext());
+                        Language.getInstance().setLanguage("en");
+                        getActivity().recreate();
                         break;
                     case 1:
-                        mainActivity = ((MainActivity) getActivity());
-                        mainActivity.setLocale("fi");
-                        mainActivity.recreate();
+                        Language.getInstance().setLocale("fi", getContext());
+                        Language.getInstance().setLanguage("fi");
+                        getActivity().recreate();
                         break;
                 }
             }

@@ -27,6 +27,8 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -56,6 +58,8 @@ public class AccountCreationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_creation);
+        Language.getInstance().loadLocale(this);
+        System.out.println(Locale.getDefault().getLanguage());
 
         confirmButton = (Button)findViewById(R.id.confirmButton_account_creation);
         cancelButton = (Button)findViewById(R.id.cancelButton_account_creation);
@@ -77,7 +81,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AccountCreationActivity.this, LoginActivity.class));
+                onBackPressed();
                 finish();
             }
         });
