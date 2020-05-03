@@ -22,6 +22,9 @@
     <!-- accountCreation specific -->
     <string name="accountCreation_ConfirmButton">Confirm</string>
 
+    <!-- authenticationView -->
+    <string name="authenticationView_hintText">Write the number to the text field below,\n for 2-step authentication</string>
+
     <!-- mainView specific -->
     <string name="mainView_nextDay">Next Day</string>
     <string name="mainView_currentDay">Current Day</string>
@@ -34,10 +37,22 @@
     <string name="mainView_saturday">Saturday</string>
     <string name="mainView_sunday">Sunday</string>
 
+    <!-- sideMenu specific -->
+    <string name="sideMenu_mainTitle">Main</string>
+    <string name="sideMenu_userTitle">User</string>
+    <string name="sideMenu_restaurantMenus">Restaurant Menus</string>
+    <string name="sideMenu_ownReviews">Own Reviews</string>
+    <string name="sideMenu_account">Account</string>
+    <string name="sideMenu_settings">Settings</string>
+    <string name="sideMenu_logOut">Log Out</string>
+
     <!-- ownReviewsView specific -->
     <string name="ownReviewsView_viewTitle">Your own reviews</string>
     <string name="ownReviewsView_publishedTitle">Reviews published by you</string>
     <string name="ownReviewsView_draftsTitle">Your review drafts</string>
+    <string name="ownReviewsView_universityFilter">Filter reviews by university</string>
+    <string name="ownReviewsView_restaurantFilter">Filter reviews by restaurant</string>
+    <string name="ownReviewsView_sort">Sort by</string>
     <string name="ownReviewsView_food">Food: </string>
     <string name="ownReviewsView_date">Date: </string>
     <string name="ownReviewsView_restaurant">Restaurant: </string>
@@ -50,8 +65,10 @@
     <string name="editReviewView_deleteReviewButton">Delete review</string>
     <string name="editReviewView_saveReviewButton">Save as a draft</string>
     <string name="editReviewView_publishReviewButton">Save and publish</string>
+    <string name="editReviewView_HintText">Give a written review...</string>
 
     <!-- accountView specific -->
+    <string name="accountView_editButton">Edit</string>
 
     <!-- editAccountInformationView specific -->
     <string name="editAccountInformationView_newPassword">New Password</string>

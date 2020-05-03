@@ -11,7 +11,7 @@
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:text="Cancel"
+        android:text="@string/common_cancelButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saveAndPublishEditReview" />
@@ -23,7 +23,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:gravity="start|bottom"
-        android:hint="Give a written review"
+        android:hint="@string/editReviewView_HintText"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Texture"
+        android:text="@string/editReviewView_texture"
         app:layout_constraintBottom_toBottomOf="@+id/textureRatingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.082"
@@ -76,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Appearance"
+        android:text="@string/editReviewView_appearance"
         app:layout_constraintBottom_toBottomOf="@+id/appearanceRatingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.089"
@@ -98,7 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Taste"
+        android:text="@string/editReviewView_taste"
         app:layout_constraintBottom_toBottomOf="@+id/tasteRatingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.08"
@@ -109,7 +109,7 @@
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:text="Delete review"
+        android:text="@string/editReviewView_deleteReviewButton"
         app:layout_constraintStart_toStartOf="@+id/saveButtonEditReview"
         app:layout_constraintTop_toBottomOf="@+id/writtenReview" />
 
@@ -118,7 +118,7 @@
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:text="Save and Publish"
+        android:text="@string/editReviewView_publishReviewButton"
         app:layout_constraintStart_toStartOf="@+id/writtenReview"
         app:layout_constraintTop_toBottomOf="@+id/saveButtonEditReview" />
 
@@ -127,7 +127,7 @@
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:text="Save as a draft"
+        android:text="@string/editReviewView_saveReviewButton"
         app:layout_constraintStart_toStartOf="@+id/writtenReview"
         app:layout_constraintTop_toBottomOf="@+id/removeButtonEditReview" />
 

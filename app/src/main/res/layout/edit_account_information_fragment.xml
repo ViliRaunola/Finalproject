@@ -9,7 +9,7 @@
         android:id="@+id/account_information_edit_cancel_button"
         android:layout_width="167dp"
         android:layout_height="48dp"
-        android:text="Cancel"
+        android:text="@string/common_cancelButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/currentPasswordConfirmation_editAccountInformationFragment" />
@@ -27,7 +27,7 @@
         android:id="@+id/saveChangesButton_editAccountInformationFragment"
         android:layout_width="167dp"
         android:layout_height="48dp"
-        android:text="save changes"
+        android:text="@string/editAccountInformationView_saveButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/currentPasswordConfirmation_editAccountInformationFragment" />
@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="-8dp"
-        android:text="Email"
+        android:text="@string/Common_eMail"
         app:layout_constraintBottom_toTopOf="@+id/emailEditText_editAccountInformationFragment"
         app:layout_constraintStart_toStartOf="@+id/emailEditText_editAccountInformationFragment"
         app:layout_constraintTop_toTopOf="@+id/emailEditText_editAccountInformationFragment" />
@@ -110,7 +110,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Last Name"
+        android:text="@string/common_lastName"
         app:layout_constraintBottom_toTopOf="@+id/lastNameEditText_editAccountInformationFragment"
         app:layout_constraintStart_toStartOf="@+id/lastNameEditText_editAccountInformationFragment"
         app:layout_constraintTop_toTopOf="@+id/lastNameEditText_editAccountInformationFragment" />
@@ -119,7 +119,7 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home University"
+        android:text="@string/common_homeUniversity"
         app:layout_constraintBottom_toTopOf="@+id/homeUniversitySpinner_editAccountInformationFragment"
         app:layout_constraintStart_toStartOf="@+id/homeUniversitySpinner_editAccountInformationFragment"
         app:layout_constraintTop_toTopOf="@+id/homeUniversitySpinner_editAccountInformationFragment" />
@@ -128,7 +128,7 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Password"
+        android:text="@string/editAccountInformationView_newPassword"
         app:layout_constraintBottom_toTopOf="@+id/newPasswordEditText_editAccountInformationFragment"
         app:layout_constraintStart_toStartOf="@+id/newPasswordEditText_editAccountInformationFragment"
         app:layout_constraintTop_toTopOf="@+id/newPasswordEditText_editAccountInformationFragment" />
@@ -137,7 +137,7 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confrim New Password"
+        android:text="@string/editAccountInformationView_confirmNewPassword"
         app:layout_constraintBottom_toTopOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
         app:layout_constraintStart_toStartOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
         app:layout_constraintTop_toTopOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment" />
@@ -147,7 +147,7 @@
         android:layout_width="350dp"
         android:layout_height="70dp"
         android:layout_marginTop="8dp"
-        android:text="Password needs to contain the following: \n - Minimum 12 characters \n - At least one number, one special character, one capital and one small letter "
+        android:text="@string/common_passwordRequirements"
         app:layout_constraintStart_toStartOf="@+id/newPasswordEditText_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/homeUniversitySpinner_editAccountInformationFragment" />
 
@@ -166,7 +166,7 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm Changes With Current Password"
+        android:text="@string/editAccountInformationView_confirmCurrentPassword"
         app:layout_constraintBottom_toTopOf="@+id/currentPasswordConfirmation_editAccountInformationFragment"
         app:layout_constraintStart_toStartOf="@+id/currentPasswordConfirmation_editAccountInformationFragment"
         app:layout_constraintTop_toTopOf="@+id/currentPasswordConfirmation_editAccountInformationFragment" />

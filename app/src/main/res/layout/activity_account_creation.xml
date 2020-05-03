@@ -11,7 +11,7 @@
         android:layout_width="350dp"
         android:layout_height="70dp"
         android:layout_marginTop="16dp"
-        android:text="Password needs to contain the following: \n - Minimum 12 characters \n - At least one number, one special character, one capital and one small letter "
+        android:text="@string/common_passwordRequirements"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="167dp"
         android:layout_height="48dp"
         android:onClick="confirmPressed"
-        android:text="Confirm"
+        android:text="@string/accountCreation_ConfirmButton"
         app:layout_constraintBottom_toBottomOf="@+id/cancelButton_account_creation"
         app:layout_constraintEnd_toEndOf="@+id/confirmPasswordTextField_account_creation"
         app:layout_constraintTop_toTopOf="@+id/cancelButton_account_creation"
@@ -80,7 +80,7 @@
         android:id="@+id/emailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email"
+        android:text="@string/Common_eMail"
         app:layout_constraintBottom_toTopOf="@+id/emailTextField_account_creation"
         app:layout_constraintStart_toStartOf="@+id/emailTextField_account_creation"
         app:layout_constraintTop_toTopOf="@+id/emailTextField_account_creation" />
@@ -88,7 +88,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="First Name"
+        android:text="@string/common_firstName"
         app:layout_constraintBottom_toTopOf="@+id/firstNameTextField_account_creation"
         app:layout_constraintStart_toStartOf="@+id/firstNameTextField_account_creation"
         app:layout_constraintTop_toTopOf="@+id/firstNameTextField_account_creation" />
@@ -97,7 +97,7 @@
         android:id="@+id/textView2"
         android:layout_width="78dp"
         android:layout_height="21dp"
-        android:text="Last Name"
+        android:text="@string/common_lastName"
         app:layout_constraintBottom_toTopOf="@+id/lastNameTextField_account_creation"
         app:layout_constraintStart_toStartOf="@+id/lastNameTextField_account_creation"
         app:layout_constraintTop_toTopOf="@+id/lastNameTextField_account_creation" />
@@ -106,7 +106,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm Password"
+        android:text="@string/common_confirmPassword"
         app:layout_constraintBottom_toTopOf="@+id/confirmPasswordTextField_account_creation"
         app:layout_constraintStart_toStartOf="@+id/confirmPasswordTextField_account_creation"
         app:layout_constraintTop_toTopOf="@+id/confirmPasswordTextField_account_creation" />
@@ -134,7 +134,7 @@
         android:id="@+id/cancelButton_account_creation"
         android:layout_width="167dp"
         android:layout_height="48dp"
-        android:text="Cancel"
+        android:text="@string/common_cancelButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/confirmPasswordTextField_account_creation"
         app:layout_constraintTop_toBottomOf="@+id/confirmPasswordTextField_account_creation"
@@ -155,7 +155,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
+        android:text="@string/common_password"
         app:layout_constraintBottom_toTopOf="@+id/passwordTextField_account_creation"
         app:layout_constraintStart_toStartOf="@+id/passwordTextField_account_creation"
         app:layout_constraintTop_toTopOf="@+id/passwordTextField_account_creation" />

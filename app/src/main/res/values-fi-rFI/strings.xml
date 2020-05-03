@@ -23,6 +23,9 @@
     <!-- accountCreation specific -->
     <string name="accountCreation_ConfirmButton">Vahvista</string>
 
+    <!-- authenticationView -->
+    <string name="authenticationView_hintText">Kirjoita 2-vaiheisen varmennuksen \n luku alla olevaan tekstikenttään</string>
+
     <!-- mainView specific -->
     <string name="mainView_nextDay">Seuraava Päivä</string>
     <string name="mainView_currentDay">Tämä Päivä</string>
@@ -35,10 +38,22 @@
     <string name="mainView_saturday">Lauantai</string>
     <string name="mainView_sunday">Sunnuntai</string>
 
+    <!-- sideMenu specific -->
+    <string name="sideMenu_mainTitle">Päänäkymä</string>
+    <string name="sideMenu_userTitle">Käyttäjä</string>
+    <string name="sideMenu_restaurantMenus">Ravintoloiden Ruokalistat</string>
+    <string name="sideMenu_ownReviews">Omat Arvostelut</string>
+    <string name="sideMenu_account">Tili</string>
+    <string name="sideMenu_settings">Asetukset</string>
+    <string name="sideMenu_logOut">Kirjaudu Ulos</string>
+
     <!-- ownReviewsView specific -->
     <string name="ownReviewsView_viewTitle">Omat arvostelusi</string>
     <string name="ownReviewsView_publishedTitle">Julkaistut arvostelusi</string>
     <string name="ownReviewsView_draftsTitle">Arvostelu luonnoksesi</string>
+    <string name="ownReviewsView_universityFilter">Suodata arvosteluja yliopistojen mukaan</string>
+    <string name="ownReviewsView_restaurantFilter">Suodata arvosteluja ravintoloiden mukaan</string>
+    <string name="ownReviewsView_sort">Järjestä arvostelut</string>
     <string name="ownReviewsView_food">"Ruoka: "</string>
     <string name="ownReviewsView_date">"Päivämäärä: "</string>
     <string name="ownReviewsView_restaurant">"Ravintola: "</string>
@@ -51,8 +66,10 @@
     <string name="editReviewView_deleteReviewButton">Poista arvostelu</string>
     <string name="editReviewView_saveReviewButton">Tallenna luonnoksena</string>
     <string name="editReviewView_publishReviewButton">Tallenna ja julkaise</string>
+    <string name="editReviewView_HintText">Anna kirjallinen arvostelu...</string>
 
     <!-- accountView specific -->
+    <string name="accountView_editButton">Muokkaa</string>
 
     <!-- editAccountInformationView specific -->
     <string name="editAccountInformationView_newPassword">Uusi Salasana</string>
@@ -68,4 +85,5 @@
     <!-- navigationDrawer specific -->
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
 </resources>

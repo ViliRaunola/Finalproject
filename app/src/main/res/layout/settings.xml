@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:textAlignment="center"
-        android:text="Here you can change the language.\nThe Language will change automatically when pressing selected language "
+        android:text="@string/SettingsView_titleText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +44,7 @@
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Language"
+        android:text="@string/SettingsView_language"
         app:layout_constraintBottom_toTopOf="@+id/languageSpinner_settings"
         app:layout_constraintStart_toStartOf="@+id/languageSpinner_settings"
         app:layout_constraintTop_toTopOf="@+id/languageSpinner_settings" />

@@ -38,7 +38,7 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Restaurant"
+        android:text="@string/common_restaurant"
         app:layout_constraintBottom_toTopOf="@+id/restaurant_spinner"
         app:layout_constraintStart_toStartOf="@+id/restaurant_spinner"
         app:layout_constraintTop_toTopOf="@+id/restaurant_spinner" />
@@ -47,7 +47,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="University"
+        android:text="@string/common_university"
         app:layout_constraintBottom_toTopOf="@+id/university_spinner"
         app:layout_constraintStart_toStartOf="@+id/university_spinner"
         app:layout_constraintTop_toTopOf="@+id/university_spinner" />
@@ -78,7 +78,7 @@
         android:layout_width="125dp"
         android:layout_height="48dp"
         android:layout_marginBottom="8dp"
-        android:text="Next Day"
+        android:text="@string/mainView_nextDay"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
         app:layout_constraintEnd_toEndOf="@+id/listViewFood" />
 
@@ -87,7 +87,7 @@
         android:layout_width="125dp"
         android:layout_height="48dp"
         android:layout_marginBottom="8dp"
-        android:text="Previous Day"
+        android:text="@string/mainView_previousDay"
         app:layout_constraintBottom_toTopOf="@+id/listViewFood"
         app:layout_constraintStart_toStartOf="@+id/listViewFood" />
 
@@ -95,7 +95,7 @@
         android:id="@+id/currentDayButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Current Day"
+        android:text="@string/mainView_currentDay"
         app:layout_constraintBottom_toTopOf="@+id/nextDayButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
