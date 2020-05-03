@@ -22,7 +22,7 @@
         android:layout_width="167dp"
         android:layout_height="48dp"
         android:onClick="confirmPressed"
-        android:text="@string/accountCreation_ConfirmButton"
+        android:text="@string/accountCreation_makeAccountButton"
         app:layout_constraintBottom_toBottomOf="@+id/cancelButton_account_creation"
         app:layout_constraintEnd_toEndOf="@+id/confirmPasswordTextField_account_creation"
         app:layout_constraintTop_toTopOf="@+id/cancelButton_account_creation"
@@ -125,7 +125,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home University"
+        android:text="@string/common_homeUniversity"
         app:layout_constraintBottom_toTopOf="@+id/homeUniversity_spinner_account_creation"
         app:layout_constraintStart_toStartOf="@+id/homeUniversity_spinner_account_creation"
         app:layout_constraintTop_toTopOf="@+id/homeUniversity_spinner_account_creation" />

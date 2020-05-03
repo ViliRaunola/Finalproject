@@ -6,11 +6,11 @@
     <string name="common_loginButton">Kirjaudu sisään</string>
     <string name="Common_eMail">Sähköposti</string>
     <string name="common_password">Salasana</string>
-    <string name="common_confirmPassword">Vahvista Salasana</string>
+    <string name="common_confirmPassword">Vahvista salasana</string>
     <string name="common_firstName">Etunimi</string>
     <string name="common_lastName">Sukunimi</string>
-    <string name="common_homeUniversity">Koti Yliopisto</string>
-    <string name="common_passwordRequirements">Salasanan tulee sisältää: \\n - Vähintään 12 merkkiä \\n - Vähintään yksi numero, yksi erikoismerkki, yksi iso ja yksi pieni kirjain</string>
+    <string name="common_homeUniversity">Koti yliopisto</string>
+    <string name="common_passwordRequirements">Salasanan tulee sisältää: \n - Vähintään 12 merkkiä \n - Vähintään yksi numero, yksi erikoismerkki, yksi iso ja yksi pieni kirjain</string>
     <string name="common_cancelButton">Peruuta</string>
     <string name="common_university">Yliopisto</string>
     <string name="common_restaurant">Ravintola</string>
@@ -21,15 +21,15 @@
     <string name="loginScreen_CreateAccountButton">Luo uusi tili</string>
 
     <!-- accountCreation specific -->
-    <string name="accountCreation_ConfirmButton">Vahvista</string>
+    <string name="accountCreation_makeAccountButton">Luo tili</string>
 
     <!-- authenticationView -->
-    <string name="authenticationView_hintText">Kirjoita 2-vaiheisen varmennuksen \n luku alla olevaan tekstikenttään</string>
+    <string name="authenticationView_hintText">Kirjoita 2-vaiheisen varmennuksen luku alla olevaan tekstikenttään</string>
 
     <!-- mainView specific -->
-    <string name="mainView_nextDay">Seuraava Päivä</string>
-    <string name="mainView_currentDay">Tämä Päivä</string>
-    <string name="mainView_previousDay">Edellinen Päivä</string>
+    <string name="mainView_nextDay">Seuraava päivä</string>
+    <string name="mainView_currentDay">Tämä päivä</string>
+    <string name="mainView_previousDay">Edellinen päivä</string>
     <string name="mainView_monday">Maanantai</string>
     <string name="mainView_tuesday">Tiistai</string>
     <string name="mainView_wednesday">Keskiviikko</string>
@@ -41,8 +41,8 @@
     <!-- sideMenu specific -->
     <string name="sideMenu_mainTitle">Päänäkymä</string>
     <string name="sideMenu_userTitle">Käyttäjä</string>
-    <string name="sideMenu_restaurantMenus">Ravintoloiden Ruokalistat</string>
-    <string name="sideMenu_ownReviews">Omat Arvostelut</string>
+    <string name="sideMenu_restaurantMenus">Ravintoloiden ruokalistat</string>
+    <string name="sideMenu_ownReviews">Omat arvostelut</string>
     <string name="sideMenu_account">Tili</string>
     <string name="sideMenu_settings">Asetukset</string>
     <string name="sideMenu_logOut">Kirjaudu Ulos</string>
@@ -72,9 +72,9 @@
     <string name="accountView_editButton">Muokkaa</string>
 
     <!-- editAccountInformationView specific -->
-    <string name="editAccountInformationView_newPassword">Uusi Salasana</string>
-    <string name="editAccountInformationView_confirmNewPassword">Vahvista Uusi Salasana</string>
-    <string name="editAccountInformationView_confirmCurrentPassword">Vahvista Muutokset Nykyisellä Salasanallasi</string>
+    <string name="editAccountInformationView_newPassword">Uusi salasana</string>
+    <string name="editAccountInformationView_confirmNewPassword">Vahvista uusi salasana</string>
+    <string name="editAccountInformationView_confirmCurrentPassword">Vahvista muutokset nykyisellä salasanallasi</string>
     <string name="editAccountInformationView_saveButton">Vahvista muutokset</string>
 
     <!-- settingsView specific -->
