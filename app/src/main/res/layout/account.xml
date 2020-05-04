@@ -10,12 +10,11 @@
         android:id="@+id/emailEditText_account_fragment"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:enabled="false"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,9 +35,7 @@
         android:ems="10"
         android:enabled="false"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/emailEditText_account_fragment"
         app:layout_constraintTop_toBottomOf="@+id/emailEditText_account_fragment" />
 
     <TextView
@@ -58,9 +55,7 @@
         android:ems="10"
         android:enabled="false"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/firstNameEditText_account_fragment"
         app:layout_constraintTop_toBottomOf="@+id/firstNameEditText_account_fragment" />
 
     <TextView
@@ -80,8 +75,7 @@
         android:ems="10"
         android:enabled="false"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/lastNameEditText_account_fragment"
         app:layout_constraintTop_toBottomOf="@+id/lastNameEditText_account_fragment" />
 
     <TextView
@@ -101,9 +95,7 @@
         android:ems="10"
         android:enabled="false"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/passwordEditText_account_fragment"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText_account_fragment" />
 
     <TextView

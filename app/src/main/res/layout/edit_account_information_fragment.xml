@@ -11,7 +11,7 @@
         android:layout_height="48dp"
         android:text="@string/common_cancelButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
+        app:layout_constraintStart_toStartOf="@+id/currentPasswordConfirmation_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/currentPasswordConfirmation_editAccountInformationFragment" />
 
     <TextView
@@ -29,7 +29,7 @@
         android:layout_height="48dp"
         android:text="@string/editAccountInformationView_saveButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
+        app:layout_constraintEnd_toEndOf="@+id/currentPasswordConfirmation_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/currentPasswordConfirmation_editAccountInformationFragment" />
 
     <EditText
@@ -50,8 +50,8 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/emailEditText_editAccountInformationFragment"
+        app:layout_constraintStart_toStartOf="@+id/emailEditText_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/emailEditText_editAccountInformationFragment" />
 
     <EditText
@@ -61,8 +61,8 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/firstNameEditText_editAccountInformationFragment"
+        app:layout_constraintStart_toStartOf="@+id/firstNameEditText_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/firstNameEditText_editAccountInformationFragment" />
 
     <EditText
@@ -72,8 +72,8 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView16"
+        app:layout_constraintStart_toStartOf="@+id/textView16"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <Spinner
@@ -81,8 +81,8 @@
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/lastNameEditText_editAccountInformationFragment"
+        app:layout_constraintStart_toStartOf="@+id/lastNameEditText_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/lastNameEditText_editAccountInformationFragment" />
 
     <EditText
@@ -92,8 +92,8 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/newPasswordEditText_editAccountInformationFragment"
+        app:layout_constraintStart_toStartOf="@+id/newPasswordEditText_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/newPasswordEditText_editAccountInformationFragment" />
 
     <TextView
@@ -148,7 +148,8 @@
         android:layout_height="70dp"
         android:layout_marginTop="8dp"
         android:text="@string/common_passwordRequirements"
-        app:layout_constraintStart_toStartOf="@+id/newPasswordEditText_editAccountInformationFragment"
+        app:layout_constraintEnd_toEndOf="@+id/homeUniversitySpinner_editAccountInformationFragment"
+        app:layout_constraintStart_toStartOf="@+id/homeUniversitySpinner_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/homeUniversitySpinner_editAccountInformationFragment" />
 
     <EditText
@@ -158,8 +159,8 @@
         android:layout_marginTop="48dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
+        app:layout_constraintStart_toStartOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment" />
 
     <TextView

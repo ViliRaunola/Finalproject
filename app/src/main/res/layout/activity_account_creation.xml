@@ -12,9 +12,9 @@
         android:layout_height="70dp"
         android:layout_marginTop="16dp"
         android:text="@string/common_passwordRequirements"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/homeUniversity_spinner_account_creation"
         app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/homeUniversity_spinner_account_creation"
         app:layout_constraintTop_toBottomOf="@+id/homeUniversity_spinner_account_creation" />
 
     <Button
@@ -36,7 +36,6 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,9 +46,9 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/passwordTextField_account_creation"
         app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/passwordTextField_account_creation"
         app:layout_constraintTop_toBottomOf="@+id/passwordTextField_account_creation" />
 
     <EditText
@@ -59,9 +58,9 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/firstNameTextField_account_creation"
         app:layout_constraintHorizontal_bias="0.524"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/firstNameTextField_account_creation"
         app:layout_constraintTop_toBottomOf="@+id/firstNameTextField_account_creation" />
 
     <EditText
@@ -71,9 +70,9 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/emailTextField_account_creation"
         app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/emailTextField_account_creation"
         app:layout_constraintTop_toBottomOf="@+id/emailTextField_account_creation" />
 
     <TextView
@@ -116,9 +115,9 @@
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/lastNameTextField_account_creation"
         app:layout_constraintHorizontal_bias="0.524"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/lastNameTextField_account_creation"
         app:layout_constraintTop_toBottomOf="@+id/lastNameTextField_account_creation" />
 
     <TextView
@@ -147,8 +146,8 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView18"
+        app:layout_constraintStart_toStartOf="@+id/textView18"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <TextView

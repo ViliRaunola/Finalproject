@@ -24,8 +24,8 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/randomNumberTextView"
+        app:layout_constraintStart_toStartOf="@+id/randomNumberTextView"
         app:layout_constraintTop_toBottomOf="@+id/randomNumberTextView" />
 
     <TextView
@@ -36,9 +36,8 @@
         android:text="@string/authenticationView_hintText"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/randomNumberTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/randomNumberTextView"
+        app:layout_constraintStart_toStartOf="@+id/randomNumberTextView" />
 
     <Button
         android:id="@+id/cancelButton_authentication"

@@ -13,9 +13,9 @@
         android:layout_marginTop="16dp"
         android:text="@string/ownReviewsView_viewTitle"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/universitySpinner_ownReviews"
         app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/universitySpinner_ownReviews"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
@@ -24,9 +24,9 @@
         android:layout_height="32dp"
         android:layout_marginTop="24dp"
         android:textAlignment="textStart"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/restaurantSpinner_ownReviews"
         app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/restaurantSpinner_ownReviews"
         app:layout_constraintTop_toBottomOf="@+id/restaurantSpinner_ownReviews" />
 
     <ListView
@@ -34,8 +34,8 @@
         android:layout_width="366dp"
         android:layout_height="180dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ownReviews_sorting_spinner"
+        app:layout_constraintStart_toStartOf="@+id/ownReviews_sorting_spinner"
         app:layout_constraintTop_toBottomOf="@+id/ownReviews_sorting_spinner" />
 
     <ListView
@@ -43,8 +43,8 @@
         android:layout_width="366dp"
         android:layout_height="180dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/listViewPublishedReviews"
+        app:layout_constraintStart_toStartOf="@+id/listViewPublishedReviews"
         app:layout_constraintTop_toBottomOf="@+id/listViewPublishedReviews" />
 
     <TextView
@@ -62,9 +62,9 @@
         android:layout_height="32dp"
         android:layout_marginTop="24dp"
         android:textAlignment="textStart"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/universitySpinner_ownReviews"
         app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/universitySpinner_ownReviews"
         app:layout_constraintTop_toBottomOf="@+id/universitySpinner_ownReviews" />
 
     <Spinner
