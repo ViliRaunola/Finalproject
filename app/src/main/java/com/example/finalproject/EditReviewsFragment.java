@@ -75,9 +75,11 @@ public class EditReviewsFragment extends Fragment {
         saveAndPublishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setReviewInformation();
                 selectedOwnReview.setPublished(true);
                 modifyRestaurantReviewXmlFile();
                 Toast.makeText(getContext(),"Your review was saved and published",Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
             }
         });
         removeButton.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +87,7 @@ public class EditReviewsFragment extends Fragment {
             public void onClick(View view) {
                 removeReviewFromXml();
                 Toast.makeText(getContext(),"Your review was removed",Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
             }
         });
 
@@ -203,7 +206,8 @@ public class EditReviewsFragment extends Fragment {
             s = "\n</reviews>";
             fos.write(s.getBytes());
             fos.close();
-            allReviews.remove(selectedOwnReview);
+            allReviews.clear();
+            //allReviews.remove(selectedOwnReview);
         }catch (IOException e) {//TODO ADD REAL EXCEPTION
             e.printStackTrace();
         }

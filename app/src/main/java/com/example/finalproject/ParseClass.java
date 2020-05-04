@@ -169,6 +169,8 @@ public class ParseClass extends AppCompatActivity {
             Document xmlDoc = documentBuilder.parse(ins);
             NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("review");
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            reviewsPublished.clear();
+            reviewsNotPublished.clear();
 
             for(int i = 0; i < nodeList.getLength(); i++){
                 Node node = nodeList.item(i);

@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 parseClass.getAllReviews().clear();
                 parseClass.getReviewsNotPublished().clear();
                 parseClass.getReviewsPublished().clear();
-                
+
                 finish();
                 Toast.makeText(this, "You Have Logged Out", Toast.LENGTH_SHORT).show();
                 break;
