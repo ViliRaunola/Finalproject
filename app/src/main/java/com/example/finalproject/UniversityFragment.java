@@ -206,7 +206,7 @@ public class UniversityFragment extends Fragment implements Serializable {
                 bundle.putString("dateKey", dayOfFoodString);
                 foodReviewsFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, foodReviewsFragment);
-                ft.addToBackStack("Food_reviews_fragment");
+                ft.addToBackStack("food_reviews_fragment");
                 ft.commit();
             }
         });

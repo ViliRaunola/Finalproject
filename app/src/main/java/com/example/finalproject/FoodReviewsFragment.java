@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -41,7 +42,8 @@ public class FoodReviewsFragment extends Fragment {
         overallRatingBar = (RatingBar)v.findViewById(R.id.overalLratingBar_foodReviewsFragment);
         allReviewsListView = (ListView)v.findViewById(R.id.allReviews_foodReviewsFragment);
         foodNameTextView = (TextView)v.findViewById(R.id.foodNameTextView);
-
+        overallRating = 0;
+        reviewCounter = 0;
         reviewsForFood.clear();
 
 
@@ -96,6 +98,22 @@ public class FoodReviewsFragment extends Fragment {
         });
 
 
+        allReviewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ViewReviewFragment viewReviewFragment = new ViewReviewFragment();
+
+                Bundle bundle = new Bundle();
+
+                bundle.putSerializable("FoodReviewKey", reviewsForFood.get(position));
+                viewReviewFragment.setArguments(bundle);
+                ft.replace(R.id.fragment_container, viewReviewFragment);
+                ft.addToBackStack("fragment_viewreview");
+                ft.commit();
+            }
+        });
 
         return v;
     }
@@ -105,5 +123,6 @@ public class FoodReviewsFragment extends Fragment {
         super.onResume();
         parseClass.getAllReviews().clear();
         foodNameTextView.invalidate();
+        overallRatingBar.setRating(overallRating);
     }
 }
