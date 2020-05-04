@@ -55,29 +55,31 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //set the language
         Language.getInstance().loadLocale(this);
         setContentView(R.layout.activity_login);
-        System.out.println(Locale.getDefault().getLanguage());
+
 
         context = this;
-
         parseClass.parseUniversity(context);
-
-        Language.getInstance().loadLocale(context);
         login = (Button) findViewById(R.id.login);
         createAccount = (Button) findViewById(R.id.createAccount);
         email = (EditText) findViewById(R.id.emailTextField_login);
         password = (EditText) findViewById(R.id.passwordTextField_login);
 
         languageSpinner = (Spinner)findViewById(R.id.languageSpinner_login);
-        languageList.add("Change Language");
+        languageList.add(getResources().getString(R.string.loginScreen_changeLanguage));
+
+        //creating language spinner
         parseLanguage();
         final ArrayAdapter<String> languageSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, languageList);
         languageSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         languageSpinner.setAdapter(languageSpinnerAdapter);
+
+        //set selection to always show change language/vaihda kieli
         languageSpinner.setSelection(0);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Login");
+        actionBar.setTitle(getResources().getString(R.string.common_loginButton));
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -86,13 +88,13 @@ public class LoginActivity extends AppCompatActivity {
                         break;
                     case 1:
                         Language.getInstance().setLocale("en", context);
-                        Language.getInstance().setLanguage("en");
+                        //Language.getInstance().setLanguage("en");
                         languageSpinner.setSelection(0);
                         recreate();
                         break;
                     case 2:
                         Language.getInstance().setLocale("fi", context);
-                        Language.getInstance().setLanguage("fi");
+                        //Language.getInstance().setLanguage("fi");
                         languageSpinner.setSelection(0);
                         recreate();
                         break;

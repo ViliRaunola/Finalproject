@@ -26,13 +26,14 @@ public class Authentication extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Language.getInstance().loadLocale(this);
         setContentView(R.layout.activity_authentication);
         context = this;
-        Language.getInstance().loadLocale(this);
+
         System.out.println(Locale.getDefault().getLanguage());
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Authentication");
+        actionBar.setTitle(getResources().getString(R.string.authenticationView_toolbar));
 
         randomNumberEditText = (EditText) findViewById(R.id.randomNumberInputEditText);
         randomNumberTextView = (TextView) findViewById(R.id.randomNumberTextView);
@@ -49,6 +50,7 @@ public class Authentication extends AppCompatActivity {
                 numberInput = randomNumberEditText.getText().toString();
                 if (numberInput.equals(randomNumber)) {
                     startActivity(new Intent(Authentication.this, MainActivity.class));
+                    finish();
                 }else {
                     Toast.makeText(context,"Wrong number, please try again",Toast.LENGTH_SHORT).show();
                 }

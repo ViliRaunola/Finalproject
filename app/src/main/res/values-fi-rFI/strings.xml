@@ -16,14 +16,17 @@
     <string name="common_restaurant">Ravintola</string>
 
     <!-- loginScreen specific -->
+    <string name="loginScreen_changeLanguage">Vaihda kieli</string>
     <string name="loginScreen_EmailHint">Kirjoita sähköpostisi tähän...</string>
     <string name="loginScreen_passwordHint">Kirjoita salasanasi tähän...</string>
     <string name="loginScreen_CreateAccountButton">Luo uusi tili</string>
 
     <!-- accountCreation specific -->
+    <string name="accountCreation_appBar">Tilin luonti</string>
     <string name="accountCreation_makeAccountButton">Luo tili</string>
 
     <!-- authenticationView -->
+    <string name="authenticationView_toolbar">Varmistus</string>
     <string name="authenticationView_hintText">Kirjoita 2-vaiheisen varmennuksen luku alla olevaan tekstikenttään</string>
 
     <!-- mainView specific -->

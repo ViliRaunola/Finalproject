@@ -79,10 +79,10 @@ public class OwnReviewsFragment extends Fragment {
         clearChoices();
         //sorting options
 
-        sortingList.add("Date");
-        sortingList.add("Food"); //ruoka;pvm;restaurant;score
-        sortingList.add("Restaurant");
-        sortingList.add("Average Score");
+        sortingList.add(getResources().getString(R.string.ownReviewsView_date));
+        sortingList.add(getResources().getString(R.string.ownReviewsView_food)); //ruoka;pvm;restaurant;score
+        sortingList.add(getResources().getString(R.string.ownReviewsView_restaurant));
+        sortingList.add(getResources().getString(R.string.ownReviewsView_overallScore));
 
         //arrayadapter for spinner
         ArrayAdapter<String> ap = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, sortingList);

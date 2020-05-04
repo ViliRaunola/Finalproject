@@ -34,12 +34,12 @@ public class Language extends Application {
         String language = sharedPreferences.getString("My_language","");
         setLocale(language, context);
     }
-    //TODO voidaa ottaa pois kun käännös toimii kunnolla
+    /*//TODO voidaa ottaa pois kun käännös toimii kunnolla
     public String getLanguge(){
         return lang;
     }
     //TODO voidaa ottaa pois kun käännös toimii kunnolla
     public void setLanguage(String language){
         this.lang = language;
-    }
+    }*/
 }
