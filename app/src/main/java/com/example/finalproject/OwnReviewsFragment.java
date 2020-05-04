@@ -184,7 +184,6 @@ public class OwnReviewsFragment extends Fragment {
                 bundle.putSerializable("allReviews", parseClass.getAllReviews());
                 editReviewsFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, editReviewsFragment);
-                ft.addToBackStack("edit_own_reviews_fragment");
                 ft.commit();
 
                 //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).addToBackStack("edit_own_reviews_fragment").commit();
@@ -204,7 +203,6 @@ public class OwnReviewsFragment extends Fragment {
                 bundle.putSerializable("allReviews", parseClass.getAllReviews());
                 editReviewsFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, editReviewsFragment);
-                ft.addToBackStack("edit_own_reviews_fragment");
                 ft.commit();
                 //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).addToBackStack("edit_own_reviews_fragment").commit();
             }

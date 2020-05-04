@@ -6,20 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
@@ -76,17 +66,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
 
-
+        //if drawer is open --> close the drawer
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+
+        //if Restaurant Menus page is open --> move task to back
+        }else if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof UniversityFragment){
             this.moveTaskToBack(true);
-        } else if(getSupportFragmentManager().getBackStackEntryCount()>0){
-            getSupportFragmentManager().popBackStack();
 
-        }else{
+        //if one of side menu pages is open --> Restaurant Menus page
+        }else if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof AccountFragment) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
+            toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
+        }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof OwnReviewsFragment){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
+            toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
+        }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof SettingsFragment){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
+            toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
 
+        //if edit review page is open --> Own reviews
+        }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof EditReviewsFragment){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).commit();
+            //super.onBackPressed();
+            toolbar.setTitle(getResources().getString(R.string.sideMenu_ownReviews));
+
+        //if edit account information is open --> Account page
+        }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof EditAccountInformationFragment){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).commit();
+            //super.onBackPressed();
+            toolbar.setTitle(getResources().getString(R.string.sideMenu_account));
+
+        //if food reviews page is open --> Restaurant Menus
+        }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof FoodReviewsFragment){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
+            //super.onBackPressed();
+            toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
+
+        }else {
+            super.onBackPressed();
         }
+
     }
 
     //This handles what item has been selected by Vili.
@@ -94,25 +114,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_restaurants:
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).addToBackStack("restaurant_fragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
                 break;
             case R.id.nav_reviews:
                 //sendUniversityFragmentRestaurantsOwnReviews();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).addToBackStack("reviews_fragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).commit();
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 toolbar.setTitle(getResources().getString(R.string.sideMenu_ownReviews));
                 break;
             case R.id.nav_account:
                 //sendUniversityFragmentRestaurantsAccount();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).addToBackStack("account_fragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).commit();
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
                 toolbar.setTitle(getResources().getString(R.string.sideMenu_account));
                 break;
             case R.id.nav_settings:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, settingsFragment).addToBackStack("settings_fragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, settingsFragment).commit();
                 toolbar.setTitle(getResources().getString(R.string.sideMenu_settings));
                 break;
             case R.id.nav_logout:
@@ -131,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 /*
     public void sendUniversityFragmentRestaurantsOwnReviews(){
         Bundle bundle = new Bundle();

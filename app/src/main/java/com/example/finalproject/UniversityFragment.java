@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -58,7 +59,7 @@ public class UniversityFragment extends Fragment implements Serializable {
     Context context;
     ParseClass parseClass = ParseClass.getInstance();
     DateClass dateClass = DateClass.getInstance();
-    University selectedUniversity;
+    MainActivity mainActivity;
 
     @Nullable
     @Override
@@ -73,6 +74,8 @@ public class UniversityFragment extends Fragment implements Serializable {
         nextDayButton = v.findViewById(R.id.nextDayButton);
         currentDayButton = v.findViewById(R.id.currentDayButton);
         context = getContext();
+
+
 
 
         toDayInt = dateClass.getToDayInt();
@@ -227,4 +230,5 @@ public class UniversityFragment extends Fragment implements Serializable {
         super.onResume();
         universitySpinner.setSelection(user.getHomeUniversityPos());
     }
+
 }

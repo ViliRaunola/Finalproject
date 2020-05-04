@@ -99,4 +99,5 @@ public class SettingsFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
 }
