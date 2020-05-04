@@ -39,6 +39,7 @@ public class FoodReviewsFragment extends Fragment {
         allReviewsListView = (ListView)v.findViewById(R.id.allReviews_foodReviewsFragment);
         foodNameTextView = (TextView)v.findViewById(R.id.foodNameTextView);
 
+        reviewsForFood.clear();
 
 
 
@@ -96,5 +97,6 @@ public class FoodReviewsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         parseClass.getAllReviews().clear();
+        foodNameTextView.invalidate();
     }
 }

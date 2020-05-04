@@ -47,6 +47,7 @@ public class AddNewReviewFragment extends Fragment {
         cancelButton = (Button)v.findViewById(R.id.cancel_button_add_new_review);
 
 
+
         try{
             informationBundle = getArguments();
             selectedFood = (FoodItem) informationBundle.getSerializable("FoodKey");
@@ -93,7 +94,8 @@ public class AddNewReviewFragment extends Fragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FoodReviewsFragment()).commit();
+                getActivity().onBackPressed();
+                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FoodReviewsFragment()).commit();
             }
         });
         return v;

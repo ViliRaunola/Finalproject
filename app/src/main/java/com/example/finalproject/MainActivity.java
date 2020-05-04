@@ -103,6 +103,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //super.onBackPressed();
             toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
 
+        }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof AddNewReviewFragment){
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
+            super.onBackPressed();
+            toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
+
         }else {
             super.onBackPressed();
         }
