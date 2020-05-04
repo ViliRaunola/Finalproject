@@ -33,6 +33,7 @@ public class EditReviewsFragment extends Fragment {
     private Button saveAndPublishButton;
     private Button removeButton;
     private Bundle informationBundle;
+    private Button cancelButton;
     private FoodReview selectedOwnReview;
     private ArrayList<FoodReview> allReviews;
 
@@ -51,6 +52,7 @@ public class EditReviewsFragment extends Fragment {
         saveAndPublishButton = (Button)v.findViewById(R.id.saveAndPublishEditReview);
         removeButton = (Button)v.findViewById(R.id.removeButtonEditReview);
         writtenReview = (EditText) v.findViewById(R.id.writtenReview);
+        cancelButton = (Button)v.findViewById(R.id.review_edit_cancel_button2);
 
         try{
             informationBundle = getArguments();
@@ -90,6 +92,13 @@ public class EditReviewsFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
             }
         });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
+            }
+        });
+
 
 
 
