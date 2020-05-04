@@ -12,8 +12,10 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class ParseClass extends AppCompatActivity {
     private ArrayList<FoodReview> allReviews = new ArrayList<FoodReview>();
     private ArrayList<FoodReview> reviewsPublished = new ArrayList<FoodReview>();
     private ArrayList<FoodReview> reviewsNotPublished = new ArrayList<FoodReview>();
+    private int biggestReviewId;
 
     //Initialize singleton class
     private static ParseClass parseClass = new ParseClass();
@@ -161,8 +164,13 @@ public class ParseClass extends AppCompatActivity {
     }
 
 
+    public int getBiggestReviewId() {
+        return this.biggestReviewId;
+    }
+
     //Gets selected restaurant reviews from the user.
     public void parseRestaurantReviews(String selectedRestaurantName, Context context){
+        biggestReviewId = 0;
         User user = User.getInstance();
         try (FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/reviews/" + selectedRestaurantName + "_Reviews.xml"))){
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -172,6 +180,7 @@ public class ParseClass extends AppCompatActivity {
             reviewsPublished.clear();
             reviewsNotPublished.clear();
             allReviews.clear();
+
 
             for(int i = 0; i < nodeList.getLength(); i++){
                 Node node = nodeList.item(i);
@@ -204,6 +213,11 @@ public class ParseClass extends AppCompatActivity {
 
                     FoodReview review = new FoodReview(reviewId, publishedBoolean,foodId, foodName, selectedRestaurantName, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId);
                     allReviews.add(review);
+
+                    if(Integer.parseInt(review.getReviewId()) >= biggestReviewId){
+                        biggestReviewId = Integer.parseInt(review.getReviewId()) + 1;
+                    }
+
                     if(Integer.parseInt(userId) == user.getUserID()){
                         if(publishedBoolean){
                             reviewsPublished.add(review);
@@ -224,6 +238,100 @@ public class ParseClass extends AppCompatActivity {
         }
     }
 
+    public void removeReviewFromXml(Context context, FoodReview selectedOwnReview) {
+
+        OutputStreamWriter osw = null;
+        String s;
+        try {
+            File file = new File(context.getFilesDir() +"/reviews/" + selectedOwnReview.getRestaurant() + "_Reviews.xml");
+            FileOutputStream fos = new FileOutputStream(file);
+
+            s = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                    "<reviews>\n";
+            fos.write(s.getBytes());
+
+            for (FoodReview review : allReviews) {
+                System.out.println(allReviews.size());
+                if (review.getReviewId().equals(selectedOwnReview.getReviewId())){
+                    s = "";
+                }else {
+                    System.out.println("ELSEN SISÄLLÄ ##############");
+                    s = "<review>\n" +
+                            "        <reviewId>" + review.getReviewId() + "</reviewId>\n" +
+                            "        <foodId>" + review.getFoodId() + "</foodId>\n" +
+                            "        <foodName>" + review.getFoodName() + "</foodName>\n" +
+                            "        <userId>" + review.getUserId() + "</userId>\n" +
+                            "        <tasteScore>" + review.getTasteScore() + "</tasteScore>\n" +
+                            "        <lookScore>" + review.getLookScore() + "</lookScore>\n" +
+                            "        <textureScore>" + review.getTextureScore() + "</textureScore>\n" +
+                            "        <reviewText>" + review.getReviewText() + "</reviewText>\n" +
+                            "        <date>" + review.getDateString() + "</date>\n" +
+                            "        <published>" + review.getPublished() + "</published>\n" +
+                            "    </review>";
+                }
+                fos.write(s.getBytes());
+            }
+            s = "\n</reviews>";
+            fos.write(s.getBytes());
+            fos.close();
+            allReviews.clear();
+            //allReviews.remove(selectedOwnReview);
+        }catch (IOException e) {//TODO ADD REAL EXCEPTION
+            e.printStackTrace();
+        }
+    }
+    //https://stackoverflow.com/questions/17022221/openfileoutput-how-to-create-files-outside-the-data-data-path
+    //Teacher's coding video
+    //Rewrites the specific restaurant review folder with new information for the selected review
+    public void modifyRestaurantReviewXmlFile(Context context, FoodReview selectedOwnReview) {
+        OutputStreamWriter osw = null;
+        String s;
+        try {
+            File file = new File(context.getFilesDir() +"/reviews/" + selectedOwnReview.getRestaurant() + "_Reviews.xml");
+            FileOutputStream fos = new FileOutputStream(file);
+
+            s = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                    "<reviews>";
+            fos.write(s.getBytes());
+
+            for (FoodReview review : allReviews) {
+                if (review.getReviewId().equals(selectedOwnReview.getReviewId())){
+                    s = "<review>\n" +
+                            "        <reviewId>" + selectedOwnReview.getReviewId() + "</reviewId>\n" +
+                            "        <foodId>" + selectedOwnReview.getFoodId() + "</foodId>\n" +
+                            "        <foodName>" + selectedOwnReview.getFoodName() + "</foodName>\n" +
+                            "        <userId>" + selectedOwnReview.getUserId() + "</userId>\n" +
+                            "        <tasteScore>" + selectedOwnReview.getTasteScore() + "</tasteScore>\n" +
+                            "        <lookScore>" + selectedOwnReview.getLookScore() + "</lookScore>\n" +
+                            "        <textureScore>" + selectedOwnReview.getTextureScore() + "</textureScore>\n" +
+                            "        <reviewText>" + selectedOwnReview.getReviewText() + "</reviewText>\n" +
+                            "        <date>" + selectedOwnReview.getDateString() + "</date>\n" +
+                            "        <published>" + selectedOwnReview.getPublished() + "</published>\n" +
+                            "    </review>";
+                }else {
+                    s = "<review>\n" +
+                            "        <reviewId>" + review.getReviewId() + "</reviewId>\n" +
+                            "        <foodId>" + review.getFoodId() + "</foodId>\n" +
+                            "        <foodName>" + review.getFoodName() + "</foodName>\n" +
+                            "        <userId>" + review.getUserId() + "</userId>\n" +
+                            "        <tasteScore>" + review.getTasteScore() + "</tasteScore>\n" +
+                            "        <lookScore>" + review.getLookScore() + "</lookScore>\n" +
+                            "        <textureScore>" + review.getTextureScore() + "</textureScore>\n" +
+                            "        <reviewText>" + review.getReviewText() + "</reviewText>\n" +
+                            "        <date>" + review.getDateString() + "</date>\n" +
+                            "        <published>" + review.getPublished() + "</published>\n" +
+                            "    </review>";
+                }
+                fos.write(s.getBytes());
+            }
+            s = "\n</reviews>";
+            fos.write(s.getBytes());
+            fos.close();
+            allReviews.clear();
+        }catch (IOException e) {//TODO ADD REAL EXCEPTION
+            e.printStackTrace();
+        }
+    }
 
 
 }

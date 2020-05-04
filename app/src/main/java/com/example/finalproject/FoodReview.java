@@ -1,6 +1,7 @@
 package com.example.finalproject;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -20,6 +21,10 @@ public class FoodReview implements Serializable {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
     private Boolean published;
 
+
+    public FoodReview(){
+
+    }
 
     public FoodReview(String reviewId,Boolean published, String f, String n, String r, Date d, float taScore, float loScore, float teScore, String text, String userId) {
         foodId = f;
@@ -94,7 +99,34 @@ public class FoodReview implements Serializable {
         this.averageScore = (this.lookScore + this.textureScore + this.tasteScore) / 3;
     }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setFoodId(String foodId) {
+        this.foodId = foodId;
+    }
+
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
+
+    public void setRestaurant(String restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public void setDate(String date) {
+        try{
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            this.date = simpleDateFormat.parse(date);
+            System.out.println(this.date + "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getDateString(){
+        System.out.println(simpleDateFormat.format(this.date) + "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         return simpleDateFormat.format(this.date);
     }
 
@@ -102,6 +134,13 @@ public class FoodReview implements Serializable {
         return this.published.toString();
     }
 
+    public Boolean getPublishedBoolean(){
+        return this.published;
+    }
+
+    public void setReviewId(String id){
+        this.reviewId = id;
+    }
 
 
 
