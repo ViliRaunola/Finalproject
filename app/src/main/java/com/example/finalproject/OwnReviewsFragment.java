@@ -152,7 +152,7 @@ public class OwnReviewsFragment extends Fragment {
                    case 0:
                         //https://www.youtube.com/watch?v=Mguw_TQBExo how to use Collections.sort
                        //sort by date using Collections.sort
-                       Collections.sort(Sorting.sortByDate(parseClass.getReviewsPublished()), new Comparator<FoodReview>() {
+                       Collections.sort(parseClass.getReviewsPublished(), new Comparator<FoodReview>() {
                            @Override
                            public int compare(FoodReview foodReview, FoodReview t1) {
                                return foodReview.getDate().compareTo(t1.getDate());
@@ -164,7 +164,7 @@ public class OwnReviewsFragment extends Fragment {
                        publishedReviewsListView.setAdapter(arrayAdapterDatePublish);
 
                        //sort by date using Collections.sort
-                       Collections.sort(Sorting.sortByDate(parseClass.getReviewsNotPublished()), new Comparator<FoodReview>() {
+                       Collections.sort(parseClass.getReviewsNotPublished(), new Comparator<FoodReview>() {
                            @Override
                            public int compare(FoodReview foodReview, FoodReview t1) {
                                return foodReview.getDate().compareTo(t1.getDate());

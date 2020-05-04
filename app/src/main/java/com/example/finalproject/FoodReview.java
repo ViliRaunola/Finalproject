@@ -26,7 +26,7 @@ public class FoodReview implements Serializable {
 
     }
 
-    public FoodReview(String reviewId,Boolean published, String f, String n, String r, Date d, Float taScore, Float loScore, Float teScore, String text, String userId) {
+    public FoodReview(String reviewId,Boolean published, String f, String n, String r, Date d, float taScore, float loScore, float teScore, String text, String userId) {
         foodId = f;
         foodName = n;
         restaurant = r;
@@ -41,13 +41,13 @@ public class FoodReview implements Serializable {
         this.reviewId = reviewId;
     }
 
-    public Float getTasteScore() {
+    public float getTasteScore() {
         return tasteScore;
     }
-    public Float getLookScore() {
+    public float getLookScore() {
         return lookScore;
     }
-    public Float getTextureScore() {
+    public float getTextureScore() {
         return textureScore;
     }
     public Float getAverageScore() {
@@ -83,15 +83,15 @@ public class FoodReview implements Serializable {
         this.reviewText = text;
     }
 
-    public void setTasteScore(Float taste){
+    public void setTasteScore(float taste){
         this.tasteScore = taste;
     }
 
-    public void setLookScore(Float look){
+    public void setLookScore(float look){
         this.lookScore = look;
     }
 
-    public void setTextureScore(Float texture){
+    public void setTextureScore(float texture){
         this.textureScore = texture;
     }
 
