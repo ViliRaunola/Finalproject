@@ -10,7 +10,7 @@
         android:id="@+id/foodInfoWindow_add_new_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,73 +20,99 @@
         android:id="@+id/tasteRatingbar_add_new_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/writtenReview_add_new_review"
         app:layout_constraintTop_toBottomOf="@+id/foodInfoWindow_add_new_review" />
 
     <RatingBar
         android:id="@+id/appearenceRatingbar_add_new_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/tasteRatingbar_add_new_review"
+        app:layout_constraintHorizontal_bias="0.812"
+        app:layout_constraintStart_toStartOf="@+id/tasteRatingbar_add_new_review"
         app:layout_constraintTop_toBottomOf="@+id/tasteRatingbar_add_new_review" />
 
     <RatingBar
         android:id="@+id/textureRatingbar_add_new_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/appearenceRatingbar_add_new_review"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/appearenceRatingbar_add_new_review"
         app:layout_constraintTop_toBottomOf="@+id/appearenceRatingbar_add_new_review" />
 
     <EditText
         android:id="@+id/writtenReview_add_new_review"
-        android:layout_width="310dp"
-        android:layout_height="151dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="350dp"
+        android:layout_height="225dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
+        android:gravity="start|bottom"
+        android:hint="@string/editReviewView_HintText"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/foodInfoWindow_add_new_review"
+        app:layout_constraintStart_toStartOf="@+id/foodInfoWindow_add_new_review"
         app:layout_constraintTop_toBottomOf="@+id/textureRatingbar_add_new_review" />
 
     <Button
         android:id="@+id/addreview_button_add_new_review"
-        android:layout_width="302dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="24dp"
-        android:text="Publish Review"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/editReviewView_publishReviewButton"
+        app:layout_constraintEnd_toEndOf="@+id/writtenReview_add_new_review"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/writtenReview_add_new_review"
         app:layout_constraintTop_toBottomOf="@+id/writtenReview_add_new_review" />
 
     <Button
         android:id="@+id/save_button_add_new_review"
-        android:layout_width="294dp"
-        android:layout_height="57dp"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:text="Save to drafts"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/editReviewView_saveReviewButton"
+        app:layout_constraintEnd_toEndOf="@+id/addreview_button_add_new_review"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/addreview_button_add_new_review"
         app:layout_constraintTop_toBottomOf="@+id/addreview_button_add_new_review" />
 
     <Button
         android:id="@+id/cancel_button_add_new_review"
-        android:layout_width="293dp"
+        android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="8dp"
         android:text="@string/common_cancelButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/save_button_add_new_review"
+        app:layout_constraintStart_toStartOf="@+id/save_button_add_new_review"
         app:layout_constraintTop_toBottomOf="@+id/save_button_add_new_review" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/editReviewView_taste"
+        app:layout_constraintBottom_toBottomOf="@+id/tasteRatingbar_add_new_review"
+        app:layout_constraintStart_toStartOf="@+id/writtenReview_add_new_review"
+        app:layout_constraintTop_toTopOf="@+id/tasteRatingbar_add_new_review" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/editReviewView_appearance"
+        app:layout_constraintBottom_toBottomOf="@+id/appearenceRatingbar_add_new_review"
+        app:layout_constraintStart_toStartOf="@+id/writtenReview_add_new_review"
+        app:layout_constraintTop_toTopOf="@+id/appearenceRatingbar_add_new_review" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/editReviewView_texture"
+        app:layout_constraintBottom_toBottomOf="@+id/textureRatingbar_add_new_review"
+        app:layout_constraintStart_toStartOf="@+id/writtenReview_add_new_review"
+        app:layout_constraintTop_toTopOf="@+id/textureRatingbar_add_new_review" />
 </androidx.constraintlayout.widget.ConstraintLayout>
