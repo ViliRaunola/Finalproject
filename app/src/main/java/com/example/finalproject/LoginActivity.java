@@ -88,13 +88,11 @@ public class LoginActivity extends AppCompatActivity {
                         break;
                     case 1:
                         Language.getInstance().setLocale("en", context);
-                        //Language.getInstance().setLanguage("en");
                         languageSpinner.setSelection(0);
                         recreate();
                         break;
                     case 2:
                         Language.getInstance().setLocale("fi", context);
-                        //Language.getInstance().setLanguage("fi");
                         languageSpinner.setSelection(0);
                         recreate();
                         break;
