@@ -1,6 +1,8 @@
 package com.example.finalproject;
 
-public class FoodItem {
+import java.io.Serializable;
+
+public class FoodItem implements Serializable {
     private String name;
     private String price;
     private String id;
@@ -14,6 +16,14 @@ public class FoodItem {
         this.id = id;
         this.day = day;
 
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public int getDay(){

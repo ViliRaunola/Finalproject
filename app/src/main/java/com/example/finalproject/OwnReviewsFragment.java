@@ -226,5 +226,4 @@ public class OwnReviewsFragment extends Fragment {
         notPublishedReviewsListView.clearChoices();
     }
 
-
 }

@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -187,7 +189,19 @@ public class UniversityFragment extends Fragment implements Serializable {
         foodItemLisView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                FoodReviewsFragment foodReviewsFragment = new FoodReviewsFragment();
 
+                Bundle bundle = new Bundle();
+                FoodItem selectedFood = dailyFoods.get(i);
+                String selectedUniversityName = restaurantSpinner.getSelectedItem().toString();
+                bundle.putSerializable("FoodKey", selectedFood);
+                bundle.putString("resKey", selectedUniversityName);
+                foodReviewsFragment.setArguments(bundle);
+                ft.replace(R.id.fragment_container, foodReviewsFragment);
+                ft.addToBackStack("Food_reviews_fragment");
+                ft.commit();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,foodReviewsFragment).commit();
             }
         });

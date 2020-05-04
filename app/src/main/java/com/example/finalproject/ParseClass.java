@@ -171,6 +171,7 @@ public class ParseClass extends AppCompatActivity {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
             reviewsPublished.clear();
             reviewsNotPublished.clear();
+            allReviews.clear();
 
             for(int i = 0; i < nodeList.getLength(); i++){
                 Node node = nodeList.item(i);
