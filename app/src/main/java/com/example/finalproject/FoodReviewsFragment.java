@@ -65,7 +65,7 @@ public class FoodReviewsFragment extends Fragment {
         overallRating = overallRating / reviewCounter;
 
         overallRatingBar.setRating(overallRating);
-        
+
 
         if (reviewsForFood.size() > 0) {
             ArrayAdapter<FoodReview> arrayAdapter = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, reviewsForFood);

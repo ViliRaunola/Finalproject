@@ -57,6 +57,7 @@ public class UniversityFragment extends Fragment implements Serializable {
     User user = User.getInstance();
     Context context;
     ParseClass parseClass = ParseClass.getInstance();
+    DateClass dateClass = DateClass.getInstance();
     University selectedUniversity;
 
     @Nullable
@@ -74,7 +75,7 @@ public class UniversityFragment extends Fragment implements Serializable {
         context = getContext();
 
 
-        getToDayInt();
+        toDayInt = dateClass.getToDayInt();
         parseClass.getUniversities().clear();
         parseClass.parseUniversity(context);
         ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getUniversities());
@@ -88,8 +89,8 @@ public class UniversityFragment extends Fragment implements Serializable {
         universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                dayTextView.setText(getCurrentDate());
-                getToDayInt();
+                dayTextView.setText(dateClass.getCurrentDate());
+                toDayInt = dateClass.getToDayInt();
                 parseClass.getRestaurants().clear();
 
 
@@ -131,8 +132,8 @@ public class UniversityFragment extends Fragment implements Serializable {
         currentDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dayTextView.setText(getCurrentDate());
-                getToDayInt();
+                dayTextView.setText(dateClass.getCurrentDate());
+                toDayInt = dateClass.getToDayInt();
                 checkCurrentDay(toDayInt, restaurantPosition);
                 foodItemLisView.invalidateViews();
             }
@@ -148,7 +149,7 @@ public class UniversityFragment extends Fragment implements Serializable {
                         Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
                     }else {
                         Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
-                        String previousDate = simpleDateFormat.format(changeDate(selectedDate, -1));
+                        String previousDate = simpleDateFormat.format(dateClass.changeDate(selectedDate, -1));
                         dayTextView.setText(previousDate);
                         toDayInt -= 1;
                         checkCurrentDay(toDayInt, restaurantPosition);
@@ -172,7 +173,7 @@ public class UniversityFragment extends Fragment implements Serializable {
                         Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
                     }else{
                         Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
-                        String nextDate = simpleDateFormat.format(changeDate(selectedDate, 1));
+                        String nextDate = simpleDateFormat.format(dateClass.changeDate(selectedDate, 1));
                         dayTextView.setText(nextDate);
                         toDayInt += 1;
                         checkCurrentDay(toDayInt, restaurantPosition);
@@ -219,30 +220,6 @@ public class UniversityFragment extends Fragment implements Serializable {
                 continue;
             }
         }
-    }
-
-    public void getToDayInt(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String temp = dtf.format(now);
-        String time[] = temp.split(" "); //time[0] == yyyy/MM/dd
-        final String day[] = time[0].split("/"); //day[2] == d
-        toDayInt = Integer.parseInt(day[2]);
-    }
-
-    // returns current date
-    public String getCurrentDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy");
-        Date currentDate = new Date();
-        return simpleDateFormat.format(currentDate);
-    }
-
-    //returns next or previous date (+1 or -1)
-    public static Date changeDate(Date date, int numberOfDays) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.add(Calendar.DATE, numberOfDays);
-        return cal.getTime();
     }
 
     @Override
