@@ -77,11 +77,18 @@ public class EditReviewsFragment extends Fragment {
         saveAndPublishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setReviewInformation();
-                selectedOwnReview.setPublished(true);
-                parseClass.modifyRestaurantReviewXmlFile(getContext(), selectedOwnReview);
-                Toast.makeText(getContext(),"Your review was saved and published",Toast.LENGTH_SHORT).show();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
+                if ((tasteRatingBar.getRating() == 0)
+                        && (appearanceRatingBar.getRating() == 0)
+                        &&(textureRatingBar.getRating() == 0)
+                        && (writtenReview.getText().toString().trim().equals(""))) {
+                    Toast.makeText(getContext(), "Can't publish a review with score of 0 without text.", Toast.LENGTH_SHORT).show();
+                } else {
+                    setReviewInformation();
+                    selectedOwnReview.setPublished(true);
+                    parseClass.modifyRestaurantReviewXmlFile(getContext(), selectedOwnReview);
+                    Toast.makeText(getContext(), "Your review was saved and published", Toast.LENGTH_SHORT).show();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
+                }
             }
         });
         removeButton.setOnClickListener(new View.OnClickListener() {
