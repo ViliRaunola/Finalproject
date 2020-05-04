@@ -75,19 +75,26 @@ public class AddNewReviewFragment extends Fragment {
         saveAndPublishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setReviewInformation();
-                newOwnReview.setPublished(true);
-                newOwnReview.setReviewId(String.valueOf(parseClass.getBiggestReviewId()));
+                if ((tasteRatingBar.getRating() == 0)
+                && (appearanceRatingBar.getRating() == 0)
+                &&(textureRatingBar.getRating() == 0)
+                && (writtenReview.getText().toString().trim().equals(""))) {
+                    Toast.makeText(getContext(), "Can't publish a review with score of 0 without text.", Toast.LENGTH_SHORT).show();
+                } else {
+                    setReviewInformation();
+                    newOwnReview.setPublished(true);
+                    newOwnReview.setReviewId(String.valueOf(parseClass.getBiggestReviewId()));
 
-                System.out.println(parseClass.getAllReviews() + "Ennen ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤");
+                    System.out.println(parseClass.getAllReviews() + "Ennen ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤");
 
-                parseClass.parseRestaurantReviews(selectedRestaurantName, getContext());
+                    parseClass.parseRestaurantReviews(selectedRestaurantName, getContext());
 
-                parseClass.getAllReviews().add(newOwnReview);
-                System.out.println(parseClass.getAllReviews() + "jälkeen");
-                parseClass.modifyRestaurantReviewXmlFile(getContext(), newOwnReview);
-                Toast.makeText(getContext(),"Your review was saved and published",Toast.LENGTH_SHORT).show();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UniversityFragment()).commit();
+                    parseClass.getAllReviews().add(newOwnReview);
+                    System.out.println(parseClass.getAllReviews() + "jälkeen");
+                    parseClass.modifyRestaurantReviewXmlFile(getContext(), newOwnReview);
+                    Toast.makeText(getContext(), "Your review was saved and published", Toast.LENGTH_SHORT).show();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UniversityFragment()).commit();
+                }
             }
         });
 
