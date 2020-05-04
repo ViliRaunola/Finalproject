@@ -12,10 +12,10 @@ public class FoodReview implements Serializable {
     private String foodName;
     private String restaurant;
     private Date date; //TODO käytetäänkö me tätä?
-    private float tasteScore;
-    private float lookScore;
-    private float textureScore;
-    private float averageScore;
+    private Float tasteScore;
+    private Float lookScore;
+    private Float textureScore;
+    private Float averageScore;
     private String reviewText;
     private String userId;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -50,7 +50,7 @@ public class FoodReview implements Serializable {
     public float getTextureScore() {
         return textureScore;
     }
-    public float getAverageScore() {
+    public Float getAverageScore() {
         return averageScore;
     }
     public String getReviewText() {

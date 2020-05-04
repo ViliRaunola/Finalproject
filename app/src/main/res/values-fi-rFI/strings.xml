@@ -57,10 +57,10 @@
     <string name="ownReviewsView_universityFilter">Suodata arvosteluja yliopistojen mukaan</string>
     <string name="ownReviewsView_restaurantFilter">Suodata arvosteluja ravintoloiden mukaan</string>
     <string name="ownReviewsView_sort">Järjestä arvostelut</string>
-    <string name="ownReviewsView_food">"Ruoka: "</string>
-    <string name="ownReviewsView_date">"Päivämäärä: "</string>
-    <string name="ownReviewsView_restaurant">"Ravintola: "</string>
-    <string name="ownReviewsView_overallScore">"Yleinen arvosana: "</string>
+    <string name="ownReviewsView_food">"Ruoka"</string>
+    <string name="ownReviewsView_date">"Päivämäärä"</string>
+    <string name="ownReviewsView_restaurant">"Ravintola"</string>
+    <string name="ownReviewsView_overallScore">"Yleinen arvosana"</string>
 
     <!-- editReviewView specific -->
     <string name="editReviewView_taste">Maku</string>
