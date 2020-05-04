@@ -12,10 +12,10 @@ public class FoodReview implements Serializable {
     private String foodName;
     private String restaurant;
     private Date date; //TODO käytetäänkö me tätä?
-    private float tasteScore;
-    private float lookScore;
-    private float textureScore;
-    private float averageScore;
+    private Float tasteScore;
+    private Float lookScore;
+    private Float textureScore;
+    private Float averageScore;
     private String reviewText;
     private String userId;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -26,7 +26,7 @@ public class FoodReview implements Serializable {
 
     }
 
-    public FoodReview(String reviewId,Boolean published, String f, String n, String r, Date d, float taScore, float loScore, float teScore, String text, String userId) {
+    public FoodReview(String reviewId,Boolean published, String f, String n, String r, Date d, Float taScore, Float loScore, Float teScore, String text, String userId) {
         foodId = f;
         foodName = n;
         restaurant = r;
@@ -41,16 +41,16 @@ public class FoodReview implements Serializable {
         this.reviewId = reviewId;
     }
 
-    public float getTasteScore() {
+    public Float getTasteScore() {
         return tasteScore;
     }
-    public float getLookScore() {
+    public Float getLookScore() {
         return lookScore;
     }
-    public float getTextureScore() {
+    public Float getTextureScore() {
         return textureScore;
     }
-    public float getAverageScore() {
+    public Float getAverageScore() {
         return averageScore;
     }
     public String getReviewText() {
@@ -83,15 +83,15 @@ public class FoodReview implements Serializable {
         this.reviewText = text;
     }
 
-    public void setTasteScore(float taste){
+    public void setTasteScore(Float taste){
         this.tasteScore = taste;
     }
 
-    public void setLookScore(float look){
+    public void setLookScore(Float look){
         this.lookScore = look;
     }
 
-    public void setTextureScore(float texture){
+    public void setTextureScore(Float texture){
         this.textureScore = texture;
     }
 

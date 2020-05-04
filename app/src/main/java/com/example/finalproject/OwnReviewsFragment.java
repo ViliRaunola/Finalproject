@@ -31,6 +31,8 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
@@ -81,7 +83,6 @@ public class OwnReviewsFragment extends Fragment {
 
         sortingList.add(getResources().getString(R.string.ownReviewsView_date));
         sortingList.add(getResources().getString(R.string.ownReviewsView_food)); //ruoka;pvm;restaurant;score
-        sortingList.add(getResources().getString(R.string.ownReviewsView_restaurant));
         sortingList.add(getResources().getString(R.string.ownReviewsView_overallScore));
 
         //arrayadapter for spinner
@@ -145,20 +146,92 @@ public class OwnReviewsFragment extends Fragment {
         //sorting spinner listener
         sortingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-               selectedSortingMethod = sortingSpinner.getSelectedItem().toString();
-               switch (selectedSortingMethod) {
-                   case "Date":
-                       Toast.makeText(getContext(), "Sorting by date", Toast.LENGTH_SHORT).show();
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+               //selectedSortingMethod = sortingSpinner.getSelectedItem().toString();
+               switch (position) {
+                   case 0:
+                        //https://www.youtube.com/watch?v=Mguw_TQBExo how to use Collections.sort
+                       //sort by date using Collections.sort
+                       Collections.sort(Sorting.sortByDate(parseClass.getReviewsPublished()), new Comparator<FoodReview>() {
+                           @Override
+                           public int compare(FoodReview foodReview, FoodReview t1) {
+                               return foodReview.getDate().compareTo(t1.getDate());
+                           }
+                       });
+
+                       //setting new adapter for published reviews
+                       ArrayAdapter<FoodReview> arrayAdapterDatePublish = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  parseClass.getReviewsPublished());
+                       publishedReviewsListView.setAdapter(arrayAdapterDatePublish);
+
+                       //sort by date using Collections.sort
+                       Collections.sort(Sorting.sortByDate(parseClass.getReviewsNotPublished()), new Comparator<FoodReview>() {
+                           @Override
+                           public int compare(FoodReview foodReview, FoodReview t1) {
+                               return foodReview.getDate().compareTo(t1.getDate());
+                           }
+                       });
+
+                       //setting new adapter for not published reviews
+                       ArrayAdapter<FoodReview> arrayAdapterDate2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
+                       notPublishedReviewsListView.setAdapter(arrayAdapterDate2);
+
                        break;
-                   case "Food":
-                       Toast.makeText(getContext(), "Sorting by food", Toast.LENGTH_SHORT).show();
+                   case 1:
+                       //https://www.youtube.com/watch?v=Mguw_TQBExo how to use Collections.sort
+                       //sort by food using Collections.sort
+                       Collections.sort(parseClass.getReviewsPublished(), new Comparator<FoodReview>() {
+                           @Override
+                           public int compare(FoodReview foodReview, FoodReview t1) {
+                               return foodReview.getFoodName().compareTo(t1.getFoodName());
+                           }
+                       });
+                       //setting new adapter for published reviews
+                       ArrayAdapter<FoodReview> arrayAdapterFood = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  parseClass.getReviewsPublished());
+                       publishedReviewsListView.setAdapter(arrayAdapterFood);
+
+                       //sort by date using Collections.sort
+                       Collections.sort(parseClass.getReviewsNotPublished(), new Comparator<FoodReview>() {
+                           @Override
+                           public int compare(FoodReview foodReview, FoodReview t1) {
+                               return foodReview.getFoodName().compareTo(t1.getFoodName());
+                           }
+                       });
+
+                       //setting new adapter for not published reviews
+                       ArrayAdapter<FoodReview> arrayAdapterFood2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
+                       notPublishedReviewsListView.setAdapter(arrayAdapterFood2);
                        break;
-                   case "Restaurant":
-                       Toast.makeText(getContext(), "Sorting by restaurant", Toast.LENGTH_SHORT).show();
-                       break;
-                   case "Average Score":
-                       Toast.makeText(getContext(), "Sorting by average score", Toast.LENGTH_SHORT).show();
+
+                   case 2:
+                       //https://stackoverflow.com/questions/9941890/sorting-arraylist-of-objects-by-float how to sort by float
+                       //sort by overall score using Collections.sort
+                       Collections.sort(parseClass.getReviewsPublished(), new Comparator<FoodReview>() {
+                           @Override
+                           public int compare(FoodReview foodReview, FoodReview t1) {
+                               return Float.compare(foodReview.getAverageScore(),t1.getAverageScore());
+                           }
+                       });
+
+                       //reverse the list
+                       Collections.reverse(parseClass.getReviewsPublished());
+
+                       //setting new adapter for published reviews
+                       ArrayAdapter<FoodReview> arrayAdapterScore = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  parseClass.getReviewsPublished());
+                       publishedReviewsListView.setAdapter(arrayAdapterScore);
+
+                       //sort by date using Collections.sort
+                       Collections.sort(parseClass.getReviewsNotPublished(), new Comparator<FoodReview>() {
+                           @Override
+                           public int compare(FoodReview foodReview, FoodReview t1) {
+                               return Float.compare(foodReview.getAverageScore(),t1.getAverageScore());
+                           }
+                       });
+                       //reverse the list
+                       Collections.reverse(parseClass.getReviewsNotPublished());
+
+                       //setting new adapter for not published reviews
+                       ArrayAdapter<FoodReview> arrayAdapterScore2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
+                       notPublishedReviewsListView.setAdapter(arrayAdapterScore2);
                }
             }
 
