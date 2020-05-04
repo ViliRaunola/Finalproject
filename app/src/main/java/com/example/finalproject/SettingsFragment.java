@@ -62,12 +62,10 @@ public class SettingsFragment extends Fragment {
                 switch (position) {
                     case 0:
                         Language.getInstance().setLocale("en", getContext());
-                        Language.getInstance().setLanguage("en");
                         getActivity().recreate();
                         break;
                     case 1:
                         Language.getInstance().setLocale("fi", getContext());
-                        Language.getInstance().setLanguage("fi");
                         getActivity().recreate();
                         break;
                 }

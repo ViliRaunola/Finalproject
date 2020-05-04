@@ -127,7 +127,6 @@ public class EditAccountInformationFragment extends Fragment {
                     user.setLastName(lastNameInput);
                     user.setFirstName(firstNameInput);
                     user.setHomeUniversityPos(homeUniversityPos);
-                    System.out.println(homeUniversityPos + "             kotihomon paikka ========================================================================================¤");
                     user.setHomeUniversity(homeUniversity_spinner.getSelectedItem().toString());
                     user.setEmail(emailInput);
 

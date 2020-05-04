@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //set the toolbar text
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Restaurant Menus");
+        toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
 
         //Part of onNavigationItemSelected.
         drawer = findViewById(R.id.drawer_layout);
@@ -80,11 +80,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }else if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            super.onBackPressed();
+            this.moveTaskToBack(true);
         } else if(getSupportFragmentManager().getBackStackEntryCount()>0){
             getSupportFragmentManager().popBackStack();
+
         }else{
-            this.moveTaskToBack(true);
+
         }
     }
 
@@ -93,30 +94,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_restaurants:
-                System.out.println(getSupportFragmentManager().findFragmentById(R.id.fragment_container));
-                System.out.println(getBaseContext());
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).addToBackStack("restaurant_fragment").commit();
                 Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
-                toolbar.setTitle("Restaurant Menus");
-
+                toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
                 break;
             case R.id.nav_reviews:
                 //sendUniversityFragmentRestaurantsOwnReviews();
-
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).addToBackStack("reviews_fragment").commit();
                 Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
-                toolbar.setTitle("Own Reviews");
-
+                toolbar.setTitle(getResources().getString(R.string.sideMenu_ownReviews));
                 break;
             case R.id.nav_account:
                 //sendUniversityFragmentRestaurantsAccount();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).addToBackStack("account_fragment").commit();
                 Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
-                toolbar.setTitle("Account");
+                toolbar.setTitle(getResources().getString(R.string.sideMenu_account));
                 break;
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, settingsFragment).addToBackStack("settings_fragment").commit();
-                toolbar.setTitle("Settings");
+                toolbar.setTitle(getResources().getString(R.string.sideMenu_settings));
                 break;
             case R.id.nav_logout:
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -152,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
  */
 
-   @SuppressWarnings("deprecation")
+  /* @SuppressWarnings("deprecation")
     public void setLocale(String language){
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
@@ -168,6 +165,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
         String language = sharedPreferences.getString("My_language","");
         setLocale(language);
-    }
+    }*/
 
 }

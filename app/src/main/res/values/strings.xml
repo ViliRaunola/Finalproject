@@ -15,14 +15,17 @@
     <string name="common_restaurant">Restaurant</string>
 
     <!-- loginScreen specific -->
+    <string name="loginScreen_changeLanguage">Change language</string>
     <string name="loginScreen_EmailHint">Write your email here...</string>
     <string name="loginScreen_passwordHint">Write your password here...</string>
     <string name="loginScreen_CreateAccountButton">Create a new account</string>
 
     <!-- accountCreation specific -->
+    <string name="accountCreation_appBar">Account creation</string>
     <string name="accountCreation_makeAccountButton">Make an account</string>
 
     <!-- authenticationView -->
+    <string name="authenticationView_toolbar">Authentication</string>
     <string name="authenticationView_hintText">Write the number to the text field below,\n for 2-step authentication</string>
 
     <!-- mainView specific -->
@@ -53,10 +56,10 @@
     <string name="ownReviewsView_universityFilter">Filter reviews by university</string>
     <string name="ownReviewsView_restaurantFilter">Filter reviews by restaurant</string>
     <string name="ownReviewsView_sort">Sort by</string>
-    <string name="ownReviewsView_food">Food: </string>
-    <string name="ownReviewsView_date">Date: </string>
-    <string name="ownReviewsView_restaurant">Restaurant: </string>
-    <string name="ownReviewsView_overallScore">Overall score: </string>
+    <string name="ownReviewsView_food">Food</string>
+    <string name="ownReviewsView_date">Date</string>
+    <string name="ownReviewsView_restaurant">Restaurant</string>
+    <string name="ownReviewsView_overallScore">Overall score</string>
 
     <!-- editReviewView specific -->
     <string name="editReviewView_taste">Taste</string>

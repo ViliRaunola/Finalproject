@@ -58,8 +58,8 @@ public class AccountCreationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_creation);
         Language.getInstance().loadLocale(this);
+        setContentView(R.layout.activity_account_creation);
         System.out.println(Locale.getDefault().getLanguage());
 
         confirmButton = (Button)findViewById(R.id.confirmButton_account_creation);
@@ -74,7 +74,7 @@ public class AccountCreationActivity extends AppCompatActivity {
 
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Account creation");
+        actionBar.setTitle(getResources().getString(R.string.accountCreation_appBar));
         //create spinner from universityList
 
         ArrayAdapter<University> ap = new ArrayAdapter<University>(this, android.R.layout.simple_list_item_1, parseClass.getUniversities());
