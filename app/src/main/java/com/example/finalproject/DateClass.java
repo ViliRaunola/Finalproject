@@ -19,11 +19,19 @@ public class DateClass {
     }
 
     // returns current date
-    public String getCurrentDate() {
+    public String getCurrentDateWithWeekDay() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy");
         Date currentDate = new Date();
         return simpleDateFormat.format(currentDate);
     }
+
+    public String getCurrentDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        Date currentDate = new Date();
+        return simpleDateFormat.format(currentDate);
+    }
+
+
 
     //returns next or previous date (+1 or -1)
     public static Date changeDate(Date date, int numberOfDays) {

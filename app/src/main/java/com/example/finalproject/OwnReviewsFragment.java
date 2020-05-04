@@ -201,7 +201,6 @@ public class OwnReviewsFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 FoodReview selectedReview = parseClass.getReviewsNotPublished().get(i);
                 bundle.putSerializable("reviewKey", selectedReview);
-                bundle.putSerializable("allReviews", parseClass.getAllReviews());
                 editReviewsFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, editReviewsFragment);
                 ft.addToBackStack("edit_own_reviews_fragment");

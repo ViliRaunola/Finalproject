@@ -89,7 +89,7 @@ public class UniversityFragment extends Fragment implements Serializable {
         universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                dayTextView.setText(dateClass.getCurrentDate());
+                dayTextView.setText(dateClass.getCurrentDateWithWeekDay());
                 toDayInt = dateClass.getToDayInt();
                 parseClass.getRestaurants().clear();
 
@@ -132,7 +132,7 @@ public class UniversityFragment extends Fragment implements Serializable {
         currentDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dayTextView.setText(dateClass.getCurrentDate());
+                dayTextView.setText(dateClass.getCurrentDateWithWeekDay());
                 toDayInt = dateClass.getToDayInt();
                 checkCurrentDay(toDayInt, restaurantPosition);
                 foodItemLisView.invalidateViews();
@@ -196,14 +196,13 @@ public class UniversityFragment extends Fragment implements Serializable {
 
                 Bundle bundle = new Bundle();
                 FoodItem selectedFood = dailyFoods.get(i);
-                String selectedUniversityName = restaurantSpinner.getSelectedItem().toString();
+                String selectedRestaurantName = restaurantSpinner.getSelectedItem().toString();
                 bundle.putSerializable("FoodKey", selectedFood);
-                bundle.putString("resKey", selectedUniversityName);
+                bundle.putString("resKey", selectedRestaurantName);
                 foodReviewsFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, foodReviewsFragment);
                 ft.addToBackStack("Food_reviews_fragment");
                 ft.commit();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,foodReviewsFragment).commit();
             }
         });
         return v;

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 
@@ -39,38 +40,55 @@ public class FoodReviewsFragment extends Fragment {
         foodNameTextView = (TextView)v.findViewById(R.id.foodNameTextView);
 
 
+
+
         try{
             informationBundle = getArguments();
             selectedFood = (FoodItem) informationBundle.getSerializable("FoodKey");
             selectedRestaurantName = (String) informationBundle.getString("resKey");
-            System.out.println(selectedRestaurantName + "====================================================ASDASDASDASDASDA=========================");
             parseClass.parseRestaurantReviews(selectedRestaurantName , getContext());
         }catch (Exception e){//TODO ADD REAL EXCEPTION
             e.printStackTrace();
         }
 
-
         foodNameTextView.setText(selectedFood.getName());
 
-
         for (FoodReview r : parseClass.getAllReviews()) {
-            if (selectedFood.getId().equals(r.getFoodId())) {
-                System.out.println(selectedFood.getId() + "====================================================ASDASDASDASDASDA=========================");
+            if (selectedFood.getId().equals(r.getFoodId()) && (r.getPublishedBoolean())) {
                 reviewsForFood.add(r);
                 overallRating += r.getAverageScore();
                 reviewCounter += 1;
             }
         }
-        System.out.println(reviewsForFood);
+
         overallRating = overallRating / reviewCounter;
-
         overallRatingBar.setRating(overallRating);
-
 
         if (reviewsForFood.size() > 0) {
             ArrayAdapter<FoodReview> arrayAdapter = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, reviewsForFood);
             allReviewsListView.setAdapter(arrayAdapter);
         }
+
+
+        addReviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                AddNewReviewFragment addNewReviewFragment = new AddNewReviewFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("FoodKey", selectedFood);
+                bundle.putString("resKey", selectedRestaurantName);
+                addNewReviewFragment.setArguments(bundle);
+                ft.replace(R.id.fragment_container, addNewReviewFragment);
+                ft.addToBackStack("Fragment_add_new_review");
+                ft.commit();
+            }
+        });
+
+
+
         return v;
     }
 

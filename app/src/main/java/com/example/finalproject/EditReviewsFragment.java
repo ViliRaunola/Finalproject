@@ -35,7 +35,7 @@ public class EditReviewsFragment extends Fragment {
     private Bundle informationBundle;
     private Button cancelButton;
     private FoodReview selectedOwnReview;
-    private ArrayList<FoodReview> allReviews;
+    ParseClass parseClass = ParseClass.getInstance();
 
 
 
@@ -57,19 +57,19 @@ public class EditReviewsFragment extends Fragment {
         try{
             informationBundle = getArguments();
             selectedOwnReview = (FoodReview) informationBundle.getSerializable("reviewKey");
-            allReviews = (ArrayList<FoodReview>) informationBundle.getSerializable("allReviews");
         }catch (Exception e){//TODO ADD REAL EXCEPTION
             e.printStackTrace();
         }
 
         getOldReviewInformation();
 
+        //TODO ADD BACKSTACK??
         saveReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setReviewInformation();
                 selectedOwnReview.setPublished(false);
-                modifyRestaurantReviewXmlFile();
+                parseClass.modifyRestaurantReviewXmlFile(getContext(), selectedOwnReview);
                 Toast.makeText(getContext(),"Your review was saved",Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
             }
@@ -79,7 +79,7 @@ public class EditReviewsFragment extends Fragment {
             public void onClick(View view) {
                 setReviewInformation();
                 selectedOwnReview.setPublished(true);
-                modifyRestaurantReviewXmlFile();
+                parseClass.modifyRestaurantReviewXmlFile(getContext(), selectedOwnReview);
                 Toast.makeText(getContext(),"Your review was saved and published",Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
             }
@@ -87,7 +87,7 @@ public class EditReviewsFragment extends Fragment {
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                removeReviewFromXml();
+                parseClass.removeReviewFromXml(getContext(),selectedOwnReview);
                 Toast.makeText(getContext(),"Your review was removed",Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
             }
@@ -121,6 +121,7 @@ public class EditReviewsFragment extends Fragment {
         foodInfoWindow.setText(selectedOwnReview.getFoodName());
     }
 
+    /*
     //https://stackoverflow.com/questions/17022221/openfileoutput-how-to-create-files-outside-the-data-data-path
     //Teacher's coding video
     //Rewrites the specific restaurant review folder with new information for the selected review
@@ -136,11 +137,8 @@ public class EditReviewsFragment extends Fragment {
                     "<reviews>";
             fos.write(s.getBytes());
 
-            for (FoodReview review : allReviews) {
-                System.out.println(allReviews.size());
+            for (FoodReview review : parseClass.getAllReviews()) {
                 if (review.getReviewId().equals(selectedOwnReview.getReviewId())){
-                    System.out.println("IFFIN SISÄLLÄ ##############");
-                    System.out.println(selectedOwnReview.getAverageScore());
                     s = "<review>\n" +
                             "        <reviewId>" + selectedOwnReview.getReviewId() + "</reviewId>\n" +
                             "        <foodId>" + selectedOwnReview.getFoodId() + "</foodId>\n" +
@@ -154,7 +152,6 @@ public class EditReviewsFragment extends Fragment {
                             "        <published>" + selectedOwnReview.getPublished() + "</published>\n" +
                             "    </review>";
                 }else {
-                    System.out.println("ELSEN SISÄLLÄ ##############");
                     s = "<review>\n" +
                             "        <reviewId>" + review.getReviewId() + "</reviewId>\n" +
                             "        <foodId>" + review.getFoodId() + "</foodId>\n" +
@@ -173,12 +170,15 @@ public class EditReviewsFragment extends Fragment {
             s = "\n</reviews>";
             fos.write(s.getBytes());
             fos.close();
-            allReviews.clear();
+            parseClass.getAllReviews().clear();
         }catch (IOException e) {//TODO ADD REAL EXCEPTION
             e.printStackTrace();
         }
     }
 
+     */
+
+    /*
     public void removeReviewFromXml() {
 
         OutputStreamWriter osw = null;
@@ -221,6 +221,8 @@ public class EditReviewsFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+     */
 }
 
 
