@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -48,5 +49,25 @@ public class DateClass {
         String time[] = temp.split(" "); //time[0] == yyyy/MM/dd
         final String day[] = time[0].split("/"); //day[2] == d
         return Integer.parseInt(day[2]);
+    }
+
+    //https://www.tutorialspoint.com/how-to-compare-two-dates-in-java
+    //compares if given date is later than current date
+    public Boolean compareDates(String selectedDateString) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy");
+        Boolean bol = true;
+        try {
+            Date today = simpleDateFormat.parse(getCurrentDateWithWeekDay());
+            Date selectedDate = simpleDateFormat.parse(selectedDateString);
+
+            if (selectedDate.compareTo(today) > 0) {
+                bol = false;
+            } else {
+                bol = true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return bol;
     }
 }

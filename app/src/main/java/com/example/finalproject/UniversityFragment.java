@@ -200,8 +200,10 @@ public class UniversityFragment extends Fragment implements Serializable {
                 Bundle bundle = new Bundle();
                 FoodItem selectedFood = dailyFoods.get(i);
                 String selectedRestaurantName = restaurantSpinner.getSelectedItem().toString();
+                String dayOfFoodString = dayTextView.getText().toString();
                 bundle.putSerializable("FoodKey", selectedFood);
                 bundle.putString("resKey", selectedRestaurantName);
+                bundle.putString("dateKey", dayOfFoodString);
                 foodReviewsFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, foodReviewsFragment);
                 ft.addToBackStack("Food_reviews_fragment");
@@ -218,8 +220,6 @@ public class UniversityFragment extends Fragment implements Serializable {
             FoodItem foodItem =  parseClass.getRestaurants().get(restaurantPlace).resDailyMenu.get(i);
             if(foodItem.getDay() == day){
                 dailyFoods.add(foodItem);
-            }else{
-                continue;
             }
         }
     }
