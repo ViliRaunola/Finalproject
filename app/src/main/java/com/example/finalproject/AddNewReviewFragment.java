@@ -9,12 +9,9 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 
 public class AddNewReviewFragment extends Fragment {
     private RatingBar tasteRatingBar;
@@ -28,15 +25,15 @@ public class AddNewReviewFragment extends Fragment {
     private Bundle informationBundle;
     private FoodItem selectedFood;
     private String selectedRestaurantName;
-
     private FoodReview newOwnReview;
-    ParseClass parseClass = ParseClass.getInstance();
 
+    ParseClass parseClass = ParseClass.getInstance();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add_new_review, container, false);
+
         tasteRatingBar = (RatingBar)v.findViewById(R.id.tasteRatingbar_add_new_review);
         textureRatingBar = (RatingBar)v.findViewById(R.id.textureRatingbar_add_new_review);
         appearanceRatingBar = (RatingBar)v.findViewById(R.id.appearenceRatingbar_add_new_review);
@@ -46,68 +43,90 @@ public class AddNewReviewFragment extends Fragment {
         saveReviewButton = (Button)v.findViewById(R.id.save_button_add_new_review);
         cancelButton = (Button)v.findViewById(R.id.cancel_button_add_new_review);
 
-
-
+        //getting data from food reviews page
         try{
             informationBundle = getArguments();
             selectedFood = (FoodItem) informationBundle.getSerializable("FoodKey");
             selectedRestaurantName = (String) informationBundle.getString("resKey");
-        }catch (Exception e){//TODO ADD REAL EXCEPTION
+        }catch (NullPointerException npe){
+            npe.printStackTrace();
+        }catch (Exception e){
             e.printStackTrace();
         }
 
-
-
+        //setting new review information and saving it to our own reviews as not published
         saveReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setReviewInformation();
+
+                //setting review as not published
                 newOwnReview.setPublished(false);
+
+                //setting id for the review
                 newOwnReview.setReviewId(String.valueOf(parseClass.getBiggestReviewId()));
+
+                //populate all reviews list to get already existing reviews
                 parseClass.parseRestaurantReviews(selectedRestaurantName, getContext());
                 parseClass.getAllReviews().add(newOwnReview);
+
+                //modifies restaurant file by adding the new review
                 parseClass.modifyRestaurantReviewXmlFile(getContext(), newOwnReview);
+
                 Toast.makeText(getContext(),"Your review was saved",Toast.LENGTH_SHORT).show();
+
+                //going to Restaurant Menu page
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UniversityFragment()).commit();
             }
         });
 
+        //checking that user has given feedback and saving the review and publishing it
         saveAndPublishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //checking that user has given some kind of feedback
                 if ((tasteRatingBar.getRating() == 0)
                 && (appearanceRatingBar.getRating() == 0)
                 &&(textureRatingBar.getRating() == 0)
                 && (writtenReview.getText().toString().trim().equals(""))) {
                     Toast.makeText(getContext(), "Can't publish a review with score of 0 without text.", Toast.LENGTH_SHORT).show();
                 } else {
+                    //setting review information
                     setReviewInformation();
+
+                    //setting review as published
                     newOwnReview.setPublished(true);
+
+                    //setting id for the review
                     newOwnReview.setReviewId(String.valueOf(parseClass.getBiggestReviewId()));
 
-                    System.out.println(parseClass.getAllReviews() + "Ennen ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤");
-
+                    //populate all reviews list to get already existing reviews
                     parseClass.parseRestaurantReviews(selectedRestaurantName, getContext());
-
                     parseClass.getAllReviews().add(newOwnReview);
-                    System.out.println(parseClass.getAllReviews() + "jälkeen");
+
+                    //modifies restaurant file by adding the new review
                     parseClass.modifyRestaurantReviewXmlFile(getContext(), newOwnReview);
+
                     Toast.makeText(getContext(), "Your review was saved and published", Toast.LENGTH_SHORT).show();
+
+                    //going to Restaurant Menu page
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UniversityFragment()).commit();
                 }
             }
         });
 
+        //going back to previous fragment
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().onBackPressed();
-                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FoodReviewsFragment()).commit();
             }
         });
         return v;
     }
 
+    //creating new foodReview object and setting information to it
     private void setReviewInformation(){
         newOwnReview = new FoodReview();
 
