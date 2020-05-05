@@ -161,7 +161,7 @@ public class FoodReview implements Serializable {
     @Override
     public String toString() {
         String temp;
-        temp = "Food: " + this.foodName + "\n" + "Date: " + simpleDateFormat.format(this.date) + "\n" + "Restaurant: " + this.restaurant + "\n" + "Average Score: " + String.format("%.1f", this.averageScore);
+        temp = "Food: " + this.foodName + "\n" + "Date: " + simpleDateFormat.format(this.date) + "\n" + "Restaurant: " + this.restaurant + "\n" + "Average Score: " + String.format("%.1f", this.averageScore) + "\n" + "Vote Score: " + this.voteScore;
         return temp;
     }
 }
