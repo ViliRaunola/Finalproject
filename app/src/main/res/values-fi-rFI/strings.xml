@@ -27,7 +27,7 @@
 
     <!-- authenticationView -->
     <string name="authenticationView_toolbar">Varmistus</string>
-    <string name="authenticationView_hintText">Kirjoita 2-vaiheisen varmennuksen luku alla olevaan tekstikenttään</string>
+    <string name="authenticationView_hintText">Kirjoita 2-vaiheisen varmennuksen luku \n alla olevaan tekstikenttään</string>
 
     <!-- mainView specific -->
     <string name="mainView_nextDay">Seuraava päivä</string>
@@ -92,8 +92,9 @@
     <string name="viewReviewView_hideReview">Piilota arvostelu</string>
 
     <!-- viewReviewsView -->
-    <string name="viewReviewsView_AddReview">Lisää arvostelu</string>
-    <string name="viewReviewsView_OverallScore">Yleinen arvosana</string>
+    <string name="viewReviewsView_addReview">Lisää arvostelu</string>
+    <string name="viewReviewsView_overallScore">Yleinen arvosana</string>
+    <string name="viewReviewsView_userReviews">Käyttäjien arvostelut</string>
 
     <!-- navigationDrawer specific -->
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>

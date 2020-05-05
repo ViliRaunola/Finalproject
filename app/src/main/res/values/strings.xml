@@ -91,8 +91,9 @@
     <string name="viewReviewView_hideReview">Hide review</string>
 
     <!-- viewReviewsView -->
-    <string name="viewReviewsView_AddReview">Add review</string>
-    <string name="viewReviewsView_OverallScore">Overall</string>
+    <string name="viewReviewsView_addReview">Add review</string>
+    <string name="viewReviewsView_overallScore">Overall</string>
+    <string name="viewReviewsView_userReviews">User reviews</string>
 
     <!-- navigationDrawer specific -->
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
