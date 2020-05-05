@@ -546,4 +546,22 @@
         <id>10</id>
         <day>30</day>
     </food>
+    <food>
+        <name>Apple iPad pro 11"</name>
+        <price>799€</price>
+        <id>12</id>
+        <day>31</day>
+    </food>
+    <food>
+        <name>Toilet paper</name>
+        <price>67.00€</price>
+        <id>11</id>
+        <day>31</day>
+    </food>
+    <food>
+        <name>Oven and BBQ cleaner</name>
+        <price>16.00€</price>
+        <id>10</id>
+        <day>31</day>
+    </food>
 </menu1>
