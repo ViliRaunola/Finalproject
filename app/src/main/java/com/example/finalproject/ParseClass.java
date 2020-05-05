@@ -32,6 +32,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+
+/*
+This class handles almost all the file reads and writes.
+Does it for both file types; xml and json.
+Stores also information (makes objects based on values read from files) to ArrayLists.
+ */
 public class ParseClass extends AppCompatActivity {
 
     private ArrayList<University> universities = new ArrayList<University>();
@@ -41,7 +47,7 @@ public class ParseClass extends AppCompatActivity {
     private ArrayList<FoodReview> reviewsNotPublished = new ArrayList<FoodReview>();
     private int biggestReviewId;
 
-    //Initialize singleton class
+    //Initializing singleton class.
     private static ParseClass parseClass = new ParseClass();
     private ParseClass() {
     }
@@ -49,28 +55,22 @@ public class ParseClass extends AppCompatActivity {
         return parseClass;
     }
 
-
     //Get methods
     public ArrayList<University> getUniversities(){
         return this.universities;
     }
-
     public ArrayList<Restaurant> getRestaurants(){
         return this.restaurants;
     }
-
     public ArrayList<FoodReview> getAllReviews(){
         return this.allReviews;
     }
-
     public ArrayList<FoodReview> getReviewsPublished(){
         return this.reviewsPublished;
     }
-
     public ArrayList<FoodReview> getReviewsNotPublished(){
         return this.reviewsNotPublished;
     }
-
 
     //Parses "university.xml" and creates University objects based on .xml parameters. Adds these new University objects to "universities"-ArrayList.
     //This ArrayList is shown in university_spinner.
@@ -105,10 +105,14 @@ public class ParseClass extends AppCompatActivity {
 
 
 
-    //Parses a specific XML file depending on the selected university from the university spinner
+    /*
+    Parses a specific XML file depending on the selected university position that is the same as the university spinner.
+    The position of the selected university is same in the spinner and universities list because same list is used to
+    populate the spinner.
+     */
     public void parseRestaurantsMenu(int pos, Context context) {
         University selectedUniversity = parseClass.universities.get(pos);
-        //university info to textView
+        //University info to textView
         for (String s : selectedUniversity.restaurantsXML) {
             try (FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/"+ s))) {
                 DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
