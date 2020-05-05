@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONException;
+
 import java.util.Locale;
 
 
@@ -105,6 +107,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof AddNewReviewFragment){
             //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
+            super.onBackPressed();
+            toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
+
+        }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof ViewReviewFragment){
+        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
             super.onBackPressed();
             toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
 

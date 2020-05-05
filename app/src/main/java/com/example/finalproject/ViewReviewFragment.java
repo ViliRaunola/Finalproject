@@ -12,6 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import org.json.JSONException;
+
+import java.util.ArrayList;
+
 public class ViewReviewFragment extends Fragment {
 
     private RatingBar tasteRatingBar;
@@ -26,7 +30,8 @@ public class ViewReviewFragment extends Fragment {
     private Bundle informationBundle;
     private FoodReview selectedFoodReview;
     private TextView voteScoreTextView;
-
+    private Boolean allReadyUpVoted;
+    private Boolean allReadyDownVoted;
     User user = User.getInstance();
     ParseClass parseClass = ParseClass.getInstance();
 
@@ -46,14 +51,26 @@ public class ViewReviewFragment extends Fragment {
         downVoteButton = (Button) v.findViewById(R.id.downVoteButton);
         upVoteButton = (Button) v.findViewById(R.id.upVoteButton);
 
-
+        allReadyDownVoted = false;
+        allReadyUpVoted = false;
         try{
             informationBundle = getArguments();
             selectedFoodReview = (FoodReview) informationBundle.getSerializable("FoodReviewKey");
         }catch (Exception e){//TODO ADD REAL EXCEPTION
             e.printStackTrace();
         }
-
+        System.out.println(allReadyDownVoted+"all ready downvoted");
+        System.out.println(allReadyUpVoted+"Allreadyupvotes");
+        allReadyDownVoted = checkVoteList(user.getDownVotedList());
+        allReadyUpVoted = checkVoteList(user.getUpVotedList());
+        System.out.println(allReadyDownVoted+"all ready downvoted");
+        System.out.println(allReadyUpVoted+"Allreadyupvotes");
+        if (allReadyUpVoted) {
+            upVoteButton.setEnabled(false);
+        }
+        if (allReadyDownVoted) {
+            downVoteButton.setEnabled(false);
+        }
         foodInfoWindow.setText(selectedFoodReview.getFoodName());
         voteScoreTextView.setText(String.valueOf(selectedFoodReview.getVoteScore()));
 
@@ -104,6 +121,24 @@ public class ViewReviewFragment extends Fragment {
             public void onClick(View v) {
                 selectedFoodReview.changeVoteScore(-1);
                 voteScoreTextView.setText(String.valueOf(selectedFoodReview.getVoteScore()));
+
+                if (checkVoteList(user.getUpVotedList())){
+                    user.getUpVotedList().remove(selectedFoodReview.getReviewId());
+                    downVoteButton.setEnabled(true);
+                    upVoteButton.setEnabled(true);
+                }else {
+                    downVoteButton.setEnabled(false);
+                    upVoteButton.setEnabled(true);
+                    user.getDownVotedList().add(selectedFoodReview.getReviewId());
+                }
+                try {
+
+                    parseClass.writeUserJson(getContext(), User.getInstance());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                parseClass.parseRestaurantReviews(selectedFoodReview.getRestaurant(), getContext());
+                parseClass.modifyRestaurantReviewXmlFile(getContext(),selectedFoodReview);
             }
         });
 
@@ -112,6 +147,24 @@ public class ViewReviewFragment extends Fragment {
             public void onClick(View v) {
                 selectedFoodReview.changeVoteScore(1);
                 voteScoreTextView.setText(String.valueOf(selectedFoodReview.getVoteScore()));
+
+                if (checkVoteList(user.getDownVotedList())){
+                    upVoteButton.setEnabled(true);
+                    downVoteButton.setEnabled(true);
+                    user.getDownVotedList().remove(selectedFoodReview.getReviewId());
+                }else {
+                    downVoteButton.setEnabled(true);
+                    upVoteButton.setEnabled(false);
+                    user.getUpVotedList().add(selectedFoodReview.getReviewId());
+                }
+                try {
+                    parseClass.writeUserJson(getContext(), User.getInstance());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                parseClass.parseRestaurantReviews(selectedFoodReview.getRestaurant(), getContext());
+                parseClass.modifyRestaurantReviewXmlFile(getContext(),selectedFoodReview);
+
             }
         }));
 
@@ -126,4 +179,14 @@ public class ViewReviewFragment extends Fragment {
         writtenReview.setText(selectedFoodReview.getReviewText());
         foodInfoWindow.setText(selectedFoodReview.getFoodName());
     }
+    public Boolean checkVoteList(ArrayList<String> list) {
+        Boolean booleanCheck = false;
+        for (String s : list){
+            if (s.equals(selectedFoodReview.getReviewId())){
+                booleanCheck = true;
+            }
+        }
+        return booleanCheck;
+    }
+
 }

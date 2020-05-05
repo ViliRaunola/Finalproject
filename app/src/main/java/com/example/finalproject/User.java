@@ -51,12 +51,7 @@ public class User {
     public void setAdminUser(boolean isAdminUser){
         this.isAdminUser = isAdminUser;
     }
-    public void setUpVotedList(ArrayList<String> upVotedList){
-        this.upVotedList = upVotedList;
-    }
-    public void setDownVotedList(ArrayList<String> upVotedList){
-        this.upVotedList = upVotedList;
-    }
+
 
     //Get methods
     public boolean getIsAdminUser() {

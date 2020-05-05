@@ -68,7 +68,7 @@ public class ParseClass extends AppCompatActivity {
     public ArrayList<FoodReview> getReviewsNotPublished(){
         return this.reviewsNotPublished;
     }
-    ///data/data/com.example.finalproject/files/unisRestaurantsAndMenus
+
 
     //Parses "university.xml" and creates University objects based on .xml parameters. Adds these new University objects to "universities"-ArrayList.
     //This ArrayList is shown in university_spinner.
@@ -107,8 +107,6 @@ public class ParseClass extends AppCompatActivity {
     public void parseRestaurantsMenu(int pos, Context context) {
         University selectedUniversity = parseClass.universities.get(pos);
         //university info to textView
-        //InputStream ins = context.getAssets().open(s)
-        //FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/university.xml")))
         for (String s : selectedUniversity.restaurantsXML) {
             try (FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/"+ s))) {
                 DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -140,8 +138,6 @@ public class ParseClass extends AppCompatActivity {
     //parses food items from XML files of the chosen Restaurant. Adds them to Restaurant's dailyMenus.
     public void parseFoodItems(int position, Context context) {
         Restaurant selectedRestaurant =  parseClass.getRestaurants().get(position);
-        //InputStream ins = context.getAssets().open(s)
-        //FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/"+ s)))
         String language = Locale.getDefault().getLanguage();
         for (String s : selectedRestaurant.restaurantMenusXML) {
             try (FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/"+ language + "_" + s))) {
@@ -364,8 +360,24 @@ public class ParseClass extends AppCompatActivity {
         jsonObject.put("eMail", user.getEmail());
         jsonObject.put("homeUniversity", user.getHomeUniversity());
         jsonObject.put("adminStatus", user.getIsAdminUser());
-        jsonObject.put("upVoted", user.getUpVotedList());
-        jsonObject.put("downVoted", user.getDownVotedList());
+        JSONArray downVoteList = new JSONArray();
+        if (user.getDownVotedList().size() > 0) {
+            for (int i = 0; i < user.getDownVotedList().size(); i++) {
+                JSONObject downVoteObject = new JSONObject();
+                downVoteObject.put("reviewId", user.getDownVotedList().get(i));
+                downVoteList.put(downVoteObject);
+            }
+        }
+        JSONArray upVoteList = new JSONArray();
+        if (user.getUpVotedList().size() > 0) {
+            for (int d = 0; d < user.getUpVotedList().size(); d++) {
+                JSONObject upVoteObject = new JSONObject();
+                upVoteObject.put("reviewId", user.getUpVotedList().get(d));
+                upVoteList.put(upVoteObject);
+            }
+        }
+        jsonObject.put("downVoted",downVoteList);
+        jsonObject.put("upVoted", upVoteList);
         jsonArray.put(jsonObject);
         try{
             String x = String.format(context.getFilesDir() + "/userData/User" + user.getUserID() + ".json");
