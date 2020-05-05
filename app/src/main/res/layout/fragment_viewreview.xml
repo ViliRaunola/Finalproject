@@ -6,56 +6,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/upVoteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="188dp"
-        android:text="UP VOTE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/writtenReview_viewReview"
-        app:layout_constraintVertical_bias="0.533" />
-
     <RatingBar
         android:id="@+id/tasteRatingBar_viewReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:isIndicator="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.561"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/writtenReview_viewReview"
         app:layout_constraintTop_toBottomOf="@+id/foodInfoWindow_viewReview" />
 
     <RatingBar
         android:id="@+id/appearanceRatingBar_viewReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:isIndicator="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.561"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/writtenReview_viewReview"
         app:layout_constraintTop_toBottomOf="@+id/tasteRatingBar_viewReview" />
 
     <RatingBar
         android:id="@+id/textureRatingBar_viewReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="12dp"
         android:isIndicator="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/writtenReview_viewReview"
         app:layout_constraintTop_toBottomOf="@+id/appearanceRatingBar_viewReview" />
 
     <TextView
         android:id="@+id/foodInfoWindow_viewReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="12dp"
         android:text="foodName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,92 +45,85 @@
 
     <Button
         android:id="@+id/deleteReviewButton_viewReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="48dp"
         android:text="@string/editReviewView_deleteReviewButton"
-        app:layout_constraintBottom_toTopOf="@+id/hideReviewButton_viewReview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/writtenReview_viewReview"
-        app:layout_constraintVertical_bias="0.885" />
+        app:layout_constraintBottom_toBottomOf="@+id/hideReviewButton_viewReview"
+        app:layout_constraintStart_toStartOf="@+id/downVoteButton"
+        app:layout_constraintTop_toTopOf="@+id/hideReviewButton_viewReview" />
+
+    <Button
+        android:id="@+id/hideReviewButton_viewReview"
+        android:layout_width="165dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:text="Hide Review"
+        app:layout_constraintEnd_toEndOf="@+id/upVoteButton"
+        app:layout_constraintTop_toBottomOf="@+id/upVoteButton" />
 
     <TextView
         android:id="@+id/writtenReview_viewReview"
-        android:layout_width="258dp"
-        android:layout_height="105dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="350dp"
+        android:layout_height="225dp"
+        android:layout_marginTop="28dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/foodInfoWindow_viewReview"
+        app:layout_constraintStart_toStartOf="@+id/foodInfoWindow_viewReview"
         app:layout_constraintTop_toBottomOf="@+id/textureRatingBar_viewReview" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:text="@string/editReviewView_taste"
-        app:layout_constraintEnd_toStartOf="@+id/tasteRatingBar_viewReview"
-        app:layout_constraintHorizontal_bias="0.636"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tasteRatingBar_viewReview"
+        app:layout_constraintStart_toStartOf="@+id/writtenReview_viewReview"
         app:layout_constraintTop_toTopOf="@+id/tasteRatingBar_viewReview" />
 
     <TextView
+        android:id="@+id/textView33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="@string/editReviewView_appearance"
-        app:layout_constraintEnd_toStartOf="@+id/appearanceRatingBar_viewReview"
-        app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/appearanceRatingBar_viewReview"
+        app:layout_constraintStart_toStartOf="@+id/writtenReview_viewReview"
         app:layout_constraintTop_toTopOf="@+id/appearanceRatingBar_viewReview" />
 
     <TextView
         android:id="@+id/textView35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/editReviewView_texture"
-        app:layout_constraintEnd_toStartOf="@+id/textureRatingBar_viewReview"
-        app:layout_constraintHorizontal_bias="0.34"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/textureRatingBar_viewReview"
+        app:layout_constraintStart_toStartOf="@+id/writtenReview_viewReview"
         app:layout_constraintTop_toTopOf="@+id/textureRatingBar_viewReview" />
 
     <Button
-        android:id="@+id/hideReviewButton_viewReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
-        android:text="Hide Review"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:id="@+id/downVoteButton"
+        android:layout_width="115dp"
+        android:layout_height="48dp"
+        android:text="DOWN VOTE"
+        app:layout_constraintBottom_toBottomOf="@+id/voteScoreTextView"
+        app:layout_constraintStart_toStartOf="@+id/writtenReview_viewReview"
+        app:layout_constraintTop_toTopOf="@+id/voteScoreTextView" />
 
     <Button
-        android:id="@+id/downVoteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="188dp"
-        android:text="DOWN VOTE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/writtenReview_viewReview"
-        app:layout_constraintVertical_bias="0.533" />
+        android:id="@+id/upVoteButton"
+        android:layout_width="115dp"
+        android:layout_height="48dp"
+        android:text="UP VOTE"
+        app:layout_constraintBottom_toBottomOf="@+id/voteScoreTextView"
+        app:layout_constraintEnd_toEndOf="@+id/writtenReview_viewReview"
+        app:layout_constraintTop_toTopOf="@+id/voteScoreTextView" />
 
     <TextView
         android:id="@+id/voteScoreTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/deleteReviewButton_viewReview"
-        app:layout_constraintEnd_toStartOf="@+id/upVoteButton"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toEndOf="@+id/downVoteButton"
-        app:layout_constraintTop_toBottomOf="@+id/writtenReview_viewReview"
-        app:layout_constraintVertical_bias="1.0" />
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/writtenReview_viewReview"
+        app:layout_constraintStart_toStartOf="@+id/writtenReview_viewReview"
+        app:layout_constraintTop_toBottomOf="@+id/writtenReview_viewReview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
