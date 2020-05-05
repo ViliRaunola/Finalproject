@@ -10,34 +10,34 @@
         android:id="@+id/tasteRatingBar_viewReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="32dp"
         android:isIndicator="true"
-        app:layout_constraintBottom_toTopOf="@+id/appearanceRatingBar_viewReview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.561"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodInfoWindow_viewReview" />
 
     <RatingBar
         android:id="@+id/appearanceRatingBar_viewReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:isIndicator="true"
-        app:layout_constraintBottom_toTopOf="@+id/textureRatingBar_viewReview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.561"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tasteRatingBar_viewReview" />
 
     <RatingBar
         android:id="@+id/textureRatingBar_viewReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="28dp"
         android:isIndicator="true"
-        app:layout_constraintBottom_toTopOf="@+id/writtenReview_viewReview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.561"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appearanceRatingBar_viewReview" />
 
     <TextView
         android:id="@+id/foodInfoWindow_viewReview"
@@ -45,11 +45,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/tasteRatingBar_viewReview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.042" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/deleteReviewButton_viewReview"
@@ -59,15 +57,49 @@
         android:text="@string/editReviewView_deleteReviewButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/writtenReview_viewReview" />
 
     <TextView
         android:id="@+id/writtenReview_viewReview"
         android:layout_width="258dp"
         android:layout_height="105dp"
-        android:layout_marginBottom="144dp"
+        android:layout_marginTop="60dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/deleteReviewButton_viewReview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textureRatingBar_viewReview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/editReviewView_taste"
+        app:layout_constraintEnd_toStartOf="@+id/tasteRatingBar_viewReview"
+        app:layout_constraintHorizontal_bias="0.636"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tasteRatingBar_viewReview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/editReviewView_appearance"
+        app:layout_constraintEnd_toStartOf="@+id/appearanceRatingBar_viewReview"
+        app:layout_constraintHorizontal_bias="0.432"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appearanceRatingBar_viewReview" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/editReviewView_texture"
+        app:layout_constraintEnd_toStartOf="@+id/textureRatingBar_viewReview"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textureRatingBar_viewReview" />
 </androidx.constraintlayout.widget.ConstraintLayout>
