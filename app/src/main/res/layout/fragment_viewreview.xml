@@ -57,7 +57,7 @@
         android:layout_width="165dp"
         android:layout_height="48dp"
         android:layout_marginTop="32dp"
-        android:text="Hide Review"
+        android:text="@string/viewReviewView_hideReview"
         app:layout_constraintEnd_toEndOf="@+id/upVoteButton"
         app:layout_constraintTop_toBottomOf="@+id/upVoteButton" />
 
@@ -66,7 +66,7 @@
         android:layout_width="350dp"
         android:layout_height="225dp"
         android:layout_marginTop="28dp"
-        android:text="TextView"
+        android:text="Review text"
         android:gravity="top|left"
         app:layout_constraintEnd_toEndOf="@+id/foodInfoWindow_viewReview"
         app:layout_constraintStart_toStartOf="@+id/foodInfoWindow_viewReview"
@@ -102,7 +102,7 @@
         android:id="@+id/downVoteButton"
         android:layout_width="115dp"
         android:layout_height="48dp"
-        android:text="DOWN VOTE"
+        android:text="@string/viewReviewView_downVote"
         app:layout_constraintBottom_toBottomOf="@+id/voteScoreTextView"
         app:layout_constraintStart_toStartOf="@+id/writtenReview_viewReview"
         app:layout_constraintTop_toTopOf="@+id/voteScoreTextView" />
@@ -111,7 +111,7 @@
         android:id="@+id/upVoteButton"
         android:layout_width="115dp"
         android:layout_height="48dp"
-        android:text="UP VOTE"
+        android:text="@string/viewReviewView_upVote"
         app:layout_constraintBottom_toBottomOf="@+id/voteScoreTextView"
         app:layout_constraintEnd_toEndOf="@+id/writtenReview_viewReview"
         app:layout_constraintTop_toTopOf="@+id/voteScoreTextView" />
@@ -121,7 +121,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="TextView"
+        android:text="Vote score"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/writtenReview_viewReview"
         app:layout_constraintStart_toStartOf="@+id/writtenReview_viewReview"

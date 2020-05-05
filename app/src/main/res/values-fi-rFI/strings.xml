@@ -85,6 +85,16 @@
     <string name="SettingsView_language">Kieli</string>
     <string name="SettingsView_changeLanguageButton">Vaihda kieli</string>
 
+    <!-- viewReviewView -->
+    <string name="viewReviewView_upVote">Hyödyllinen</string>
+    <string name="viewReviewView_downVote">Ei hyödyllinen</string>
+    <string name="viewReviewView_deleteReview">Poista arvostelu</string>
+    <string name="viewReviewView_hideReview">Piilota arvostelu</string>
+
+    <!-- viewReviewsView -->
+    <string name="viewReviewsView_AddReview">Lisää arvostelu</string>
+    <string name="viewReviewsView_OverallScore">Yleinen arvosana</string>
+
     <!-- navigationDrawer specific -->
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
