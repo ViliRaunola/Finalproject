@@ -54,23 +54,24 @@ public class UniversityFragment extends Fragment implements Serializable {
         nextDayButton = v.findViewById(R.id.nextDayButton);
         currentDayButton = v.findViewById(R.id.currentDayButton);
 
+        //Getting this fragments context to variable.
         context = getContext();
 
         /*
         Populating the first spinner on the page.
-        Calls parse class to read all universities from "database" aka phones own memory.
+        Calls ParseClass to read all universities from "database" aka phones own memory.
          */
         toDayInt = dateClass.getTodayInt();
         parseClass.getUniversities().clear();
         parseClass.parseUniversity(context);
-        ArrayAdapter<University> ap = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getUniversities());
-        ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        universitySpinner.setAdapter(ap);
+        ArrayAdapter<University> arrayAdapterUniversities = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getUniversities());
+        arrayAdapterUniversities.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        universitySpinner.setAdapter(arrayAdapterUniversities);
         universitySpinner.setSelection(user.getHomeUniversityPos());
-        ap.notifyDataSetChanged();
+        arrayAdapterUniversities.notifyDataSetChanged();
 
 
-        //On select adds specific restaurants to restaurantSpinner depending the selected university.
+        //On select adds specific restaurants to restaurantSpinner depending on the selected university.
         universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -78,13 +79,17 @@ public class UniversityFragment extends Fragment implements Serializable {
                 toDayInt = dateClass.getTodayInt();
                 parseClass.getRestaurants().clear();
 
+                /*
+                From ParseClass gets called parseRestaurantsMenu, which gets all the universities, makes them into objects and
+                displays them on restaurantSpinner.
+                 */
                 parseClass.parseRestaurantsMenu(position, context);
                 University selectedUniversity = parseClass.getUniversities().get(position);
                 infoWin.setText(selectedUniversity.getInfo());
 
-                ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item,  parseClass.getRestaurants());
-                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                restaurantSpinner.setAdapter(arrayAdapter);
+                ArrayAdapter<Restaurant> arrayAdapterRestaurants = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item,  parseClass.getRestaurants());
+                arrayAdapterRestaurants.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                restaurantSpinner.setAdapter(arrayAdapterRestaurants);
 
                 /*
                 Food items come from "unisRestaurantAndMenus"-file which's address is searched from
@@ -114,7 +119,7 @@ public class UniversityFragment extends Fragment implements Serializable {
             }
         });
 
-        //Gets today's restaurant menu and resets date
+        //Gets today's restaurant menu and resets date.
         currentDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,7 +182,8 @@ public class UniversityFragment extends Fragment implements Serializable {
 
         /*
         When user taps on selected food item a new fragment called FoodReviewsFragment is opened.
-        This sends selected food object, selected restaurant name and the day of the
+        This sends selected food object, selected restaurant name and the day of the review to
+        foodReviewsFragment.
          */
         foodItemLisView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -186,6 +192,7 @@ public class UniversityFragment extends Fragment implements Serializable {
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 FoodReviewsFragment foodReviewsFragment = new FoodReviewsFragment();
 
+                //Creating a bundle and adding needed items to it.
                 Bundle bundle = new Bundle();
                 FoodItem selectedFood = dailyFoods.get(i);
                 String selectedRestaurantName = restaurantSpinner.getSelectedItem().toString();
@@ -195,6 +202,7 @@ public class UniversityFragment extends Fragment implements Serializable {
                 bundle.putString("dateKey", dayOfFoodString);
                 foodReviewsFragment.setArguments(bundle);
 
+                //Replacing current fragment with a FoodReviewsFragment.
                 ft.replace(R.id.fragment_container, foodReviewsFragment);
                 ft.addToBackStack("food_reviews_fragment");
                 ft.commit();
