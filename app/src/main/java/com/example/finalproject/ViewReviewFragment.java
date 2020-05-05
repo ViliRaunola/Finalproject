@@ -51,6 +51,9 @@ public class ViewReviewFragment extends Fragment {
         downVoteButton = (Button) v.findViewById(R.id.downVoteButton);
         upVoteButton = (Button) v.findViewById(R.id.upVoteButton);
 
+        /*This is for making sure up vote and down vote buttons are either disabled or enabled depending
+        on the user's previous vote.
+        */
         allReadyDownVoted = false;
         allReadyUpVoted = false;
         try{
@@ -63,8 +66,6 @@ public class ViewReviewFragment extends Fragment {
         System.out.println(allReadyUpVoted+"Allreadyupvotes");
         allReadyDownVoted = checkVoteList(user.getDownVotedList());
         allReadyUpVoted = checkVoteList(user.getUpVotedList());
-        System.out.println(allReadyDownVoted+"all ready downvoted");
-        System.out.println(allReadyUpVoted+"Allreadyupvotes");
         if (allReadyUpVoted) {
             upVoteButton.setEnabled(false);
         }
@@ -98,7 +99,7 @@ public class ViewReviewFragment extends Fragment {
                 selectedFoodReview.setPublished(false);
                 parseClass.parseRestaurantReviews(selectedFoodReview.getRestaurant(), getContext());
                 parseClass.modifyRestaurantReviewXmlFile(getContext(), selectedFoodReview);
-                Toast.makeText(getContext(),"You have hid this review",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"You have hid a review",Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
             }
         });
@@ -116,6 +117,10 @@ public class ViewReviewFragment extends Fragment {
         });
 
 
+        /*
+        Down vote and up vote buttons add or remove review's id from user's up vote or down vote list.
+        They also rewrite user's json file to save what the user has up or down voted.
+         */
         downVoteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,12 +136,13 @@ public class ViewReviewFragment extends Fragment {
                     upVoteButton.setEnabled(true);
                     user.getDownVotedList().add(selectedFoodReview.getReviewId());
                 }
-                try {
 
+                try {
                     parseClass.writeUserJson(getContext(), User.getInstance());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
                 parseClass.parseRestaurantReviews(selectedFoodReview.getRestaurant(), getContext());
                 parseClass.modifyRestaurantReviewXmlFile(getContext(),selectedFoodReview);
             }
@@ -164,14 +170,15 @@ public class ViewReviewFragment extends Fragment {
                 }
                 parseClass.parseRestaurantReviews(selectedFoodReview.getRestaurant(), getContext());
                 parseClass.modifyRestaurantReviewXmlFile(getContext(),selectedFoodReview);
-
             }
         }));
 
 
         return v;
     }
-
+    /*
+    Sets values to the fragments elements from current Food Review.
+     */
     private void getOldReviewInformation(){
         tasteRatingBar.setRating(selectedFoodReview.getTasteScore());
         textureRatingBar.setRating(selectedFoodReview.getTextureScore());
@@ -179,6 +186,11 @@ public class ViewReviewFragment extends Fragment {
         writtenReview.setText(selectedFoodReview.getReviewText());
         foodInfoWindow.setText(selectedFoodReview.getFoodName());
     }
+
+    /*
+    Goes through given list and returns true if current Food Review's Id matches the
+    value from ArrayList.
+     */
     public Boolean checkVoteList(ArrayList<String> list) {
         Boolean booleanCheck = false;
         for (String s : list){

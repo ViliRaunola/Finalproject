@@ -15,29 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 public class UniversityFragment extends Fragment implements Serializable {
 
@@ -49,9 +33,6 @@ public class UniversityFragment extends Fragment implements Serializable {
     private Button previousDayButton;
     private Button nextDayButton;
     private Button currentDayButton;
-    EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
-    FoodReviewsFragment foodReviewsFragment = new FoodReviewsFragment();
-    //These are for showing the right food item in the day
     private int toDayInt;
     private ArrayList<FoodItem> dailyFoods = new ArrayList<FoodItem>();
     private int restaurantPosition;
@@ -59,8 +40,7 @@ public class UniversityFragment extends Fragment implements Serializable {
     Context context;
     ParseClass parseClass = ParseClass.getInstance();
     DateClass dateClass = DateClass.getInstance();
-    MainActivity mainActivity;
-
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,11 +53,13 @@ public class UniversityFragment extends Fragment implements Serializable {
         previousDayButton = v.findViewById(R.id.previousDayButton);
         nextDayButton = v.findViewById(R.id.nextDayButton);
         currentDayButton = v.findViewById(R.id.currentDayButton);
+
         context = getContext();
 
-
-
-
+        /*
+        Populating the first spinner on the page.
+        Calls parse class to read all universities from "database" aka phones own memory.
+         */
         toDayInt = dateClass.getToDayInt();
         parseClass.getUniversities().clear();
         parseClass.parseUniversity(context);
@@ -88,14 +70,13 @@ public class UniversityFragment extends Fragment implements Serializable {
         ap.notifyDataSetChanged();
 
 
-        //On select adds specific restaurants to restaurantSpinner depending the selected university
+        //On select adds specific restaurants to restaurantSpinner depending the selected university.
         universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 dayTextView.setText(dateClass.getCurrentDateWithWeekDay());
                 toDayInt = dateClass.getToDayInt();
                 parseClass.getRestaurants().clear();
-
 
                 parseClass.parseRestaurantsMenu(position, context);
                 University selectedUniversity = parseClass.getUniversities().get(position);
@@ -104,8 +85,11 @@ public class UniversityFragment extends Fragment implements Serializable {
                 ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item,  parseClass.getRestaurants());
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 restaurantSpinner.setAdapter(arrayAdapter);
-                //Here is listView + array adapter for it. This listView is meant for food items.
-                //Food items come from some xml file; not sure yet from where??!
+
+                /*
+                Food items come from "unisRestaurantAndMenus"-file which's address is searched from
+                corresponding university's xml file that contains that university's all restaurants.
+                 */
                 restaurantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -127,7 +111,6 @@ public class UniversityFragment extends Fragment implements Serializable {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -142,7 +125,10 @@ public class UniversityFragment extends Fragment implements Serializable {
             }
         });
 
-        //These on click listeners are for displaying right day on the text field.
+        /*
+        These on click listeners for previous and next day are for displaying right day on the text field.
+        Also disables the button if user gets to the last day of the menu.
+         */
         previousDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,10 +149,7 @@ public class UniversityFragment extends Fragment implements Serializable {
                 } catch (ParseException e){
                     e.printStackTrace();
                 }
-
             }
-
-
         });
         nextDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,7 +157,6 @@ public class UniversityFragment extends Fragment implements Serializable {
                 previousDayButton.setEnabled(true);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy");
                 try {
-
                     if(toDayInt >=  parseClass.getRestaurants().get(0).resDailyMenu.get( parseClass.getRestaurants().get(0).resDailyMenu.size()-1).getDay()) {
                         Toast.makeText(getContext(),"End of monthly menu",Toast.LENGTH_SHORT).show();
                         nextDayButton.setEnabled(false);
@@ -186,14 +168,17 @@ public class UniversityFragment extends Fragment implements Serializable {
                         checkCurrentDay(toDayInt, restaurantPosition);
                         foodItemLisView.invalidateViews();
                     }
-
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
         });
 
-        //TODO Add here a new fragment that displays all reviews for selected food item.
+
+        /*
+        When user taps on selected food item a new fragment called FoodReviewsFragment is opened.
+        This sends selected food object, selected restaurant name and the day of the
+         */
         foodItemLisView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -209,6 +194,7 @@ public class UniversityFragment extends Fragment implements Serializable {
                 bundle.putString("resKey", selectedRestaurantName);
                 bundle.putString("dateKey", dayOfFoodString);
                 foodReviewsFragment.setArguments(bundle);
+
                 ft.replace(R.id.fragment_container, foodReviewsFragment);
                 ft.addToBackStack("food_reviews_fragment");
                 ft.commit();
@@ -228,6 +214,10 @@ public class UniversityFragment extends Fragment implements Serializable {
         }
     }
 
+    /*
+    When reloading this fragment
+    users home university is set as the first university on the spinner.
+     */
     @Override
     public void onResume() {
         super.onResume();

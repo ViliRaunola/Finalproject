@@ -1,7 +1,7 @@
 package com.example.finalproject;
 
 import java.util.ArrayList;
-import java.util.Objects;
+
 
 
 public class User {
@@ -17,7 +17,7 @@ public class User {
     private ArrayList<String> upVotedList = new ArrayList<String>();
     private ArrayList<String> downVotedList = new ArrayList<String>();;
 
-    //Makes this singleton
+    //Makes this a singleton class.
     private static User user = new User();
     private User() {
     }
