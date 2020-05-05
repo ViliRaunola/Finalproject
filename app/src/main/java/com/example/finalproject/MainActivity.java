@@ -13,9 +13,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
-
-import org.json.JSONException;
-
 import java.util.Locale;
 
 
@@ -152,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 parseClass.getReviewsPublished().clear();
 
                 finish();
-                Toast.makeText(this, "You Have Logged Out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.toast_loggedOut), Toast.LENGTH_SHORT).show();
                 break;
         }
         //After the item has been selected closes the side menu.
@@ -160,40 +157,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-/*
-    public void sendUniversityFragmentRestaurantsOwnReviews(){
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("key2",universityFragment.universities);
-        ownReviewsFragment.setArguments(bundle);
-
-    }
-
- */
-/*
-    public void sendUniversityFragmentRestaurantsAccount(){
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("key2",universityFragment.universities);
-        accountFragment.setArguments(bundle);
-    }
-
- */
-
-  /* @SuppressWarnings("deprecation")
-    public void setLocale(String language){
-        Locale locale = new Locale(language);
-        Locale.setDefault(locale);
-        Configuration config = getBaseContext().getResources().getConfiguration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
-        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-        editor.putString("My_language", language);
-        editor.apply();
-    }
-    public void loadLocale(){
-        SharedPreferences sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
-        String language = sharedPreferences.getString("My_language","");
-        setLocale(language);
-    }*/
 
 }
