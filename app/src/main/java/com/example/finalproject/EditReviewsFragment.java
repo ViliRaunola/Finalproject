@@ -1,8 +1,6 @@
 package com.example.finalproject;
 
-import android.content.Context;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +9,9 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-
 
 public class EditReviewsFragment extends Fragment {
     private RatingBar tasteRatingBar;
@@ -36,9 +26,6 @@ public class EditReviewsFragment extends Fragment {
     private Button cancelButton;
     private FoodReview selectedOwnReview;
     ParseClass parseClass = ParseClass.getInstance();
-
-
-
 
     @Nullable
     @Override
@@ -70,7 +57,7 @@ public class EditReviewsFragment extends Fragment {
                 setReviewInformation();
                 selectedOwnReview.setPublished(false);
                 parseClass.modifyRestaurantReviewXmlFile(getContext(), selectedOwnReview);
-                Toast.makeText(getContext(),"Your review was saved",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),getResources().getString(R.string.toast_saveReviewDraft),Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
             }
         });
@@ -81,12 +68,12 @@ public class EditReviewsFragment extends Fragment {
                         && (appearanceRatingBar.getRating() == 0)
                         &&(textureRatingBar.getRating() == 0)
                         && (writtenReview.getText().toString().trim().equals(""))) {
-                    Toast.makeText(getContext(), "Can't publish a review with score of 0 without text.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.toast_reviewScoreAndTextEmpty), Toast.LENGTH_SHORT).show();
                 } else {
                     setReviewInformation();
                     selectedOwnReview.setPublished(true);
                     parseClass.modifyRestaurantReviewXmlFile(getContext(), selectedOwnReview);
-                    Toast.makeText(getContext(), "Your review was saved and published", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.toast_reviewPublished), Toast.LENGTH_SHORT).show();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
                 }
             }
@@ -95,7 +82,7 @@ public class EditReviewsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 parseClass.removeReviewFromXml(getContext(),selectedOwnReview);
-                Toast.makeText(getContext(),"Your review was removed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),getResources().getString(R.string.toast_reviewRemovedUser),Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
             }
         });
@@ -105,9 +92,6 @@ public class EditReviewsFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
             }
         });
-
-
-
 
         return v;
     }
@@ -128,108 +112,6 @@ public class EditReviewsFragment extends Fragment {
         foodInfoWindow.setText(selectedOwnReview.getFoodName());
     }
 
-    /*
-    //https://stackoverflow.com/questions/17022221/openfileoutput-how-to-create-files-outside-the-data-data-path
-    //Teacher's coding video
-    //Rewrites the specific restaurant review folder with new information for the selected review
-    public void modifyRestaurantReviewXmlFile() {
-
-        OutputStreamWriter osw = null;
-        String s;
-        try {
-            File file = new File(getContext().getFilesDir() +"/reviews/" + selectedOwnReview.getRestaurant() + "_Reviews.xml");
-            FileOutputStream fos = new FileOutputStream(file);
-
-            s = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                    "<reviews>";
-            fos.write(s.getBytes());
-
-            for (FoodReview review : parseClass.getAllReviews()) {
-                if (review.getReviewId().equals(selectedOwnReview.getReviewId())){
-                    s = "<review>\n" +
-                            "        <reviewId>" + selectedOwnReview.getReviewId() + "</reviewId>\n" +
-                            "        <foodId>" + selectedOwnReview.getFoodId() + "</foodId>\n" +
-                            "        <foodName>" + selectedOwnReview.getFoodName() + "</foodName>\n" +
-                            "        <userId>" + selectedOwnReview.getUserId() + "</userId>\n" +
-                            "        <tasteScore>" + selectedOwnReview.getTasteScore() + "</tasteScore>\n" +
-                            "        <lookScore>" + selectedOwnReview.getLookScore() + "</lookScore>\n" +
-                            "        <textureScore>" + selectedOwnReview.getTextureScore() + "</textureScore>\n" +
-                            "        <reviewText>" + selectedOwnReview.getReviewText() + "</reviewText>\n" +
-                            "        <date>" + selectedOwnReview.getDateString() + "</date>\n" +
-                            "        <published>" + selectedOwnReview.getPublished() + "</published>\n" +
-                            "    </review>";
-                }else {
-                    s = "<review>\n" +
-                            "        <reviewId>" + review.getReviewId() + "</reviewId>\n" +
-                            "        <foodId>" + review.getFoodId() + "</foodId>\n" +
-                            "        <foodName>" + review.getFoodName() + "</foodName>\n" +
-                            "        <userId>" + review.getUserId() + "</userId>\n" +
-                            "        <tasteScore>" + review.getTasteScore() + "</tasteScore>\n" +
-                            "        <lookScore>" + review.getLookScore() + "</lookScore>\n" +
-                            "        <textureScore>" + review.getTextureScore() + "</textureScore>\n" +
-                            "        <reviewText>" + review.getReviewText() + "</reviewText>\n" +
-                            "        <date>" + review.getDateString() + "</date>\n" +
-                            "        <published>" + review.getPublished() + "</published>\n" +
-                            "    </review>";
-                }
-                fos.write(s.getBytes());
-            }
-            s = "\n</reviews>";
-            fos.write(s.getBytes());
-            fos.close();
-            parseClass.getAllReviews().clear();
-        }catch (IOException e) {//TODO ADD REAL EXCEPTION
-            e.printStackTrace();
-        }
-    }
-
-     */
-
-    /*
-    public void removeReviewFromXml() {
-
-        OutputStreamWriter osw = null;
-        String s;
-        try {
-            File file = new File(getContext().getFilesDir() +"/reviews/" + selectedOwnReview.getRestaurant() + "_Reviews.xml");
-            FileOutputStream fos = new FileOutputStream(file);
-
-            s = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                    "<reviews>";
-            fos.write(s.getBytes());
-
-            for (FoodReview review : allReviews) {
-                System.out.println(allReviews.size());
-                if (review.getReviewId().equals(selectedOwnReview.getReviewId())){
-                    s = "";
-                }else {
-                    System.out.println("ELSEN SISÄLLÄ ##############");
-                    s = "<review>\n" +
-                            "        <reviewId>" + review.getReviewId() + "</reviewId>\n" +
-                            "        <foodId>" + review.getFoodId() + "</foodId>\n" +
-                            "        <foodName>" + review.getFoodName() + "</foodName>\n" +
-                            "        <userId>" + review.getUserId() + "</userId>\n" +
-                            "        <tasteScore>" + review.getTasteScore() + "</tasteScore>\n" +
-                            "        <lookScore>" + review.getLookScore() + "</lookScore>\n" +
-                            "        <textureScore>" + review.getTextureScore() + "</textureScore>\n" +
-                            "        <reviewText>" + review.getReviewText() + "</reviewText>\n" +
-                            "        <date>" + review.getDateString() + "</date>\n" +
-                            "        <published>" + review.getPublished() + "</published>\n" +
-                            "    </review>";
-                }
-                fos.write(s.getBytes());
-            }
-            s = "\n</reviews>";
-            fos.write(s.getBytes());
-            fos.close();
-            allReviews.clear();
-            //allReviews.remove(selectedOwnReview);
-        }catch (IOException e) {//TODO ADD REAL EXCEPTION
-            e.printStackTrace();
-        }
-    }
-
-     */
 }
 
 
