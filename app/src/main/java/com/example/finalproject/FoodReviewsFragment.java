@@ -64,16 +64,18 @@ public class FoodReviewsFragment extends Fragment {
         foodNameTextView.setText(selectedFood.getName());
 
         for (FoodReview r : parseClass.getAllReviews()) {
+            // reads through list of all reviews for restaurant. If a review has same foodId as the selected food, then the review is shown in the ListView.
             if (selectedFood.getId().equals(r.getFoodId()) && (r.getPublishedBoolean())) {
                 reviewsForFood.add(r);
                 overallRating += r.getAverageScore();
                 reviewCounter += 1;
+                // Checks if user has already made a review for currently selected food
                 if (r.getUserId().equals(String.valueOf(user.getUserID()))) {
                     userReviewBoolean = true;
                 }
             }
         }
-
+        //calculates overall rating among all reviews for the selected food.
         overallRating = overallRating / reviewCounter;
         overallRatingBar.setRating(overallRating);
 
@@ -86,9 +88,11 @@ public class FoodReviewsFragment extends Fragment {
         addReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Checks if user has already made a review for currently selected food
                 if (userReviewBoolean) {
                     Toast.makeText(getContext(), "Can't create multiple reviews for one food. Go to Own reviews to edit your older review.", Toast.LENGTH_SHORT).show();
                 } else {
+                    //Checks if user is trying to make a review for a food that has not been served yet.
                     if (dateClass.compareDates(dayOfFoodString)) {
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
