@@ -1,32 +1,26 @@
 package com.example.finalproject;
 
-import android.content.Intent;
-import android.content.res.Configuration;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -35,7 +29,6 @@ public class SettingsFragment extends Fragment {
     private Spinner languageSpinner;
     private Button changeLanguageButton;
     private List<String> languageList = new ArrayList<String>();
-    private MainActivity mainActivity;
     private int position;
 
     @Nullable
@@ -76,7 +69,6 @@ public class SettingsFragment extends Fragment {
     }
 
     public void parseLanguage() {
-
         try (InputStream ins = getActivity().getAssets().open("language.xml")){
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document xmlDoc = documentBuilder.parse(ins);
@@ -90,7 +82,6 @@ public class SettingsFragment extends Fragment {
                     languageList.add(uniName);
                 }
             }
-
         }catch (IOException e) {
             e.printStackTrace();
         }catch(ParserConfigurationException e){
@@ -99,5 +90,4 @@ public class SettingsFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
 }
