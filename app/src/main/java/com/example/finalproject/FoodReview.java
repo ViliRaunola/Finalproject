@@ -20,14 +20,14 @@ public class FoodReview implements Serializable {
     private String userId;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
     private Boolean published;
-    private int voteScore;
+    private Integer voteScore;
 
 
     public FoodReview(){
 
     }
 
-    public FoodReview(String reviewId,Boolean published, String f, String n, String r, Date d, float taScore, float loScore, float teScore, String text, String userId, int voteScore) {
+    public FoodReview(String reviewId,Boolean published, String f, String n, String r, Date d, float taScore, float loScore, float teScore, String text, String userId, Integer voteScore) {
         foodId = f;
         foodName = n;
         restaurant = r;
@@ -148,11 +148,11 @@ public class FoodReview implements Serializable {
         this.reviewId = id;
     }
 
-    public void setVoteScore(int voteScore) {
+    public void setVoteScore(Integer voteScore) {
         this.voteScore = voteScore;
     }
 
-    public void changeVoteScore(int amount) {
+    public void changeVoteScore(Integer amount) {
         this.voteScore += amount;
     }
 

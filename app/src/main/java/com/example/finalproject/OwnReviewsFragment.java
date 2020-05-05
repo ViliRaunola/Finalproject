@@ -61,6 +61,7 @@ public class OwnReviewsFragment extends Fragment {
         sortingList.add(getResources().getString(R.string.ownReviewsView_date));
         sortingList.add(getResources().getString(R.string.ownReviewsView_food));
         sortingList.add(getResources().getString(R.string.ownReviewsView_overallScore));
+        sortingList.add(getResources().getString(R.string.ownReviewsView_vote));
 
         //ArrayAdapter for sortingSpinner
         ArrayAdapter<String> sortAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, sortingList);
@@ -145,8 +146,8 @@ public class OwnReviewsFragment extends Fragment {
                        //Reverses the list
                        Collections.reverse(parseClass.getReviewsNotPublished());
                        //setting new adapter for not published reviews
-                       ArrayAdapter<FoodReview> arrayAdapterDate2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
-                       notPublishedReviewsListView.setAdapter(arrayAdapterDate2);
+                       ArrayAdapter<FoodReview> arrayAdapterDateNotPublished = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
+                       notPublishedReviewsListView.setAdapter(arrayAdapterDateNotPublished);
                        break;
 
                    case 1:
@@ -155,15 +156,15 @@ public class OwnReviewsFragment extends Fragment {
                        Sorting.sortByFood(parseClass.getReviewsPublished());
 
                        //setting new adapter for published reviews
-                       ArrayAdapter<FoodReview> arrayAdapterFood = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  parseClass.getReviewsPublished());
-                       publishedReviewsListView.setAdapter(arrayAdapterFood);
+                       ArrayAdapter<FoodReview> arrayAdapterFoodPublished = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  parseClass.getReviewsPublished());
+                       publishedReviewsListView.setAdapter(arrayAdapterFoodPublished);
 
                        //sort by date using Collections.sort
                        Sorting.sortByFood(parseClass.getReviewsNotPublished());
 
                        //setting new adapter for not published reviews
-                       ArrayAdapter<FoodReview> arrayAdapterFood2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
-                       notPublishedReviewsListView.setAdapter(arrayAdapterFood2);
+                       ArrayAdapter<FoodReview> arrayAdapterFoodNotPublished = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
+                       notPublishedReviewsListView.setAdapter(arrayAdapterFoodNotPublished);
                        break;
 
                    case 2:
@@ -175,8 +176,8 @@ public class OwnReviewsFragment extends Fragment {
                        Collections.reverse(parseClass.getReviewsPublished());
 
                        //setting new adapter for published reviews
-                       ArrayAdapter<FoodReview> arrayAdapterScore = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  parseClass.getReviewsPublished());
-                       publishedReviewsListView.setAdapter(arrayAdapterScore);
+                       ArrayAdapter<FoodReview> arrayAdapterScorePublished = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  parseClass.getReviewsPublished());
+                       publishedReviewsListView.setAdapter(arrayAdapterScorePublished);
 
                        //sort by date using Collections.sort
                        Sorting.sortByScore(parseClass.getReviewsNotPublished());
@@ -185,9 +186,27 @@ public class OwnReviewsFragment extends Fragment {
                        Collections.reverse(parseClass.getReviewsNotPublished());
 
                        //setting new adapter for not published reviews
-                       ArrayAdapter<FoodReview> arrayAdapterScore2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
-                       notPublishedReviewsListView.setAdapter(arrayAdapterScore2);
+                       ArrayAdapter<FoodReview> arrayAdapterScoreNotPublished = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
+                       notPublishedReviewsListView.setAdapter(arrayAdapterScoreNotPublished);
                        break;
+                   case 3:
+
+                       Sorting.sortByVote(parseClass.getReviewsPublished());
+
+                       Collections.reverse(parseClass.getReviewsPublished());
+
+                       ArrayAdapter<FoodReview> arrayAdapterVote = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  parseClass.getReviewsPublished());
+                       publishedReviewsListView.setAdapter(arrayAdapterVote);
+
+
+                       Sorting.sortByVote(parseClass.getReviewsNotPublished());
+
+                       Collections.reverse(parseClass.getReviewsNotPublished());
+
+                       ArrayAdapter<FoodReview> arrayAdapterVoteNotPublished = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
+                       notPublishedReviewsListView.setAdapter(arrayAdapterVoteNotPublished);
+
+
                    default:
                        break;
                }
