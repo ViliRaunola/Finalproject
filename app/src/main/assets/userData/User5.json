@@ -6,6 +6,8 @@
     "lastName": "Keittäjä",
     "eMail": "we",
     "homeUniversity": "Aalto",
-    "adminStatus": false
+    "adminStatus": false,
+    "upVoted": [],
+    "upVoted": []
   }
 ]

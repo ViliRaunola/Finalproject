@@ -4,6 +4,9 @@ import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -13,6 +16,7 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
@@ -338,6 +342,96 @@ public class ParseClass extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    //https://www.tutorialspoint.com/how-to-write-create-a-json-file-using-java
+    public void writeUserJson(Context context, User user) throws JSONException {
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
+        String password;
+        //password = Security.getSecuredPassword(user.getPassword(),user.getEmail());
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        System.out.println(user.getPassword());
+        //System.out.println(password);
+        jsonObject.put("password", user.getPassword());
+        jsonObject.put("userId", user.getUserID());
+        jsonObject.put("firstName", user.getFirstName());
+        jsonObject.put("lastName", user.getLastName());
+        jsonObject.put("eMail", user.getEmail());
+        jsonObject.put("homeUniversity", user.getHomeUniversity());
+        jsonObject.put("adminStatus", user.getIsAdminUser());
+        jsonObject.put("upVoted", user.getUpVotedList());
+        jsonObject.put("downVoted", user.getDownVotedList());
+        jsonArray.put(jsonObject);
+        try{
+            String x = String.format(context.getFilesDir() + "/userData/User" + user.getUserID() + ".json");
+            System.out.println(x);
+            FileWriter fileWriter = new FileWriter(x);
+            fileWriter.write(jsonArray.toString());
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+    public boolean checkIfEmailInUse(String email, Context context) throws IOException, JSONException {
+        FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"));
+        int size = ins.available();
+        final byte[] buffer = new byte[size];
+        ins.read(buffer);
+        ins.close();
+
+        String json = new String(buffer, "UTF-8");
+        JSONArray originalUserData = new JSONArray(json);
+
+        for (int i = 0; i < originalUserData.length(); i++) {
+            JSONObject userObject = originalUserData.getJSONObject(i).getJSONObject("user");
+            if (email.equals(userObject.getString("eMail"))){
+                return true;
+            }
+
+        }
+        return  false;
+    }
+
+
+    //https://howtodoinjava.com/library/json-simple-read-write-json-examples/
+    public void modifyEmailsAndIds(Context context, User user) throws JSONException, IOException {
+
+        //reading original file
+        FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"));
+        int size = ins.available();
+        final byte[] buffer = new byte[size];
+        ins.read(buffer);
+        ins.close();
+
+        String json = new String(buffer, "UTF-8");
+        JSONArray originalUserData = new JSONArray(json);
+        JSONArray newUserData = new JSONArray();
+        FileWriter fileWriter = new FileWriter((context.getFilesDir() + "/userData/EmailsAndIds.json"));
+
+        //goinng through original EmailsAnsIds file
+        for (int i = 0; i < originalUserData.length(); i++) {
+            JSONObject userObject = originalUserData.getJSONObject(i).getJSONObject("user");
+
+            //changing new user email for the same user id
+            if (Integer.parseInt(userObject.getString("userId")) == user.getUserID()) {
+                userObject.put("eMail", user.getEmail());
+            }
+
+            //create a newUserObject and adding it to newUserData
+            JSONObject newUserObject = new JSONObject();
+            newUserObject.put("user", userObject);
+            newUserData.put(newUserObject);
+        }
+
+        fileWriter.write(newUserData.toString());
+        fileWriter.close();
+    }
+
 
 
 }

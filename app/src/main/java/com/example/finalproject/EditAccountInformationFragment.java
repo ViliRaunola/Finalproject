@@ -104,7 +104,7 @@ public class EditAccountInformationFragment extends Fragment {
                 currentpasswordInput = currentPasswordConfirmationEditText.getText().toString();
 
                 try {
-                    emailCheck = checkIfEmailInUse(emailInput);
+                    emailCheck = parseClass.checkIfEmailInUse(emailInput, getContext());
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
@@ -144,8 +144,8 @@ public class EditAccountInformationFragment extends Fragment {
 
                             //Rewrites the changed user file
                             try {
-                                modifyEmailsAndIds();
-                                writeUserJson();
+                                parseClass.modifyEmailsAndIds(getContext(), user);
+                                parseClass.writeUserJson(getContext(), user);
                             } catch (JSONException | IOException e) {
                                 e.printStackTrace();
                             }
@@ -163,8 +163,8 @@ public class EditAccountInformationFragment extends Fragment {
                     }else {
                         //Rewrites the changed user file
                         try {
-                            modifyEmailsAndIds();
-                            writeUserJson();
+                            parseClass.modifyEmailsAndIds(getContext(), user);
+                            parseClass.writeUserJson(getContext(), user);
                         } catch (JSONException | IOException e) {
                             e.printStackTrace();
                         }
@@ -188,7 +188,7 @@ public class EditAccountInformationFragment extends Fragment {
 
 
 
-
+/*
     //TODO lisää parse luokkaan
     //https://howtodoinjava.com/library/json-simple-read-write-json-examples/
     public void modifyEmailsAndIds() throws JSONException, IOException {
@@ -223,6 +223,9 @@ public class EditAccountInformationFragment extends Fragment {
         fileWriter.write(newUserData.toString());
         fileWriter.close();
     }
+
+ */
+    /*
     //TODO lisää parse luokkaan
     //https://www.tutorialspoint.com/how-to-write-create-a-json-file-using-java
     public void writeUserJson() throws JSONException {
@@ -272,4 +275,5 @@ public class EditAccountInformationFragment extends Fragment {
         }
         return  false;
     }
+    */
 }

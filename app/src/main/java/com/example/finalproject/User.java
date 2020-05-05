@@ -14,6 +14,8 @@ public class User {
     private String eMail;
     private int homeUniversityPos;
     private String homeUniversity;
+    private ArrayList<String> upVotedList = new ArrayList<String>();
+    private ArrayList<String> downVotedList = new ArrayList<String>();;
 
     //Makes this singleton
     private static User user = new User();
@@ -49,6 +51,12 @@ public class User {
     public void setAdminUser(boolean isAdminUser){
         this.isAdminUser = isAdminUser;
     }
+    public void setUpVotedList(ArrayList<String> upVotedList){
+        this.upVotedList = upVotedList;
+    }
+    public void setDownVotedList(ArrayList<String> upVotedList){
+        this.upVotedList = upVotedList;
+    }
 
     //Get methods
     public boolean getIsAdminUser() {
@@ -75,5 +83,10 @@ public class User {
     public String getHomeUniversity() {
         return homeUniversity;
     }
-
+    public ArrayList<String> getUpVotedList() {
+        return upVotedList;
+    }
+    public ArrayList<String> getDownVotedList() {
+        return downVotedList;
+    }
 }

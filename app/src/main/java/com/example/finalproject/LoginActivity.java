@@ -188,6 +188,28 @@ public class LoginActivity extends AppCompatActivity {
                     user.setHomeUniversityPos(universitiesPositionCompare);
                     user.setLastName(object.getString("lastName"));
                     user.setFirstName(object.getString("firstName"));
+
+                    if(!object.isNull("downVoted")){
+                        JSONArray downVoteJson = object.getJSONArray("downVoted");
+                        for(int d = 0; d < downVoteJson.length(); d++ ){
+                            JSONObject downVoteList = downVoteJson.getJSONObject(d);
+                            String reviewId = downVoteList.getString("reviewId");
+                            user.getDownVotedList().add(reviewId);
+                        }
+                    }
+
+                    if(!object.isNull("upVoted")){
+                        System.out.println("???????????????????????????????????????????");
+                        JSONArray upVoteJson = object.getJSONArray("upVoted");
+                        for(int d = 0; d < upVoteJson.length(); d++ ){
+                            JSONObject upVoteList = upVoteJson.getJSONObject(d);
+                            String reviewId = upVoteList.getString("reviewId");
+                            System.out.println(reviewId + "???????????????????????????????????????????");
+                            user.getUpVotedList().add(reviewId);
+                        }
+                    }
+                    System.out.println("???????????????????????????????????????????jälkeen");
+
                     return 1;
                 }
             }

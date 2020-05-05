@@ -6,6 +6,8 @@
     "lastName": "Baunola",
     "eMail": "admin",
     "homeUniversity": "LUT",
-    "adminStatus": true
+    "adminStatus": true,
+    "upVoted": [{"reviewId" : "0"}, {"reviewId" : "1"}],
+    "downVoted": []
   }
 ]
