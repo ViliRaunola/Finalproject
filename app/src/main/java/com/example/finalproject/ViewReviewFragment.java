@@ -23,9 +23,11 @@ public class ViewReviewFragment extends Fragment {
     private TextView writtenReview;
     private Button removeButton;
     private Button hideButton;
-
+    private Button downVoteButton;
+    private Button upVoteButton;
     private Bundle informationBundle;
     private FoodReview selectedFoodReview;
+    private TextView voteScoreTextView;
 
     User user = User.getInstance();
     ParseClass parseClass = ParseClass.getInstance();
@@ -40,8 +42,11 @@ public class ViewReviewFragment extends Fragment {
         appearanceRatingBar = (RatingBar)v.findViewById(R.id.appearanceRatingBar_viewReview);
         foodInfoWindow = (TextView)v.findViewById(R.id.foodInfoWindow_viewReview);
         writtenReview = (TextView)v.findViewById(R.id.writtenReview_viewReview);
+        voteScoreTextView = (TextView) v.findViewById(R.id.voteScoreTextView);
         removeButton = (Button)v.findViewById(R.id.deleteReviewButton_viewReview);
         hideButton = (Button)v.findViewById(R.id.hideReviewButton_viewReview);
+        downVoteButton = (Button) v.findViewById(R.id.downVoteButton);
+        upVoteButton = (Button) v.findViewById(R.id.upVoteButton);
 
 
         try{
@@ -51,8 +56,8 @@ public class ViewReviewFragment extends Fragment {
             e.printStackTrace();
         }
 
-
-
+        foodInfoWindow.setText(selectedFoodReview.getFoodName());
+        voteScoreTextView.setText(String.valueOf(selectedFoodReview.getVoteScore()));
 
         //Sets the values for all the fields
         getOldReviewInformation();
@@ -94,6 +99,23 @@ public class ViewReviewFragment extends Fragment {
                 getActivity().onBackPressed();
             }
         });
+
+
+        downVoteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedFoodReview.changeVoteScore(-1);
+                voteScoreTextView.setText(String.valueOf(selectedFoodReview.getVoteScore()));
+            }
+        });
+
+        upVoteButton.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedFoodReview.changeVoteScore(1);
+                voteScoreTextView.setText(String.valueOf(selectedFoodReview.getVoteScore()));
+            }
+        }));
 
 
         return v;

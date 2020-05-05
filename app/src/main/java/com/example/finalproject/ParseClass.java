@@ -211,7 +211,10 @@ public class ParseClass extends AppCompatActivity {
                     String reviewDate = element.getElementsByTagName("date").item(0).getTextContent();
                     Date reviewDateDate = simpleDateFormat.parse(reviewDate);
 
-                    FoodReview review = new FoodReview(reviewId, publishedBoolean,foodId, foodName, selectedRestaurantName, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId);
+                    String voteScoreString = element.getElementsByTagName("voteScore").item(0).getTextContent();
+                    int voteScore = Integer.parseInt(voteScoreString);
+
+                    FoodReview review = new FoodReview(reviewId, publishedBoolean,foodId, foodName, selectedRestaurantName, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId, voteScore);
                     allReviews.add(review);
 
                     if(Integer.parseInt(review.getReviewId()) >= biggestReviewId){
@@ -256,7 +259,7 @@ public class ParseClass extends AppCompatActivity {
                     s = "";
                 }else {
                     System.out.println("ELSEN SISÄLLÄ ##############");
-                    s = "<review>\n" +
+                    s = "   <review>\n" +
                             "        <reviewId>" + review.getReviewId() + "</reviewId>\n" +
                             "        <foodId>" + review.getFoodId() + "</foodId>\n" +
                             "        <foodName>" + review.getFoodName() + "</foodName>\n" +
@@ -267,6 +270,7 @@ public class ParseClass extends AppCompatActivity {
                             "        <reviewText>" + review.getReviewText() + "</reviewText>\n" +
                             "        <date>" + review.getDateString() + "</date>\n" +
                             "        <published>" + review.getPublished() + "</published>\n" +
+                            "        <voteScore>" + review.getVoteScore() + "</voteScore>\n" +
                             "    </review>";
                 }
                 fos.write(s.getBytes());
@@ -291,12 +295,12 @@ public class ParseClass extends AppCompatActivity {
             FileOutputStream fos = new FileOutputStream(file);
 
             s = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                    "<reviews>";
+                    "<reviews>\n";
             fos.write(s.getBytes());
 
             for (FoodReview review : allReviews) {
                 if (review.getReviewId().equals(selectedOwnReview.getReviewId())){
-                    s = "<review>\n" +
+                    s = "   <review>\n" +
                             "        <reviewId>" + selectedOwnReview.getReviewId() + "</reviewId>\n" +
                             "        <foodId>" + selectedOwnReview.getFoodId() + "</foodId>\n" +
                             "        <foodName>" + selectedOwnReview.getFoodName() + "</foodName>\n" +
@@ -307,9 +311,10 @@ public class ParseClass extends AppCompatActivity {
                             "        <reviewText>" + selectedOwnReview.getReviewText() + "</reviewText>\n" +
                             "        <date>" + selectedOwnReview.getDateString() + "</date>\n" +
                             "        <published>" + selectedOwnReview.getPublished() + "</published>\n" +
+                            "        <voteScore>" + selectedOwnReview.getVoteScore() + "</voteScore>\n" +
                             "    </review>";
                 }else {
-                    s = "<review>\n" +
+                    s = "   <review>\n" +
                             "        <reviewId>" + review.getReviewId() + "</reviewId>\n" +
                             "        <foodId>" + review.getFoodId() + "</foodId>\n" +
                             "        <foodName>" + review.getFoodName() + "</foodName>\n" +
@@ -320,6 +325,7 @@ public class ParseClass extends AppCompatActivity {
                             "        <reviewText>" + review.getReviewText() + "</reviewText>\n" +
                             "        <date>" + review.getDateString() + "</date>\n" +
                             "        <published>" + review.getPublished() + "</published>\n" +
+                            "        <voteScore>" + review.getVoteScore() + "</voteScore>\n" +
                             "    </review>";
                 }
                 fos.write(s.getBytes());

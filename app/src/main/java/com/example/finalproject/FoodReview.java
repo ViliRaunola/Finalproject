@@ -20,13 +20,14 @@ public class FoodReview implements Serializable {
     private String userId;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
     private Boolean published;
+    private int voteScore;
 
 
     public FoodReview(){
 
     }
 
-    public FoodReview(String reviewId,Boolean published, String f, String n, String r, Date d, float taScore, float loScore, float teScore, String text, String userId) {
+    public FoodReview(String reviewId,Boolean published, String f, String n, String r, Date d, float taScore, float loScore, float teScore, String text, String userId, int voteScore) {
         foodId = f;
         foodName = n;
         restaurant = r;
@@ -39,6 +40,7 @@ public class FoodReview implements Serializable {
         this.userId = userId;
         this.published = published;
         this.reviewId = reviewId;
+        this.voteScore = voteScore;
     }
 
     public float getTasteScore() {
@@ -73,6 +75,10 @@ public class FoodReview implements Serializable {
     }
     public String getUserId(){
         return  this.userId;
+    }
+
+    public int getVoteScore() {
+        return voteScore;
     }
 
     public void setPublished(Boolean b) {
@@ -142,6 +148,13 @@ public class FoodReview implements Serializable {
         this.reviewId = id;
     }
 
+    public void setVoteScore(int voteScore) {
+        this.voteScore = voteScore;
+    }
+
+    public void changeVoteScore(int amount) {
+        this.voteScore += amount;
+    }
 
 
 

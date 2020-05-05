@@ -124,6 +124,7 @@ public class AddNewReviewFragment extends Fragment {
         newOwnReview.setTextureScore(textureRatingBar.getRating());
         newOwnReview.setUserId(String.valueOf(User.getInstance().getUserID()));
         newOwnReview.setDate(DateClass.getInstance().getCurrentDate());
+        newOwnReview.setVoteScore(0);
         newOwnReview.setAverageScore();
     }
 
