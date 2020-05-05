@@ -8,6 +8,7 @@ public class University{
     ArrayList<String> restaurantsXML = new ArrayList<>();
     private String info;
 
+    //Constructor for this class
     University(String name, String id, String info){
         this.name = name;
         this.id = id;
