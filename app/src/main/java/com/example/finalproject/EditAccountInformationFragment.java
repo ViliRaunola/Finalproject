@@ -113,14 +113,14 @@ public class EditAccountInformationFragment extends Fragment {
 
                 //checking if the password and confirmation are the same
                 if (!passwordInput.equals(passwordConfirmationInput)) {
-                    Toast.makeText(getContext(), "Password does not match password confirmation", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.toast_passwordAndConfirmationDontMatch), Toast.LENGTH_SHORT).show();
                     newPasswordEditText.setText("");
                     newPasswordConfirmationEditText.setText("");
                 }else if (!Security.getSecuredPassword(currentpasswordInput, user.getEmail()).equals(currentPasswordUser)) {
-                    Toast.makeText(getContext(), "Given password does not match your current password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.toast_wrongPassword), Toast.LENGTH_SHORT).show();
                     currentPasswordConfirmationEditText.setText("");
                 }else if (emailCheck && !user.getEmail().equals(emailInput)) {
-                    Toast.makeText(getContext(), "User with that email already exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.toast_emailAlreadyInUse), Toast.LENGTH_SHORT).show();
                 }else{
 
                     //setting new user data
@@ -157,7 +157,7 @@ public class EditAccountInformationFragment extends Fragment {
 
                             newPasswordEditText.setText("");
                             newPasswordConfirmationEditText.setText("");
-                            Toast.makeText(getContext(),"Your password does not contains all the required characters",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),getResources().getString(R.string.toast_passwordRequirementsNotMet),Toast.LENGTH_SHORT).show();
                         }
                     //if user does not want to change their password
                     }else {
@@ -184,96 +184,4 @@ public class EditAccountInformationFragment extends Fragment {
         return v;
     }
 
-    //Vili!Raunola12345
-
-
-
-/*
-    //TODO lisää parse luokkaan
-    //https://howtodoinjava.com/library/json-simple-read-write-json-examples/
-    public void modifyEmailsAndIds() throws JSONException, IOException {
-
-        //reading original file
-        FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"));
-        int size = ins.available();
-        final byte[] buffer = new byte[size];
-        ins.read(buffer);
-        ins.close();
-
-        String json = new String(buffer, "UTF-8");
-        JSONArray originalUserData = new JSONArray(json);
-        JSONArray newUserData = new JSONArray();
-        FileWriter fileWriter = new FileWriter((context.getFilesDir() + "/userData/EmailsAndIds.json"));
-
-        //goinng through original EmailsAnsIds file
-        for (int i = 0; i < originalUserData.length(); i++) {
-            JSONObject userObject = originalUserData.getJSONObject(i).getJSONObject("user");
-
-            //changing new user email for the same user id
-            if (Integer.parseInt(userObject.getString("userId")) == user.getUserID()) {
-                userObject.put("eMail", user.getEmail());
-            }
-
-            //create a newUserObject and adding it to newUserData
-            JSONObject newUserObject = new JSONObject();
-            newUserObject.put("user", userObject);
-            newUserData.put(newUserObject);
-        }
-
-        fileWriter.write(newUserData.toString());
-        fileWriter.close();
-    }
-
- */
-    /*
-    //TODO lisää parse luokkaan
-    //https://www.tutorialspoint.com/how-to-write-create-a-json-file-using-java
-    public void writeUserJson() throws JSONException {
-        JSONArray jsonArray = new JSONArray();
-        JSONObject jsonObject = new JSONObject();
-        String password;
-        //password = Security.getSecuredPassword(user.getPassword(),user.getEmail());
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        System.out.println(user.getPassword());
-        //System.out.println(password);
-        jsonObject.put("password", user.getPassword());
-        jsonObject.put("userId", user.getUserID());
-        jsonObject.put("firstName", user.getFirstName());
-        jsonObject.put("lastName", user.getLastName());
-        jsonObject.put("eMail", user.getEmail());
-        jsonObject.put("homeUniversity", user.getHomeUniversity());
-        jsonObject.put("adminStatus", user.getIsAdminUser());
-        jsonArray.put(jsonObject);
-        try{
-
-            String x = String.format(context.getFilesDir() + "/userData/User" + user.getUserID() + ".json");
-            System.out.println(x);
-            FileWriter fileWriter = new FileWriter(x);
-            fileWriter.write(jsonArray.toString());
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    //TODO lisää parse luokkaan
-    public boolean checkIfEmailInUse(String email) throws IOException, JSONException {
-        FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"));
-        int size = ins.available();
-        final byte[] buffer = new byte[size];
-        ins.read(buffer);
-        ins.close();
-
-        String json = new String(buffer, "UTF-8");
-        JSONArray originalUserData = new JSONArray(json);
-
-        for (int i = 0; i < originalUserData.length(); i++) {
-            JSONObject userObject = originalUserData.getJSONObject(i).getJSONObject("user");
-            if (email.equals(userObject.getString("eMail"))){
-                return true;
-            }
-
-        }
-        return  false;
-    }
-    */
 }
