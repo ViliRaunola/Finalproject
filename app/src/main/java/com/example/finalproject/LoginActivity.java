@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private List<String> languageList = new ArrayList<String>();
     ParseClass parseClass = ParseClass.getInstance();
 
-    // LoginPasswordTestiHommma Vili!Raunola12345
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +62,11 @@ public class LoginActivity extends AppCompatActivity {
         createAccount = (Button) findViewById(R.id.createAccount);
         email = (EditText) findViewById(R.id.emailTextField_login);
         password = (EditText) findViewById(R.id.passwordTextField_login);
-
         languageSpinner = (Spinner)findViewById(R.id.languageSpinner_login);
         languageList.add(getResources().getString(R.string.loginScreen_changeLanguage));
 
         //creating language spinner
-        parseLanguage();
+        languageList = parseClass.parseLanguage(this, languageList);
         final ArrayAdapter<String> languageSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, languageList);
         languageSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         languageSpinner.setAdapter(languageSpinnerAdapter);
@@ -244,29 +243,4 @@ public class LoginActivity extends AppCompatActivity {
         return id;
     }
 
-
-    public void parseLanguage() {
-
-        try (InputStream ins = this.getAssets().open("language.xml")){
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document xmlDoc = documentBuilder.parse(ins);
-            NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("language");
-
-            for(int i = 0; i < nodeList.getLength(); i++){
-                Node node = nodeList.item(i);
-                if(node.getNodeType() == Node.ELEMENT_NODE){
-                    Element element = (Element) node;
-                    String uniName = element.getElementsByTagName("name").item(0).getTextContent();
-                    languageList.add(uniName);
-                }
-            }
-
-        }catch (IOException e) {
-            e.printStackTrace();
-        }catch(ParserConfigurationException e){
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
-    }
 }

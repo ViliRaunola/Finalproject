@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.app.Activity;
 import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -449,6 +451,31 @@ public class ParseClass extends AppCompatActivity {
         fileWriter.close();
     }
 
+
+    public List parseLanguage(Activity activity, List languageList) {
+
+        try (InputStream ins = activity.getAssets().open("language.xml")){
+            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document xmlDoc = documentBuilder.parse(ins);
+            NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("language");
+
+            for(int i = 0; i < nodeList.getLength(); i++){
+                Node node = nodeList.item(i);
+                if(node.getNodeType() == Node.ELEMENT_NODE){
+                    Element element = (Element) node;
+                    String uniName = element.getElementsByTagName("name").item(0).getTextContent();
+                    languageList.add(uniName);
+                }
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }catch(ParserConfigurationException e){
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+        return languageList;
+    }
 
 
 }

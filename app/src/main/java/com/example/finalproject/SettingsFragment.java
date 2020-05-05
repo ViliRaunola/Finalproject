@@ -28,8 +28,10 @@ import javax.xml.parsers.ParserConfigurationException;
 public class SettingsFragment extends Fragment {
     private Spinner languageSpinner;
     private Button changeLanguageButton;
-    private List<String> languageList = new ArrayList<String>();
     private int position;
+    private List<String> languageList = new ArrayList<String>();
+
+    ParseClass parseClass = ParseClass.getInstance();
 
     @Nullable
     @Override
@@ -37,7 +39,7 @@ public class SettingsFragment extends Fragment {
         View v = inflater.inflate(R.layout.settings, container, false);
         changeLanguageButton = (Button)v.findViewById(R.id.changeLanguageButton_settings);
         languageSpinner = (Spinner)v.findViewById(R.id.languageSpinner_settings);
-        parseLanguage();
+        languageList = parseClass.parseLanguage(getActivity(), languageList);
         final ArrayAdapter<String> languageSpinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, languageList);
         languageSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         languageSpinner.setAdapter(languageSpinnerAdapter);
@@ -68,26 +70,4 @@ public class SettingsFragment extends Fragment {
         return v;
     }
 
-    public void parseLanguage() {
-        try (InputStream ins = getActivity().getAssets().open("language.xml")){
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document xmlDoc = documentBuilder.parse(ins);
-            NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("language");
-
-            for(int i = 0; i < nodeList.getLength(); i++){
-                Node node = nodeList.item(i);
-                if(node.getNodeType() == Node.ELEMENT_NODE){
-                    Element element = (Element) node;
-                    String uniName = element.getElementsByTagName("name").item(0).getTextContent();
-                    languageList.add(uniName);
-                }
-            }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }catch(ParserConfigurationException e){
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
-    }
 }
