@@ -22,7 +22,7 @@
         android:layout_height="225dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:gravity="start|bottom"
+        android:gravity="top|left"
         android:hint="@string/editReviewView_HintText"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="@+id/foodInfoWindow"
