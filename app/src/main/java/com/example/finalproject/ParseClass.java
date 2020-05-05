@@ -255,7 +255,7 @@ public class ParseClass extends AppCompatActivity {
             FileOutputStream fos = new FileOutputStream(file);
 
             s = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                    "<reviews>\n";
+                    "<reviews>";
             fos.write(s.getBytes());
 
             for (FoodReview review : allReviews) {
@@ -264,7 +264,7 @@ public class ParseClass extends AppCompatActivity {
                     s = "";
                 }else {
                     System.out.println("ELSEN SISÄLLÄ ##############");
-                    s = "   <review>\n" +
+                    s = "\n   <review>\n" +
                             "        <reviewId>" + review.getReviewId() + "</reviewId>\n" +
                             "        <foodId>" + review.getFoodId() + "</foodId>\n" +
                             "        <foodName>" + review.getFoodName() + "</foodName>\n" +
@@ -300,12 +300,12 @@ public class ParseClass extends AppCompatActivity {
             FileOutputStream fos = new FileOutputStream(file);
 
             s = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                    "<reviews>\n";
+                    "<reviews>";
             fos.write(s.getBytes());
 
             for (FoodReview review : allReviews) {
                 if (review.getReviewId().equals(selectedOwnReview.getReviewId())){
-                    s = "   <review>\n" +
+                    s = "\n   <review>\n" +
                             "        <reviewId>" + selectedOwnReview.getReviewId() + "</reviewId>\n" +
                             "        <foodId>" + selectedOwnReview.getFoodId() + "</foodId>\n" +
                             "        <foodName>" + selectedOwnReview.getFoodName() + "</foodName>\n" +
@@ -317,9 +317,9 @@ public class ParseClass extends AppCompatActivity {
                             "        <date>" + selectedOwnReview.getDateString() + "</date>\n" +
                             "        <published>" + selectedOwnReview.getPublished() + "</published>\n" +
                             "        <voteScore>" + selectedOwnReview.getVoteScore() + "</voteScore>\n" +
-                            "    </review>";
+                            "   </review>";
                 }else {
-                    s = "   <review>\n" +
+                    s = "\n   <review>\n" +
                             "        <reviewId>" + review.getReviewId() + "</reviewId>\n" +
                             "        <foodId>" + review.getFoodId() + "</foodId>\n" +
                             "        <foodName>" + review.getFoodName() + "</foodName>\n" +
@@ -331,7 +331,7 @@ public class ParseClass extends AppCompatActivity {
                             "        <date>" + review.getDateString() + "</date>\n" +
                             "        <published>" + review.getPublished() + "</published>\n" +
                             "        <voteScore>" + review.getVoteScore() + "</voteScore>\n" +
-                            "    </review>";
+                            "   </review>";
                 }
                 fos.write(s.getBytes());
             }
