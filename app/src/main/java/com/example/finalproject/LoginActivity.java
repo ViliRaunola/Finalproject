@@ -2,7 +2,6 @@ package com.example.finalproject;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,8 +26,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -119,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     } else {
                         password.setText("");
-                        Toast.makeText(getBaseContext(), "We didn't find your account. Please create a new one.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), getResources().getString(R.string.toast_invalidCredentials), Toast.LENGTH_SHORT).show();
                     }
                 }
         });
@@ -142,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
         //TODO tiedoston avaus, luku ja salasanan ja sähköpostin tarkistus,jos väärin alla oleva viesti
         check = jsonParse(id, password);
         if (check == 0) {
-            Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.toast_invalidCredentials), Toast.LENGTH_SHORT).show();
         } else {
             if(User.getInstance().getIsAdminUser()){
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -248,35 +244,7 @@ public class LoginActivity extends AppCompatActivity {
         return id;
     }
 
-    /*
-    //TODO lisää parse luokkaan
-    public void parseUniversity(String hU){
-        try (InputStream ins = context.getAssets().open("university.xml")){
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document xmlDoc = documentBuilder.parse(ins);
-            NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("university");
 
-            for(int i = 0; i < nodeList.getLength(); i++){
-                Node node = nodeList.item(i);
-                if(node.getNodeType() == Node.ELEMENT_NODE){
-                    Element element = (Element) node;
-                    String uniName = element.getElementsByTagName("universityName").item(0).getTextContent();
-                    if (uniName.equals(hU)) {
-                        universitiesPositionCompare = i;
-                    }
-
-                }
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch(ParserConfigurationException e){
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
-    }
-
-     */
     public void parseLanguage() {
 
         try (InputStream ins = this.getAssets().open("language.xml")){
