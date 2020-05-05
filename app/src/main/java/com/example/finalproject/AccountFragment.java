@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-
 public class AccountFragment extends Fragment {
     private Button editButton;
     private EditText email;
@@ -18,8 +17,10 @@ public class AccountFragment extends Fragment {
     private EditText lastName;
     private EditText firstName;
     private EditText homeUniText;
+
     User user = User.getInstance();
     EditAccountInformationFragment editAccountInformationFragment = new EditAccountInformationFragment();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,22 +33,24 @@ public class AccountFragment extends Fragment {
         password = (EditText)v.findViewById(R.id.passwordEditText_account_fragment);
         homeUniText = (EditText) v.findViewById(R.id.homeUniversityEditText_account_fragment);
 
+        //setting users information
         firstName.setText(user.getFirstName());
         lastName.setText(user.getLastName());
         email.setText(user.getEmail());
         password.setText("************");
         homeUniText.setText(user.getHomeUniversity());
 
-
+        //changing fragment to editing account fragment
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { //TODO muuta addBackToStack myöhemmin
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,editAccountInformationFragment).addToBackStack("account_fragment").commit();
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,editAccountInformationFragment).commit();
             }
         });
         return v;
     }
 
+    //setting user information when resuming fragment
     @Override
     public void onResume() {
         super.onResume();

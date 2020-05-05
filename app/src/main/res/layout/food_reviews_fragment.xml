@@ -29,7 +29,7 @@
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Overall"
+        android:text="@string/viewReviewsView_OverallScore"
         app:layout_constraintBottom_toBottomOf="@+id/overalLratingBar_foodReviewsFragment"
         app:layout_constraintStart_toStartOf="@+id/allReviews_foodReviewsFragment"
         app:layout_constraintTop_toTopOf="@+id/overalLratingBar_foodReviewsFragment" />
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="add review"
+        android:text="@string/viewReviewsView_AddReview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/allReviews_foodReviewsFragment"
         app:layout_constraintStart_toStartOf="@+id/allReviews_foodReviewsFragment"
