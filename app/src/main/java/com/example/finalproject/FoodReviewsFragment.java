@@ -73,6 +73,11 @@ public class FoodReviewsFragment extends Fragment {
                 if (r.getUserId().equals(String.valueOf(user.getUserID()))) {
                     userReviewBoolean = true;
                 }
+                // Checks if user has already made a review for currently selected food but hasn't published it yet. This way user can't make multiple reviews for the same food through own reviews.
+            } else if (selectedFood.getId().equals(r.getFoodId()) && !(r.getPublishedBoolean())) {
+                if (r.getUserId().equals(String.valueOf(user.getUserID()))) {
+                    userReviewBoolean = true;
+                }
             }
         }
         //calculates overall rating among all reviews for the selected food.
