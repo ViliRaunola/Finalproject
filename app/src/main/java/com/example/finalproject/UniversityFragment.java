@@ -40,7 +40,7 @@ public class UniversityFragment extends Fragment implements Serializable {
     Context context;
     ParseClass parseClass = ParseClass.getInstance();
     DateClass dateClass = DateClass.getInstance();
-    
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
