@@ -18,8 +18,6 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Locale;
-
 
 public class AccountCreationActivity extends AppCompatActivity {
     private Button confirmButton;
@@ -40,14 +38,19 @@ public class AccountCreationActivity extends AppCompatActivity {
     private boolean checkPassword;
     private byte[] buffer;
     private int newUserId;
+
+    //getting instances
     User user = User.getInstance();
     ParseClass parseClass = ParseClass.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //setting correct language
         Language.getInstance().loadLocale(this);
+
         setContentView(R.layout.activity_account_creation);
-        System.out.println(Locale.getDefault().getLanguage());
 
         confirmButton = (Button)findViewById(R.id.confirmButton_account_creation);
         cancelButton = (Button)findViewById(R.id.cancelButton_account_creation);
@@ -58,16 +61,17 @@ public class AccountCreationActivity extends AppCompatActivity {
         lastName = (EditText)findViewById(R.id.lastNameTextField_account_creation);
         home_uni_spinner = (Spinner)findViewById(R.id.homeUniversity_spinner_account_creation);
 
-
-
+        //setting the actionbar title
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.accountCreation_appBar));
         //create spinner from universityList
 
+        //making array adapter for the home university spinner and setting it
         ArrayAdapter<University> ap = new ArrayAdapter<University>(this, android.R.layout.simple_list_item_1, parseClass.getUniversities());
         ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         home_uni_spinner.setAdapter(ap);
 
+        //when pressing cancel button
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,9 +81,14 @@ public class AccountCreationActivity extends AppCompatActivity {
         });
 
     }
+
+    /*
+    *getting text from the text fields and spinner
+    *checking if email and password details and creates new user
+    */
     public void confirmPressed(View view)  {
 
-        //get text from textfields and spinner
+        //get text from text fields and spinner
         home_uni = home_uni_spinner.getSelectedItem().toString();
         email_string = email.getText().toString();
         lastname_string = lastName.getText().toString();
@@ -90,13 +99,14 @@ public class AccountCreationActivity extends AppCompatActivity {
         //check if password meets the minimum requirements for a password
         checkPassword = Security.passwordChecker(password_string);
 
-        /* reading emailsAndIds file
-         * checking if email is already in use
-         * creating new userId
-         */
         try {
+            // reading emailsAndIds file
             buffer = readEmailsAndIds();
+
+            //checking if email is already in use
             checkEmail = checkIfEmailInUse(email_string, buffer);
+
+            //creating new userId
             newUserId = generateId(buffer);
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,16 +117,19 @@ public class AccountCreationActivity extends AppCompatActivity {
         //if email is already in use
         if (checkEmail) {
             Toast.makeText(this, "User with that email already exists", Toast.LENGTH_SHORT).show();
+
         //if password and confirm password are not the same
         }else if (!passwordConfirm_string.equals(password_string)){
             Toast.makeText(this, "Password does not match password confirmation", Toast.LENGTH_SHORT).show();
             password.setText("");
             passwordConfirm.setText("");
+
         //if password does not meet the minimum requirements for a password
         }else if (!checkPassword) {
             Toast.makeText(this, "Your password does not contains all the required characters", Toast.LENGTH_SHORT).show();
             password.setText("");
             passwordConfirm.setText("");
+
         }else {
             //create a new user
             user.setEmail(email_string);
@@ -144,48 +157,64 @@ public class AccountCreationActivity extends AppCompatActivity {
 
     }
 
-
+    //reading EmailsAndIds file
     public byte[] readEmailsAndIds() throws IOException {
         FileInputStream ins = new FileInputStream (new File(this.getFilesDir() +"/userData/EmailsAndIds.json"));
         int size = ins.available();
         final byte[] buffer = new byte[size];
         ins.read(buffer);
         ins.close();
+
+        //returning the original file back as byte array
         return buffer;
     }
 
+    //check if the email is already in use
     public boolean checkIfEmailInUse(String email, byte[] buffer) throws IOException, JSONException {
+
+        //new string is original EmailsAndIds file
         String json = new String(buffer, "UTF-8");
         JSONArray originalUserData = new JSONArray(json);
 
+        //going through original file and checking if the email is the same
         for (int i = 0; i < originalUserData.length(); i++) {
             JSONObject userObject = originalUserData.getJSONObject(i).getJSONObject("user");
             if (email.equals(userObject.getString("eMail"))){
                 return true;
             }
-
         }
         return  false;
     }
+
+    //generating userID for the new user
     public int generateId(byte[] buffer) throws UnsupportedEncodingException, JSONException {
         int userId = 0;
+
+        //new string is original EmailsAndIds file
         String json = new String(buffer, "UTF-8");
         JSONArray originalUserData = new JSONArray(json);
 
+        //going through original file and finding the largest userID there
         for (int i = 0; i < originalUserData.length(); i++) {
             JSONObject userObject = originalUserData.getJSONObject(i).getJSONObject("user");
             if (Integer.parseInt(userObject.get("userId").toString()) > userId){
                 userId = Integer.parseInt(userObject.get("userId").toString());
             }
         }
+
+        //adding new userID
         userId += 1;
         return  userId;
     }
 
+    //writing json file for the new user
     public void writeNewUserJson() throws JSONException {
+
+        //creating new JSONArray and JSONObject
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
 
+        //setting user object values to JSOnObject
         jsonObject.put("password", user.getPassword());
         jsonObject.put("userId", user.getUserID());
         jsonObject.put("firstName", user.getFirstName());
@@ -197,7 +226,6 @@ public class AccountCreationActivity extends AppCompatActivity {
 
         try{
             String x = String.format(this.getFilesDir() + "/userData/User" + user.getUserID() + ".json");
-            System.out.println(x);
             FileWriter fileWriter = new FileWriter(x);
             fileWriter.write(jsonArray.toString());
             fileWriter.close();
@@ -206,14 +234,16 @@ public class AccountCreationActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     //save user to email and ids file
     public void saveUserDataToEmailAndIdsFile() throws JSONException, IOException {
+
         //reading original file
-        FileInputStream ins = new FileInputStream (new File(this.getFilesDir() +"/userData/EmailsAndIds.json"));
-        int size = ins.available();
+        FileInputStream fis = new FileInputStream (new File(this.getFilesDir() + "/userData/EmailsAndIds.json"));
+        int size = fis.available();
         final byte[] buffer = new byte[size];
-        ins.read(buffer);
-        ins.close();
+        fis.read(buffer);
+        fis.close();
 
         String json = new String(buffer, "UTF-8");
         JSONArray originalUserData = new JSONArray(json);
@@ -237,6 +267,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         userObject.put("user",newUserObject);
         newUserData.put(userObject);
 
+        //adding them to the end of the file
         fileWriter.append(newUserData.toString());
         fileWriter.close();
     }
