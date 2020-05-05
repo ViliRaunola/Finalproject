@@ -27,9 +27,9 @@
 
     <TextView
         android:id="@+id/textView30"
-        android:layout_width="wrap_content"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
-        android:text="@string/viewReviewsView_OverallScore"
+        android:text="@string/viewReviewsView_overallScore"
         app:layout_constraintBottom_toBottomOf="@+id/overalLratingBar_foodReviewsFragment"
         app:layout_constraintStart_toStartOf="@+id/allReviews_foodReviewsFragment"
         app:layout_constraintTop_toTopOf="@+id/overalLratingBar_foodReviewsFragment" />
@@ -37,8 +37,8 @@
     <ListView
         android:id="@+id/allReviews_foodReviewsFragment"
         android:layout_width="350dp"
-        android:layout_height="400dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="375dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/overalLratingBar_foodReviewsFragment" />
@@ -48,11 +48,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="@string/viewReviewsView_AddReview"
+        android:text="@string/viewReviewsView_addReview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/allReviews_foodReviewsFragment"
         app:layout_constraintStart_toStartOf="@+id/allReviews_foodReviewsFragment"
         app:layout_constraintTop_toBottomOf="@+id/allReviews_foodReviewsFragment"
         app:layout_constraintVertical_bias="0.505" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/viewReviewsView_userReviews"
+        app:layout_constraintBottom_toTopOf="@+id/allReviews_foodReviewsFragment"
+        app:layout_constraintEnd_toEndOf="@+id/allReviews_foodReviewsFragment"
+        app:layout_constraintStart_toStartOf="@+id/allReviews_foodReviewsFragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

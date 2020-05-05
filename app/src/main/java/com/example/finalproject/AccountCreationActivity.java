@@ -60,7 +60,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         lastName = (EditText)findViewById(R.id.lastNameTextField_account_creation);
         home_uni_spinner = (Spinner)findViewById(R.id.homeUniversity_spinner_account_creation);
 
-        //setting the actionbar title
+        //setting the actionbar title as current page
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.accountCreation_appBar));
         //create spinner from universityList

@@ -2,8 +2,6 @@ package com.example.finalproject;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Locale;
 
 public class Authentication extends AppCompatActivity {
     private EditText randomNumberEditText;
@@ -23,15 +20,19 @@ public class Authentication extends AppCompatActivity {
     private String randomNumber;
     private String numberInput;
     private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //setting the current language
         Language.getInstance().loadLocale(this);
         setContentView(R.layout.activity_authentication);
+
+        //getting the context
         context = this;
 
-        System.out.println(Locale.getDefault().getLanguage());
-
+        //setting the action bar title as current page
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.authenticationView_toolbar));
 
@@ -44,18 +45,26 @@ public class Authentication extends AppCompatActivity {
         randomNumber = Long.toString(Math.round(Math.random() * 900000 + 100000));
         randomNumberTextView.setText(randomNumber);
 
+        //changing the activity if user has inputted the correct number combination
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //getting the inputted number
                 numberInput = randomNumberEditText.getText().toString();
+
+                //if correct changes and enters the app
                 if (numberInput.equals(randomNumber)) {
                     startActivity(new Intent(Authentication.this, MainActivity.class));
                     finish();
+
                 }else {
                     Toast.makeText(context,"Wrong number, please try again",Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        //going to previous page
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
