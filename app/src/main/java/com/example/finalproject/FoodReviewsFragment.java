@@ -11,12 +11,10 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import java.util.ArrayList;
 
 public class FoodReviewsFragment extends Fragment {
@@ -40,24 +38,25 @@ public class FoodReviewsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.food_reviews_fragment, container, false);
-        addReviewButton = (Button)v.findViewById(R.id.addReviewButton);
-        overallRatingBar = (RatingBar)v.findViewById(R.id.overalLratingBar_foodReviewsFragment);
-        allReviewsListView = (ListView)v.findViewById(R.id.allReviews_foodReviewsFragment);
-        foodNameTextView = (TextView)v.findViewById(R.id.foodNameTextView);
+        addReviewButton = (Button) v.findViewById(R.id.addReviewButton);
+        overallRatingBar = (RatingBar) v.findViewById(R.id.overalLratingBar_foodReviewsFragment);
+        allReviewsListView = (ListView) v.findViewById(R.id.allReviews_foodReviewsFragment);
+        foodNameTextView = (TextView) v.findViewById(R.id.foodNameTextView);
         overallRating = 0;
         reviewCounter = 0;
         reviewsForFood.clear();
         userReviewBoolean = false;
 
 
-
-        try{
+        try {
             informationBundle = getArguments();
             selectedFood = (FoodItem) informationBundle.getSerializable("FoodKey");
             selectedRestaurantName = (String) informationBundle.getString("resKey");
             dayOfFoodString = (String) informationBundle.getString("dateKey");
-            parseClass.parseRestaurantReviews(selectedRestaurantName , getContext());
-        }catch (Exception e){//TODO ADD REAL EXCEPTION
+            parseClass.parseRestaurantReviews(selectedRestaurantName, getContext());
+        }catch (NullPointerException npe){
+            npe.printStackTrace();
+        }catch (Exception e){
             e.printStackTrace();
         }
 
@@ -95,7 +94,7 @@ public class FoodReviewsFragment extends Fragment {
             public void onClick(View v) {
                 // Checks if user has already made a review for currently selected food
                 if (userReviewBoolean) {
-                    Toast.makeText(getContext(), "Can't create multiple reviews for one food. Go to Own reviews to edit your older review.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.toast_multipleReviewsForOneFood), Toast.LENGTH_SHORT).show();
                 } else {
                     //Checks if user is trying to make a review for a food that has not been served yet.
                     if (dateClass.compareDates(dayOfFoodString)) {
@@ -110,7 +109,7 @@ public class FoodReviewsFragment extends Fragment {
                         ft.addToBackStack("Fragment_add_new_review");
                         ft.commit();
                     } else {
-                        Toast.makeText(getContext(), "Can't add a review for a food that has not yet been served.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getResources().getString(R.string.toast_foodNotServedYet), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
