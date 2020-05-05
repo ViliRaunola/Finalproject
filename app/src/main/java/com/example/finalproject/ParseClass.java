@@ -24,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -67,17 +68,17 @@ public class ParseClass extends AppCompatActivity {
     public ArrayList<FoodReview> getReviewsNotPublished(){
         return this.reviewsNotPublished;
     }
-
+    ///data/data/com.example.finalproject/files/unisRestaurantsAndMenus
 
     //Parses "university.xml" and creates University objects based on .xml parameters. Adds these new University objects to "universities"-ArrayList.
     //This ArrayList is shown in university_spinner.
     public void parseUniversity(Context context){
 
-        try (InputStream ins = context.getAssets().open("university.xml")){
+        try (FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/university.xml"))){
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document xmlDoc = documentBuilder.parse(ins);
+            Document xmlDoc = documentBuilder.parse(fis);
             NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("university");
-
+            fis.close();
             for(int i = 0; i < nodeList.getLength(); i++){
                 Node node = nodeList.item(i);
                 if(node.getNodeType() == Node.ELEMENT_NODE){
@@ -106,13 +107,14 @@ public class ParseClass extends AppCompatActivity {
     public void parseRestaurantsMenu(int pos, Context context) {
         University selectedUniversity = parseClass.universities.get(pos);
         //university info to textView
-
+        //InputStream ins = context.getAssets().open(s)
+        //FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/university.xml")))
         for (String s : selectedUniversity.restaurantsXML) {
-            try (InputStream ins = context.getAssets().open(s)) {
+            try (FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/"+ s))) {
                 DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-                Document xmlDoc = documentBuilder.parse(ins);
+                Document xmlDoc = documentBuilder.parse(fis);
                 NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("restaurant");
-
+                fis.close();
                 for (int i = 0; i < nodeList.getLength(); i++) {
                     Node node = nodeList.item(i);
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -138,12 +140,15 @@ public class ParseClass extends AppCompatActivity {
     //parses food items from XML files of the chosen Restaurant. Adds them to Restaurant's dailyMenus.
     public void parseFoodItems(int position, Context context) {
         Restaurant selectedRestaurant =  parseClass.getRestaurants().get(position);
+        //InputStream ins = context.getAssets().open(s)
+        //FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/"+ s)))
+        String language = Locale.getDefault().getLanguage();
         for (String s : selectedRestaurant.restaurantMenusXML) {
-            try (InputStream ins = context.getAssets().open(s)) {
+            try (FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/"+ language + "_" + s))) {
                 DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-                Document xmlDoc = documentBuilder.parse(ins);
+                Document xmlDoc = documentBuilder.parse(fis);
                 NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("food");
-
+                fis.close();
                 for (int i = 0; i < nodeList.getLength(); i++) {
                     Node node = nodeList.item(i);
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -176,15 +181,15 @@ public class ParseClass extends AppCompatActivity {
     public void parseRestaurantReviews(String selectedRestaurantName, Context context){
         biggestReviewId = 0;
         User user = User.getInstance();
-        try (FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/reviews/" + selectedRestaurantName + "_Reviews.xml"))){
+        try (FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/reviews/" + selectedRestaurantName + "_Reviews.xml"))){
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document xmlDoc = documentBuilder.parse(ins);
+            Document xmlDoc = documentBuilder.parse(fis);
             NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("review");
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
             reviewsPublished.clear();
             reviewsNotPublished.clear();
             allReviews.clear();
-
+            fis.close();
 
             for(int i = 0; i < nodeList.getLength(); i++){
                 Node node = nodeList.item(i);

@@ -23,7 +23,7 @@ public class Language extends Application {
         config.locale = locale;
         cont.getResources().updateConfiguration(config, cont.getResources().getDisplayMetrics());
 
-        //setting language to shared preferences
+        //setting language to shared preferences and creates a settings file in shared preferences directory
         SharedPreferences.Editor editor = cont.getSharedPreferences("Settings", MODE_PRIVATE).edit();
         editor.putString("My_language", language);
         editor.apply();
