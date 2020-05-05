@@ -96,6 +96,24 @@
     <string name="viewReviewsView_overallScore">Yleinen arvosana</string>
     <string name="viewReviewsView_userReviews">Käyttäjien arvostelut</string>
 
+    <!-- Toasts -->
+    <string name="toast_emailAlreadyInUse">Antamasi sähköposti on jo käytössä</string>
+    <string name="toast_passwordAndConfirmationDontMatch">Antamasi salasana ja sen vahvistus eivät vastaa</string>
+    <string name="toast_passwordRequirementsNotMet">Antamasi salasana ei ole vaatimusten mukainen</string>
+    <string name="toast_reviewScoreAndTextEmpty">Et voi julkaista arvostelua arvosanalla 0 ilman tekstiä</string>
+    <string name="toast_reviewPublished">Arvostelusi on tallennettu ja julkaistu</string>
+    <string name="toast_wrongAuthenticationNumber">Antamasi vahvistusluku on väärä, yritä uudelleen</string>
+    <string name="toast_saveReviewDraft">Arvostelusi tallennettiin luonnoksena</string>
+    <string name="toast_wrongPassword">Antamasi salasana ei vastaa nykyistä salasanaasi</string>
+    <string name="toast_reviewRemovedUser">Arvostelusi poistettiin</string>
+    <string name="toast_reviewRemovedAdmin">Arvostelu poistettu</string>
+    <string name="toast_reviewHiddenAdmin">Arvostelu piilotettu</string>
+    <string name="toast_multipleReviewsForOneFood">Et voi antaa montaa arvostelua samalle ruoalle. Muokkaa arvostelua "Omat arvostelut" sivulla</string>
+    <string name="toast_foodNotServedYet">Et voi antaa arvostelua ruoalle, joka ei ole vielä ollut tarjolla</string>
+    <string name="toast_invalidCredentials">Väärä käyttäjätunnus tai salasana</string>
+    <string name="toast_loggedOut">Sinut on kirjattu ulos</string>
+    <string name="toast_EndOfMenu">Ei enempää ruokia tässä kuussa</string>
+
     <!-- navigationDrawer specific -->
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>

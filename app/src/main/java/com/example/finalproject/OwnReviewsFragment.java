@@ -3,7 +3,6 @@ package com.example.finalproject;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,37 +10,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 public class OwnReviewsFragment extends Fragment {
 
-    private TextView tv;
     private Spinner sortingSpinner;
     private Spinner universitySpinner;
     private Spinner restaurantSpinner;
@@ -49,7 +27,6 @@ public class OwnReviewsFragment extends Fragment {
     private List<String> reviewsList = new ArrayList<String>();
     private ListView notPublishedReviewsListView ;
     private ListView publishedReviewsListView ;
-    private String selectedSortingMethod;
     private String selectedRestaurantName;
     View v;
     EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
@@ -72,63 +49,74 @@ public class OwnReviewsFragment extends Fragment {
         restaurantSpinner = (Spinner)v.findViewById(R.id.restaurantSpinner_ownReviews);
 
 
-        //clear spinner and list
+        //clear spinner and list views
         sortingSpinner.setAdapter(null);
         sortingList.clear();
         reviewsList.clear();
         publishedReviewsListView.setAdapter(null);
         notPublishedReviewsListView.setAdapter(null);
         clearChoices();
-        //sorting options
 
+        //sorting options
         sortingList.add(getResources().getString(R.string.ownReviewsView_date));
-        sortingList.add(getResources().getString(R.string.ownReviewsView_food)); //ruoka;pvm;restaurant;score
+        sortingList.add(getResources().getString(R.string.ownReviewsView_food));
         sortingList.add(getResources().getString(R.string.ownReviewsView_overallScore));
 
-        //arrayadapter for spinner
-        ArrayAdapter<String> ap = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, sortingList);
-        ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortingSpinner.setAdapter(ap);
+        //ArrayAdapter for sortingSpinner
+        ArrayAdapter<String> sortAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, sortingList);
+        sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortingSpinner.setAdapter(sortAdapter);
 
-        ArrayAdapter<University> ap4 = new ArrayAdapter<University>(getContext(), android.R.layout.simple_list_item_1, parseClass.getUniversities());
-        ap4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        universitySpinner.setAdapter(ap4);
+        //ArrayAdapter for universitySpinner
+        ArrayAdapter<University> uniAdapter = new ArrayAdapter<University>(getContext(), android.R.layout.simple_list_item_1, parseClass.getUniversities());
+        uniAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        universitySpinner.setAdapter(uniAdapter);
+
+        //Sets home university as default selection
         universitySpinner.setSelection(user.getHomeUniversityPos());
 
+        //University spinner listener
         universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                //Reads restaurant XML file again based on the selected university
+                //clears restaurants and list views
                 parseClass.getRestaurants().clear();
                 clearChoices();
-                parseClass.parseRestaurantsMenu(position, context);
-                ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, parseClass.getRestaurants());
-                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                restaurantSpinner.setAdapter(arrayAdapter);
 
+                //Reads restaurant XML file again based on the selected university and fills restaurants ArrayList in parseClass
+                parseClass.parseRestaurantsMenu(position, context);
+
+                //arrayAdapter for Restaurants
+                ArrayAdapter<Restaurant> resAdapter = new ArrayAdapter<Restaurant>(getActivity(), android.R.layout.simple_spinner_item, parseClass.getRestaurants());
+                resAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                restaurantSpinner.setAdapter(resAdapter);
+
+                //Restaurant spinner listener
                 restaurantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        //clears list views
                         clearChoices();
+
                         selectedRestaurantName = restaurantSpinner.getSelectedItem().toString();
+
+                        //reads reviews from XML and fills published, not published and all reviews.
                         parseClass.parseRestaurantReviews(selectedRestaurantName, context);
 
-                        ArrayAdapter<FoodReview> arrayAdapterListView = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsPublished());
-                        publishedReviewsListView.setAdapter(arrayAdapterListView);
+                        //ArrayAdapter for published reviews list view
+                        ArrayAdapter<FoodReview> publishedAdapter = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsPublished());
+                        publishedReviewsListView.setAdapter(publishedAdapter);
 
-                        ArrayAdapter<FoodReview> arrayAdapterListView2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
-                        notPublishedReviewsListView.setAdapter(arrayAdapterListView2);
+                        //ArrayAdapter for not published reviews list view
+                        ArrayAdapter<FoodReview> notPublishedAdapter = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
+                        notPublishedReviewsListView.setAdapter(notPublishedAdapter);
                     }
-
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
 
                     }
                 });
-
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -136,66 +124,39 @@ public class OwnReviewsFragment extends Fragment {
         });
 
 
-        //arrayadapter for publishedreviews listview
-        ArrayAdapter<String> ap2 = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, reviewsList);
-        publishedReviewsListView.setAdapter(ap2);
-        notPublishedReviewsListView.setAdapter(ap2);
-
-
-
         //sorting spinner listener
         sortingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-               //selectedSortingMethod = sortingSpinner.getSelectedItem().toString();
                switch (position) {
                    case 0:
                         //https://www.youtube.com/watch?v=Mguw_TQBExo how to use Collections.sort
                        //sort by date using Collections.sort
-                       Collections.sort(parseClass.getReviewsPublished(), new Comparator<FoodReview>() {
-                           @Override
-                           public int compare(FoodReview foodReview, FoodReview t1) {
-                               return foodReview.getDate().compareTo(t1.getDate());
-                           }
-                       });
+                       Sorting.sortByDate(parseClass.getReviewsPublished());
 
                        //setting new adapter for published reviews
                        ArrayAdapter<FoodReview> arrayAdapterDatePublish = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  parseClass.getReviewsPublished());
                        publishedReviewsListView.setAdapter(arrayAdapterDatePublish);
 
                        //sort by date using Collections.sort
-                       Collections.sort(parseClass.getReviewsNotPublished(), new Comparator<FoodReview>() {
-                           @Override
-                           public int compare(FoodReview foodReview, FoodReview t1) {
-                               return foodReview.getDate().compareTo(t1.getDate());
-                           }
-                       });
+                       Sorting.sortByDate(parseClass.getReviewsNotPublished());
 
                        //setting new adapter for not published reviews
                        ArrayAdapter<FoodReview> arrayAdapterDate2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
                        notPublishedReviewsListView.setAdapter(arrayAdapterDate2);
-
                        break;
+
                    case 1:
                        //https://www.youtube.com/watch?v=Mguw_TQBExo how to use Collections.sort
                        //sort by food using Collections.sort
-                       Collections.sort(parseClass.getReviewsPublished(), new Comparator<FoodReview>() {
-                           @Override
-                           public int compare(FoodReview foodReview, FoodReview t1) {
-                               return foodReview.getFoodName().compareTo(t1.getFoodName());
-                           }
-                       });
+                       Sorting.sortByFood(parseClass.getReviewsPublished());
+
                        //setting new adapter for published reviews
                        ArrayAdapter<FoodReview> arrayAdapterFood = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  parseClass.getReviewsPublished());
                        publishedReviewsListView.setAdapter(arrayAdapterFood);
 
                        //sort by date using Collections.sort
-                       Collections.sort(parseClass.getReviewsNotPublished(), new Comparator<FoodReview>() {
-                           @Override
-                           public int compare(FoodReview foodReview, FoodReview t1) {
-                               return foodReview.getFoodName().compareTo(t1.getFoodName());
-                           }
-                       });
+                       Sorting.sortByFood(parseClass.getReviewsNotPublished());
 
                        //setting new adapter for not published reviews
                        ArrayAdapter<FoodReview> arrayAdapterFood2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
@@ -205,12 +166,7 @@ public class OwnReviewsFragment extends Fragment {
                    case 2:
                        //https://stackoverflow.com/questions/9941890/sorting-arraylist-of-objects-by-float how to sort by float
                        //sort by overall score using Collections.sort
-                       Collections.sort(parseClass.getReviewsPublished(), new Comparator<FoodReview>() {
-                           @Override
-                           public int compare(FoodReview foodReview, FoodReview t1) {
-                               return Float.compare(foodReview.getAverageScore(),t1.getAverageScore());
-                           }
-                       });
+                       Sorting.sortByScore(parseClass.getReviewsPublished());
 
                        //reverse the list
                        Collections.reverse(parseClass.getReviewsPublished());
@@ -220,18 +176,17 @@ public class OwnReviewsFragment extends Fragment {
                        publishedReviewsListView.setAdapter(arrayAdapterScore);
 
                        //sort by date using Collections.sort
-                       Collections.sort(parseClass.getReviewsNotPublished(), new Comparator<FoodReview>() {
-                           @Override
-                           public int compare(FoodReview foodReview, FoodReview t1) {
-                               return Float.compare(foodReview.getAverageScore(),t1.getAverageScore());
-                           }
-                       });
+                       Sorting.sortByScore(parseClass.getReviewsNotPublished());
+
                        //reverse the list
                        Collections.reverse(parseClass.getReviewsNotPublished());
 
                        //setting new adapter for not published reviews
                        ArrayAdapter<FoodReview> arrayAdapterScore2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
                        notPublishedReviewsListView.setAdapter(arrayAdapterScore2);
+                       break;
+                   default:
+                       break;
                }
             }
 
@@ -241,11 +196,12 @@ public class OwnReviewsFragment extends Fragment {
             }
         });
 
-    //https://stackoverflow.com/questions/42266436/passing-objects-between-fragments
+        //https://stackoverflow.com/questions/42266436/passing-objects-between-fragments
+        //When clicked on a published review, passes data to published review editing fragment and moves to new fragment (editReviewsFragment)
+        //sends selected review and it's information
         publishedReviewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
 
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -254,15 +210,14 @@ public class OwnReviewsFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 FoodReview selectedReview = parseClass.getReviewsPublished().get(i);
                 bundle.putSerializable("reviewKey", selectedReview);
-                bundle.putSerializable("allReviews", parseClass.getAllReviews());
                 editReviewsFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, editReviewsFragment);
                 ft.commit();
-
-                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).addToBackStack("edit_own_reviews_fragment").commit();
-
             }
         });
+
+        //When clicked on a not published review, passes data to not published review editing fragment and moves to new fragment (editReviewsFragment)
+        //sends selected review and it's information
         notPublishedReviewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -276,12 +231,13 @@ public class OwnReviewsFragment extends Fragment {
                 editReviewsFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, editReviewsFragment);
                 ft.commit();
-                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editReviewsFragment).addToBackStack("edit_own_reviews_fragment").commit();
             }
         });
         return v;
     }
 
+
+    //On resume clears list views and sets user's home university and universitySpinner selection
     @Override
     public void onResume() {
         super.onResume();
@@ -289,6 +245,7 @@ public class OwnReviewsFragment extends Fragment {
         universitySpinner.setSelection(user.getHomeUniversityPos());
     }
 
+    //clears published and not published list views.
     private void clearChoices(){
         parseClass.getReviewsNotPublished().clear();
         parseClass.getReviewsPublished().clear();

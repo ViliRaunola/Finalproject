@@ -2,53 +2,52 @@ package com.example.finalproject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
 public class DateClass {
 
+    //makes DateClass singleton
     private static DateClass dateClass = new DateClass();
 
     public DateClass() {
-
     }
 
     public static DateClass getInstance() {
         return dateClass;
     }
 
-    // returns current date
+
+    //https://stackoverflow.com/questions/5175728/how-to-get-the-current-date-time-in-java
+    // returns current date with weekday as String
     public String getCurrentDateWithWeekDay() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy");
         Date currentDate = new Date();
         return simpleDateFormat.format(currentDate);
     }
 
+    //returns current date as String
     public String getCurrentDate() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         Date currentDate = new Date();
         return simpleDateFormat.format(currentDate);
     }
 
+    //returns current day as integer
+    public int getTodayInt() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
+        Date currentDate = new Date();
+        return Integer.parseInt(simpleDateFormat.format(currentDate));
+    }
 
 
-    //returns next or previous date (+1 or -1)
+    //https://beginnersbook.com/2017/10/java-add-days-to-date/
+    //returns next or previous date (+1 or -1) or any other date by adding numberOfDays to given parameter date
     public static Date changeDate(Date date, int numberOfDays) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.DATE, numberOfDays);
         return cal.getTime();
-    }
-
-    public int getToDayInt() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String temp = dtf.format(now);
-        String time[] = temp.split(" "); //time[0] == yyyy/MM/dd
-        final String day[] = time[0].split("/"); //day[2] == d
-        return Integer.parseInt(day[2]);
     }
 
     //https://www.tutorialspoint.com/how-to-compare-two-dates-in-java

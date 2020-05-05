@@ -61,7 +61,7 @@ public class UniversityFragment extends Fragment implements Serializable {
         Populating the first spinner on the page.
         Calls ParseClass to read all universities from "database" aka phones own memory.
          */
-        toDayInt = dateClass.getToDayInt();
+        toDayInt = dateClass.getTodayInt();
         parseClass.getUniversities().clear();
         parseClass.parseUniversity(context);
         ArrayAdapter<University> arrayAdapterUniversities = new ArrayAdapter<University>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getUniversities());
@@ -76,7 +76,7 @@ public class UniversityFragment extends Fragment implements Serializable {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 dayTextView.setText(dateClass.getCurrentDateWithWeekDay());
-                toDayInt = dateClass.getToDayInt();
+                toDayInt = dateClass.getTodayInt();
                 parseClass.getRestaurants().clear();
 
                 /*
@@ -124,7 +124,7 @@ public class UniversityFragment extends Fragment implements Serializable {
             @Override
             public void onClick(View v) {
                 dayTextView.setText(dateClass.getCurrentDateWithWeekDay());
-                toDayInt = dateClass.getToDayInt();
+                toDayInt = dateClass.getTodayInt();
                 checkCurrentDay(toDayInt, restaurantPosition);
                 foodItemLisView.invalidateViews();
             }
