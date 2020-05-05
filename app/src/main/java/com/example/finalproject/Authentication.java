@@ -59,7 +59,7 @@ public class Authentication extends AppCompatActivity {
                     finish();
 
                 }else {
-                    Toast.makeText(context,"Wrong number, please try again",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,getResources().getString(R.string.toast_wrongAuthenticationNumber),Toast.LENGTH_SHORT).show();
                 }
             }
         });

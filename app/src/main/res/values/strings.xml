@@ -95,6 +95,24 @@
     <string name="viewReviewsView_overallScore">Overall</string>
     <string name="viewReviewsView_userReviews">User reviews</string>
 
+    <!-- Toasts -->
+    <string name="toast_emailAlreadyInUse">User with that email already exists</string>
+    <string name="toast_passwordAndConfirmationDontMatch">Password does not match password confirmation</string>
+    <string name="toast_passwordRequirementsNotMet">Your password does not contains all the required characters</string>
+    <string name="toast_reviewScoreAndTextEmpty">Can\'t publish a review with score of 0 without text</string>
+    <string name="toast_reviewPublished">Your review was saved and published</string>
+    <string name="toast_wrongAuthenticationNumber">Wrong authentication number, please try again</string>
+    <string name="toast_saveReviewDraft">Your review was saved as a draft</string>
+    <string name="toast_wrongPassword">Given password does not match your current password</string>
+    <string name="toast_reviewRemovedUser">Your review was removed</string>
+    <string name="toast_reviewRemovedAdmin">Review removed</string>
+    <string name="toast_reviewHiddenAdmin">Review hidden</string>
+    <string name="toast_multipleReviewsForOneFood">Can\'t create multiple reviews for one food. Go to "Own reviews" to edit your older review</string>
+    <string name="toast_foodNotServedYet">Can\'t add a review for a food that has not yet been served</string>
+    <string name="toast_invalidCredentials">Invalid email or password</string>
+    <string name="toast_loggedOut">You have logged out</string>
+    <string name="toast_EndOfMenu">End of monthly menu</string>
+
     <!-- navigationDrawer specific -->
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>

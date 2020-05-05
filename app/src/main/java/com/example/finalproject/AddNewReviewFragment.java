@@ -73,7 +73,7 @@ public class AddNewReviewFragment extends Fragment {
                 //modifies restaurant file by adding the new review
                 parseClass.modifyRestaurantReviewXmlFile(getContext(), newOwnReview);
 
-                Toast.makeText(getContext(),"Your review was saved",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),getResources().getString(R.string.toast_saveReviewDraft),Toast.LENGTH_SHORT).show();
 
                 //going to Restaurant Menu page
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UniversityFragment()).commit();
@@ -90,7 +90,7 @@ public class AddNewReviewFragment extends Fragment {
                 && (appearanceRatingBar.getRating() == 0)
                 &&(textureRatingBar.getRating() == 0)
                 && (writtenReview.getText().toString().trim().equals(""))) {
-                    Toast.makeText(getContext(), "Can't publish a review with score of 0 without text.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.toast_reviewScoreAndTextEmpty), Toast.LENGTH_SHORT).show();
                 } else {
                     //setting review information
                     setReviewInformation();
@@ -108,7 +108,7 @@ public class AddNewReviewFragment extends Fragment {
                     //modifies restaurant file by adding the new review
                     parseClass.modifyRestaurantReviewXmlFile(getContext(), newOwnReview);
 
-                    Toast.makeText(getContext(), "Your review was saved and published", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.toast_reviewPublished), Toast.LENGTH_SHORT).show();
 
                     //going to Restaurant Menu page
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UniversityFragment()).commit();

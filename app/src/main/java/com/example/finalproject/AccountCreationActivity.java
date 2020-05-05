@@ -115,17 +115,17 @@ public class AccountCreationActivity extends AppCompatActivity {
 
         //if email is already in use
         if (checkEmail) {
-            Toast.makeText(this, "User with that email already exists", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.toast_emailAlreadyInUse), Toast.LENGTH_SHORT).show();
 
         //if password and confirm password are not the same
         }else if (!passwordConfirm_string.equals(password_string)){
-            Toast.makeText(this, "Password does not match password confirmation", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.toast_passwordAndConfirmationDontMatch), Toast.LENGTH_SHORT).show();
             password.setText("");
             passwordConfirm.setText("");
 
         //if password does not meet the minimum requirements for a password
         }else if (!checkPassword) {
-            Toast.makeText(this, "Your password does not contains all the required characters", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getResources().getString(R.string.toast_passwordRequirementsNotMet) , Toast.LENGTH_SHORT).show();
             password.setText("");
             passwordConfirm.setText("");
 
