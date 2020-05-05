@@ -37,11 +37,11 @@
     <ListView
         android:id="@+id/allReviews_foodReviewsFragment"
         android:layout_width="350dp"
-        android:layout_height="375dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="325dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/overalLratingBar_foodReviewsFragment" />
+        app:layout_constraintTop_toBottomOf="@+id/sortingSpinner_foorReviewsFragment" />
 
     <Button
         android:id="@+id/addReviewButton"
@@ -59,9 +59,26 @@
         android:id="@+id/textView34"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/viewReviewsView_userReviews"
-        app:layout_constraintBottom_toTopOf="@+id/allReviews_foodReviewsFragment"
         app:layout_constraintEnd_toEndOf="@+id/allReviews_foodReviewsFragment"
-        app:layout_constraintStart_toStartOf="@+id/allReviews_foodReviewsFragment" />
+        app:layout_constraintStart_toStartOf="@+id/allReviews_foodReviewsFragment"
+        app:layout_constraintTop_toBottomOf="@+id/overalLratingBar_foodReviewsFragment" />
+
+    <Spinner
+        android:id="@+id/sortingSpinner_foorReviewsFragment"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/allReviews_foodReviewsFragment"
+        app:layout_constraintStart_toStartOf="@+id/allReviews_foodReviewsFragment"
+        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ownReviewsView_sort"
+        app:layout_constraintStart_toStartOf="@+id/sortingSpinner_foorReviewsFragment"
+        app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
