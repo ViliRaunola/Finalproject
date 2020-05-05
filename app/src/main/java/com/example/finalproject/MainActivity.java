@@ -127,19 +127,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch(item.getItemId()){
             case R.id.nav_restaurants:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
-                Toast.makeText(this, "All Unis", Toast.LENGTH_SHORT).show();
                 toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
                 break;
             case R.id.nav_reviews:
                 //sendUniversityFragmentRestaurantsOwnReviews();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).commit();
-                Toast.makeText(this, "Your reviews", Toast.LENGTH_SHORT).show();
                 toolbar.setTitle(getResources().getString(R.string.sideMenu_ownReviews));
                 break;
             case R.id.nav_account:
                 //sendUniversityFragmentRestaurantsAccount();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).commit();
-                Toast.makeText(this, "Your Account", Toast.LENGTH_SHORT).show();
                 toolbar.setTitle(getResources().getString(R.string.sideMenu_account));
                 break;
             case R.id.nav_settings:

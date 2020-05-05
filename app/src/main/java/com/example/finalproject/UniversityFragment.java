@@ -146,10 +146,12 @@ public class UniversityFragment extends Fragment implements Serializable {
         previousDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                nextDayButton.setEnabled(true);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy");
                 try {
                     if(toDayInt <= 1){
-                        Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"End of monthly menu",Toast.LENGTH_SHORT).show();
+                        previousDayButton.setEnabled(false);
                     }else {
                         Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
                         String previousDate = simpleDateFormat.format(dateClass.changeDate(selectedDate, -1));
@@ -169,11 +171,13 @@ public class UniversityFragment extends Fragment implements Serializable {
         nextDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                previousDayButton.setEnabled(true);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy");
                 try {
 
                     if(toDayInt >=  parseClass.getRestaurants().get(0).resDailyMenu.get( parseClass.getRestaurants().get(0).resDailyMenu.size()-1).getDay()) {
-                        Toast.makeText(getContext(), "No more", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"End of monthly menu",Toast.LENGTH_SHORT).show();
+                        nextDayButton.setEnabled(false);
                     }else{
                         Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
                         String nextDate = simpleDateFormat.format(dateClass.changeDate(selectedDate, 1));

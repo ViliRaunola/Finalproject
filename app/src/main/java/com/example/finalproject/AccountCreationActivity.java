@@ -13,25 +13,13 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 public class AccountCreationActivity extends AppCompatActivity {
     private Button confirmButton;
@@ -42,7 +30,6 @@ public class AccountCreationActivity extends AppCompatActivity {
     private EditText email;
     private EditText passwordConfirm;
     private Spinner home_uni_spinner;
-    private List<String> universityList = new ArrayList<String>();
     private String firstname_string;
     private String lastname_string;
     private String password_string;
@@ -144,47 +131,20 @@ public class AccountCreationActivity extends AppCompatActivity {
 
             //writing new user file and updating emailsAnsIds file
             try {
-                writeUserJson();
-                modifyEmailsAndIds();
+                writeNewUserJson();
+                saveUserDataToEmailAndIdsFile();
             } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
 
+            //go to login page
             startActivity(new Intent(AccountCreationActivity.this, LoginActivity.class));
             finish();
         }
 
     }
-    /*
-    //TODO lisää parse luokkaan
-    //parses "university.xml" to make a list from university names
-    public void parseUniversity() {
 
-        try (InputStream ins = this.getAssets().open("university.xml")){
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document xmlDoc = documentBuilder.parse(ins);
-            NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("university");
 
-            for(int i = 0; i < nodeList.getLength(); i++){
-                Node node = nodeList.item(i);
-                if(node.getNodeType() == Node.ELEMENT_NODE){
-                    Element element = (Element) node;
-                    String uniName = element.getElementsByTagName("universityName").item(0).getTextContent();
-                    universityList.add(uniName);
-                }
-            }
-
-        }catch (IOException e) {
-            e.printStackTrace();
-        }catch(ParserConfigurationException e){
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
-    }
-
-    */
-    //TODO lisää parse luokkaan
     public byte[] readEmailsAndIds() throws IOException {
         FileInputStream ins = new FileInputStream (new File(this.getFilesDir() +"/userData/EmailsAndIds.json"));
         int size = ins.available();
@@ -193,7 +153,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         ins.close();
         return buffer;
     }
-    //TODO lisää parse luokkaan
+
     public boolean checkIfEmailInUse(String email, byte[] buffer) throws IOException, JSONException {
         String json = new String(buffer, "UTF-8");
         JSONArray originalUserData = new JSONArray(json);
@@ -221,8 +181,8 @@ public class AccountCreationActivity extends AppCompatActivity {
         userId += 1;
         return  userId;
     }
-    //TODO lisää parse luokkaan
-    public void writeUserJson() throws JSONException {
+
+    public void writeNewUserJson() throws JSONException {
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
 
@@ -246,10 +206,8 @@ public class AccountCreationActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    //TODO lisää osa parse luokkaan
-    public void modifyEmailsAndIds() throws JSONException, IOException {
-
-        //TODO lisää osa parse luokkaan
+    //save user to email and ids file
+    public void saveUserDataToEmailAndIdsFile() throws JSONException, IOException {
         //reading original file
         FileInputStream ins = new FileInputStream (new File(this.getFilesDir() +"/userData/EmailsAndIds.json"));
         int size = ins.available();
@@ -282,7 +240,4 @@ public class AccountCreationActivity extends AppCompatActivity {
         fileWriter.append(newUserData.toString());
         fileWriter.close();
     }
-
-
-
 }
