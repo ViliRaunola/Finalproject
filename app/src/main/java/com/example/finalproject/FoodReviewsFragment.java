@@ -9,13 +9,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class FoodReviewsFragment extends Fragment {
     private Button addReviewButton;
@@ -31,8 +36,12 @@ public class FoodReviewsFragment extends Fragment {
     private String selectedRestaurantName;
     private String dayOfFoodString;
     private DateClass dateClass = DateClass.getInstance();
+    private Spinner sortingSpinner;
+    private List<String> sortingList = new ArrayList<String>();
+
     User user = User.getInstance();
     Boolean userReviewBoolean;
+
 
     @Nullable
     @Override
@@ -47,8 +56,17 @@ public class FoodReviewsFragment extends Fragment {
         reviewsForFood.clear();
         userReviewBoolean = false;
 
+        sortingSpinner = (Spinner) v.findViewById(R.id.sortingSpinner_foorReviewsFragment);
+        sortingList.clear();
+        sortingList.add(getResources().getString(R.string.ownReviewsView_date));
+        sortingList.add(getResources().getString(R.string.ownReviewsView_overallScore));
+        //TODO add up vote to here and sorting class
 
-        try {
+        ArrayAdapter<String> ap = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, sortingList);
+        ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortingSpinner.setAdapter(ap);
+
+        try{
             informationBundle = getArguments();
             selectedFood = (FoodItem) informationBundle.getSerializable("FoodKey");
             selectedRestaurantName = (String) informationBundle.getString("resKey");
@@ -83,11 +101,55 @@ public class FoodReviewsFragment extends Fragment {
         overallRating = overallRating / reviewCounter;
         overallRatingBar.setRating(overallRating);
 
+
+
         if (reviewsForFood.size() > 0) {
             ArrayAdapter<FoodReview> arrayAdapter = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, reviewsForFood);
             allReviewsListView.setAdapter(arrayAdapter);
         }
 
+        //sorting spinner listener
+        sortingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                switch (position) {
+                    case 0:
+                        //https://www.youtube.com/watch?v=Mguw_TQBExo how to use Collections.sort
+                        //sort by date using Collections.sort
+                        Sorting.sortByDate(reviewsForFood);
+                        //Reverses the list
+                        Collections.reverse(reviewsForFood);
+                        //setting new adapter for published reviews
+                        ArrayAdapter<FoodReview> arrayAdapterDate = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  reviewsForFood);
+                        allReviewsListView.setAdapter(arrayAdapterDate);
+
+                        break;
+
+                    case 1:
+                        //https://stackoverflow.com/questions/9941890/sorting-arraylist-of-objects-by-float how to sort by float
+                        //sort by overall score using Collections.sort
+                        Sorting.sortByScore(reviewsForFood);
+
+                        //reverse the list
+                        Collections.reverse(reviewsForFood);
+
+                        //setting new adapter for published reviews
+                        ArrayAdapter<FoodReview> arrayAdapterScore = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  reviewsForFood);
+                        allReviewsListView.setAdapter(arrayAdapterScore);
+                        break;
+                    case 3:
+                        //TODO upvotes
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         addReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override

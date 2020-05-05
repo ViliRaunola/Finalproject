@@ -11,9 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import org.json.JSONException;
-
 import java.util.ArrayList;
 
 public class ViewReviewFragment extends Fragment {
@@ -99,7 +97,7 @@ public class ViewReviewFragment extends Fragment {
                 selectedFoodReview.setPublished(false);
                 parseClass.parseRestaurantReviews(selectedFoodReview.getRestaurant(), getContext());
                 parseClass.modifyRestaurantReviewXmlFile(getContext(), selectedFoodReview);
-                Toast.makeText(getContext(),"You have hid a review",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),getResources().getString(R.string.toast_reviewHiddenAdmin),Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
             }
         });
@@ -111,7 +109,7 @@ public class ViewReviewFragment extends Fragment {
             public void onClick(View v) {
                 parseClass.parseRestaurantReviews(selectedFoodReview.getRestaurant(), getContext());
                 parseClass.removeReviewFromXml(getContext(), selectedFoodReview);
-                Toast.makeText(getContext(),"You have removed a review",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),getResources().getString(R.string.toast_reviewRemovedAdmin),Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
             }
         });

@@ -100,7 +100,7 @@
 
     <Button
         android:id="@+id/downVoteButton"
-        android:layout_width="115dp"
+        android:layout_width="135dp"
         android:layout_height="48dp"
         android:text="@string/viewReviewView_downVote"
         app:layout_constraintBottom_toBottomOf="@+id/voteScoreTextView"
@@ -109,7 +109,7 @@
 
     <Button
         android:id="@+id/upVoteButton"
-        android:layout_width="115dp"
+        android:layout_width="135dp"
         android:layout_height="48dp"
         android:text="@string/viewReviewView_upVote"
         app:layout_constraintBottom_toBottomOf="@+id/voteScoreTextView"
@@ -118,7 +118,7 @@
 
     <TextView
         android:id="@+id/voteScoreTextView"
-        android:layout_width="100dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Vote score"

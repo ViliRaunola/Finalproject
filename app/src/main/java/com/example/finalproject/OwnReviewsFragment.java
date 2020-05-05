@@ -134,13 +134,16 @@ public class OwnReviewsFragment extends Fragment {
                        //sort by date using Collections.sort
                        Sorting.sortByDate(parseClass.getReviewsPublished());
 
+                       //Reverses the list
+                       Collections.reverse(parseClass.getReviewsPublished());
                        //setting new adapter for published reviews
                        ArrayAdapter<FoodReview> arrayAdapterDatePublish = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  parseClass.getReviewsPublished());
                        publishedReviewsListView.setAdapter(arrayAdapterDatePublish);
 
                        //sort by date using Collections.sort
                        Sorting.sortByDate(parseClass.getReviewsNotPublished());
-
+                       //Reverses the list
+                       Collections.reverse(parseClass.getReviewsNotPublished());
                        //setting new adapter for not published reviews
                        ArrayAdapter<FoodReview> arrayAdapterDate2 = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, parseClass.getReviewsNotPublished());
                        notPublishedReviewsListView.setAdapter(arrayAdapterDate2);
