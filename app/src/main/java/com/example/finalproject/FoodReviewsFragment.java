@@ -33,6 +33,8 @@ public class FoodReviewsFragment extends Fragment {
     private String selectedRestaurantName;
     private String dayOfFoodString;
     private DateClass dateClass = DateClass.getInstance();
+    User user = User.getInstance();
+    Boolean userReviewBoolean;
 
     @Nullable
     @Override
@@ -45,6 +47,7 @@ public class FoodReviewsFragment extends Fragment {
         overallRating = 0;
         reviewCounter = 0;
         reviewsForFood.clear();
+        userReviewBoolean = false;
 
 
 
@@ -65,6 +68,9 @@ public class FoodReviewsFragment extends Fragment {
                 reviewsForFood.add(r);
                 overallRating += r.getAverageScore();
                 reviewCounter += 1;
+                if (r.getUserId().equals(String.valueOf(user.getUserID()))) {
+                    userReviewBoolean = true;
+                }
             }
         }
 
@@ -80,19 +86,23 @@ public class FoodReviewsFragment extends Fragment {
         addReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dateClass.compareDates(dayOfFoodString)) {
-                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                    AddNewReviewFragment addNewReviewFragment = new AddNewReviewFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("FoodKey", selectedFood);
-                    bundle.putString("resKey", selectedRestaurantName);
-                    addNewReviewFragment.setArguments(bundle);
-                    ft.replace(R.id.fragment_container, addNewReviewFragment);
-                    ft.addToBackStack("Fragment_add_new_review");
-                    ft.commit();
+                if (userReviewBoolean) {
+                    Toast.makeText(getContext(), "Can't create multiple reviews for one food. Go to Own reviews to edit your older review.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getContext(), "Can't add a review for a food that has not yet been served.", Toast.LENGTH_SHORT).show();
+                    if (dateClass.compareDates(dayOfFoodString)) {
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                        AddNewReviewFragment addNewReviewFragment = new AddNewReviewFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("FoodKey", selectedFood);
+                        bundle.putString("resKey", selectedRestaurantName);
+                        addNewReviewFragment.setArguments(bundle);
+                        ft.replace(R.id.fragment_container, addNewReviewFragment);
+                        ft.addToBackStack("Fragment_add_new_review");
+                        ft.commit();
+                    } else {
+                        Toast.makeText(getContext(), "Can't add a review for a food that has not yet been served.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
