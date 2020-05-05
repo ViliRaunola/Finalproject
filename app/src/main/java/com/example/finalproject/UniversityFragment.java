@@ -141,7 +141,7 @@ public class UniversityFragment extends Fragment implements Serializable {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy");
                 try {
                     if(toDayInt <= 1){
-                        Toast.makeText(getContext(),"End of monthly menu",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),getResources().getString(R.string.toast_EndOfMenu),Toast.LENGTH_SHORT).show();
                         previousDayButton.setEnabled(false);
                     }else {
                         Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
@@ -163,7 +163,7 @@ public class UniversityFragment extends Fragment implements Serializable {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy");
                 try {
                     if(toDayInt >=  parseClass.getRestaurants().get(0).resDailyMenu.get( parseClass.getRestaurants().get(0).resDailyMenu.size()-1).getDay()) {
-                        Toast.makeText(getContext(),"End of monthly menu",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),getResources().getString(R.string.toast_EndOfMenu),Toast.LENGTH_SHORT).show();
                         nextDayButton.setEnabled(false);
                     }else{
                         Date selectedDate = simpleDateFormat.parse(dayTextView.getText().toString());
