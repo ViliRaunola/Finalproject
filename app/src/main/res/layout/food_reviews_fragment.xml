@@ -10,7 +10,7 @@
         android:id="@+id/foodNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="32dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,10 +20,9 @@
         android:id="@+id/overalLratingBar_foodReviewsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="32dp"
         android:isIndicator="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/allReviews_foodReviewsFragment"
         app:layout_constraintTop_toBottomOf="@+id/foodNameTextView" />
 
     <TextView
@@ -31,17 +30,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Overall"
-        app:layout_constraintBottom_toTopOf="@+id/overalLratingBar_foodReviewsFragment"
-        app:layout_constraintStart_toStartOf="@+id/overalLratingBar_foodReviewsFragment"
+        app:layout_constraintBottom_toBottomOf="@+id/overalLratingBar_foodReviewsFragment"
+        app:layout_constraintStart_toStartOf="@+id/allReviews_foodReviewsFragment"
         app:layout_constraintTop_toTopOf="@+id/overalLratingBar_foodReviewsFragment" />
 
     <ListView
         android:id="@+id/allReviews_foodReviewsFragment"
-        android:layout_width="402dp"
-        android:layout_height="334dp"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/overalLratingBar_foodReviewsFragment" />
 
@@ -52,9 +50,9 @@
         android:layout_marginBottom="24dp"
         android:text="add review"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/allReviews_foodReviewsFragment" />
+        app:layout_constraintEnd_toEndOf="@+id/allReviews_foodReviewsFragment"
+        app:layout_constraintStart_toStartOf="@+id/allReviews_foodReviewsFragment"
+        app:layout_constraintTop_toBottomOf="@+id/allReviews_foodReviewsFragment"
+        app:layout_constraintVertical_bias="0.505" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
