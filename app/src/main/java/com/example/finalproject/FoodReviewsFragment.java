@@ -60,6 +60,7 @@ public class FoodReviewsFragment extends Fragment {
         sortingList.clear();
         sortingList.add(getResources().getString(R.string.ownReviewsView_date));
         sortingList.add(getResources().getString(R.string.ownReviewsView_overallScore));
+        sortingList.add(getResources().getString(R.string.ownReviewsView_vote));
         //TODO add up vote to here and sorting class
 
         ArrayAdapter<String> ap = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, sortingList);
@@ -115,11 +116,11 @@ public class FoodReviewsFragment extends Fragment {
                 switch (position) {
                     case 0:
                         //https://www.youtube.com/watch?v=Mguw_TQBExo how to use Collections.sort
-                        //sort by date using Collections.sort
+                        //sort by date using Collections.sort for current food reviews
                         Sorting.sortByDate(reviewsForFood);
                         //Reverses the list
                         Collections.reverse(reviewsForFood);
-                        //setting new adapter for published reviews
+                        //setting new adapter for current food reviews
                         ArrayAdapter<FoodReview> arrayAdapterDate = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  reviewsForFood);
                         allReviewsListView.setAdapter(arrayAdapterDate);
 
@@ -127,18 +128,23 @@ public class FoodReviewsFragment extends Fragment {
 
                     case 1:
                         //https://stackoverflow.com/questions/9941890/sorting-arraylist-of-objects-by-float how to sort by float
-                        //sort by overall score using Collections.sort
+                        //sort by overall score using Collections.sort for current food reviews
                         Sorting.sortByScore(reviewsForFood);
 
                         //reverse the list
                         Collections.reverse(reviewsForFood);
 
-                        //setting new adapter for published reviews
+                        //setting new adapter for current food reviews
                         ArrayAdapter<FoodReview> arrayAdapterScore = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  reviewsForFood);
                         allReviewsListView.setAdapter(arrayAdapterScore);
                         break;
-                    case 3:
-                        //TODO upvotes
+                    case 2:
+                        Sorting.sortByVote(reviewsForFood);
+
+                        Collections.reverse(reviewsForFood);
+
+                        ArrayAdapter<FoodReview> arrayAdapterVote = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  reviewsForFood);
+                        allReviewsListView.setAdapter(arrayAdapterVote);
                         break;
                     default:
                         break;

@@ -15,7 +15,7 @@ public class Sorting {
         Collections.sort(arrayList, new Comparator<FoodReview>() {
             @Override
             public int compare(FoodReview foodReview, FoodReview t1) {
-                return Float.compare(foodReview.getAverageScore(),t1.getAverageScore());
+                return Float.compare(foodReview.getAverageScore(), t1.getAverageScore());
             }
         });
     }
@@ -34,6 +34,15 @@ public class Sorting {
             @Override
             public int compare(FoodReview foodReview, FoodReview t1) {
                 return foodReview.getDate().compareTo(t1.getDate());
+            }
+        });
+    }
+    //sorting by vote using Collections.sort method
+    public static void sortByVote(ArrayList<FoodReview> arrayList) {
+        Collections.sort(arrayList, new Comparator<FoodReview>() {
+            @Override
+            public int compare(FoodReview foodReview, FoodReview t1) {
+                return Integer.compare(foodReview.getVoteScore(), t1.getVoteScore());
             }
         });
     }

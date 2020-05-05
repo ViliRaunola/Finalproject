@@ -51,6 +51,7 @@
     <string name="sideMenu_logOut">Kirjaudu Ulos</string>
 
     <!-- ownReviewsView specific -->
+    <string name="ownReviewsView_vote">Hyödyllisyys</string>
     <string name="ownReviewsView_viewTitle">Omat arvostelusi</string>
     <string name="ownReviewsView_publishedTitle">Julkaistut arvostelusi</string>
     <string name="ownReviewsView_draftsTitle">Arvostelu luonnoksesi</string>

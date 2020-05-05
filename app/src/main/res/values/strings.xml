@@ -50,6 +50,7 @@
     <string name="sideMenu_logOut">Log out</string>
 
     <!-- ownReviewsView specific -->
+    <string name="ownReviewsView_vote">Votes</string>
     <string name="ownReviewsView_viewTitle">Your own reviews</string>
     <string name="ownReviewsView_publishedTitle">Reviews published by you</string>
     <string name="ownReviewsView_draftsTitle">Your review drafts</string>

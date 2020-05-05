@@ -13,7 +13,7 @@ public class Language extends Application {
     private static Language language = new Language();
     public static Language getInstance(){return language;}
 
-
+    //https://www.youtube.com/watch?v=zILw5eV9QBQ source for changing the language
     @SuppressWarnings("deprecation")
     public void setLocale(String language, Context cont){
         //changes the language
