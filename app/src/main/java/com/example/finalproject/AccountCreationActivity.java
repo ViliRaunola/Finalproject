@@ -39,7 +39,6 @@ public class AccountCreationActivity extends AppCompatActivity {
     private byte[] buffer;
     private int newUserId;
 
-    //getting instances
     User user = User.getInstance();
     ParseClass parseClass = ParseClass.getInstance();
 
