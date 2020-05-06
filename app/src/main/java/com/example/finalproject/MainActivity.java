@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         Language.getInstance().loadLocale(this);
-        System.out.println(Locale.getDefault().getLanguage());
+
 
 
 
