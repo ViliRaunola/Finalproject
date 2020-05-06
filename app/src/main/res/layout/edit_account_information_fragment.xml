@@ -7,12 +7,13 @@
 
     <Button
         android:id="@+id/account_information_edit_cancel_button"
-        android:layout_width="167dp"
+        android:layout_width="350dp"
         android:layout_height="48dp"
+        android:layout_marginTop="4dp"
         android:text="@string/common_cancelButton"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/currentPasswordConfirmation_editAccountInformationFragment"
         app:layout_constraintStart_toStartOf="@+id/currentPasswordConfirmation_editAccountInformationFragment"
-        app:layout_constraintTop_toBottomOf="@+id/currentPasswordConfirmation_editAccountInformationFragment" />
+        app:layout_constraintTop_toBottomOf="@+id/saveChangesButton_editAccountInformationFragment" />
 
     <TextView
         android:id="@+id/textView10"
@@ -25,11 +26,12 @@
 
     <Button
         android:id="@+id/saveChangesButton_editAccountInformationFragment"
-        android:layout_width="167dp"
+        android:layout_width="350dp"
         android:layout_height="48dp"
+        android:layout_marginTop="4dp"
         android:text="@string/editAccountInformationView_saveButton"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/currentPasswordConfirmation_editAccountInformationFragment"
+        app:layout_constraintStart_toStartOf="@+id/currentPasswordConfirmation_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/currentPasswordConfirmation_editAccountInformationFragment" />
 
     <EditText
@@ -47,7 +49,7 @@
         android:id="@+id/firstNameEditText_editAccountInformationFragment"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/emailEditText_editAccountInformationFragment"
@@ -58,7 +60,7 @@
         android:id="@+id/lastNameEditText_editAccountInformationFragment"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/firstNameEditText_editAccountInformationFragment"
@@ -69,7 +71,7 @@
         android:id="@+id/newPasswordEditText_editAccountInformationFragment"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/textView16"
@@ -80,7 +82,7 @@
         android:id="@+id/homeUniversitySpinner_editAccountInformationFragment"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="@+id/lastNameEditText_editAccountInformationFragment"
         app:layout_constraintStart_toStartOf="@+id/lastNameEditText_editAccountInformationFragment"
         app:layout_constraintTop_toBottomOf="@+id/lastNameEditText_editAccountInformationFragment" />
@@ -89,7 +91,7 @@
         android:id="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/newPasswordEditText_editAccountInformationFragment"
@@ -156,7 +158,7 @@
         android:id="@+id/currentPasswordConfirmation_editAccountInformationFragment"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/newPasswordConfirmationEditText_editAccountInformationFragment"
