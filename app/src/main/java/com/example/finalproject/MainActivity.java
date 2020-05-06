@@ -14,26 +14,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
-
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
-    UniversityFragment universityFragment = new UniversityFragment();
-    OwnReviewsFragment ownReviewsFragment = new OwnReviewsFragment();
-    AccountFragment accountFragment = new AccountFragment();
-    SettingsFragment settingsFragment = new SettingsFragment();
     private Toolbar toolbar;
-    ParseClass parseClass = ParseClass.getInstance();
+    private UniversityFragment universityFragment = new UniversityFragment();
+    private OwnReviewsFragment ownReviewsFragment = new OwnReviewsFragment();
+    private AccountFragment accountFragment = new AccountFragment();
+    private SettingsFragment settingsFragment = new SettingsFragment();
+    private ParseClass parseClass = ParseClass.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //setting the current language
         Language.getInstance().loadLocale(this);
-
-
-
 
         //set the toolbar text
         toolbar = findViewById(R.id.toolbar);
@@ -45,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //for opening and closing navigation drawer
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -56,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         //https://stackoverflow.com/questions/34973456/how-to-change-text-of-a-textview-in-navigation-drawer-header first answer
-
+        //setting drawer header for the current user
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.userHeader);
         navUsername.setText(User.getInstance().getFirstName() + " " + User.getInstance().getLastName());
@@ -84,31 +81,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
             toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
 
-        //if edit review page is open --> Own reviews
+        //if edit review page is open --> Own reviews page
         }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof EditReviewsFragment){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).commit();
-            //super.onBackPressed();
             toolbar.setTitle(getResources().getString(R.string.sideMenu_ownReviews));
 
         //if edit account information is open --> Account page
         }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof EditAccountInformationFragment){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).commit();
-            //super.onBackPressed();
             toolbar.setTitle(getResources().getString(R.string.sideMenu_account));
 
-        //if food reviews page is open --> Restaurant Menus
+        //if food reviews page is open --> Restaurant Menus page
         }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof FoodReviewsFragment){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
-            //super.onBackPressed();
             toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
 
+        //if add new review page is open --> View reviews page
         }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof AddNewReviewFragment){
-            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
             super.onBackPressed();
             toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
 
+        //if view reviews page is open --> Restaurant Menus page
         }else if(getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof ViewReviewFragment){
-        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
             super.onBackPressed();
             toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
 
@@ -118,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    //This handles what item has been selected by Vili.
+    //This handles what item has been selected and switching fragment/activity and setting the toolbar as current page
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -126,29 +120,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, universityFragment).commit();
                 toolbar.setTitle(getResources().getString(R.string.sideMenu_restaurantMenus));
                 break;
+
             case R.id.nav_reviews:
-                //sendUniversityFragmentRestaurantsOwnReviews();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ownReviewsFragment).commit();
                 toolbar.setTitle(getResources().getString(R.string.sideMenu_ownReviews));
                 break;
+
             case R.id.nav_account:
-                //sendUniversityFragmentRestaurantsAccount();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, accountFragment).commit();
                 toolbar.setTitle(getResources().getString(R.string.sideMenu_account));
                 break;
+
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, settingsFragment).commit();
                 toolbar.setTitle(getResources().getString(R.string.sideMenu_settings));
                 break;
+
             case R.id.nav_logout:
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                //clearing all the lists
                 parseClass.getUniversities().clear();
                 parseClass.getRestaurants().clear();
                 parseClass.getAllReviews().clear();
                 parseClass.getReviewsNotPublished().clear();
                 parseClass.getReviewsPublished().clear();
 
+                //finishing the activity
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 finish();
+
                 Toast.makeText(this, getResources().getString(R.string.toast_loggedOut), Toast.LENGTH_SHORT).show();
                 break;
         }
