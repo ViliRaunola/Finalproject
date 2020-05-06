@@ -17,11 +17,15 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
     private Toolbar toolbar;
+    private TextView navUsername;
+    private View headerView;
+    private NavigationView navigationView;
     private UniversityFragment universityFragment = new UniversityFragment();
     private OwnReviewsFragment ownReviewsFragment = new OwnReviewsFragment();
     private AccountFragment accountFragment = new AccountFragment();
     private SettingsFragment settingsFragment = new SettingsFragment();
     private ParseClass parseClass = ParseClass.getInstance();
+    private User user = User.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +42,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Part of onNavigationItemSelected.
         drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //https://stackoverflow.com/questions/34973456/how-to-change-text-of-a-textview-in-navigation-drawer-header first answer
+        //setting drawer header for the current user
+        headerView = navigationView.getHeaderView(0);
+        navUsername = (TextView) headerView.findViewById(R.id.userHeader);
+        navUsername.setText(user.getFirstName() + " " + user.getLastName());
+
         //for opening and closing navigation drawer
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+            //https://stackoverflow.com/questions/32806735/refresh-header-in-navigation-drawer/35952939#35952939 for changing users name in the side menu header
+            public void onDrawerOpened(View view) {
+                super.onDrawerClosed(view);
+                navUsername.setText(user.getFirstName() + " " + user.getLastName());
+            }
+        };
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
 
         //Here can be defined what page opens first. If statement is for rotating the screen.
         if(savedInstanceState == null) {
@@ -52,12 +70,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_restaurants);
         }
 
-        //https://stackoverflow.com/questions/34973456/how-to-change-text-of-a-textview-in-navigation-drawer-header first answer
-        //setting drawer header for the current user
-        View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.userHeader);
-        navUsername.setText(User.getInstance().getFirstName() + " " + User.getInstance().getLastName());
+
+
     }
+
 
     @Override
     public void onBackPressed() {
@@ -155,6 +171,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 }
