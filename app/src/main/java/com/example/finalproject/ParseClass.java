@@ -227,7 +227,16 @@ public class ParseClass extends AppCompatActivity {
                     String voteScoreString = element.getElementsByTagName("voteScore").item(0).getTextContent();
                     int voteScore = Integer.parseInt(voteScoreString);
 
+
                     FoodReview review = new FoodReview(reviewId, publishedBoolean,foodId, foodName, selectedRestaurantName, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId, voteScore);
+
+                    //settings string for displaying reviews in the correct language
+                    review.setAverageScoreString(context.getResources().getString(R.string.ownReviewsView_averageScore));
+                    review.setDateString(context.getResources().getString(R.string.ownReviewsView_date));
+                    review.setRestaurantString(context.getResources().getString(R.string.ownReviewsView_restaurant));
+                    review.setVoteScoreString(context.getResources().getString(R.string.ownReviewsView_voteScore));
+                    review.setFoodString(context.getResources().getString(R.string.ownReviewsView_food));
+
                     allReviews.add(review);
 
                     //Comparing current review id to our so far biggest id. If it is bigger than ours

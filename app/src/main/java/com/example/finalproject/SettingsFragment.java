@@ -29,6 +29,7 @@ public class SettingsFragment extends Fragment {
         changeLanguageButton = (Button)v.findViewById(R.id.changeLanguageButton_settings);
         languageSpinner = (Spinner)v.findViewById(R.id.languageSpinner_settings);
 
+        languageList.clear();
         //reading language xml and getting list for available languages
         languageList = parseClass.parseLanguage(getActivity(), languageList);
 
@@ -62,6 +63,8 @@ public class SettingsFragment extends Fragment {
                     case 1:
                         Language.getInstance().setLocale("fi", getContext());
                         getActivity().recreate();
+                        break;
+                    default:
                         break;
                 }
             }
