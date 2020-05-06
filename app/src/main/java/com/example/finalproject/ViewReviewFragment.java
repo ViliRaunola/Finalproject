@@ -49,25 +49,34 @@ public class ViewReviewFragment extends Fragment {
         downVoteButton = (Button) v.findViewById(R.id.downVoteButton);
         upVoteButton = (Button) v.findViewById(R.id.upVoteButton);
 
+        //gets bundle from FoodReviewsFragment; Contains selected food review object
+        try{
+            informationBundle = getArguments();
+            selectedFoodReview = (FoodReview) informationBundle.getSerializable("FoodReviewKey");
+        }catch (NullPointerException npe){
+            npe.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         /*This is for making sure up vote and down vote buttons are either disabled or enabled depending
         on the user's previous vote.
         */
         allReadyDownVoted = false;
         allReadyUpVoted = false;
-        try{
-            informationBundle = getArguments();
-            selectedFoodReview = (FoodReview) informationBundle.getSerializable("FoodReviewKey");
-        }catch (Exception e){//TODO ADD REAL EXCEPTION
-            e.printStackTrace();
-        }
+
+        //Check if user has already voted
         allReadyDownVoted = checkVoteList(user.getDownVotedList());
         allReadyUpVoted = checkVoteList(user.getUpVotedList());
+
+        //disables buttons (or leaves enabled)
         if (allReadyUpVoted) {
             upVoteButton.setEnabled(false);
         }
         if (allReadyDownVoted) {
             downVoteButton.setEnabled(false);
         }
+
         foodInfoWindow.setText(selectedFoodReview.getFoodName());
         voteScoreTextView.setText(String.valueOf(selectedFoodReview.getVoteScore()));
 
@@ -117,6 +126,7 @@ public class ViewReviewFragment extends Fragment {
         Down vote and up vote buttons add or remove review's id from user's up vote or down vote list.
         They also rewrite user's json file to save what the user has up or down voted.
          */
+        //Makes sure that user can up vote and down vote, and also remove their vote completely.
         downVoteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
