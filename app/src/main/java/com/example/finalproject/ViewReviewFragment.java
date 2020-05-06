@@ -60,8 +60,6 @@ public class ViewReviewFragment extends Fragment {
         }catch (Exception e){//TODO ADD REAL EXCEPTION
             e.printStackTrace();
         }
-        System.out.println(allReadyDownVoted+"all ready downvoted");
-        System.out.println(allReadyUpVoted+"Allreadyupvotes");
         allReadyDownVoted = checkVoteList(user.getDownVotedList());
         allReadyUpVoted = checkVoteList(user.getUpVotedList());
         if (allReadyUpVoted) {
