@@ -63,8 +63,34 @@
         <reviewText>Really good.</reviewText>
         <date>06.05.2020</date>
         <published>false</published>
-        <voteScore>-1</voteScore>
+        <voteScore>1</voteScore>
    </review>
+     <review>
+          <reviewId>9</reviewId>
+          <foodId>24</foodId>
+          <foodName>Christmas ham and mustard</foodName>
+          <userId>0</userId>
+          <tasteScore>4.5</tasteScore>
+          <lookScore>2.5</lookScore>
+          <textureScore>0.5</textureScore>
+          <reviewText>Really good taste.</reviewText>
+          <date>06.04.2020</date>
+          <published>true</published>
+          <voteScore>-1</voteScore>
+     </review>
+     <review>
+          <reviewId>10</reviewId>
+          <foodId>24</foodId>
+          <foodName>Christmas ham and mustard</foodName>
+          <userId>1</userId>
+          <tasteScore>1.5</tasteScore>
+          <lookScore>1.5</lookScore>
+          <textureScore>2.5</textureScore>
+          <reviewText>Twas good.</reviewText>
+          <date>06.03.2020</date>
+          <published>true</published>
+          <voteScore>-4</voteScore>
+     </review>
    <review>
         <reviewId>5</reviewId>
         <foodId>23</foodId>
