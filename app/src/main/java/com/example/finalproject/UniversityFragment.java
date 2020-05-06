@@ -77,7 +77,8 @@ public class UniversityFragment extends Fragment implements Serializable {
                 dayTextView.setText(dateClass.getCurrentDateWithWeekDay());
                 toDayInt = dateClass.getTodayInt();
                 parseClass.getRestaurants().clear();
-
+                nextDayButton.setEnabled(true);
+                previousDayButton.setEnabled(true);
                 /*
                 From ParseClass gets called parseRestaurantsMenu, which gets all the universities, makes them into objects and
                 displays them on restaurantSpinner.
