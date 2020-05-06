@@ -33,13 +33,6 @@
     <string name="mainView_nextDay">Seuraava päivä</string>
     <string name="mainView_currentDay">Tämä päivä</string>
     <string name="mainView_previousDay">Edellinen päivä</string>
-    <string name="mainView_monday">Maanantai</string>
-    <string name="mainView_tuesday">Tiistai</string>
-    <string name="mainView_wednesday">Keskiviikko</string>
-    <string name="mainView_thursday">Torstai</string>
-    <string name="mainView_friday">Perjantai</string>
-    <string name="mainView_saturday">Lauantai</string>
-    <string name="mainView_sunday">Sunnuntai</string>
 
     <!-- sideMenu specific -->
     <string name="sideMenu_mainTitle">Päänäkymä</string>
@@ -61,7 +54,9 @@
     <string name="ownReviewsView_food">"Ruoka"</string>
     <string name="ownReviewsView_date">"Päivämäärä"</string>
     <string name="ownReviewsView_restaurant">"Ravintola"</string>
+    <string name="ownReviewsView_averageScore">Keskiarvo arvosana</string>
     <string name="ownReviewsView_overallScore">"Yleinen arvosana"</string>
+    <string name="ownReviewsView_voteScore">"Hyödyllisyys arvosana"</string>
 
     <!-- editReviewView specific -->
     <string name="editReviewView_taste">Maku</string>
