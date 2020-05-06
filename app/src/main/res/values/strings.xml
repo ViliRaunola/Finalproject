@@ -32,13 +32,6 @@
     <string name="mainView_nextDay">Next day</string>
     <string name="mainView_currentDay">Current day</string>
     <string name="mainView_previousDay">Previous day</string>
-    <string name="mainView_monday">Monday</string>
-    <string name="mainView_tuesday">Tuesday</string>
-    <string name="mainView_wednesday">Wednesday</string>
-    <string name="mainView_thursday">Thursday</string>
-    <string name="mainView_friday">Friday</string>
-    <string name="mainView_saturday">Saturday</string>
-    <string name="mainView_sunday">Sunday</string>
 
     <!-- sideMenu specific -->
     <string name="sideMenu_mainTitle">Main</string>
@@ -60,7 +53,9 @@
     <string name="ownReviewsView_food">Food</string>
     <string name="ownReviewsView_date">Date</string>
     <string name="ownReviewsView_restaurant">Restaurant</string>
+    <string name="ownReviewsView_averageScore">Average score</string>
     <string name="ownReviewsView_overallScore">Overall score</string>
+    <string name="ownReviewsView_voteScore">Vote score</string>
 
     <!-- editReviewView specific -->
     <string name="editReviewView_taste">Taste</string>
