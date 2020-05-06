@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<reviews>
+   <review>
+        <reviewId>0</reviewId>
+        <foodId>24</foodId>
+        <foodName>Christmas ham and mustard</foodName>
+        <userId>2</userId>
+        <tasteScore>1.5</tasteScore>
+        <lookScore>1.5</lookScore>
+        <textureScore>0.0</textureScore>
+        <reviewText></reviewText>
+        <date>06.05.2020</date>
+        <published>true</published>
+        <voteScore>0</voteScore>
+   </review>
+   <review>
+        <reviewId>1</reviewId>
+        <foodId>23</foodId>
+        <foodName>Mustard and Ketchup</foodName>
+        <userId>2</userId>
+        <tasteScore>3.5</tasteScore>
+        <lookScore>3.0</lookScore>
+        <textureScore>3.0</textureScore>
+        <reviewText></reviewText>
+        <date>06.05.2020</date>
+        <published>true</published>
+        <voteScore>-1</voteScore>
+   </review>
+   <review>
+        <reviewId>2</reviewId>
+        <foodId>30</foodId>
+        <foodName>Whey protein shake</foodName>
+        <userId>2</userId>
+        <tasteScore>3.0</tasteScore>
+        <lookScore>2.5</lookScore>
+        <textureScore>4.0</textureScore>
+        <reviewText>It was ok.</reviewText>
+        <date>06.05.2020</date>
+        <published>true</published>
+        <voteScore>0</voteScore>
+   </review>
+   <review>
+        <reviewId>3</reviewId>
+        <foodId>26</foodId>
+        <foodName>Raw meat</foodName>
+        <userId>2</userId>
+        <tasteScore>1.0</tasteScore>
+        <lookScore>1.0</lookScore>
+        <textureScore>1.0</textureScore>
+        <reviewText>I've had better.</reviewText>
+        <date>06.05.2020</date>
+        <published>false</published>
+        <voteScore>0</voteScore>
+   </review>
+   <review>
+        <reviewId>4</reviewId>
+        <foodId>24</foodId>
+        <foodName>Christmas ham and mustard</foodName>
+        <userId>3</userId>
+        <tasteScore>3.5</tasteScore>
+        <lookScore>4.5</lookScore>
+        <textureScore>4.5</textureScore>
+        <reviewText>Really good.</reviewText>
+        <date>06.05.2020</date>
+        <published>false</published>
+        <voteScore>-1</voteScore>
+   </review>
+   <review>
+        <reviewId>5</reviewId>
+        <foodId>23</foodId>
+        <foodName>Mustard and Ketchup</foodName>
+        <userId>3</userId>
+        <tasteScore>1.5</tasteScore>
+        <lookScore>4.0</lookScore>
+        <textureScore>4.0</textureScore>
+        <reviewText>Nicenice</reviewText>
+        <date>06.05.2020</date>
+        <published>true</published>
+        <voteScore>0</voteScore>
+   </review>
+   <review>
+        <reviewId>7</reviewId>
+        <foodId>22</foodId>
+        <foodName>Tacos</foodName>
+        <userId>2</userId>
+        <tasteScore>0.0</tasteScore>
+        <lookScore>0.0</lookScore>
+        <textureScore>0.0</textureScore>
+        <reviewText></reviewText>
+        <date>06.05.2020</date>
+        <published>false</published>
+        <voteScore>0</voteScore>
+   </review>
+   <review>
+        <reviewId>8</reviewId>
+        <foodId>33</foodId>
+        <foodName>Hot Dog</foodName>
+        <userId>2</userId>
+        <tasteScore>3.0</tasteScore>
+        <lookScore>3.0</lookScore>
+        <textureScore>4.0</textureScore>
+        <reviewText>Very good.</reviewText>
+        <date>06.05.2020</date>
+        <published>true</published>
+        <voteScore>1</voteScore>
+   </review>
+</reviews>
