@@ -1,7 +1,4 @@
 package com.example.finalproject;
-import android.service.autofill.RegexValidator;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

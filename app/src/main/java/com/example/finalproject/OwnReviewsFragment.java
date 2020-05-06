@@ -28,10 +28,10 @@ public class OwnReviewsFragment extends Fragment {
     private ListView notPublishedReviewsListView ;
     private ListView publishedReviewsListView ;
     private String selectedRestaurantName;
-    View v;
-    EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
-    User user = User.getInstance();
-    ParseClass parseClass = ParseClass.getInstance();
+    private View v;
+    private EditReviewsFragment editReviewsFragment = new EditReviewsFragment();
+    private User user = User.getInstance();
+    private ParseClass parseClass = ParseClass.getInstance();
     private Context context;
 
 

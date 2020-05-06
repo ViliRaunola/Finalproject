@@ -35,10 +35,10 @@ public class UniversityFragment extends Fragment implements Serializable {
     private int toDayInt;
     private ArrayList<FoodItem> dailyFoods = new ArrayList<FoodItem>();
     private int restaurantPosition;
-    User user = User.getInstance();
-    Context context;
-    ParseClass parseClass = ParseClass.getInstance();
-    DateClass dateClass = DateClass.getInstance();
+    private User user = User.getInstance();
+    private Context context;
+    private ParseClass parseClass = ParseClass.getInstance();
+    private DateClass dateClass = DateClass.getInstance();
 
     @Nullable
     @Override

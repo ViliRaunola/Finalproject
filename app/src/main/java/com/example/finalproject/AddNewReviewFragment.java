@@ -26,8 +26,7 @@ public class AddNewReviewFragment extends Fragment {
     private FoodItem selectedFood;
     private String selectedRestaurantName;
     private FoodReview newOwnReview;
-
-    ParseClass parseClass = ParseClass.getInstance();
+    private ParseClass parseClass = ParseClass.getInstance();
 
     @Nullable
     @Override

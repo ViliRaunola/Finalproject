@@ -17,9 +17,8 @@ public class AccountFragment extends Fragment {
     private EditText lastName;
     private EditText firstName;
     private EditText homeUniText;
-
-    User user = User.getInstance();
-    EditAccountInformationFragment editAccountInformationFragment = new EditAccountInformationFragment();
+    private User user = User.getInstance();
+    private EditAccountInformationFragment editAccountInformationFragment = new EditAccountInformationFragment();
 
     @Nullable
     @Override

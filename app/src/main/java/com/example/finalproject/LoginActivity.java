@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private String homeUniversity;
     private int check = 0;
     private List<String> languageList = new ArrayList<String>();
-    ParseClass parseClass = ParseClass.getInstance();
+    private ParseClass parseClass = ParseClass.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

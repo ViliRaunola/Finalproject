@@ -19,7 +19,7 @@ public class SettingsFragment extends Fragment {
     private Button changeLanguageButton;
     private int position;
     private List<String> languageList = new ArrayList<String>();
-    ParseClass parseClass = ParseClass.getInstance();
+    private ParseClass parseClass = ParseClass.getInstance();
 
     @Nullable
     @Override

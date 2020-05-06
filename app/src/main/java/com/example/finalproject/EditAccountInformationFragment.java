@@ -35,8 +35,8 @@ public class EditAccountInformationFragment extends Fragment {
     private boolean checkPassword;
     private boolean emailCheck;
     private String currentPasswordUser;
-    User user = User.getInstance();
-    ParseClass parseClass = ParseClass.getInstance();
+    private User user = User.getInstance();
+    private ParseClass parseClass = ParseClass.getInstance();
 
     @Nullable
     @Override

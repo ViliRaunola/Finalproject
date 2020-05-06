@@ -25,7 +25,7 @@ public class EditReviewsFragment extends Fragment {
     private Bundle informationBundle;
     private Button cancelButton;
     private FoodReview selectedOwnReview;
-    ParseClass parseClass = ParseClass.getInstance();
+    private ParseClass parseClass = ParseClass.getInstance();
 
     @Nullable
     @Override

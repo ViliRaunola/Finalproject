@@ -38,9 +38,8 @@ public class AccountCreationActivity extends AppCompatActivity {
     private boolean checkPassword;
     private byte[] buffer;
     private int newUserId;
-
-    User user = User.getInstance();
-    ParseClass parseClass = ParseClass.getInstance();
+    private User user = User.getInstance();
+    private ParseClass parseClass = ParseClass.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

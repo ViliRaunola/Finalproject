@@ -30,8 +30,8 @@ public class ViewReviewFragment extends Fragment {
     private TextView voteScoreTextView;
     private Boolean allReadyUpVoted;
     private Boolean allReadyDownVoted;
-    User user = User.getInstance();
-    ParseClass parseClass = ParseClass.getInstance();
+    private User user = User.getInstance();
+    private ParseClass parseClass = ParseClass.getInstance();
 
     @Nullable
     @Override
