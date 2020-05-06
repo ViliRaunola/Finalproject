@@ -1,6 +1,5 @@
 package com.example.finalproject;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,28 +12,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 public class EditAccountInformationFragment extends Fragment {
     private Button saveChanges;
     private Button cancelButton;
-    private ArrayList<String> universities = new ArrayList<String>();
     private Spinner homeUniversity_spinner;
     private EditText emailEditText;
     private EditText firstNameEditText;
@@ -51,7 +34,6 @@ public class EditAccountInformationFragment extends Fragment {
     private int homeUniversityPos;
     private boolean checkPassword;
     private boolean emailCheck;
-    private Context context;
     private String currentPasswordUser;
     User user = User.getInstance();
     ParseClass parseClass = ParseClass.getInstance();
@@ -61,7 +43,6 @@ public class EditAccountInformationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.edit_account_information_fragment, container, false);
-        context = this.getContext();
 
         saveChanges = (Button)v.findViewById(R.id.saveChangesButton_editAccountInformationFragment);
         cancelButton = (Button)v.findViewById(R.id.account_information_edit_cancel_button);
@@ -83,7 +64,6 @@ public class EditAccountInformationFragment extends Fragment {
         currentPasswordUser = user.getPassword();
 
         //parsing university xml and setting home university spinner adapter
-
         ArrayAdapter<University> universityArrayAdapter = new ArrayAdapter<University>(getContext(), android.R.layout.simple_list_item_1, parseClass.getUniversities());
         universityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         homeUniversity_spinner.setAdapter(universityArrayAdapter);
@@ -103,6 +83,7 @@ public class EditAccountInformationFragment extends Fragment {
                 homeUniversityPos = homeUniversity_spinner.getSelectedItemPosition();
                 currentpasswordInput = currentPasswordConfirmationEditText.getText().toString();
 
+                //checking if email already in use
                 try {
                     emailCheck = parseClass.checkIfEmailInUse(emailInput, getContext());
                 } catch (IOException e) {
@@ -116,9 +97,11 @@ public class EditAccountInformationFragment extends Fragment {
                     Toast.makeText(getContext(), getResources().getString(R.string.toast_passwordAndConfirmationDontMatch), Toast.LENGTH_SHORT).show();
                     newPasswordEditText.setText("");
                     newPasswordConfirmationEditText.setText("");
+                //checking if given password matches current one
                 }else if (!Security.getSecuredPassword(currentpasswordInput, user.getEmail()).equals(currentPasswordUser)) {
                     Toast.makeText(getContext(), getResources().getString(R.string.toast_wrongPassword), Toast.LENGTH_SHORT).show();
                     currentPasswordConfirmationEditText.setText("");
+                //checking if email is same
                 }else if (emailCheck && !user.getEmail().equals(emailInput)) {
                     Toast.makeText(getContext(), getResources().getString(R.string.toast_emailAlreadyInUse), Toast.LENGTH_SHORT).show();
                 }else{
@@ -153,6 +136,7 @@ public class EditAccountInformationFragment extends Fragment {
                             //switching fragments
                             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AccountFragment()).commit();
 
+                        //if password does not contain all th required characters
                         }else {
 
                             newPasswordEditText.setText("");

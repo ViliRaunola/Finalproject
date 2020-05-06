@@ -31,6 +31,7 @@ public class EditReviewsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.edit_review, container, false);
+
         tasteRatingBar = (RatingBar)v.findViewById(R.id.tasteRatingBar);
         textureRatingBar = (RatingBar)v.findViewById(R.id.textureRatingBar);
         appearanceRatingBar = (RatingBar)v.findViewById(R.id.appearanceRatingBar);
@@ -41,29 +42,44 @@ public class EditReviewsFragment extends Fragment {
         writtenReview = (EditText) v.findViewById(R.id.writtenReview);
         cancelButton = (Button)v.findViewById(R.id.review_edit_cancel_button2);
 
+        //getting selected review form the bundle
         try{
             informationBundle = getArguments();
             selectedOwnReview = (FoodReview) informationBundle.getSerializable("reviewKey");
-        }catch (Exception e){//TODO ADD REAL EXCEPTION
+        }catch (NullPointerException npe){
+            npe.printStackTrace();
+        }catch (Exception e){
             e.printStackTrace();
         }
 
+        //setting old review information
         getOldReviewInformation();
 
-        //TODO ADD BACKSTACK??
+        //setting new review information that user has inputted, setting review as not published and switching fragment
         saveReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setReviewInformation();
+
+                //setting review as not published
                 selectedOwnReview.setPublished(false);
+
+                //modifying xml file based new review values
                 parseClass.modifyRestaurantReviewXmlFile(getContext(), selectedOwnReview);
+
+
                 Toast.makeText(getContext(),getResources().getString(R.string.toast_saveReviewDraft),Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
             }
         });
+
+
+        //publishing the review and saving it as published
         saveAndPublishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //checks if user has given some kind of feedback
                 if ((tasteRatingBar.getRating() == 0)
                         && (appearanceRatingBar.getRating() == 0)
                         &&(textureRatingBar.getRating() == 0)
@@ -78,6 +94,8 @@ public class EditReviewsFragment extends Fragment {
                 }
             }
         });
+
+        //removing review and switching fragment
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,6 +104,8 @@ public class EditReviewsFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OwnReviewsFragment()).commit();
             }
         });
+
+        //going back to previous fragment
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +116,7 @@ public class EditReviewsFragment extends Fragment {
         return v;
     }
 
+    //setting new review information
     private void setReviewInformation(){
         selectedOwnReview.setReviewText(writtenReview.getText().toString());
         selectedOwnReview.setTasteScore(tasteRatingBar.getRating());
@@ -104,6 +125,7 @@ public class EditReviewsFragment extends Fragment {
         selectedOwnReview.setAverageScore();
     }
 
+    //setting old review information
     private void getOldReviewInformation(){
         tasteRatingBar.setRating(selectedOwnReview.getTasteScore());
         textureRatingBar.setRating(selectedOwnReview.getTextureScore());
