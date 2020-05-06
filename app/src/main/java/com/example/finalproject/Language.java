@@ -5,7 +5,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-
 import java.util.Locale;
 
 public class Language extends Application {
@@ -28,6 +27,8 @@ public class Language extends Application {
         editor.putString("My_language", language);
         editor.apply();
     }
+
+    //loading language from shared preferences directory
     public void loadLocale(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences("Settings", Activity.MODE_PRIVATE);
         String language = sharedPreferences.getString("My_language","");

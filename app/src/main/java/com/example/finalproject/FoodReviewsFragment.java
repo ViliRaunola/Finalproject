@@ -12,12 +12,10 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,46 +25,49 @@ public class FoodReviewsFragment extends Fragment {
     private RatingBar overallRatingBar;
     private ListView allReviewsListView;
     private TextView foodNameTextView;
-    private ParseClass parseClass = ParseClass.getInstance();
-    private ArrayList<FoodReview> reviewsForFood = new ArrayList<FoodReview>();
+    private Boolean userReviewBoolean;
     private FoodItem selectedFood;
-    float overallRating;
-    int reviewCounter = 0;
+    private float overallRating;
+    private int reviewCounter = 0;
     private Bundle informationBundle;
     private String selectedRestaurantName;
     private String dayOfFoodString;
-    private DateClass dateClass = DateClass.getInstance();
     private Spinner sortingSpinner;
     private List<String> sortingList = new ArrayList<String>();
+    private ArrayList<FoodReview> reviewsForFood = new ArrayList<FoodReview>();
 
-    User user = User.getInstance();
-    Boolean userReviewBoolean;
+    private ParseClass parseClass = ParseClass.getInstance();
+    private User user = User.getInstance();
+    private DateClass dateClass = DateClass.getInstance();
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.food_reviews_fragment, container, false);
+
         addReviewButton = (Button) v.findViewById(R.id.addReviewButton);
         overallRatingBar = (RatingBar) v.findViewById(R.id.overalLratingBar_foodReviewsFragment);
         allReviewsListView = (ListView) v.findViewById(R.id.allReviews_foodReviewsFragment);
         foodNameTextView = (TextView) v.findViewById(R.id.foodNameTextView);
+        sortingSpinner = (Spinner) v.findViewById(R.id.sortingSpinner_foorReviewsFragment);
+
+        //making sure that values are correct
         overallRating = 0;
         reviewCounter = 0;
         reviewsForFood.clear();
+        sortingList.clear();
         userReviewBoolean = false;
 
-        sortingSpinner = (Spinner) v.findViewById(R.id.sortingSpinner_foorReviewsFragment);
-        sortingList.clear();
+        //adding sorting strings to sorting list and setting sorting spinner
         sortingList.add(getResources().getString(R.string.ownReviewsView_date));
         sortingList.add(getResources().getString(R.string.ownReviewsView_overallScore));
         sortingList.add(getResources().getString(R.string.ownReviewsView_vote));
-        //TODO add up vote to here and sorting class
+        ArrayAdapter<String> sortingArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, sortingList);
+        sortingArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortingSpinner.setAdapter(sortingArrayAdapter);
 
-        ArrayAdapter<String> ap = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, sortingList);
-        ap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortingSpinner.setAdapter(ap);
-
+        //getting values from the bundle
         try{
             informationBundle = getArguments();
             selectedFood = (FoodItem) informationBundle.getSerializable("FoodKey");
@@ -75,10 +76,9 @@ public class FoodReviewsFragment extends Fragment {
             parseClass.parseRestaurantReviews(selectedRestaurantName, getContext());
         }catch (NullPointerException npe){
             npe.printStackTrace();
-        }catch (Exception e){
-            e.printStackTrace();
         }
 
+        //setting food name to text field
         foodNameTextView.setText(selectedFood.getName());
 
         for (FoodReview r : parseClass.getAllReviews()) {
@@ -98,12 +98,12 @@ public class FoodReviewsFragment extends Fragment {
                 }
             }
         }
+
         //calculates overall rating among all reviews for the selected food.
         overallRating = overallRating / reviewCounter;
         overallRatingBar.setRating(overallRating);
 
-
-
+        //setting reviews list view
         if (reviewsForFood.size() > 0) {
             ArrayAdapter<FoodReview> arrayAdapter = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1, reviewsForFood);
             allReviewsListView.setAdapter(arrayAdapter);
@@ -118,12 +118,13 @@ public class FoodReviewsFragment extends Fragment {
                         //https://www.youtube.com/watch?v=Mguw_TQBExo how to use Collections.sort
                         //sort by date using Collections.sort for current food reviews
                         Sorting.sortByDate(reviewsForFood);
+
                         //Reverses the list
                         Collections.reverse(reviewsForFood);
+
                         //setting new adapter for current food reviews
                         ArrayAdapter<FoodReview> arrayAdapterDate = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  reviewsForFood);
                         allReviewsListView.setAdapter(arrayAdapterDate);
-
                         break;
 
                     case 1:
@@ -139,10 +140,14 @@ public class FoodReviewsFragment extends Fragment {
                         allReviewsListView.setAdapter(arrayAdapterScore);
                         break;
                     case 2:
+                        //https://www.youtube.com/watch?v=Mguw_TQBExo how to use Collections.sort
+                        //sort by date using Collections.sort for current foods votes
                         Sorting.sortByVote(reviewsForFood);
 
+                        //reverse the list
                         Collections.reverse(reviewsForFood);
 
+                        //setting new adapter for current food reviews
                         ArrayAdapter<FoodReview> arrayAdapterVote = new ArrayAdapter<FoodReview>(getActivity(), android.R.layout.simple_list_item_1,  reviewsForFood);
                         allReviewsListView.setAdapter(arrayAdapterVote);
                         break;
@@ -150,13 +155,13 @@ public class FoodReviewsFragment extends Fragment {
                         break;
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
 
+        //adding new review
         addReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,6 +170,7 @@ public class FoodReviewsFragment extends Fragment {
                     Toast.makeText(getContext(), getResources().getString(R.string.toast_multipleReviewsForOneFood), Toast.LENGTH_SHORT).show();
                 } else {
                     //Checks if user is trying to make a review for a food that has not been served yet.
+                    //https://developer.android.com/reference/android/app/FragmentTransaction for fragment transaction
                     if (dateClass.compareDates(dayOfFoodString)) {
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -183,16 +189,15 @@ public class FoodReviewsFragment extends Fragment {
             }
         });
 
-
+        //changing to new fragment for viewing the review
         allReviewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //https://developer.android.com/reference/android/app/FragmentTransaction for fragment transaction
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 ViewReviewFragment viewReviewFragment = new ViewReviewFragment();
-
                 Bundle bundle = new Bundle();
-
                 bundle.putSerializable("FoodReviewKey", reviewsForFood.get(position));
                 viewReviewFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, viewReviewFragment);
@@ -200,10 +205,10 @@ public class FoodReviewsFragment extends Fragment {
                 ft.commit();
             }
         });
-
         return v;
     }
 
+    //clearing all reviews list and setting rating bar
     @Override
     public void onResume() {
         super.onResume();

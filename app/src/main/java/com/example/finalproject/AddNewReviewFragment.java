@@ -54,6 +54,9 @@ public class AddNewReviewFragment extends Fragment {
             e.printStackTrace();
         }
 
+        //setting food name to text field
+        foodInfoWindow.setText(selectedFood.getName());
+
         //setting new review information and saving it to our own reviews as not published
         saveReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override

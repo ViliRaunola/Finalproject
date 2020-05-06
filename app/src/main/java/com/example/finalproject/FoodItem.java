@@ -3,10 +3,13 @@ package com.example.finalproject;
 import java.io.Serializable;
 
 public class FoodItem implements Serializable {
+
     private String name;
     private String price;
     private String id;
     private int day;
+
+    //these are constructors
     public FoodItem(){
 
     }
@@ -18,18 +21,20 @@ public class FoodItem implements Serializable {
 
     }
 
+    //get methods
     public String getId() {
         return this.id;
     }
-
     public String getName() {
         return this.name;
     }
-
     public int getDay(){
         return this.day;
     }
-
+    /*
+    This "toString" method is for array adapter to show selected string.
+    In this case food item name and price.
+     */
     @Override
     public String toString() {
         String temp;
