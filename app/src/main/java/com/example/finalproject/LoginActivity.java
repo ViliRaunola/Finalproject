@@ -27,8 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
     private EditText email;
     private Spinner languageSpinner;
-    private String pw;
-    private String em;
+    private String password_string;
+    private String email_string;
     private String id;
     private Context context;
     private int universitiesPositionCompare;
@@ -92,12 +92,12 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            em = email.getText().toString();
-            pw = password.getText().toString();
-            pw = Security.getSecuredPassword(pw, em);
-            id = jsonParseEmailsAndIds(em);
+            email_string = email.getText().toString();
+            password_string = password.getText().toString();
+            password_string = Security.getSecuredPassword(password_string, email_string);
+            id = jsonParseEmailsAndIds(email_string);
             if (!id.isEmpty()) {
-                credentialsCheck(id, pw);
+                credentialsCheck(id, password_string);
                 if (check == 0) {
                     password.setText("");
                 }
