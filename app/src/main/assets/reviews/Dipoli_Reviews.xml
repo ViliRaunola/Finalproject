@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<reviews>
+   <review>
+        <reviewId>0</reviewId>
+        <foodId>23</foodId>
+        <foodName>Mustard and Ketchup</foodName>
+        <userId>2</userId>
+        <tasteScore>5.0</tasteScore>
+        <lookScore>5.0</lookScore>
+        <textureScore>5.0</textureScore>
+        <reviewText>Best combo.</reviewText>
+        <date>06.05.2020</date>
+        <published>true</published>
+        <voteScore>0</voteScore>
+   </review>
+</reviews>

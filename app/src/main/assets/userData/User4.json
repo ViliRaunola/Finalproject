@@ -1,13 +1,1 @@
-[
-  {
-    "password": "7e7246cbaa79f710fe57ba338f684064a416198270db19b4a0c509c83755a9a307c87b21736c99a7dbff5da96a6191ec89ce9fbace919a6d8455f51d78e0313f",
-    "userId": "4",
-    "firstName": "Kayttaja",
-    "lastName": "Keittäjä",
-    "eMail": "w",
-    "homeUniversity": "LUT",
-    "adminStatus": false,
-    "upVoted": [],
-    "downVoted": []
-  }
-]
+[{"password":"29cf8a8cf4dba8e5a13ab20d4ca1820fc3e7b0b1bbf44b66af63dd3f09b33f2621a77701f798e2036aad1cd9611baa0952a7313a8a33bc95a2963a299b953657","userId":4,"firstName":"Test","lastName":"User","eMail":"user@test.com","homeUniversity":"Aalto","adminStatus":false}]

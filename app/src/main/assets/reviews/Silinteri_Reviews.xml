@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<reviews>
+   <review>
+        <reviewId>0</reviewId>
+        <foodId>53</foodId>
+        <foodName>Pancake casserole</foodName>
+        <userId>2</userId>
+        <tasteScore>1.5</tasteScore>
+        <lookScore>1.5</lookScore>
+        <textureScore>2.5</textureScore>
+        <reviewText></reviewText>
+        <date>06.05.2020</date>
+        <published>true</published>
+        <voteScore>0</voteScore>
+   </review>
+</reviews>

@@ -177,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
                     String uniName = homeUniversity;
                     for(University u : parseClass.getUniversities()){
                         if (uniName.equals(u.toString())) {
-                            universitiesPositionCompare = i;
+                            universitiesPositionCompare = parseClass.getUniversities().indexOf(u);
                         }
                     }
                     user.setHomeUniversity(homeUniversity);
