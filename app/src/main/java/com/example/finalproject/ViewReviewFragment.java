@@ -87,7 +87,7 @@ public class ViewReviewFragment extends Fragment {
         removeButton.setEnabled(user.getIsAdminUser());
         hideButton.setEnabled(user.getIsAdminUser());
 
-        //Checks if the current is user. If true it shows the buttons and makes them functional
+        //Checks if the current user is admin. If true it shows the buttons and makes them functional
         if(user.getIsAdminUser()){
             removeButton.setVisibility(View.VISIBLE);
             hideButton.setVisibility(View.VISIBLE);
