@@ -14,15 +14,15 @@ public class Language extends Application {
 
     //https://www.youtube.com/watch?v=zILw5eV9QBQ source for changing the language
     @SuppressWarnings("deprecation")
+    //changes the language in configurations and updates it
     public void setLocale(String language, Context cont){
-        //changes the language
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
         Configuration config = cont.getResources().getConfiguration();
         config.locale = locale;
         cont.getResources().updateConfiguration(config, cont.getResources().getDisplayMetrics());
 
-        //setting language to shared preferences and creates a settings file in shared preferences directory
+        //setting language to shared preferences and creates a settings file in shared preferences directory so app can load it  when opened again
         SharedPreferences.Editor editor = cont.getSharedPreferences("Settings", MODE_PRIVATE).edit();
         editor.putString("My_language", language);
         editor.apply();
