@@ -2,9 +2,7 @@ package com.example.finalproject;
 
 import android.app.Activity;
 import android.content.Context;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,7 +11,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -27,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -39,7 +35,6 @@ Does it for both file types; xml and json.
 Stores also information (makes objects based on values read from files) to ArrayLists.
  */
 public class ParseClass extends AppCompatActivity {
-
     private ArrayList<University> universities = new ArrayList<University>();
     private ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
     private ArrayList<FoodReview> allReviews = new ArrayList<FoodReview>();
@@ -51,9 +46,7 @@ public class ParseClass extends AppCompatActivity {
     private static ParseClass parseClass = new ParseClass();
     private ParseClass() {
     }
-    public static ParseClass getInstance(){
-        return parseClass;
-    }
+
 
     //Get methods
     public ArrayList<University> getUniversities(){
@@ -70,6 +63,12 @@ public class ParseClass extends AppCompatActivity {
     }
     public ArrayList<FoodReview> getReviewsNotPublished(){
         return this.reviewsNotPublished;
+    }
+    public static ParseClass getInstance(){
+        return parseClass;
+    }
+    public int getBiggestReviewId() {
+        return this.biggestReviewId;
     }
 
     //Parses "university.xml" and creates University objects based on .xml parameters. Adds these new University objects to "universities"-ArrayList.
@@ -141,7 +140,7 @@ public class ParseClass extends AppCompatActivity {
 
     }
 
-    //parses food items from XML files of the chosen Restaurant. Adds them to Restaurant's dailyMenus.
+    //Parses food items from XML files of the chosen Restaurant. Makes them into objects and adds them to Restaurant's dailyMenus.
     public void parseFoodItems(int position, Context context) {
         Restaurant selectedRestaurant =  parseClass.getRestaurants().get(position);
         String language = Locale.getDefault().getLanguage();
@@ -175,24 +174,27 @@ public class ParseClass extends AppCompatActivity {
     }
 
 
-    public int getBiggestReviewId() {
-        return this.biggestReviewId;
-    }
 
-    //Gets selected restaurant reviews from the user.
+
+    //Gets selected restaurant reviews from the user and makes it into object.
+    //Populates ArrayLists: allReviews, reviewsPublished and reviewsNotPublished.
     public void parseRestaurantReviews(String selectedRestaurantName, Context context){
-        biggestReviewId = 0;
+        biggestReviewId = 0; //This is for keeping track of the biggest review Id so that when creating a new review we can give it a id that isn't already in use.
         User user = User.getInstance();
         try (FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/reviews/" + selectedRestaurantName + "_Reviews.xml"))){
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document xmlDoc = documentBuilder.parse(fis);
             NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("review");
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            fis.close();
+            //Making sure that ArrayLists are empty before rewriting to them.
             reviewsPublished.clear();
             reviewsNotPublished.clear();
             allReviews.clear();
-            fis.close();
 
+            /*After reading file into node list, method goes through nodeList's items and gets element
+            tag's name into variable. Later that variable is used in FoodReviews constructor.
+             */
             for(int i = 0; i < nodeList.getLength(); i++){
                 Node node = nodeList.item(i);
                 if(node.getNodeType() == Node.ELEMENT_NODE){
@@ -228,6 +230,8 @@ public class ParseClass extends AppCompatActivity {
                     FoodReview review = new FoodReview(reviewId, publishedBoolean,foodId, foodName, selectedRestaurantName, reviewDateDate, tasteScoreFloat, lookScoreFloat, textureScoreFloat, reviewText, userId, voteScore);
                     allReviews.add(review);
 
+                    //Comparing current review id to our so far biggest id. If it is bigger than ours
+                    //we replace our id with it.
                     if(Integer.parseInt(review.getReviewId()) >= biggestReviewId){
                         biggestReviewId = Integer.parseInt(review.getReviewId()) + 1;
                     }
@@ -252,24 +256,25 @@ public class ParseClass extends AppCompatActivity {
         }
     }
 
+    /*
+    This method rewrites the restaurants reviews file. It has allReviews list which it goes through.
+    It writes the review back to the file if its id doesn't match FoodReviews id that the method is deleting.
+    File that is being rewritten is xml type.
+     */
     public void removeReviewFromXml(Context context, FoodReview selectedOwnReview) {
-
         OutputStreamWriter osw = null;
         String s;
         try {
             File file = new File(context.getFilesDir() +"/reviews/" + selectedOwnReview.getRestaurant() + "_Reviews.xml");
             FileOutputStream fos = new FileOutputStream(file);
-
             s = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                     "<reviews>";
             fos.write(s.getBytes());
 
             for (FoodReview review : allReviews) {
-                System.out.println(allReviews.size());
                 if (review.getReviewId().equals(selectedOwnReview.getReviewId())){
                     s = "";
                 }else {
-                    System.out.println("ELSEN SISÄLLÄ ##############");
                     s = "\n   <review>\n" +
                             "        <reviewId>" + review.getReviewId() + "</reviewId>\n" +
                             "        <foodId>" + review.getFoodId() + "</foodId>\n" +
@@ -290,14 +295,21 @@ public class ParseClass extends AppCompatActivity {
             fos.write(s.getBytes());
             fos.close();
             allReviews.clear();
-            //allReviews.remove(selectedOwnReview);
-        }catch (IOException e) {//TODO ADD REAL EXCEPTION
+        }catch(NullPointerException npe){
+            npe.printStackTrace();
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
-    //https://stackoverflow.com/questions/17022221/openfileoutput-how-to-create-files-outside-the-data-data-path
-    //Teacher's coding video
-    //Rewrites the specific restaurant review folder with new information for the selected review
+
+    /*
+    https://stackoverflow.com/questions/17022221/openfileoutput-how-to-create-files-outside-the-data-data-path
+    Teacher's coding video
+    Rewrites the specific restaurant review file with new information for the selected review
+    Basically same as removeReviewFromXml but when finding selectedOwnReview from allReviews ArrayList
+    it writes that FoodReview object's information to file.
+     */
     public void modifyRestaurantReviewXmlFile(Context context, FoodReview selectedOwnReview) {
         OutputStreamWriter osw = null;
         String s;
@@ -345,20 +357,22 @@ public class ParseClass extends AppCompatActivity {
             fos.write(s.getBytes());
             fos.close();
             allReviews.clear();
-        }catch (IOException e) {//TODO ADD REAL EXCEPTION
+        }catch(NullPointerException npe){
+            npe.printStackTrace();
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    //https://www.tutorialspoint.com/how-to-write-create-a-json-file-using-java
+    /*
+    https://www.tutorialspoint.com/how-to-write-create-a-json-file-using-java
+    Writes given user object to its own json file.
+     */
     public void writeUserJson(Context context, User user) throws JSONException {
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
-        String password;
-        //password = Security.getSecuredPassword(user.getPassword(),user.getEmail());
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        System.out.println(user.getPassword());
-        //System.out.println(password);
+
+        //Here basic information is put to the object
         jsonObject.put("password", user.getPassword());
         jsonObject.put("userId", user.getUserID());
         jsonObject.put("firstName", user.getFirstName());
@@ -366,6 +380,11 @@ public class ParseClass extends AppCompatActivity {
         jsonObject.put("eMail", user.getEmail());
         jsonObject.put("homeUniversity", user.getHomeUniversity());
         jsonObject.put("adminStatus", user.getIsAdminUser());
+
+        /*
+        Here method goes through user's down voted and up voted lists and puts its items
+        to JSONArray. Then that JSONArray is put into the jsonObject.
+         */
         JSONArray downVoteList = new JSONArray();
         if (user.getDownVotedList().size() > 0) {
             for (int i = 0; i < user.getDownVotedList().size(); i++) {
@@ -385,9 +404,10 @@ public class ParseClass extends AppCompatActivity {
         jsonObject.put("downVoted",downVoteList);
         jsonObject.put("upVoted", upVoteList);
         jsonArray.put(jsonObject);
+
+        //Writing jsonArray to file
         try{
             String x = String.format(context.getFilesDir() + "/userData/User" + user.getUserID() + ".json");
-            System.out.println(x);
             FileWriter fileWriter = new FileWriter(x);
             fileWriter.write(jsonArray.toString());
             fileWriter.close();
@@ -398,8 +418,9 @@ public class ParseClass extends AppCompatActivity {
 
 
 
-
-
+/*
+Checks from EmailsAndIds file if current email has already been used.
+ */
     public boolean checkIfEmailInUse(String email, Context context) throws IOException, JSONException {
         FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"));
         int size = ins.available();
@@ -415,60 +436,66 @@ public class ParseClass extends AppCompatActivity {
             if (email.equals(userObject.getString("eMail"))){
                 return true;
             }
-
         }
         return  false;
     }
 
-
-    //https://howtodoinjava.com/library/json-simple-read-write-json-examples/
+    /*
+    https://howtodoinjava.com/library/json-simple-read-write-json-examples/
+    When new user is created or current user's data has been changed this method is called to update EmailsAndIds json file
+    with the current users information.
+     */
     public void modifyEmailsAndIds(Context context, User user) throws JSONException, IOException {
-
-        //reading original file
+        //Reading original file to buffer.
         FileInputStream ins = new FileInputStream (new File(context.getFilesDir() +"/userData/EmailsAndIds.json"));
         int size = ins.available();
         final byte[] buffer = new byte[size];
         ins.read(buffer);
         ins.close();
 
+        //Putting buffer into JSONArray.
         String json = new String(buffer, "UTF-8");
         JSONArray originalUserData = new JSONArray(json);
         JSONArray newUserData = new JSONArray();
         FileWriter fileWriter = new FileWriter((context.getFilesDir() + "/userData/EmailsAndIds.json"));
 
-        //goinng through original EmailsAnsIds file
+        //Going through original EmailsAnsIds file.
         for (int i = 0; i < originalUserData.length(); i++) {
             JSONObject userObject = originalUserData.getJSONObject(i).getJSONObject("user");
 
-            //changing new user email for the same user id
+            //Changing new user email for the same user id.
             if (Integer.parseInt(userObject.getString("userId")) == user.getUserID()) {
                 userObject.put("eMail", user.getEmail());
             }
 
-            //create a newUserObject and adding it to newUserData
+            //Create a newUserObject and adding it to newUserData.
             JSONObject newUserObject = new JSONObject();
             newUserObject.put("user", userObject);
             newUserData.put(newUserObject);
         }
-
         fileWriter.write(newUserData.toString());
         fileWriter.close();
     }
 
-
+    /*
+    Goes through supported languages aka from assets language.xml file.
+    Adds languages to language list which is used in ArrayAdapter to show
+    apps supported languages.
+     */
     public List parseLanguage(Activity activity, List languageList) {
 
         try (InputStream ins = activity.getAssets().open("language.xml")){
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document xmlDoc = documentBuilder.parse(ins);
             NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("language");
+            ins.close();
 
             for(int i = 0; i < nodeList.getLength(); i++){
                 Node node = nodeList.item(i);
                 if(node.getNodeType() == Node.ELEMENT_NODE){
                     Element element = (Element) node;
-                    String uniName = element.getElementsByTagName("name").item(0).getTextContent();
-                    languageList.add(uniName);
+                    String languageName = element.getElementsByTagName("name").item(0).getTextContent();
+                    languageList.add(languageName);
                 }
             }
         }catch (IOException e) {
