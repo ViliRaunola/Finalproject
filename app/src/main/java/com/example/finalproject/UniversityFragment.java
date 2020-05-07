@@ -211,7 +211,8 @@ public class UniversityFragment extends Fragment implements Serializable {
         return v;
     }
 
-    //Goes through restaurants resDailyMenu list to find correct food responding to the wanted date.
+    //Goes through restaurants resDailyMenu list to find correct food responding to the wanted date and selected restaurant by
+    //checking its position in restaurant spinner.
     public void checkCurrentDay(int day, int restaurantPlace){
         dailyFoods.clear();
         for(int i = 0; i <  parseClass.getRestaurants().get(restaurantPlace).resDailyMenu.size(); i++){
