@@ -63,12 +63,15 @@ public class LoginActivity extends AppCompatActivity {
 
         //Set selection to always show change language/vaihda kieli.
         languageSpinner.setSelection(0);
+
+        //setting the page title
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.common_loginButton));
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 switch (position){
+                    //this case is for the change language/vaihda kieli text
                     case 0:
                         break;
                     case 1:
