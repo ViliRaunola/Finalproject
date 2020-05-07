@@ -71,11 +71,12 @@ public class ParseClass extends AppCompatActivity {
         return this.biggestReviewId;
     }
 
-    //Parses "university.xml" and creates University objects based on .xml parameters. Adds these new University objects to "universities"-ArrayList.
+    //Parses "en/fi_university.xml" and creates University objects based on .xml parameters. Adds these new University objects to "universities"-ArrayList.
     //This ArrayList is shown in university_spinner.
     public void parseUniversity(Context context){
-
-        try (FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/university.xml"))){
+        //Shows university information text in correct, chosen language
+        String language = Locale.getDefault().getLanguage();
+        try (FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/" + language + "_university.xml"))){
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document xmlDoc = documentBuilder.parse(fis);
             NodeList nodeList = xmlDoc.getDocumentElement().getElementsByTagName("university");
@@ -143,6 +144,7 @@ public class ParseClass extends AppCompatActivity {
     //Parses food items from XML files of the chosen Restaurant. Makes them into objects and adds them to Restaurant's dailyMenus.
     public void parseFoodItems(int position, Context context) {
         Restaurant selectedRestaurant =  parseClass.getRestaurants().get(position);
+        //Shows Food names in correct, chosen language
         String language = Locale.getDefault().getLanguage();
         for (String s : selectedRestaurant.restaurantMenusXML) {
             try (FileInputStream fis = new FileInputStream (new File(context.getFilesDir() +"/unisRestaurantsAndMenus/"+ language + "_" + s))) {
