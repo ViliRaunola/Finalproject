@@ -1,5 +1,8 @@
 # Finalproject
 
+Video of the program working (in Finnish):
+https://www.youtube.com/watch?v=I2ov3GUtUEs
+
 The program is a university food review application that shows the daily menus of different restaurants at several different universities in Finland. 
 The dishes contain user-specific reviews which can be created more of with user accounts.
 Food reviews can only be added to foods that have been previously served, and the user can only add a review once for the same food but can edit an old one. 
